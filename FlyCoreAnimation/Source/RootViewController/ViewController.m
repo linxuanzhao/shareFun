@@ -195,6 +195,7 @@
     UIGraphicsEndImageContext();
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:newImage];
+    
 }
 
 
