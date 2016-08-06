@@ -361,20 +361,23 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIViewController *VC = [[UIViewController alloc]init];
         switch (self.tag) {
-                //青色 地图
-            
+                
+            //绿色
             case 100:{
           // VC =     [[XFShareViewController alloc]init];
             }
                 break;
+              // 蓝色
             case 101:{
            //     VC =     [[XFShareViewController alloc]init];
             }
                 break;
+                //青色 地图
             case 102:{
                 VC =     [[XFShareViewController alloc]init];
             }
                 break;
+                //红色
             case 103:{
           //      VC =     [[XFShareViewController alloc]init];
             }
