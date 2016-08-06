@@ -1,0 +1,6 @@
+framework module Pods_FlyCoreAnimation {
+  umbrella header "Pods-FlyCoreAnimation-umbrella.h"
+
+  export *
+  module * { export * }
+}
