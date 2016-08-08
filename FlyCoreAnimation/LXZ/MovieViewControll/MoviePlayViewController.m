@@ -7,7 +7,7 @@
 //
 
 #import "MoviePlayViewController.h"
-#import "AVManager.h"
+#import "LXZAVManager.h"
 #import "AppDelegate.h"
 
 @interface MoviePlayViewController () <UIGestureRecognizerDelegate>
@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) UIView *backView;
 
-@property (nonatomic, strong) AVManager *avManager;
+@property (nonatomic, strong) LXZAVManager *avManager;
 
 @property (nonatomic, strong) UIButton *playBtn;
 
@@ -47,7 +47,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
-    self.avManager = [AVManager shareInstance];
+    self.avManager = [LXZAVManager shareInstance];
     [self.avManager playWithUrlStr:self.movieUrlStr playView:self.view];
 
     [self createPlayControlView];
