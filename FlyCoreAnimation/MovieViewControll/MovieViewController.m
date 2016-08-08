@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "DetailMovieViewController.h"
 #import "OUNavigationController.h"
+#import "OUNavigationController.h"
 
 @interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
@@ -116,6 +117,7 @@
     
     [((OUNavigationController*)self.navigationController) pushViewController:detailMovieVC withImageView:cell.imageV desRect:CGRectMake(20, 150, cell.imageV.bounds.size.width, cell.imageV.bounds.size.height)];
     
+
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "OUNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -32,7 +33,7 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     ViewController *VC = [[ViewController alloc]init];
-    UINavigationController *Navc = [[UINavigationController alloc]initWithRootViewController:VC];
+    OUNavigationController *Navc = [[OUNavigationController alloc]initWithRootViewController:VC];
     self.window.rootViewController = Navc;
 
     return YES;

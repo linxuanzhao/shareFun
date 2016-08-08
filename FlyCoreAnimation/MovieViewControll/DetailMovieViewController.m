@@ -34,10 +34,10 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(50, 400, 96, 16)];
-    image.image = [UIImage imageNamed:@"star.png"];
-//    image.backgroundColor = [UIColor redColor];;
-    [self.view addSubview:image];
+//    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(50, 400, 96, 16)];
+//    image.image = [UIImage imageNamed:@"star.png"];
+////    image.backgroundColor = [UIColor redColor];;
+//    [self.view addSubview:image];
     
 }
 
