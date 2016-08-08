@@ -10,6 +10,7 @@
 
 #import "XFMapViewController.h"
 #import "XFShareViewController.h"
+#import "MovieViewController.h"
 
 #define marginX 120
 #define marginY1 100
@@ -364,7 +365,7 @@
                 
             //绿色
             case 100:{
-          // VC =     [[XFShareViewController alloc]init];
+           VC =     [[MovieViewController alloc]init];
             }
                 break;
               // 蓝色
