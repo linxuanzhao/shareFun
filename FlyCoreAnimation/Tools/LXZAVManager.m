@@ -1,17 +1,15 @@
 //
-//  AVManager.m
-//  Movie
+//  LXZAVManager.m
+//  FlyCoreAnimation
 //
-//  Created by lanou on 16/8/3.
-//  Copyright © 2016年 linxuanzhao. All rights reserved.
+//  Created by lanou on 16/8/8.
+//  Copyright © 2016年 he. All rights reserved.
 //
 
-#import "AVManager.h"
+#import "LXZAVManager.h"
 
 
-@interface AVManager ()
-
-@property (nonatomic, assign) BOOL isPlaying;
+@interface LXZAVManager ()
 
 @property (nonatomic, strong) UIView *playView;
 
@@ -19,16 +17,16 @@
 
 @end
 
-@implementation AVManager
+@implementation LXZAVManager
 
 
-+ (AVManager *)shareInstance
++ (LXZAVManager *)shareInstance
 {
-    static AVManager *manager = nil;
+    static LXZAVManager *manager = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[AVManager alloc] init];
+        manager = [[LXZAVManager alloc] init];
     });
     return manager;
 }
@@ -40,11 +38,11 @@
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     AVPlayerLayer *playLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     playLayer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-
+    
     playLayer.videoGravity = AVLayerVideoGravityResize;
     [playView.layer addSublayer:playLayer];
     [self.player play];
-
+    
 }
 
 
@@ -55,7 +53,7 @@
     }
     
     return self.player.currentItem.duration.value / self.player.currentItem.duration.timescale;
-;
+    ;
 }
 
 - (float)currentTime
@@ -81,7 +79,7 @@
             
         }];
     }
-   
+    
     
     
 }
@@ -106,14 +104,14 @@
         [self.progressView setProgress:result / totalDuration animated:NO];
     }
     
-
+    
     
 }
 
 - (void)dealloc
 {
     [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
-
+    
 }
 
 

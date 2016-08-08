@@ -1,22 +1,22 @@
 //
-//  AVManager.h
-//  Movie
+//  LXZAVManager.h
+//  FlyCoreAnimation
 //
-//  Created by lanou on 16/8/3.
-//  Copyright © 2016年 linxuanzhao. All rights reserved.
+//  Created by lanou on 16/8/8.
+//  Copyright © 2016年 he. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
-@interface AVManager : NSObject
+@interface LXZAVManager : NSObject
 
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 
 
-+ (AVManager *)shareInstance;
++ (LXZAVManager *)shareInstance;
 
 - (void)playWithUrlStr:(NSString *)urlStr playView:(UIView *)playView;
 

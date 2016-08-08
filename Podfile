@@ -2,6 +2,6 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'FlyCoreAnimation’ do
-  pod 'BaiduMapKit' #百度地图SDK
-
+  pod 'BaiduMapKit', '~> 3.0.0'
+  pod 'SDWebImage’, '~> 3.8.1'
 end
