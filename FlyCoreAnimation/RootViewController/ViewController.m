@@ -10,6 +10,7 @@
 #import "XFMapViewController.h"
 #import "XFShareViewController.h"
 #import "MovieViewController.h"
+#import "RadioViewController.h"
 
 #define marginX 120
 #define marginY1 100
@@ -367,7 +368,7 @@
             }
                 break;
             case 101:{
-           //     VC =     [[XFShareViewController alloc]init];
+                VC =     [[RadioViewController alloc]init];
             }
                 break;
             case 102:{

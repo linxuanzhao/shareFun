@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsPlayViewController">
+            <connections>
+                <outlet property="curTime" destination="fO3-fL-HNA" id="pJk-nK-I0g"/>
+                <outlet property="handleImageView" destination="QFg-to-6dL" id="CLY-d4-pjq"/>
+                <outlet property="leftLabel" destination="kCd-py-79O" id="V40-uZ-mLI"/>
+                <outlet property="satrt" destination="PjN-VI-lCy" id="n5x-wi-xfG"/>
+                <outlet property="slider" destination="38L-1W-8v5" id="Cr3-HV-ruJ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hello.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="QFg-to-6dL">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIt-ji-vgj">
+                    <rect key="frame" x="39" y="608" width="32" height="32"/>
+                    <state key="normal" image="Unknown-6.png"/>
+                    <connections>
+                        <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="xub-SK-tIc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PjN-VI-lCy">
+                    <rect key="frame" x="185" y="608" width="32" height="32"/>
+                    <state key="normal" image="Unknown-4.png"/>
+                    <connections>
+                        <action selector="startAndStopBtnAction:" destination="-1" eventType="touchUpInside" id="dSf-LC-5uq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucv-e2-07Y">
+                    <rect key="frame" x="312" y="608" width="32" height="32"/>
+                    <state key="normal" image="Unknown-2.png"/>
+                    <connections>
+                        <action selector="nextBtnAction:" destination="-1" eventType="touchUpInside" id="ksh-1t-CrY"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO3-fL-HNA">
+                    <rect key="frame" x="29" y="548" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="38L-1W-8v5">
+                    <rect key="frame" x="71" y="548" width="241" height="31"/>
+                    <connections>
+                        <action selector="chanageProgress:" destination="-1" eventType="valueChanged" id="e14-Kt-H4R"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ye3-zR-0HF">
+                    <rect key="frame" x="39" y="483" width="32" height="32"/>
+                    <state key="normal" image="Unknown-1.png"/>
+                    <connections>
+                        <action selector="downLoadBtnAction:" destination="-1" eventType="touchUpInside" id="T8j-mR-Nvg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lF-K8-hmh">
+                    <rect key="frame" x="185" y="483" width="32" height="32"/>
+                    <state key="normal" image="Unknown-8.png"/>
+                    <connections>
+                        <action selector="shareBtnAction:" destination="-1" eventType="touchUpInside" id="mwA-QR-Nvb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6u2-JL-cb6">
+                    <rect key="frame" x="312" y="483" width="32" height="32"/>
+                    <state key="normal" image="Unknown-7.png"/>
+                    <connections>
+                        <action selector="collectBtnAction:" destination="-1" eventType="touchUpInside" id="5Bx-pN-O9G"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCd-py-79O">
+                    <rect key="frame" x="312" y="548" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QFg-to-6dL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xee-Cm-yQM"/>
+                <constraint firstAttribute="bottom" secondItem="QFg-to-6dL" secondAttribute="bottom" id="YR0-6C-83c"/>
+                <constraint firstItem="QFg-to-6dL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eB5-Xw-INJ"/>
+                <constraint firstAttribute="trailing" secondItem="QFg-to-6dL" secondAttribute="trailing" id="sho-vx-Vhr"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="275.5" y="203.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Unknown-1.png" width="32" height="32"/>
+        <image name="Unknown-2.png" width="32" height="32"/>
+        <image name="Unknown-4.png" width="33" height="32"/>
+        <image name="Unknown-6.png" width="32" height="32"/>
+        <image name="Unknown-7.png" width="32" height="32"/>
+        <image name="Unknown-8.png" width="32" height="32"/>
+        <image name="hello.JPG" width="1080" height="1920"/>
+    </resources>
+</document>
