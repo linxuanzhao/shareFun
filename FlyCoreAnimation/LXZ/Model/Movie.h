@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *logo556640;
 @property (nonatomic, strong) NSString *mobilePreview; // 预告片
+@property (nonatomic, strong) NSString *movieId;
 
 @end

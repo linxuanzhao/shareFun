@@ -286,12 +286,12 @@
 		3FA4200C1D58B6C000BEA989 /* MovieViewControll */ = {
 			isa = PBXGroup;
 			children = (
+				3FA420111D58B6C000BEA989 /* MovieViewController.h */,
+				3FA420121D58B6C000BEA989 /* MovieViewController.m */,
 				3FA4200D1D58B6C000BEA989 /* DetailMovieViewController.h */,
 				3FA4200E1D58B6C000BEA989 /* DetailMovieViewController.m */,
 				3FA4200F1D58B6C000BEA989 /* MoviePlayViewController.h */,
 				3FA420101D58B6C000BEA989 /* MoviePlayViewController.m */,
-				3FA420111D58B6C000BEA989 /* MovieViewController.h */,
-				3FA420121D58B6C000BEA989 /* MovieViewController.m */,
 			);
 			path = MovieViewControll;
 			sourceTree = "<group>";

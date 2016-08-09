@@ -114,6 +114,7 @@
     
     detailMovieVC.cover = urlImgStr;
     detailMovieVC.movieUrlStr = cell.movie.mobilePreview;
+    detailMovieVC.movieId = cell.movie.movieId;
     
     [((OUNavigationController*)self.navigationController) pushViewController:detailMovieVC withImageView:cell.imageV desRect:CGRectMake(20, 150, cell.imageV.bounds.size.width, cell.imageV.bounds.size.height)];
     

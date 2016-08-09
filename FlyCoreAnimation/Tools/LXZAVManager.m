@@ -72,8 +72,6 @@
         
         time.value = self.player.currentTime.timescale *progress;
         
-        [self.player pause];
-        
         [self.player seekToTime:time completionHandler:^(BOOL finished) {
             [self.player play];
             
@@ -87,6 +85,7 @@
 - (void)loadProgressView:(UIProgressView *)progressView
 {
     [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    [self.playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     self.progressView = progressView;
 }
 
@@ -104,6 +103,12 @@
         [self.progressView setProgress:result / totalDuration animated:NO];
     }
     
+    else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]){
+        if (self.playerItem.playbackLikelyToKeepUp) {
+            [self.player play];
+        }
+    }
+
     
     
 }
@@ -111,7 +116,7 @@
 - (void)dealloc
 {
     [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
-    
+    [self.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
 }
 
 

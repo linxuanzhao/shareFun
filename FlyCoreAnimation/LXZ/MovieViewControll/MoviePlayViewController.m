@@ -131,7 +131,7 @@
     self.backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.backBtn.frame = CGRectMake(10, 15, 50, 50);
     [self.backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    [self.backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [self.backBtn addTarget:self action:@selector(backToDetail) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:self.backBtn];
     
     // 创建播放/暂停按钮
@@ -205,10 +205,12 @@
     [self.avManager playProgress:self.slider.value];
 }
 
-- (void)back
+- (void)backToDetail
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.avManager.player pause];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.avManager.player pause];
+    }];
+    
     
 }
 
@@ -286,7 +288,6 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if ([touch.view isDescendantOfView:self.bottomView] || [touch.view isDescendantOfView:self.topView]) {
-        
         return NO;
     }
     return YES;

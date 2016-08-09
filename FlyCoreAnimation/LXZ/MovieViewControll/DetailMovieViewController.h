@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong) NSString *cover;
 @property (nonatomic, strong) NSString *movieUrlStr;
-
+@property (nonatomic, strong) NSString *movieId;
 
 @end
