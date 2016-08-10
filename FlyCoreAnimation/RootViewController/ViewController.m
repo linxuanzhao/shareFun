@@ -258,7 +258,7 @@
     for (UIView *vi in self.viewArr) {
         vi.hidden = NO  ;
     }
-    if (self.P.x > self.MP.x) {
+    if (self.P.x - self.MP.x>10 && self.MP.x != 0) {
        
         self.rightRowArr = [NSMutableArray arrayWithObjects:self.viewArr[1],self.viewArr[2],self.viewArr[3],self.viewArr[0], nil];
         
@@ -384,10 +384,6 @@
                 break;
         }
         [self.navigationController pushViewController:VC animated:NO];
-        
-
-        
-        
            });
    
 }

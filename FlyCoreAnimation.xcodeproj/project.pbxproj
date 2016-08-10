@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4EF1D5978E200DBEEAA /* PFGoldenSectionSpiral.m */; settings = {ASSET_TAGS = (); }; };
+		3F0FF4F71D5978E200DBEEAA /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4F51D5978E200DBEEAA /* ZYQSphereView.m */; settings = {ASSET_TAGS = (); }; };
+		3F0FF4FE1D59AF7900DBEEAA /* ResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4FD1D59AF7900DBEEAA /* ResultModel.m */; settings = {ASSET_TAGS = (); }; };
+		3F0FF5001D59B54600DBEEAA /* XFBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F0FF4FF1D59B54600DBEEAA /* XFBG.jpg */; settings = {ASSET_TAGS = (); }; };
+		3F0FF5031D59D98000DBEEAA /* XFAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF5021D59D98000DBEEAA /* XFAnnotation.m */; settings = {ASSET_TAGS = (); }; };
 		3F22D71C1D5967CC00820C61 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F22D7161D5967CC00820C61 /* DetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3F22D71D1D5967CC00820C61 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F22D7181D5967CC00820C61 /* ListViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3F22D71E1D5967CC00820C61 /* RadioPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F22D71A1D5967CC00820C61 /* RadioPlayViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -126,6 +131,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F0FF4ED1D5978E200DBEEAA /* PFAxisDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAxisDirection.h; sourceTree = "<group>"; };
+		3F0FF4EE1D5978E200DBEEAA /* PFGoldenSectionSpiral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGoldenSectionSpiral.h; sourceTree = "<group>"; };
+		3F0FF4EF1D5978E200DBEEAA /* PFGoldenSectionSpiral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGoldenSectionSpiral.m; sourceTree = "<group>"; };
+		3F0FF4F01D5978E200DBEEAA /* PFMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMatrix.h; sourceTree = "<group>"; };
+		3F0FF4F11D5978E200DBEEAA /* PFMatrixTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMatrixTransform.h; sourceTree = "<group>"; };
+		3F0FF4F21D5978E200DBEEAA /* PFPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFPoint.h; sourceTree = "<group>"; };
+		3F0FF4F31D5978E200DBEEAA /* PFRadian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFRadian.h; sourceTree = "<group>"; };
+		3F0FF4F41D5978E200DBEEAA /* ZYQSphereView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQSphereView.h; sourceTree = "<group>"; };
+		3F0FF4F51D5978E200DBEEAA /* ZYQSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQSphereView.m; sourceTree = "<group>"; };
+		3F0FF4FC1D59AF7900DBEEAA /* ResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultModel.h; sourceTree = "<group>"; };
+		3F0FF4FD1D59AF7900DBEEAA /* ResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultModel.m; sourceTree = "<group>"; };
+		3F0FF4FF1D59B54600DBEEAA /* XFBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = XFBG.jpg; sourceTree = "<group>"; };
+		3F0FF5011D59D98000DBEEAA /* XFAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFAnnotation.h; sourceTree = "<group>"; };
+		3F0FF5021D59D98000DBEEAA /* XFAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFAnnotation.m; sourceTree = "<group>"; };
 		3F22D7151D5967CC00820C61 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		3F22D7161D5967CC00820C61 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		3F22D7171D5967CC00820C61 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
@@ -298,6 +317,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F0FF4EC1D5978E200DBEEAA /* SphereView */ = {
+			isa = PBXGroup;
+			children = (
+				3F0FF4ED1D5978E200DBEEAA /* PFAxisDirection.h */,
+				3F0FF4EE1D5978E200DBEEAA /* PFGoldenSectionSpiral.h */,
+				3F0FF4EF1D5978E200DBEEAA /* PFGoldenSectionSpiral.m */,
+				3F0FF4F01D5978E200DBEEAA /* PFMatrix.h */,
+				3F0FF4F11D5978E200DBEEAA /* PFMatrixTransform.h */,
+				3F0FF4F21D5978E200DBEEAA /* PFPoint.h */,
+				3F0FF4F31D5978E200DBEEAA /* PFRadian.h */,
+				3F0FF4F41D5978E200DBEEAA /* ZYQSphereView.h */,
+				3F0FF4F51D5978E200DBEEAA /* ZYQSphereView.m */,
+			);
+			path = SphereView;
+			sourceTree = "<group>";
+		};
+		3F0FF4F81D59AECF00DBEEAA /* XFMapModel */ = {
+			isa = PBXGroup;
+			children = (
+				3F0FF4FC1D59AF7900DBEEAA /* ResultModel.h */,
+				3F0FF4FD1D59AF7900DBEEAA /* ResultModel.m */,
+				3F0FF5011D59D98000DBEEAA /* XFAnnotation.h */,
+				3F0FF5021D59D98000DBEEAA /* XFAnnotation.m */,
+			);
+			path = XFMapModel;
+			sourceTree = "<group>";
+		};
 		3F22D70F1D59664700820C61 /* MusicRadio */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +478,7 @@
 		3F22D7631D596A1800820C61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3F0FF4FF1D59B54600DBEEAA /* XFBG.jpg */,
 				3F22D7641D596A1800820C61 /* 1.jpg */,
 				3F22D7651D596A1800820C61 /* 2.png */,
 				3F22D7661D596A1800820C61 /* 3.jpeg */,
@@ -528,6 +575,7 @@
 		3FA41FF91D58B6C000BEA989 /* HXF */ = {
 			isa = PBXGroup;
 			children = (
+				3F0FF4EC1D5978E200DBEEAA /* SphereView */,
 				3FA41FFA1D58B6C000BEA989 /* Map */,
 				3FA41FFE1D58B6C000BEA989 /* Share */,
 			);
@@ -537,6 +585,7 @@
 		3FA41FFA1D58B6C000BEA989 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				3F0FF4F81D59AECF00DBEEAA /* XFMapModel */,
 				3FA41FFB1D58B6C000BEA989 /* XFMapViewController */,
 			);
 			path = Map;
@@ -942,6 +991,7 @@
 				3F22D7861D596A1800820C61 /* 3.jpeg in Resources */,
 				3FA41FF81D58A60800BEA989 /* Info.plist in Resources */,
 				3FA420631D58B74300BEA989 /* cancle.png in Resources */,
+				3F0FF5001D59B54600DBEEAA /* XFBG.jpg in Resources */,
 				3F22D79E1D596A1800820C61 /* Unknown-6.png in Resources */,
 				3FA420691D58B74300BEA989 /* ic_left - circle.png in Resources */,
 				3F22D7841D596A1800820C61 /* 1.jpg in Resources */,
@@ -1046,6 +1096,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0FF4FE1D59AF7900DBEEAA /* ResultModel.m in Sources */,
+				3F0FF4F71D5978E200DBEEAA /* ZYQSphereView.m in Sources */,
 				3FA420411D58B6C000BEA989 /* Map.mm in Sources */,
 				3F22D7471D5968BB00820C61 /* NewsDetailModel.m in Sources */,
 				3F22D7331D5967FC00820C61 /* ListCell.m in Sources */,
@@ -1057,12 +1109,14 @@
 				3F22D7421D5968AE00820C61 /* NewsViewController.m in Sources */,
 				3F22D74F1D5968CA00820C61 /* NewsCell.m in Sources */,
 				3F22D7311D5967FC00820C61 /* DetailCell.m in Sources */,
+				3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */,
 				3F22D7481D5968BB00820C61 /* NewsModel.m in Sources */,
 				3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */,
 				3F22D7251D5967D900820C61 /* RadioModel.m in Sources */,
 				3FA4203D1D58B6C000BEA989 /* DetailMovieViewController.m in Sources */,
 				3F22D7611D5969E900820C61 /* ImageCell.m in Sources */,
 				3FA420381D58B6C000BEA989 /* XFShareViewController.m in Sources */,
+				3F0FF5031D59D98000DBEEAA /* XFAnnotation.m in Sources */,
 				3F22D7591D59692200820C61 /* XRCarouselView.m in Sources */,
 				3FA420421D58B6C000BEA989 /* AppDelegate.m in Sources */,
 				3F22D7281D5967EB00820C61 /* MyLayout.m in Sources */,
