@@ -101,6 +101,10 @@
 		3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4207E1D58BA0A00BEA989 /* YZLAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420821D58BA7600BEA989 /* LXZAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420811D58BA7600BEA989 /* LXZAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA4208A1D58C32200BEA989 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420891D58C32200BEA989 /* MovieCell.m */; settings = {ASSET_TAGS = (); }; };
+		3FB6C7F21D5AD66200B0BBFD /* StoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F11D5AD66200B0BBFD /* StoryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		3FB6C7F51D5AD67E00B0BBFD /* StoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F41D5AD67E00B0BBFD /* StoryModel.m */; settings = {ASSET_TAGS = (); }; };
+		3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F71D5AD69D00B0BBFD /* StoryTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		3FB6C7FA1D5AD69D00B0BBFD /* StoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F81D5AD69D00B0BBFD /* StoryTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		DEAC44B51C5F5432BB1DFD32 /* Pods_FlyCoreAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +260,13 @@
 		3FA420811D58BA7600BEA989 /* LXZAVManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXZAVManager.m; sourceTree = "<group>"; };
 		3FA420881D58C32200BEA989 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		3FA420891D58C32200BEA989 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		3FB6C7F01D5AD66200B0BBFD /* StoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryViewController.h; sourceTree = "<group>"; };
+		3FB6C7F11D5AD66200B0BBFD /* StoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryViewController.m; sourceTree = "<group>"; };
+		3FB6C7F31D5AD67E00B0BBFD /* StoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryModel.h; sourceTree = "<group>"; };
+		3FB6C7F41D5AD67E00B0BBFD /* StoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryModel.m; sourceTree = "<group>"; };
+		3FB6C7F61D5AD69D00B0BBFD /* StoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryTableViewCell.h; sourceTree = "<group>"; };
+		3FB6C7F71D5AD69D00B0BBFD /* StoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryTableViewCell.m; sourceTree = "<group>"; };
+		3FB6C7F81D5AD69D00B0BBFD /* StoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryTableViewCell.xib; sourceTree = "<group>"; };
 		7DB5884A71858E768C3064DD /* Pods-FlyCoreAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.debug.xcconfig"; sourceTree = "<group>"; };
 		B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlyCoreAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35953EDB7E950D2FF662D15 /* Pods-FlyCoreAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,7 +302,6 @@
 			isa = PBXGroup;
 			children = (
 				3F22D7111D59671100820C61 /* Controllers */,
-				3F22D7121D59671100820C61 /* Model */,
 				3F22D7131D59671100820C61 /* Tools */,
 				3F22D7141D59671100820C61 /* View */,
 			);
@@ -318,6 +328,7 @@
 				3F22D7191D5967CC00820C61 /* RadioPlayViewController.h */,
 				3F22D71A1D5967CC00820C61 /* RadioPlayViewController.m */,
 				3F22D71B1D5967CC00820C61 /* RadioPlayViewController.xib */,
+				3F22D7121D59671100820C61 /* Model */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -330,7 +341,8 @@
 				3F22D7221D5967D900820C61 /* RadioModel.h */,
 				3F22D7231D5967D900820C61 /* RadioModel.m */,
 			);
-			path = Model;
+			name = Model;
+			path = ../Model;
 			sourceTree = "<group>";
 		};
 		3F22D7131D59671100820C61 /* Tools */ = {
@@ -627,6 +639,9 @@
 		3FA420341D58B6C000BEA989 /* YZL */ = {
 			isa = PBXGroup;
 			children = (
+				3FB6C7E81D5AD5B800B0BBFD /* CompositeRadio */,
+				3FB6C7E91D5AD5B800B0BBFD /* LiteraryRaDdio */,
+				3FB6C7E41D5AD51B00B0BBFD /* StoryRadio */,
 				3F22D75C1D59699C00820C61 /* RadioViewController */,
 				3F22D70F1D59664700820C61 /* MusicRadio */,
 				3F22D7101D59664700820C61 /* NewsRadio */,
@@ -673,6 +688,106 @@
 			children = (
 				3FA420881D58C32200BEA989 /* MovieCell.h */,
 				3FA420891D58C32200BEA989 /* MovieCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3FB6C7E41D5AD51B00B0BBFD /* StoryRadio */ = {
+			isa = PBXGroup;
+			children = (
+				3FB6C7E51D5AD55A00B0BBFD /* Controllers */,
+				3FB6C7E61D5AD55A00B0BBFD /* Model */,
+				3FB6C7E71D5AD55A00B0BBFD /* View */,
+			);
+			path = StoryRadio;
+			sourceTree = "<group>";
+		};
+		3FB6C7E51D5AD55A00B0BBFD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FB6C7F01D5AD66200B0BBFD /* StoryViewController.h */,
+				3FB6C7F11D5AD66200B0BBFD /* StoryViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FB6C7E61D5AD55A00B0BBFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3FB6C7F31D5AD67E00B0BBFD /* StoryModel.h */,
+				3FB6C7F41D5AD67E00B0BBFD /* StoryModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3FB6C7E71D5AD55A00B0BBFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FB6C7F61D5AD69D00B0BBFD /* StoryTableViewCell.h */,
+				3FB6C7F71D5AD69D00B0BBFD /* StoryTableViewCell.m */,
+				3FB6C7F81D5AD69D00B0BBFD /* StoryTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3FB6C7E81D5AD5B800B0BBFD /* CompositeRadio */ = {
+			isa = PBXGroup;
+			children = (
+				3FB6C7EA1D5AD60F00B0BBFD /* Controllers */,
+				3FB6C7EB1D5AD60F00B0BBFD /* Model */,
+				3FB6C7EC1D5AD60F00B0BBFD /* View */,
+			);
+			path = CompositeRadio;
+			sourceTree = "<group>";
+		};
+		3FB6C7E91D5AD5B800B0BBFD /* LiteraryRaDdio */ = {
+			isa = PBXGroup;
+			children = (
+				3FB6C7ED1D5AD62100B0BBFD /* Controllers */,
+				3FB6C7EE1D5AD62100B0BBFD /* Model */,
+				3FB6C7EF1D5AD62100B0BBFD /* View */,
+			);
+			path = LiteraryRaDdio;
+			sourceTree = "<group>";
+		};
+		3FB6C7EA1D5AD60F00B0BBFD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FB6C7EB1D5AD60F00B0BBFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3FB6C7EC1D5AD60F00B0BBFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3FB6C7ED1D5AD62100B0BBFD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FB6C7EE1D5AD62100B0BBFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3FB6C7EF1D5AD62100B0BBFD /* View */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -844,6 +959,7 @@
 				3F22D78C1D596A1800820C61 /* a3.JPG in Resources */,
 				3F22D78D1D596A1800820C61 /* a4.JPG in Resources */,
 				3F22D7341D5967FC00820C61 /* ListCell.xib in Resources */,
+				3FB6C7FA1D5AD69D00B0BBFD /* StoryTableViewCell.xib in Resources */,
 				3FA420671D58B74300BEA989 /* ic_check - circle - o.png in Resources */,
 				3F22D7321D5967FC00820C61 /* DetailCell.xib in Resources */,
 				3FA420391D58B6C000BEA989 /* XFShareViewController.xib in Resources */,
@@ -935,12 +1051,14 @@
 				3F22D7331D5967FC00820C61 /* ListCell.m in Sources */,
 				3FA4203F1D58B6C000BEA989 /* MovieViewController.m in Sources */,
 				3F22D71D1D5967CC00820C61 /* ListViewController.m in Sources */,
+				3FB6C7F51D5AD67E00B0BBFD /* StoryModel.m in Sources */,
 				3F22D71C1D5967CC00820C61 /* DetailViewController.m in Sources */,
 				3FA4203A1D58B6C000BEA989 /* Movie.m in Sources */,
 				3F22D7421D5968AE00820C61 /* NewsViewController.m in Sources */,
 				3F22D74F1D5968CA00820C61 /* NewsCell.m in Sources */,
 				3F22D7311D5967FC00820C61 /* DetailCell.m in Sources */,
 				3F22D7481D5968BB00820C61 /* NewsModel.m in Sources */,
+				3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */,
 				3F22D7251D5967D900820C61 /* RadioModel.m in Sources */,
 				3FA4203D1D58B6C000BEA989 /* DetailMovieViewController.m in Sources */,
 				3F22D7611D5969E900820C61 /* ImageCell.m in Sources */,
@@ -952,6 +1070,7 @@
 				3FA4208A1D58C32200BEA989 /* MovieCell.m in Sources */,
 				3F22D7621D5969E900820C61 /* RadioViewController.m in Sources */,
 				3FA420821D58BA7600BEA989 /* LXZAVManager.m in Sources */,
+				3FB6C7F21D5AD66200B0BBFD /* StoryViewController.m in Sources */,
 				3FA4203C1D58B6C000BEA989 /* OUNavigationController.m in Sources */,
 				3FA420781D58B9B500BEA989 /* DownLoad.m in Sources */,
 				3FA4203E1D58B6C000BEA989 /* MoviePlayViewController.m in Sources */,
@@ -1097,7 +1216,7 @@
 			baseConfigurationReference = 7DB5884A71858E768C3064DD /* Pods-FlyCoreAnimation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = /Users/lan/Desktop/FlyCoreAnimation/shareFun/FlyCoreAnimation/Other/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lan/Desktop/ShareFun/shareFun/FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jaff-he.FlyCoreAnimation";
@@ -1110,7 +1229,7 @@
 			baseConfigurationReference = D35953EDB7E950D2FF662D15 /* Pods-FlyCoreAnimation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = /Users/lan/Desktop/FlyCoreAnimation/shareFun/FlyCoreAnimation/Other/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/lan/Desktop/ShareFun/shareFun/FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jaff-he.FlyCoreAnimation";

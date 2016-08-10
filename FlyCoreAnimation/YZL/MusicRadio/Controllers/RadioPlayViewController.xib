@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RadioPlayViewController">
             <connections>
+                <outlet property="DownLoadBtn" destination="Otx-fG-2Lr" id="5n5-Go-ZuD"/>
                 <outlet property="allTime" destination="JsA-Jh-l9l" id="wXL-vk-gEa"/>
                 <outlet property="curTime" destination="XGp-oy-t1E" id="PKl-2i-N5U"/>
                 <outlet property="imageV" destination="Oo8-b6-Ts2" id="F6T-u6-LC3"/>
@@ -20,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dan.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="d6j-Br-d9a">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d6j-Br-d9a">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-ht-gzQ">
@@ -56,8 +57,8 @@
                     </connections>
                 </slider>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otx-fG-2Lr">
-                    <rect key="frame" x="33" y="495" width="32" height="32"/>
-                    <state key="normal" image="Unknown-1.png"/>
+                    <rect key="frame" x="33" y="495" width="59" height="32"/>
+                    <state key="normal" title="下载"/>
                     <connections>
                         <action selector="download:" destination="-1" eventType="touchUpInside" id="dcr-mm-CzK"/>
                     </connections>
@@ -93,12 +94,10 @@
         </view>
     </objects>
     <resources>
-        <image name="Unknown-1.png" width="32" height="32"/>
         <image name="Unknown-2.png" width="32" height="32"/>
         <image name="Unknown-4.png" width="33" height="32"/>
         <image name="Unknown-6.png" width="32" height="32"/>
         <image name="Unknown-7.png" width="32" height="32"/>
         <image name="Unknown-8.png" width="32" height="32"/>
-        <image name="dan.JPG" width="375" height="667"/>
     </resources>
 </document>

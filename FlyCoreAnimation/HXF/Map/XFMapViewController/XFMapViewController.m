@@ -67,7 +67,7 @@
     _searcher.delegate = self;
     //发起检索
     BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
-#warning ------
+
     option.pageIndex = 1;
     option.pageCapacity = 10;
     option.location =CLLocationCoordinate2DMake(39.915, 116.404);

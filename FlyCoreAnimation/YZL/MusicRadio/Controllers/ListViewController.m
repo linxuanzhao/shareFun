@@ -51,7 +51,7 @@
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];       NSDictionary *dic1 = dic[@"data"][@"tracks"];
         NSArray *arr = dic1[@"list"];
-        NSLog(@"%@",arr);
+       // NSLog(@"%@",arr);
             for (NSDictionary *dc2 in arr) {
                 ListModel *model = [[ListModel alloc]init];
                 [model setValuesForKeysWithDictionary:dc2];

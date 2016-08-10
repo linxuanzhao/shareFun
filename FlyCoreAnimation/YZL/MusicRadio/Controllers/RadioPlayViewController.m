@@ -13,6 +13,8 @@
 #import "XRCarouselView.h"
 
 
+
+
 @interface RadioPlayViewController ()<XRCarouselViewDelegate>
 @property (nonatomic, strong) YZLAVManager *avManager;
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
@@ -23,6 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *allTime;
 
+@property (weak, nonatomic) IBOutlet UIButton *DownLoadBtn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *scImageView;
 
@@ -35,6 +38,9 @@
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, assign) BOOL isPlay;
+
+
+
 
 
 
@@ -105,7 +111,9 @@
       NSLog(@"%ld",self.urls.count);
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
+    
 
+    
 
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -164,9 +172,6 @@
     self.curTime.text = [NSString stringWithFormat:@"%02ld:%02ld",c,d];
     self.slider.maximumValue = self.avManager.playDuration;
     self.slider.value = self.avManager.curuentTime;
-
-    
-    NSLog(@"add");
 }
 
 
@@ -220,15 +225,21 @@
 - (IBAction)shareBtn:(id)sender {
 
 }
-//下载
+//收藏
 - (IBAction)collectBtnAction:(id)sender
 {
      
 }
 
-- (IBAction)download:(id)sender {
+//下载
+- (IBAction)download:(id)sender
+{
+
+    
 }
-//收藏
+
+
+
 
 - (IBAction)changeProgress:(id)sender {
     [self.avManager playProgress:self.slider.value];

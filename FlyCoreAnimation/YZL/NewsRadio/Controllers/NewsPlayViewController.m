@@ -192,6 +192,11 @@
     
 }
 
+- (void)carouselView:(XRCarouselView *)carouselView clickImageAtIndex:(NSInteger)index
+{
+    NSLog(@"图片被点击了");
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
