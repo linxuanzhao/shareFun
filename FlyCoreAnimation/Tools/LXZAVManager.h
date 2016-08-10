@@ -26,7 +26,7 @@
 
 - (void)playProgress:(float)progress;
 
-- (void)loadProgressView:(UIProgressView *)progressView;
+
 
 
 

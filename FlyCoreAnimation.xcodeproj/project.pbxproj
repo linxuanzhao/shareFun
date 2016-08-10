@@ -106,6 +106,8 @@
 		3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4207E1D58BA0A00BEA989 /* YZLAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420821D58BA7600BEA989 /* LXZAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420811D58BA7600BEA989 /* LXZAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA4208A1D58C32200BEA989 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420891D58C32200BEA989 /* MovieCell.m */; settings = {ASSET_TAGS = (); }; };
+		3FB2F1D41D5AFE5600319DA6 /* MovieDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB2F1D31D5AFE5600319DA6 /* MovieDetail.m */; settings = {ASSET_TAGS = (); }; };
+		3FB2F1D71D5AFE6C00319DA6 /* MovieDetailOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB2F1D61D5AFE6C00319DA6 /* MovieDetailOneCell.m */; settings = {ASSET_TAGS = (); }; };
 		DEAC44B51C5F5432BB1DFD32 /* Pods_FlyCoreAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +277,10 @@
 		3FA420811D58BA7600BEA989 /* LXZAVManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXZAVManager.m; sourceTree = "<group>"; };
 		3FA420881D58C32200BEA989 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		3FA420891D58C32200BEA989 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		3FB2F1D21D5AFE5600319DA6 /* MovieDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetail.h; sourceTree = "<group>"; };
+		3FB2F1D31D5AFE5600319DA6 /* MovieDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetail.m; sourceTree = "<group>"; };
+		3FB2F1D51D5AFE6C00319DA6 /* MovieDetailOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailOneCell.h; sourceTree = "<group>"; };
+		3FB2F1D61D5AFE6C00319DA6 /* MovieDetailOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailOneCell.m; sourceTree = "<group>"; };
 		7DB5884A71858E768C3064DD /* Pods-FlyCoreAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.debug.xcconfig"; sourceTree = "<group>"; };
 		B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlyCoreAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35953EDB7E950D2FF662D15 /* Pods-FlyCoreAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.release.xcconfig"; sourceTree = "<group>"; };
@@ -622,6 +628,8 @@
 			children = (
 				3FA420051D58B6C000BEA989 /* Movie.h */,
 				3FA420061D58B6C000BEA989 /* Movie.m */,
+				3FB2F1D21D5AFE5600319DA6 /* MovieDetail.h */,
+				3FB2F1D31D5AFE5600319DA6 /* MovieDetail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -722,6 +730,8 @@
 			children = (
 				3FA420881D58C32200BEA989 /* MovieCell.h */,
 				3FA420891D58C32200BEA989 /* MovieCell.m */,
+				3FB2F1D51D5AFE6C00319DA6 /* MovieDetailOneCell.h */,
+				3FB2F1D61D5AFE6C00319DA6 /* MovieDetailOneCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -992,6 +1002,7 @@
 				3F22D7421D5968AE00820C61 /* NewsViewController.m in Sources */,
 				3F22D74F1D5968CA00820C61 /* NewsCell.m in Sources */,
 				3F22D7311D5967FC00820C61 /* DetailCell.m in Sources */,
+				3FB2F1D71D5AFE6C00319DA6 /* MovieDetailOneCell.m in Sources */,
 				3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */,
 				3F22D7481D5968BB00820C61 /* NewsModel.m in Sources */,
 				3F22D7251D5967D900820C61 /* RadioModel.m in Sources */,
@@ -1016,6 +1027,7 @@
 				3F22D73F1D5968AE00820C61 /* NewsDetailViewController.m in Sources */,
 				3F22D71E1D5967CC00820C61 /* RadioPlayViewController.m in Sources */,
 				3F22D7401D5968AE00820C61 /* NewsPlayViewController.m in Sources */,
+				3FB2F1D41D5AFE5600319DA6 /* MovieDetail.m in Sources */,
 				3FA420401D58B6C000BEA989 /* main.m in Sources */,
 				3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */,
 			);

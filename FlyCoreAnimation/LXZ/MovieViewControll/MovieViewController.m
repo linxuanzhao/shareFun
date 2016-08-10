@@ -13,7 +13,6 @@
 #import "UIImageView+WebCache.h"
 #import "DetailMovieViewController.h"
 #import "OUNavigationController.h"
-#import "OUNavigationController.h"
 
 @interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 
@@ -115,6 +114,12 @@
     detailMovieVC.cover = urlImgStr;
     detailMovieVC.movieUrlStr = cell.movie.mobilePreview;
     detailMovieVC.movieId = cell.movie.movieId;
+    detailMovieVC.actors = cell.movie.actors;
+    detailMovieVC.category = cell.movie.category;
+    detailMovieVC.duration = cell.movie.duration;
+    detailMovieVC.director = cell.movie.director;
+    detailMovieVC.grade = cell.movie.grade;
+    detailMovieVC.area = cell.movie.area;
     
     [((OUNavigationController*)self.navigationController) pushViewController:detailMovieVC withImageView:cell.imageV desRect:CGRectMake(20, 150, cell.imageV.bounds.size.width, cell.imageV.bounds.size.height)];
     

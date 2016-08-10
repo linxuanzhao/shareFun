@@ -11,5 +11,6 @@
 
 #import "Content.h"
 #import <UIKit/UIKit.h>
+#import "DownLoad.h"
 
 #endif /* PrefixHeader_pch */
