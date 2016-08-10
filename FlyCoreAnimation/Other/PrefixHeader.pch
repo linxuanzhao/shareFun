@@ -10,5 +10,6 @@
 #define PrefixHeader_pch
 
 #import "Content.h"
+#import <UIKit/UIKit.h>
 
 #endif /* PrefixHeader_pch */
