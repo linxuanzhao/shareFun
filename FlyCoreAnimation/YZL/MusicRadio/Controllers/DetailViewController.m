@@ -34,12 +34,25 @@
 
 -(void)createTableView
 {
-    _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UIImageView *image1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    image1.image = [UIImage imageNamed:@"1111.jpg"];
+    [self.view addSubview: image1];
+    image1.userInteractionEnabled = YES;
+    UIView *view = [[UIView alloc]initWithFrame:image1.frame];
+    view.backgroundColor = [UIColor lightGrayColor];
+    view.alpha = 0.5;
+    [image1 addSubview:view];
+
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"DetailCell" bundle:nil] forCellReuseIdentifier:@"detailCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+    [image1 addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
+    self.tableView.bounces = NO;
+    self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     
 }
 
@@ -66,7 +79,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"音乐电台";
-
     [self requestLoadData];
     [self createTableView];
 
@@ -81,8 +93,7 @@
 {
     DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"];
     RadioModel *model = self.dataArray[indexPath.row];
-    //[cell.imageV sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290]];
-    
+    cell.backgroundColor = [UIColor clearColor];
     
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"qqq.jpg"]];
     cell.imageV.layer.cornerRadius = 10;
@@ -93,6 +104,10 @@
     cell.EpisodesLable.text = model.tracks.stringValue;
     cell.HandleImageView.layer.cornerRadius = 10;
     cell.HandleImageView.layer.masksToBounds = YES;
+    
+    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
+    view1.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = view1;
     
     return cell;
 }
@@ -114,34 +129,43 @@
     
 }
 
-
-
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *array =  tableView.indexPathsForVisibleRows;
-    NSIndexPath *firstIndexPath = array[0];
-    
-    
-    //设置anchorPoint
-    cell.layer.anchorPoint = CGPointMake(0, 0.5);
-    //为了防止cell视图移动，重新把cell放回原来的位置
-    cell.layer.position = CGPointMake(0, cell.layer.position.y);
-    
-    
-    //设置cell 按照z轴旋转90度，注意是弧度
-    if (firstIndexPath.row < indexPath.row) {
-        cell.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1.0);
-    }else{
-        cell.layer.transform = CATransform3DMakeRotation(- M_PI_2, 0, 0, 1.0);
-    }
-    cell.alpha = 0.0;
-    [UIView animateWithDuration:1 animations:^{
-        cell.layer.transform = CATransform3DIdentity;
-        cell.alpha = 1.0;
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    [UIView animateWithDuration:0.25 animations:^{
+        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
     }];
-    
-    
 }
+
+
+
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSArray *array =  tableView.indexPathsForVisibleRows;
+//    NSIndexPath *firstIndexPath = array[0];
+//    
+//    
+//    //设置anchorPoint
+//    cell.layer.anchorPoint = CGPointMake(0, 0.5);
+//    //为了防止cell视图移动，重新把cell放回原来的位置
+//    cell.layer.position = CGPointMake(0, cell.layer.position.y);
+//    
+//    
+//    //设置cell 按照z轴旋转90度，注意是弧度
+//    if (firstIndexPath.row < indexPath.row) {
+//        cell.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1.0);
+//    }else{
+//        cell.layer.transform = CATransform3DMakeRotation(- M_PI_2, 0, 0, 1.0);
+//    }
+//    cell.alpha = 0.0;
+//    [UIView animateWithDuration:1 animations:^{
+//        cell.layer.transform = CATransform3DIdentity;
+//        cell.alpha = 1.0;
+//    }];
+//    
+//    
+//}
+
+
 
 //-(void)viewWillAppear:(BOOL)animated
 //{

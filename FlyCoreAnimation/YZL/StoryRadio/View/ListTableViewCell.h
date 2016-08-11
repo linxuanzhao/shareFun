@@ -1,5 +1,5 @@
 //
-//  StoryTableViewCell.h
+//  ListTableViewCell.h
 //  FlyCoreAnimation
 //
 //  Created by lanou on 16/8/10.
@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StoryTableViewCell : UITableViewCell
+@interface ListTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewA;
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
-@property (weak, nonatomic) IBOutlet UILabel *descLable;
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
-@property (weak, nonatomic) IBOutlet UILabel *trackLable;
-@property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dayLable;
 
 @end

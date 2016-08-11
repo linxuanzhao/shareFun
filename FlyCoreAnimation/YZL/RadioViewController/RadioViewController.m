@@ -17,6 +17,7 @@
 #import "DetailViewController.h"
 #import "NewsViewController.h"
 #import "StoryViewController.h"
+#import "LiteraryViewController.h"
 
 
 @interface RadioViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,XRCarouselViewDelegate>
@@ -102,6 +103,10 @@ collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInte
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 1) {
+        LiteraryViewController *literaryVc = [[LiteraryViewController alloc]init];
+        [self.navigationController pushViewController:literaryVc animated:YES];
+    }
     if (indexPath.row == 2) {
         DetailViewController *detailVc = [[DetailViewController alloc]init];
         [self.navigationController pushViewController:detailVc animated:YES];
@@ -227,6 +232,10 @@ collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInte
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

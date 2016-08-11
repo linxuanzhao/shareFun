@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIView *view1;
 @property (nonatomic, strong) UILabel *marLabel;
 @property (weak, nonatomic) IBOutlet UIButton *satrt;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) BOOL isPlay;
 
 
 @end
@@ -69,7 +71,7 @@
 
 
     
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.navigationController.navigationBar.hidden = YES;
@@ -132,17 +134,35 @@
 
 
 
-- (IBAction)backBtnAction:(id)sender {
+- (IBAction)backBtnAction:(id)sender
+{
     self.number--;
     if (self.number < 0) {
         self.number = self.urls.count-1;
     }
     [self.avManager above];
-    
+
 }
 - (IBAction)startAndStopBtnAction:(id)sender
 {
-    [self.avManager playWithBtn:self.satrt];
+    if (!self.isPlay) {
+        // _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
+        [_timer setFireDate:[NSDate distantPast]];
+        
+        [self.avManager.avPlay play];
+        [self.satrt setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
+        self.isPlay = YES;
+        //self.startBtn.selected = YES;
+    }else{
+        [self.satrt setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
+        [self.avManager.avPlay pause];
+        [_timer setFireDate:[NSDate distantFuture]];
+        //        [_timer invalidate];
+        //        _timer = nil;
+        self.isPlay = NO;
+        // self.startBtn.selected = NO;
+    }
+    [self.avManager playWithBtn:nil];
 }
 - (IBAction)nextBtnAction:(id)sender {
     self.number++;

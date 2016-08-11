@@ -10,6 +10,8 @@
 #import "DownLoad.h"
 #import "StoryModel.h"
 #import "StoryTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "StoryListViewController.h"
 
 @interface StoryViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -34,6 +36,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"StoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"storyCell"];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 
@@ -69,8 +72,34 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     StoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"storyCell"];
+    StoryModel *model = self.storyArray[indexPath.row];
+    cell.titleLable.text = model.title;
+    cell.descLable.text = model.intro;
+    cell.countLable.text = model.playsCounts.stringValue;
+    cell.trackLable.text = model.tracks.stringValue;
+    [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"2.png"]];
+    cell.imageViewA.layer.cornerRadius = 8;
+    cell.imageViewA.layer.masksToBounds = YES;
+    cell.bottomImageView.layer.cornerRadius = 5;
+    cell.bottomImageView.layer.masksToBounds = YES;
     return cell;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 100;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    StoryListViewController *listVc = [[StoryListViewController alloc]init];
+    StoryModel *model = self.storyArray[indexPath.row];
+    listVc.albumId = model.desc;
+    NSString *str = [NSString stringWithFormat:@"%ld",indexPath.row+1];
+    listVc.statPosition = str;
+    [self.navigationController pushViewController:listVc animated:YES];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {
