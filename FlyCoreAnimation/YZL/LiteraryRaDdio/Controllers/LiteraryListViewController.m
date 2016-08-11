@@ -94,6 +94,7 @@
     cell.dayLable.text = model.likes.stringValue;
     cell.countLable.text = model.duration.stringValue;
     cell.backgroundColor = [UIColor clearColor];
+    
     return cell;
     
 }
