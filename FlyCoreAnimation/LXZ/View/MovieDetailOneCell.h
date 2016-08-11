@@ -15,3 +15,4 @@
 @property (nonatomic, strong) UILabel *directorLabel;
 
 @end
+ 

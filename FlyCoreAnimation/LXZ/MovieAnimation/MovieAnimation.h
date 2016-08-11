@@ -20,6 +20,6 @@ typedef enum: NSInteger{
 
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) AnimationType animationType;
-
+  
 
 @end

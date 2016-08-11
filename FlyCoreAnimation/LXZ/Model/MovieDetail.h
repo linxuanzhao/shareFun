@@ -15,3 +15,4 @@
 @property (nonatomic, strong) NSString *logo2;
 
 @end
+ 

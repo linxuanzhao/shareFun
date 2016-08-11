@@ -38,7 +38,7 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
-
+ 
 @end
 
 @implementation MoviePlayViewController

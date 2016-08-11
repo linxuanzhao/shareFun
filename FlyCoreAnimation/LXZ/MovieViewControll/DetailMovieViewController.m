@@ -65,7 +65,7 @@
         MovieDetail *detail = [[MovieDetail alloc] init];
         [detail setValuesForKeysWithDictionary:dic];
         [self.dataArray addObject:detail];
-        
+          
     }];
 }
 

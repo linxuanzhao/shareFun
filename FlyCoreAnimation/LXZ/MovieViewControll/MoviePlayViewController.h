@@ -13,3 +13,4 @@
 @property (nonatomic, strong) NSString *movieUrlStr;
 
 @end
+ 

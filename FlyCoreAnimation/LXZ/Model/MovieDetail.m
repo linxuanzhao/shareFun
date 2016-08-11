@@ -22,5 +22,5 @@
         self.desc = [NSString stringWithFormat:@"%@", value];
     }
 }
-
+  
 @end
