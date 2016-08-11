@@ -4,4 +4,5 @@ use_frameworks!
 target 'FlyCoreAnimation’ do
   pod 'BaiduMapKit', '~> 3.0.0'
   pod 'SDWebImage’, '~> 3.8.1'
+  pod 'FMDB', '~> 2.6.2'
 end

@@ -32,14 +32,28 @@
 
 -(void)createTableView
 {
-    _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UIImageView *imageView1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    imageView1.image = [UIImage imageNamed:@"2222.JPG"];
+    imageView1.userInteractionEnabled = YES;
+    [self.view addSubview: imageView1];
+    UIView *view1 = [[UIView alloc]initWithFrame:self.view.bounds];
+    view1.backgroundColor = [UIColor lightGrayColor];
+    view1.alpha = 0.3;
+    [imageView1 addSubview:view1];
+    
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 375, self.view.bounds.size.height-64) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
     [_tableView registerNib:[UINib nibWithNibName:@"FirstCell" bundle:nil] forCellReuseIdentifier:@"firstCell"];
     [_tableView registerNib:[UINib nibWithNibName:@"ListCell" bundle:nil] forCellReuseIdentifier:@"listCell"];
       _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+    [imageView1 addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor clearColor];
+    
+    self.tableView.backgroundView = nil;
+    self.tableView.bounces = NO;
+    self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     
 }
 
@@ -51,7 +65,6 @@
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];       NSDictionary *dic1 = dic[@"data"][@"tracks"];
         NSArray *arr = dic1[@"list"];
-        NSLog(@"%@",arr);
             for (NSDictionary *dc2 in arr) {
                 ListModel *model = [[ListModel alloc]init];
                 [model setValuesForKeysWithDictionary:dc2];
@@ -97,8 +110,14 @@
     cell.dayLable.text = model.likes.stringValue;
     cell.beijingImagevIew.layer.cornerRadius = 10;
     cell.beijingImagevIew.layer.masksToBounds = YES;
+    cell.backgroundColor  = [UIColor clearColor];
+    
     float num = [model.duration floatValue]/60;
     NSString *str = [NSString stringWithFormat:@"%.2f",num];
+    
+    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
+    view1.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = view1;
     
     cell.timeLable.text = str;
     return cell;

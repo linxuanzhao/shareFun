@@ -31,12 +31,26 @@
 
 -(void)cretateTableView
 {
-    _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UIImageView *newsImageView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    newsImageView.image = [UIImage imageNamed:@"3333.JPG"];
+    newsImageView.userInteractionEnabled = YES;
+    [self.view addSubview:newsImageView];
+    UIView *newsView = [[UIView alloc]initWithFrame:self.view.bounds];
+    newsView.backgroundColor = [UIColor grayColor];
+    newsView.alpha = 0.5;
+    [newsImageView addSubview:newsView];
+    
+    
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 375, self.view.bounds.size.height - 64) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerNib:[UINib nibWithNibName:@"NewsDetailCell" bundle:nil] forCellReuseIdentifier:@"newsDetaCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
+    self.tableView.bounces = NO;
+    self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
+    [newsImageView addSubview:_tableView];
     
 }
 
@@ -90,6 +104,10 @@
     cell.imageV.layer.masksToBounds = YES;
     cell.titleImageView.layer.cornerRadius = 10;
     cell.titleImageView.layer.masksToBounds = YES;
+    cell.backgroundColor = [UIColor clearColor];
+    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
+    cellView.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = cellView;
     
     
     return cell;

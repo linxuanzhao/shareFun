@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FlyCoreAnimation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1C71AF31E8E640828D204EAE46D1F481</key>
+		<key>23CF27B2BA6AC7125EFFEDA8C5AA819F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2FEFF814987EC2A22B105093E1DBCAD4</key>
+		<key>4BD8B8655BAE1499D6146E0A47C78C21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B5B780B87628C5DB810A6C343E2F48CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
