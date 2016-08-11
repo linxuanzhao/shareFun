@@ -38,7 +38,7 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
-
+ 
 @end
 
 @implementation MoviePlayViewController
@@ -63,13 +63,43 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePause) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
+    [self.avManager.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    
+    [self.avManager.playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+
+    
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+        
+        NSArray *loadedTimeRanges = [self.avManager.player.currentItem loadedTimeRanges];
+        CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];
+        float startSenconds = CMTimeGetSeconds(timeRange.start);
+        float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+        float result = startSenconds + durationSeconds;
+        CMTime duration = self.avManager.playerItem.duration;
+        float totalDuration = CMTimeGetSeconds(duration);
+        [self.progressView setProgress:result / totalDuration animated:NO];
+    }
+    else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"])
+    {
+        if (self.avManager.playerItem.playbackLikelyToKeepUp && !self.playBtn.selected) {
+            [self.avManager.player play];
+        }
+    }
+    
+}
+
+
 
 - (void)movieDidFinish
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.timer invalidate];
     self.timer = nil;
+    [self removeObserver];
 }
 
 
@@ -168,9 +198,7 @@
     self.progressView.frame = CGRectMake(10 + 45 + 10, self.bottomView.frame.size.height / 2 - 1, [UIScreen mainScreen].bounds.size.height - 65 * 2, 2);
     self.progressView.tintColor = [UIColor blackColor];
     [self.bottomView addSubview:self.progressView];
-    [self.avManager loadProgressView:self.progressView];
 
-    
     // 进度滑条
     self.slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height - 65 * 2, 30)];
     self.slider.center = self.progressView.center;
@@ -187,11 +215,7 @@
     self.activityView.center = self.backView.center;
     [self.activityView startAnimating];
     [self.view addSubview:self.activityView];
-
-    
-    
-    
-    
+   
 }
 
 - (void)finishChangeProgress
@@ -211,6 +235,7 @@
         [self.avManager.player pause];
     }];
     
+    [self removeObserver];
     
 }
 
@@ -264,6 +289,11 @@
     }
 }
 
+- (void)removeObserver
+{
+    [self.avManager.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
+    [self.avManager.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
+}
 
 
 - (void)playAndPause:(UIButton *)button

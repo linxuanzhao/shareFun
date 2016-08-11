@@ -261,10 +261,6 @@
 		3FA420021D58B6C000BEA989 /* XFShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XFShareViewController.xib; sourceTree = "<group>"; };
 		3FA420051D58B6C000BEA989 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		3FA420061D58B6C000BEA989 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
-		3FA420081D58B6C000BEA989 /* OUNavAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUNavAnimation.h; sourceTree = "<group>"; };
-		3FA420091D58B6C000BEA989 /* OUNavAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUNavAnimation.m; sourceTree = "<group>"; };
-		3FA4200A1D58B6C000BEA989 /* OUNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OUNavigationController.h; sourceTree = "<group>"; };
-		3FA4200B1D58B6C000BEA989 /* OUNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OUNavigationController.m; sourceTree = "<group>"; };
 		3FA4200D1D58B6C000BEA989 /* DetailMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMovieViewController.h; sourceTree = "<group>"; };
 		3FA4200E1D58B6C000BEA989 /* DetailMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMovieViewController.m; sourceTree = "<group>"; };
 		3FA4200F1D58B6C000BEA989 /* MoviePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayViewController.h; sourceTree = "<group>"; };
@@ -664,6 +660,8 @@
 			children = (
 				3FA420051D58B6C000BEA989 /* Movie.h */,
 				3FA420061D58B6C000BEA989 /* Movie.m */,
+				3FB2F1D21D5AFE5600319DA6 /* MovieDetail.h */,
+				3FB2F1D31D5AFE5600319DA6 /* MovieDetail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -671,10 +669,10 @@
 		3FA420071D58B6C000BEA989 /* MovieAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				3FA420081D58B6C000BEA989 /* OUNavAnimation.h */,
-				3FA420091D58B6C000BEA989 /* OUNavAnimation.m */,
-				3FA4200A1D58B6C000BEA989 /* OUNavigationController.h */,
-				3FA4200B1D58B6C000BEA989 /* OUNavigationController.m */,
+				3F703E0A1D5B47C200279A06 /* MovieAnimation.h */,
+				3F703E0B1D5B47C200279A06 /* MovieAnimation.m */,
+				3F703E0E1D5B4E5B00279A06 /* UIViewController+Trainsition.h */,
+				3F703E0F1D5B4E5B00279A06 /* UIViewController+Trainsition.m */,
 			);
 			path = MovieAnimation;
 			sourceTree = "<group>";
@@ -767,6 +765,8 @@
 			children = (
 				3FA420881D58C32200BEA989 /* MovieCell.h */,
 				3FA420891D58C32200BEA989 /* MovieCell.m */,
+				3FB2F1D51D5AFE6C00319DA6 /* MovieDetailOneCell.h */,
+				3FB2F1D61D5AFE6C00319DA6 /* MovieDetailOneCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1166,11 +1166,13 @@
 				3F22D7421D5968AE00820C61 /* NewsViewController.m in Sources */,
 				3F22D74F1D5968CA00820C61 /* NewsCell.m in Sources */,
 				3F22D7311D5967FC00820C61 /* DetailCell.m in Sources */,
+				3FB2F1D71D5AFE6C00319DA6 /* MovieDetailOneCell.m in Sources */,
 				3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */,
 				3FB6C7FF1D5B069400B0BBFD /* StoryListViewController.m in Sources */,
 				3F22D7481D5968BB00820C61 /* NewsModel.m in Sources */,
 				3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */,
 				3F22D7251D5967D900820C61 /* RadioModel.m in Sources */,
+				3F703E0C1D5B47C200279A06 /* MovieAnimation.m in Sources */,
 				3FA4203D1D58B6C000BEA989 /* DetailMovieViewController.m in Sources */,
 				3F22D7611D5969E900820C61 /* ImageCell.m in Sources */,
 				3FA420381D58B6C000BEA989 /* XFShareViewController.m in Sources */,
@@ -1187,14 +1189,15 @@
 				3FB6C7F21D5AD66200B0BBFD /* StoryViewController.m in Sources */,
 				3FA4203C1D58B6C000BEA989 /* OUNavigationController.m in Sources */,
 				3FA420781D58B9B500BEA989 /* DownLoad.m in Sources */,
+				3F703E101D5B4E5B00279A06 /* UIViewController+Trainsition.m in Sources */,
 				3FA4203E1D58B6C000BEA989 /* MoviePlayViewController.m in Sources */,
 				3FA420431D58B6C000BEA989 /* ViewController.m in Sources */,
 				3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */,
 				3F22D7241D5967D900820C61 /* ListModel.m in Sources */,
-				3FA4203B1D58B6C000BEA989 /* OUNavAnimation.m in Sources */,
 				3F22D73F1D5968AE00820C61 /* NewsDetailViewController.m in Sources */,
 				3F22D71E1D5967CC00820C61 /* RadioPlayViewController.m in Sources */,
 				3F22D7401D5968AE00820C61 /* NewsPlayViewController.m in Sources */,
+				3FB2F1D41D5AFE5600319DA6 /* MovieDetail.m in Sources */,
 				3FA420401D58B6C000BEA989 /* main.m in Sources */,
 				3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */,
 				3F7EFCD51D5C25DA00651AB7 /* LiteraryListViewController.m in Sources */,
@@ -1332,7 +1335,7 @@
 			baseConfigurationReference = 7DB5884A71858E768C3064DD /* Pods-FlyCoreAnimation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = /Users/lan/Desktop/ShareFun/shareFun/FlyCoreAnimation/Other/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jaff-he.FlyCoreAnimation";
@@ -1345,7 +1348,7 @@
 			baseConfigurationReference = D35953EDB7E950D2FF662D15 /* Pods-FlyCoreAnimation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = /Users/lan/Desktop/ShareFun/shareFun/FlyCoreAnimation/Other/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jaff-he.FlyCoreAnimation";
