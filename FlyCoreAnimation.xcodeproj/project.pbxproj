@@ -80,13 +80,24 @@
 		3F7EFCD81D5C2A5A00651AB7 /* LiteraryListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCD71D5C2A5A00651AB7 /* LiteraryListModel.m */; settings = {ASSET_TAGS = (); }; };
 		3F7EFCDC1D5C2AE800651AB7 /* LiteraryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCDA1D5C2AE800651AB7 /* LiteraryListCell.m */; settings = {ASSET_TAGS = (); }; };
 		3F7EFCDD1D5C2AE800651AB7 /* LiteraryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7EFCDB1D5C2AE800651AB7 /* LiteraryListCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCE31D5C52E700651AB7 /* MovieDetailOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCE21D5C52E700651AB7 /* MovieDetailOneCell.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCE91D5C530400651AB7 /* MovieAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCE61D5C530400651AB7 /* MovieAnimation.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCEA1D5C530400651AB7 /* UIViewController+Trainsition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCE81D5C530400651AB7 /* UIViewController+Trainsition.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCED1D5C543D00651AB7 /* MovieDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCEC1D5C543D00651AB7 /* MovieDetail.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCF01D5C600600651AB7 /* CompositeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCEF1D5C600600651AB7 /* CompositeViewController.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCF31D5C618C00651AB7 /* CompositeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCF21D5C618B00651AB7 /* CompositeModel.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCF71D5C61C000651AB7 /* CompositeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCF51D5C61C000651AB7 /* CompositeCell.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCF81D5C61C000651AB7 /* CompositeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7EFCF61D5C61C000651AB7 /* CompositeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCFB1D5C681900651AB7 /* CompositeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCFA1D5C681900651AB7 /* CompositeListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFCFE1D5C683700651AB7 /* CompositeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFCFD1D5C683700651AB7 /* CompositeListModel.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFD021D5C686000651AB7 /* CompositeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7EFD001D5C686000651AB7 /* CompositeListCell.m */; settings = {ASSET_TAGS = (); }; };
+		3F7EFD031D5C686000651AB7 /* CompositeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7EFD011D5C686000651AB7 /* CompositeListCell.xib */; settings = {ASSET_TAGS = (); }; };
 		3FA41FF81D58A60800BEA989 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA41FF71D58A60800BEA989 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA41FFD1D58B6C000BEA989 /* XFMapViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420381D58B6C000BEA989 /* XFShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420011D58B6C000BEA989 /* XFShareViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420391D58B6C000BEA989 /* XFShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA420021D58B6C000BEA989 /* XFShareViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		3FA4203A1D58B6C000BEA989 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420061D58B6C000BEA989 /* Movie.m */; settings = {ASSET_TAGS = (); }; };
-		3FA4203B1D58B6C000BEA989 /* OUNavAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420091D58B6C000BEA989 /* OUNavAnimation.m */; settings = {ASSET_TAGS = (); }; };
-		3FA4203C1D58B6C000BEA989 /* OUNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4200B1D58B6C000BEA989 /* OUNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		3FA4203C1D58B6C000BEA989 /* (null) in Sources */ = {isa = PBXBuildFile; settings = {ASSET_TAGS = (); }; };
 		3FA4203D1D58B6C000BEA989 /* DetailMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4200E1D58B6C000BEA989 /* DetailMovieViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FA4203E1D58B6C000BEA989 /* MoviePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420101D58B6C000BEA989 /* MoviePlayViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FA4203F1D58B6C000BEA989 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420121D58B6C000BEA989 /* MovieViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -253,6 +264,28 @@
 		3F7EFCD91D5C2AE800651AB7 /* LiteraryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiteraryListCell.h; sourceTree = "<group>"; };
 		3F7EFCDA1D5C2AE800651AB7 /* LiteraryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiteraryListCell.m; sourceTree = "<group>"; };
 		3F7EFCDB1D5C2AE800651AB7 /* LiteraryListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiteraryListCell.xib; sourceTree = "<group>"; };
+		3F7EFCE11D5C52E700651AB7 /* MovieDetailOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetailOneCell.h; sourceTree = "<group>"; };
+		3F7EFCE21D5C52E700651AB7 /* MovieDetailOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetailOneCell.m; sourceTree = "<group>"; };
+		3F7EFCE51D5C530400651AB7 /* MovieAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieAnimation.h; sourceTree = "<group>"; };
+		3F7EFCE61D5C530400651AB7 /* MovieAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieAnimation.m; sourceTree = "<group>"; };
+		3F7EFCE71D5C530400651AB7 /* UIViewController+Trainsition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Trainsition.h"; sourceTree = "<group>"; };
+		3F7EFCE81D5C530400651AB7 /* UIViewController+Trainsition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Trainsition.m"; sourceTree = "<group>"; };
+		3F7EFCEB1D5C543D00651AB7 /* MovieDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDetail.h; sourceTree = "<group>"; };
+		3F7EFCEC1D5C543D00651AB7 /* MovieDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDetail.m; sourceTree = "<group>"; };
+		3F7EFCEE1D5C600600651AB7 /* CompositeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeViewController.h; sourceTree = "<group>"; };
+		3F7EFCEF1D5C600600651AB7 /* CompositeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeViewController.m; sourceTree = "<group>"; };
+		3F7EFCF11D5C618B00651AB7 /* CompositeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeModel.h; sourceTree = "<group>"; };
+		3F7EFCF21D5C618B00651AB7 /* CompositeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeModel.m; sourceTree = "<group>"; };
+		3F7EFCF41D5C61C000651AB7 /* CompositeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeCell.h; sourceTree = "<group>"; };
+		3F7EFCF51D5C61C000651AB7 /* CompositeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeCell.m; sourceTree = "<group>"; };
+		3F7EFCF61D5C61C000651AB7 /* CompositeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompositeCell.xib; sourceTree = "<group>"; };
+		3F7EFCF91D5C681900651AB7 /* CompositeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeListViewController.h; sourceTree = "<group>"; };
+		3F7EFCFA1D5C681900651AB7 /* CompositeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeListViewController.m; sourceTree = "<group>"; };
+		3F7EFCFC1D5C683700651AB7 /* CompositeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeListModel.h; sourceTree = "<group>"; };
+		3F7EFCFD1D5C683700651AB7 /* CompositeListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeListModel.m; sourceTree = "<group>"; };
+		3F7EFCFF1D5C686000651AB7 /* CompositeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeListCell.h; sourceTree = "<group>"; };
+		3F7EFD001D5C686000651AB7 /* CompositeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositeListCell.m; sourceTree = "<group>"; };
+		3F7EFD011D5C686000651AB7 /* CompositeListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompositeListCell.xib; sourceTree = "<group>"; };
 		3FA41FF71D58A60800BEA989 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FA41FFC1D58B6C000BEA989 /* XFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFMapViewController.h; sourceTree = "<group>"; };
 		3FA41FFD1D58B6C000BEA989 /* XFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFMapViewController.m; sourceTree = "<group>"; };
@@ -598,6 +631,18 @@
 			path = FlyCoreAnimationUITests;
 			sourceTree = "<group>";
 		};
+		3F7EFCE41D5C530400651AB7 /* MovieAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				3F7EFCE51D5C530400651AB7 /* MovieAnimation.h */,
+				3F7EFCE61D5C530400651AB7 /* MovieAnimation.m */,
+				3F7EFCE71D5C530400651AB7 /* UIViewController+Trainsition.h */,
+				3F7EFCE81D5C530400651AB7 /* UIViewController+Trainsition.m */,
+			);
+			name = MovieAnimation;
+			path = View/MovieAnimation;
+			sourceTree = "<group>";
+		};
 		3FA41FF91D58B6C000BEA989 /* HXF */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,9 +692,9 @@
 		3FA420031D58B6C000BEA989 /* LXZ */ = {
 			isa = PBXGroup;
 			children = (
+				3F7EFCE41D5C530400651AB7 /* MovieAnimation */,
 				3FA420871D58C32200BEA989 /* View */,
 				3FA420041D58B6C000BEA989 /* Model */,
-				3FA420071D58B6C000BEA989 /* MovieAnimation */,
 				3FA4200C1D58B6C000BEA989 /* MovieViewControll */,
 			);
 			path = LXZ;
@@ -658,23 +703,12 @@
 		3FA420041D58B6C000BEA989 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F7EFCEB1D5C543D00651AB7 /* MovieDetail.h */,
+				3F7EFCEC1D5C543D00651AB7 /* MovieDetail.m */,
 				3FA420051D58B6C000BEA989 /* Movie.h */,
 				3FA420061D58B6C000BEA989 /* Movie.m */,
-				3FB2F1D21D5AFE5600319DA6 /* MovieDetail.h */,
-				3FB2F1D31D5AFE5600319DA6 /* MovieDetail.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		3FA420071D58B6C000BEA989 /* MovieAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				3F703E0A1D5B47C200279A06 /* MovieAnimation.h */,
-				3F703E0B1D5B47C200279A06 /* MovieAnimation.m */,
-				3F703E0E1D5B4E5B00279A06 /* UIViewController+Trainsition.h */,
-				3F703E0F1D5B4E5B00279A06 /* UIViewController+Trainsition.m */,
-			);
-			path = MovieAnimation;
 			sourceTree = "<group>";
 		};
 		3FA4200C1D58B6C000BEA989 /* MovieViewControll */ = {
@@ -763,10 +797,10 @@
 		3FA420871D58C32200BEA989 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3F7EFCE11D5C52E700651AB7 /* MovieDetailOneCell.h */,
+				3F7EFCE21D5C52E700651AB7 /* MovieDetailOneCell.m */,
 				3FA420881D58C32200BEA989 /* MovieCell.h */,
 				3FA420891D58C32200BEA989 /* MovieCell.m */,
-				3FB2F1D51D5AFE6C00319DA6 /* MovieDetailOneCell.h */,
-				3FB2F1D61D5AFE6C00319DA6 /* MovieDetailOneCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -839,6 +873,10 @@
 		3FB6C7EA1D5AD60F00B0BBFD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F7EFCEE1D5C600600651AB7 /* CompositeViewController.h */,
+				3F7EFCEF1D5C600600651AB7 /* CompositeViewController.m */,
+				3F7EFCF91D5C681900651AB7 /* CompositeListViewController.h */,
+				3F7EFCFA1D5C681900651AB7 /* CompositeListViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -846,6 +884,10 @@
 		3FB6C7EB1D5AD60F00B0BBFD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F7EFCF11D5C618B00651AB7 /* CompositeModel.h */,
+				3F7EFCF21D5C618B00651AB7 /* CompositeModel.m */,
+				3F7EFCFC1D5C683700651AB7 /* CompositeListModel.h */,
+				3F7EFCFD1D5C683700651AB7 /* CompositeListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -853,6 +895,12 @@
 		3FB6C7EC1D5AD60F00B0BBFD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3F7EFCF41D5C61C000651AB7 /* CompositeCell.h */,
+				3F7EFCF51D5C61C000651AB7 /* CompositeCell.m */,
+				3F7EFCF61D5C61C000651AB7 /* CompositeCell.xib */,
+				3F7EFCFF1D5C686000651AB7 /* CompositeListCell.h */,
+				3F7EFD001D5C686000651AB7 /* CompositeListCell.m */,
+				3F7EFD011D5C686000651AB7 /* CompositeListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1036,6 +1084,7 @@
 				3F22D7891D596A1800820C61 /* 6.jpg in Resources */,
 				3F22D71F1D5967CC00820C61 /* RadioPlayViewController.xib in Resources */,
 				3F7EFCC61D5C0F5200651AB7 /* 3333.JPG in Resources */,
+				3F7EFD031D5C686000651AB7 /* CompositeListCell.xib in Resources */,
 				3FA4206C1D58B74300BEA989 /* left.png in Resources */,
 				3F22D7921D596A1800820C61 /* fire.png in Resources */,
 				3F22D75A1D59692200820C61 /* XRPlaceholder.png in Resources */,
@@ -1070,6 +1119,7 @@
 				3FB6C80A1D5B06EA00B0BBFD /* ListTableViewCell.xib in Resources */,
 				3F22D7301D5967FC00820C61 /* beijing.png in Resources */,
 				3F22D7981D596A1800820C61 /* slider.png in Resources */,
+				3F7EFCF81D5C61C000651AB7 /* CompositeCell.xib in Resources */,
 				3F22D7971D596A1800820C61 /* qqq.jpg in Resources */,
 				3FA4206D1D58B74300BEA989 /* pause.png in Resources */,
 				3FA4206A1D58B74300BEA989 /* ic_right - circle - o.png in Resources */,
@@ -1151,6 +1201,7 @@
 			files = (
 				3F7EFCC91D5C150C00651AB7 /* LiteraryViewController.m in Sources */,
 				3F7EFCD81D5C2A5A00651AB7 /* LiteraryListModel.m in Sources */,
+				3F7EFCE31D5C52E700651AB7 /* MovieDetailOneCell.m in Sources */,
 				3F0FF4FE1D59AF7900DBEEAA /* ResultModel.m in Sources */,
 				3FB6C8091D5B06EA00B0BBFD /* ListTableViewCell.m in Sources */,
 				3F0FF4F71D5978E200DBEEAA /* ZYQSphereView.m in Sources */,
@@ -1161,45 +1212,50 @@
 				3FA4203F1D58B6C000BEA989 /* MovieViewController.m in Sources */,
 				3F22D71D1D5967CC00820C61 /* ListViewController.m in Sources */,
 				3FB6C7F51D5AD67E00B0BBFD /* StoryModel.m in Sources */,
+				3F7EFCE91D5C530400651AB7 /* MovieAnimation.m in Sources */,
 				3F22D71C1D5967CC00820C61 /* DetailViewController.m in Sources */,
 				3FA4203A1D58B6C000BEA989 /* Movie.m in Sources */,
 				3F22D7421D5968AE00820C61 /* NewsViewController.m in Sources */,
 				3F22D74F1D5968CA00820C61 /* NewsCell.m in Sources */,
 				3F22D7311D5967FC00820C61 /* DetailCell.m in Sources */,
-				3FB2F1D71D5AFE6C00319DA6 /* MovieDetailOneCell.m in Sources */,
 				3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */,
 				3FB6C7FF1D5B069400B0BBFD /* StoryListViewController.m in Sources */,
 				3F22D7481D5968BB00820C61 /* NewsModel.m in Sources */,
 				3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */,
 				3F22D7251D5967D900820C61 /* RadioModel.m in Sources */,
-				3F703E0C1D5B47C200279A06 /* MovieAnimation.m in Sources */,
 				3FA4203D1D58B6C000BEA989 /* DetailMovieViewController.m in Sources */,
 				3F22D7611D5969E900820C61 /* ImageCell.m in Sources */,
 				3FA420381D58B6C000BEA989 /* XFShareViewController.m in Sources */,
 				3F0FF5031D59D98000DBEEAA /* XFAnnotation.m in Sources */,
 				3F22D7591D59692200820C61 /* XRCarouselView.m in Sources */,
+				3F7EFCEA1D5C530400651AB7 /* UIViewController+Trainsition.m in Sources */,
 				3FA420421D58B6C000BEA989 /* AppDelegate.m in Sources */,
 				3FB6C8021D5B06A400B0BBFD /* LisstModel.m in Sources */,
 				3F22D7281D5967EB00820C61 /* MyLayout.m in Sources */,
 				3F22D7511D5968CA00820C61 /* NewsDetailCell.m in Sources */,
 				3FA4208A1D58C32200BEA989 /* MovieCell.m in Sources */,
+				3F7EFCFE1D5C683700651AB7 /* CompositeListModel.m in Sources */,
 				3F22D7621D5969E900820C61 /* RadioViewController.m in Sources */,
 				3F7EFCD01D5C18AB00651AB7 /* LiteraryCell.m in Sources */,
 				3FA420821D58BA7600BEA989 /* LXZAVManager.m in Sources */,
 				3FB6C7F21D5AD66200B0BBFD /* StoryViewController.m in Sources */,
-				3FA4203C1D58B6C000BEA989 /* OUNavigationController.m in Sources */,
+				3FA4203C1D58B6C000BEA989 /* (null) in Sources */,
 				3FA420781D58B9B500BEA989 /* DownLoad.m in Sources */,
-				3F703E101D5B4E5B00279A06 /* UIViewController+Trainsition.m in Sources */,
 				3FA4203E1D58B6C000BEA989 /* MoviePlayViewController.m in Sources */,
 				3FA420431D58B6C000BEA989 /* ViewController.m in Sources */,
 				3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */,
 				3F22D7241D5967D900820C61 /* ListModel.m in Sources */,
+				3F7EFCF71D5C61C000651AB7 /* CompositeCell.m in Sources */,
 				3F22D73F1D5968AE00820C61 /* NewsDetailViewController.m in Sources */,
+				3F7EFCF31D5C618C00651AB7 /* CompositeModel.m in Sources */,
+				3F7EFCED1D5C543D00651AB7 /* MovieDetail.m in Sources */,
+				3F7EFCFB1D5C681900651AB7 /* CompositeListViewController.m in Sources */,
 				3F22D71E1D5967CC00820C61 /* RadioPlayViewController.m in Sources */,
 				3F22D7401D5968AE00820C61 /* NewsPlayViewController.m in Sources */,
-				3FB2F1D41D5AFE5600319DA6 /* MovieDetail.m in Sources */,
 				3FA420401D58B6C000BEA989 /* main.m in Sources */,
+				3F7EFCF01D5C600600651AB7 /* CompositeViewController.m in Sources */,
 				3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */,
+				3F7EFD021D5C686000651AB7 /* CompositeListCell.m in Sources */,
 				3F7EFCD51D5C25DA00651AB7 /* LiteraryListViewController.m in Sources */,
 				3F7EFCCC1D5C188B00651AB7 /* LiteraryModel.m in Sources */,
 			);

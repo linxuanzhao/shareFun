@@ -18,6 +18,7 @@
 #import "NewsViewController.h"
 #import "StoryViewController.h"
 #import "LiteraryViewController.h"
+#import "CompositeViewController.h"
 
 
 @interface RadioViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,XRCarouselViewDelegate>
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) NSArray *imageArray;
 @property (nonatomic, assign) NSInteger tapNum;
 @property (nonatomic, strong) XRCarouselView *carouselView;
+
 
 @end
 
@@ -103,6 +105,10 @@ collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInte
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0) {
+        CompositeViewController *compositeVc = [[CompositeViewController alloc]init];
+        [self.navigationController pushViewController:compositeVc animated:YES];
+    }
     if (indexPath.row == 1) {
         LiteraryViewController *literaryVc = [[LiteraryViewController alloc]init];
         [self.navigationController pushViewController:literaryVc animated:YES];
