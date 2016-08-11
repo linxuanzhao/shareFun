@@ -96,10 +96,10 @@
 
 - (void)movieDidFinish
 {
+    [self removeObserver];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.timer invalidate];
     self.timer = nil;
-    [self removeObserver];
 }
 
 
@@ -231,11 +231,12 @@
 
 - (void)backToDetail
 {
+    [self removeObserver];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.avManager.player pause];
     }];
     
-    [self removeObserver];
+    
     
 }
 

@@ -25,6 +25,9 @@
 @property (nonatomic, strong) UIImageView *imageV;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *categoryLabel;
+@property (nonatomic, strong) UILabel *durationLabel;
+
 
 @property (nonatomic, strong) MovieAnimation *animation;
 
@@ -77,7 +80,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + 20) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    self.tableView.backgroundColor = [UIColor colorWithRed:250 / 255.0 green:250 / 255.0 blue:250 / 255.0 alpha:1];
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"reuse"];
     [self.view addSubview:self.tableView];
     
@@ -86,11 +89,11 @@
     self.headView.backgroundColor = [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:240 / 255.0 alpha:1];
     
     // imageView
-    self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 140, 110, 160)];
+    self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 160, 110, 160)];
     self.targetView = self.imageV;
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.logo520692]];
     
-    // 视频
+    // topView
     self.topView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCWI, self.imageV.center.y)];
     [self.topView sd_setImageWithURL:[NSURL URLWithString:self.cover]];
     self.topView.userInteractionEnabled=YES;
@@ -100,10 +103,10 @@
     self.tableView.tableHeaderView = self.headView;
     
     self.playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.playBtn.frame = CGRectMake(0, 0, 50, 50);
+    self.playBtn.frame = CGRectMake(0, 0, 40, 40);
     self.playBtn.backgroundColor = [UIColor colorWithRed:38 / 255.0 green:38 / 255.0 blue:38 / 255.0 alpha:0.6];
     self.playBtn.center = self.topView.center;
-    self.playBtn.layer.cornerRadius = 25;
+    self.playBtn.layer.cornerRadius = 20;
     self.playBtn.layer.masksToBounds = YES;
     [self.playBtn setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
     [self.playBtn addTarget:self action:@selector(presentMovie) forControlEvents:UIControlEventTouchUpInside];
@@ -119,15 +122,35 @@
     [self.topView addSubview:self.backButton];
     
     // name
-    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 160, 150, 20)];
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 170, 200, 20)];
     self.nameLabel.text = self.name;
     self.nameLabel.font = [UIFont boldSystemFontOfSize:18];
-    self.nameLabel.textColor = [UIColor whiteColor];
-    self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    self.nameLabel.textColor = [UIColor colorWithRed:250 / 255.0 green:250 / 255.0 blue:250 / 255.0 alpha:1];
+    self.nameLabel.textAlignment = NSTextAlignmentLeft;
     [self.topView addSubview:self.nameLabel];
     
     // releaseDate
+    self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 185, 250, 40)];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@上映 %@", self.releaseDate, self.area];
+    self.dateLabel.font = [UIFont systemFontOfSize:15];
+    self.dateLabel.numberOfLines = 2;
+    self.dateLabel.textColor = [UIColor colorWithRed:250 / 255.0 green:250 / 255.0 blue:250 / 255.0 alpha:1];
+    self.dateLabel.textAlignment = NSTextAlignmentLeft;
+    [self.topView addSubview:self.dateLabel];
     
+    // category
+    self.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 245, 200, 20)];
+    self.categoryLabel.text = self.category;
+    self.categoryLabel.font = [UIFont systemFontOfSize:14];
+    self.categoryLabel.textAlignment = NSTextAlignmentLeft;
+    [self.headView addSubview:self.categoryLabel];
+    
+    // duration
+    self.durationLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 270, 200, 20)];
+    self.durationLabel.text = [NSString stringWithFormat:@"时长: %@", self.duration];
+    self.durationLabel.font = [UIFont systemFontOfSize:14];
+    self.durationLabel.textAlignment = NSTextAlignmentLeft;
+    [self.headView addSubview:self.durationLabel];
     
 }
 
@@ -143,11 +166,13 @@
 
 - (void)back
 {
+    
     [self.navigationController popViewControllerAnimated:YES];
-    [UIView animateWithDuration:0 delay:1.5 options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:0.0 delay:1 options:UIViewAnimationOptionLayoutSubviews animations:^{
         self.navigationController.navigationBarHidden = NO;
     } completion:nil];
     
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

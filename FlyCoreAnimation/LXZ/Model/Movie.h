@@ -24,4 +24,3 @@
 @property (nonatomic, strong) NSString *releaseDate;
 
 @end
- 
