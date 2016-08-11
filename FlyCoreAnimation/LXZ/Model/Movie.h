@@ -21,5 +21,6 @@
 @property (nonatomic, strong) NSString *director;
 @property (nonatomic, strong) NSString *grade;
 @property (nonatomic, strong) NSString *area;
+@property (nonatomic, strong) NSString *releaseDate;
 
 @end

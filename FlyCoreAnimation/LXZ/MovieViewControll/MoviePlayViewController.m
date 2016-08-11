@@ -85,7 +85,7 @@
     }
     else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"])
     {
-        if (self.avManager.playerItem.playbackLikelyToKeepUp) {
+        if (self.avManager.playerItem.playbackLikelyToKeepUp && !self.playBtn.selected) {
             [self.avManager.player play];
         }
     }

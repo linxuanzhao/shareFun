@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "OUNavigationController.h"
+
 
 
 @interface AppDelegate ()
@@ -37,7 +37,7 @@
     [self.window addSubview:imageV];
     [self.window makeKeyAndVisible];
     ViewController *VC = [[ViewController alloc]init];
-    OUNavigationController *Navc = [[OUNavigationController alloc]initWithRootViewController:VC];
+    UINavigationController *Navc = [[UINavigationController alloc]initWithRootViewController:VC];
     self.window.rootViewController = Navc;
 
     return YES;

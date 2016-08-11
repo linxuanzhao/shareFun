@@ -12,27 +12,42 @@
 #import "MovieCell.h"
 #import "UIImageView+WebCache.h"
 #import "DetailMovieViewController.h"
-#import "OUNavigationController.h"
+#import "MovieAnimation.h"
+#import "UIViewController+Trainsition.h"
 
-@interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) MovieAnimation *animation;
 
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
 @implementation MovieViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"热映电影";
-    [self getData];
+    
+    self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
     [self createCollectionView];
+    [self getData];
+   
     
     
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.delegate = self;
 }
 
 - (NSMutableArray *)dataArray
@@ -45,7 +60,10 @@
 
 - (void)getData
 {
-    [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html" postBody:@"app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100?latitude=23.1967&longitude=113.33483&offen_cinema_ids=&type=0" resultBlock:^(NSData *data) {
+//    http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100
+//    latitude=23.18037&longitude=113.35261&offen_cinema_ids=&type=0
+    
+    [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100" postBody:nil resultBlock:^(NSData *data) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
@@ -96,7 +114,6 @@
     Movie *movie = self.dataArray[indexPath.item];
     cell.movie = movie;
     
-    
     return cell;
     
 }
@@ -104,13 +121,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    DetailMovieViewController *detailMovieVC = [[DetailMovieViewController alloc] init];
-    MovieCell *cell = (MovieCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    MovieCell *cell = (MovieCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    self.targetView = cell.imageV;
     
+    DetailMovieViewController *detailMovieVC = [[DetailMovieViewController alloc] init];
     NSString *str = [cell.movie.logo556640 substringToIndex:cell.movie.logo556640.length - 4];
     NSString *urlImgStr = [str stringByAppendingString:@"jpg"];
-    
     detailMovieVC.cover = urlImgStr;
     detailMovieVC.movieUrlStr = cell.movie.mobilePreview;
     detailMovieVC.movieId = cell.movie.movieId;
@@ -120,10 +136,23 @@
     detailMovieVC.director = cell.movie.director;
     detailMovieVC.grade = cell.movie.grade;
     detailMovieVC.area = cell.movie.area;
+    detailMovieVC.logo520692 = cell.movie.logo520692;
+    detailMovieVC.name = cell.movie.name;
+    detailMovieVC.releaseDate = cell.movie.releaseDate;
     
-    [((OUNavigationController*)self.navigationController) pushViewController:detailMovieVC withImageView:cell.imageV desRect:CGRectMake(20, 150, cell.imageV.bounds.size.width, cell.imageV.bounds.size.height)];
-    
+    [self.navigationController pushViewController:detailMovieVC animated:YES];
 
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
+{
+    if (operation == UINavigationControllerOperationPush) {
+        return self.animation;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 
