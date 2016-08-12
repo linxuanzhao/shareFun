@@ -22,6 +22,5 @@
 @property (nonatomic, strong) NSString *area;
 @property (nonatomic, strong) NSString *logo520692;
 @property (nonatomic, strong) NSString *releaseDate;
-
   
 @end

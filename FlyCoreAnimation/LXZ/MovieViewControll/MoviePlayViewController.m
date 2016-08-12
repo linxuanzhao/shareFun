@@ -38,7 +38,8 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
- 
+@property (nonatomic, strong) YZLAVManager *yzlAV;
+
 @end
 
 @implementation MoviePlayViewController
@@ -46,6 +47,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
+    self.yzlAV = [YZLAVManager shareInstance];
+    [self.yzlAV.avPlay pause];
     
     self.avManager = [LXZAVManager shareInstance];
     [self.avManager playWithUrlStr:self.movieUrlStr playView:self.view];

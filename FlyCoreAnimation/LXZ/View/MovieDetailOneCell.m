@@ -10,15 +10,21 @@
 
 @implementation MovieDetailOneCell
 
-//- (instancetype)initWithFrame:(CGRect)frame
-//{
-////    if (self = [super initWithFrame:frame]) {
-////        self.categoryLabel = [UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
-////    }
-//}
 
 
- 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        self.descLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.descLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+        NSLog(@"%f", self.descLabel.font.leading);
+        self.descLabel.numberOfLines = 0;
+        [self.contentView addSubview:self.descLabel];
+    }
+    return self;
+}
 
 
 - (void)awakeFromNib {

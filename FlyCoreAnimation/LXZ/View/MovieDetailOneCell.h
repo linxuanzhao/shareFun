@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface MovieDetailOneCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *categoryLabel;
-@property (nonatomic, strong) UILabel *durationLabel;
-@property (nonatomic, strong) UILabel *directorLabel;
+@property (nonatomic, strong) UILabel *descLabel;
+
 
 @end
  

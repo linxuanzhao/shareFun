@@ -40,9 +40,39 @@
     [self createCollectionView];
     [self getData];
    
+    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
+    screen.edges = UIRectEdgeLeft;
+    [self.view addGestureRecognizer:screen];
     
     
 }
+
+- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
+{
+    CGPoint pt = [screen translationInView:self.view];
+    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
+
+    [screen setTranslation:CGPointZero inView:self.view];
+    
+    if (screen.state == UIGestureRecognizerStateEnded) {
+        if (self.view.frame.origin.x > SCWI / 2) {
+            
+           [UIView animateWithDuration:0.2 animations:^{
+               self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
+               
+           } completion:^(BOOL finished) {
+               [self.navigationController popViewControllerAnimated:YES];
+           }];
+        }
+        else
+        {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
+            }];
+        }
+    }
+}
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -67,6 +97,7 @@
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
+        
         NSArray *array = dic[@"list"];
         for (NSDictionary *movieDic in array) {
             Movie *movie = [[Movie alloc] init];
@@ -78,7 +109,6 @@
             [self.collectionView reloadData];
         });
         
-        
     }];
     
 }
@@ -86,7 +116,7 @@
 - (void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(110, 180);
+    flowLayout.itemSize = CGSizeMake(100, 150);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.sectionInset = UIEdgeInsetsMake(20, 10, 30, 10);
     flowLayout.minimumLineSpacing = 50;
