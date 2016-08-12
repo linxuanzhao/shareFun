@@ -12,17 +12,30 @@
 #import "DetailCell.h"
 #import "UIImageView+WebCache.h"
 #import "ListViewController.h"
+#import "MJRefresh.h"
 
 
 @interface DetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
+@property (nonatomic, assign) NSInteger num;
+@property (nonatomic, strong) NSMutableArray *array;
+@property (nonatomic, assign) NSInteger num1;
+@property (nonatomic, strong) NSMutableArray *array12345;
 
 
 @end
 
 @implementation DetailViewController
+
+
+-(NSMutableArray *)array
+{
+    if (_array == nil) {
+        _array = [[NSMutableArray alloc]init];
+    }
+    return _array;
+}
 
 -(NSMutableArray *)dataArray
 {
@@ -51,23 +64,49 @@
     [image1 addSubview:_tableView];
     _tableView.backgroundColor = [UIColor clearColor];
     self.tableView.backgroundView = nil;
-    self.tableView.bounces = NO;
+    self.tableView.bounces = YES;
     self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     
 }
 
+-(void)refreshRequset
+{
+
+        NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=102&pageId=%ld&pageSize=20&status=0&version=5.4.21",self.num1 + 1];
+        [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
+            
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSArray *arr = dic[@"list"];
+            for (NSDictionary *dic2 in arr) {
+                
+                RadioModel *model = [[RadioModel alloc]init];
+                [model setValuesForKeysWithDictionary:dic2];
+                [self.array addObject:model];
+            }
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:self.array];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableView.mj_footer endRefreshing];
+                [self.tableView reloadData];
+            });
+            
+        }];
+}
+
 -(void)requestLoadData
 {
+  
     [DownLoad downLoadWithUrl:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=102&pageId=1&pageSize=20&statEvent=pageview%2Fcategory%40%E7%94%B5%E5%8F%B0&statModule=%E7%94%B5%E5%8F%B0&statPage=tab%40%E5%8F%91%E7%8E%B0_%E5%88%86%E7%B1%BB&status=0&version=5.4.21" postBody:nil resultBlock:^(NSData *data) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *array = dic[@"list"];
-        //NSLog(@"%@",array);
         for (NSDictionary *dict in array) {
             RadioModel *model = [RadioModel new];
             [model setValuesForKeysWithDictionary:dict];
-            [self.dataArray addObject:model];
+            
+            [self.array addObject:model];
         }
+        [self.dataArray addObjectsFromArray:self.array];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -81,11 +120,20 @@
     self.title = @"音乐电台";
     [self requestLoadData];
     [self createTableView];
-
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.num1 += 1;
+        NSLog(@"123496798798798789798 == %ld",self.num1);
+        [self refreshRequset];
+    }];
+   
+    
 }
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    _tableView.mj_footer.hidden = self.dataArray.count == 0;
     return self.dataArray.count;
 }
 
@@ -136,6 +184,7 @@
         cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
     }];
 }
+
 
 
 

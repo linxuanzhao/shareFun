@@ -39,6 +39,7 @@
 
 @property (nonatomic, assign) BOOL isPlay;
 
+@property (weak, nonatomic) IBOutlet UISlider *VolumeSlider;
 
 
 
@@ -54,15 +55,15 @@
     [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
     ListModel *model = self.urls[self.number];
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
-//    self.imageV.layer.cornerRadius = 45;
-//    self.imageV.layer.masksToBounds = YES;
-//    
-//    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-//    baseAnimation.toValue = @(M_PI * 200);
-//    baseAnimation.duration = 5000;
-//    baseAnimation.fillMode = kCAFillModeForwards;
-//    baseAnimation.removedOnCompletion = NO;
-//    [_imageV.layer addAnimation:baseAnimation forKey:@"rotate"];
+    self.imageV.layer.cornerRadius = 45;
+    self.imageV.layer.masksToBounds = YES;
+    
+    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    baseAnimation.toValue = @(M_PI * 200);
+    baseAnimation.duration = 5000;
+    baseAnimation.fillMode = kCAFillModeForwards;
+    baseAnimation.removedOnCompletion = NO;
+    [_imageV.layer addAnimation:baseAnimation forKey:@"rotate"];
     
     
     
@@ -92,30 +93,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    //self.view.backgroundColor = [UIColor redColor];
     [self changeTitleView];
     self.slider.value = 0;
+    self.VolumeSlider.value = 0;
+    self.avManager.avPlay.volume = self.VolumeSlider.value;
     [self addBackground];
-    [self imageScrollView];
+    //[self imageScrollView];
+    [self changeImage];
     
     [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+    [self.VolumeSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
 
     self.avManager = [YZLAVManager shareInstance];
     
     NSMutableArray *arr =[NSMutableArray array];
     
     for (ListModel *model in self.urls) {
-        [arr addObject:model.playUrl32];
+        [arr addObject:model.playUrl64];
     }
     [self.avManager setPlayList:arr flag:self.number];
       NSLog(@"%ld",self.urls.count);
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
-    
-
-    
-
-    
+     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.navigationController.navigationBar.hidden = YES;
     });
@@ -175,33 +176,21 @@
 }
 
 
-
 //播放暂停
 - (IBAction)startAndStop:(id)sender
 {
     if (!self.isPlay) {
-       // _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
         [_timer setFireDate:[NSDate distantPast]];
-        
         [self.avManager.avPlay play];
         [self.startBtn setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
         self.isPlay = YES;
-       //self.startBtn.selected = YES;
     }else{
         [self.startBtn setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
         [self.avManager.avPlay pause];
         [_timer setFireDate:[NSDate distantFuture]];
-//        [_timer invalidate];
-//        _timer = nil;
         self.isPlay = NO;
-       // self.startBtn.selected = NO;
     }
-    [self.avManager playWithBtn:nil];
-
-    //self.startBtn.selected = !self.startBtn.selected;
-    NSLog(@"%ld",self.number);
-
-}
+    [self.avManager playWithBtn:nil];}
 //上一首
 - (IBAction)back:(id)sender
 {
@@ -210,7 +199,6 @@
         self.number = self.urls.count-1;
     }
     [self.avManager above];
-    NSLog(@"%ld",self.number);
 }
 //下一首
 - (IBAction)next:(id)sender
@@ -219,33 +207,25 @@
     if (self.number == self.urls.count) {
         self.number = 0;
     }
-    [self.avManager next];
-     NSLog(@"%ld",self.number);
-}
-- (IBAction)shareBtn:(id)sender {
-
-}
-//收藏
-- (IBAction)collectBtnAction:(id)sender
-{
-     
-}
-
-//下载
-- (IBAction)download:(id)sender
-{
-
-    
-}
+    [self.avManager next];}
 
 
 
-
+//歌曲进度条
 - (IBAction)changeProgress:(id)sender {
     [self.avManager playProgress:self.slider.value];
 }
 
-
+//控制音量的大小
+- (IBAction)changeVolumeBtnAction:(id)sender
+{
+    self.avManager.avPlay.volume = self.VolumeSlider.value;
+}
+//收藏
+- (IBAction)repeatOneBtnAction:(id)sender
+{
+    
+}
 
 
 -(void)addBackground
@@ -266,10 +246,10 @@
     
     // 花瓣缩放比例
     snowCell.scale = 0.02;
-    snowCell.scaleRange = 0.5;
+    snowCell.scaleRange = 0.2;
     
     // 每秒产生的花瓣数量
-    snowCell.birthRate = 7;
+    snowCell.birthRate = 1;
     //粒子生命周期
     snowCell.lifetime = 80;
     

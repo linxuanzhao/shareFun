@@ -9,7 +9,7 @@
 #import "CompositeViewController.h"
 #import "CompositeCell.h"
 #import "CompositeModel.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+WebCache.h"   
 #import "CompositeListViewController.h"
 
 @interface CompositeViewController ()<UITableViewDataSource,UITableViewDelegate>

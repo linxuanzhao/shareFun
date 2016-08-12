@@ -56,7 +56,7 @@
     AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL:url];
     self.avPlay = [[AVPlayer alloc]initWithPlayerItem:item];
     
-    NSTimer *t2 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(autonext) userInfo:nil repeats:YES];
+    NSTimer *t2 = [NSTimer scheduledTimerWithTimeInterval:0.11 target:self selector:@selector(autonext) userInfo:nil repeats:YES];
     [t2 fire];
     
 }
@@ -79,6 +79,7 @@
 //下一首
 -(void)next
 {
+
     self.playIndex++;
     if (self.playIndex == self.musicUrls.count - 1) {
         self.playIndex = 0;

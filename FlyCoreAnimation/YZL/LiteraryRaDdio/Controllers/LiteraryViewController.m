@@ -12,6 +12,7 @@
 #import "LiteraryModel.h"
 #import "UIImageView+WebCache.h"
 #import "LiteraryListViewController.h"
+#import "MJRefresh.h"
 
 @interface LiteraryViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -53,7 +54,16 @@
     self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     [literaryImageView addSubview:_tableView];
     
+    
+    
+    
+
+    
+
+    
 }
+
+
 
 -(void)requestLiteraryData
 {

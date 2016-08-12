@@ -146,21 +146,15 @@
 - (IBAction)startAndStopBtnAction:(id)sender
 {
     if (!self.isPlay) {
-        // _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
         [_timer setFireDate:[NSDate distantPast]];
-        
         [self.avManager.avPlay play];
         [self.satrt setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
         self.isPlay = YES;
-        //self.startBtn.selected = YES;
     }else{
         [self.satrt setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
         [self.avManager.avPlay pause];
         [_timer setFireDate:[NSDate distantFuture]];
-        //        [_timer invalidate];
-        //        _timer = nil;
-        self.isPlay = NO;
-        // self.startBtn.selected = NO;
+         self.isPlay = NO;
     }
     [self.avManager playWithBtn:nil];
 }
@@ -195,8 +189,8 @@
     CAEmitterCell * snowCell = [CAEmitterCell emitterCell];
     snowCell.contents = (__bridge id)[UIImage imageNamed:@"樱花瓣2"].CGImage;
     snowCell.scale = 0.02;
-    snowCell.scaleRange = 0.5;
-    snowCell.birthRate = 7;
+    snowCell.scaleRange = 0.2;
+    snowCell.birthRate = 2;
     snowCell.lifetime = 80;
     snowCell.alphaSpeed = -0.01;
     snowCell.velocity = 40;

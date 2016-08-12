@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RadioPlayViewController">
             <connections>
                 <outlet property="DownLoadBtn" destination="Otx-fG-2Lr" id="5n5-Go-ZuD"/>
+                <outlet property="VolumeSlider" destination="uQ7-Yc-xwa" id="DlA-Dm-PPb"/>
                 <outlet property="allTime" destination="JsA-Jh-l9l" id="wXL-vk-gEa"/>
                 <outlet property="curTime" destination="XGp-oy-t1E" id="PKl-2i-N5U"/>
                 <outlet property="imageV" destination="Oo8-b6-Ts2" id="F6T-u6-LC3"/>
@@ -21,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d6j-Br-d9a">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3333.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="d6j-Br-d9a">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-ht-gzQ">
@@ -57,8 +59,8 @@
                     </connections>
                 </slider>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otx-fG-2Lr">
-                    <rect key="frame" x="33" y="495" width="59" height="32"/>
-                    <state key="normal" title="下载"/>
+                    <rect key="frame" x="33" y="495" width="32" height="32"/>
+                    <state key="normal" image="Unknown-1.png"/>
                     <connections>
                         <action selector="download:" destination="-1" eventType="touchUpInside" id="dcr-mm-CzK"/>
                     </connections>
@@ -67,18 +69,15 @@
                     <rect key="frame" x="307" y="495" width="32" height="32"/>
                     <state key="normal" image="Unknown-7.png"/>
                     <connections>
-                        <action selector="collectBtnAction:" destination="-1" eventType="touchUpInside" id="wdx-s6-S5Z"/>
+                        <action selector="repeatOneBtnAction:" destination="-1" eventType="touchUpInside" id="b5W-w4-BP4"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oo8-b6-Ts2">
-                    <rect key="frame" x="142" y="349" width="90" height="90"/>
+                    <rect key="frame" x="142" y="277" width="90" height="90"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dh-0N-bfr">
                     <rect key="frame" x="171" y="495" width="32" height="32"/>
                     <state key="normal" image="Unknown-8.png"/>
-                    <connections>
-                        <action selector="shareBtn:" destination="-1" eventType="touchUpInside" id="CWG-7E-Q4B"/>
-                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saL-fz-Gfd">
                     <rect key="frame" x="171" y="595" width="33" height="32"/>
@@ -87,17 +86,46 @@
                         <action selector="startAndStop:" destination="-1" eventType="touchUpInside" id="i1u-rA-fmT"/>
                     </connections>
                 </button>
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="uQ7-Yc-xwa">
+                    <rect key="frame" x="42" y="110" width="291" height="31"/>
+                    <connections>
+                        <action selector="changeVolumeBtnAction:" destination="-1" eventType="valueChanged" id="HTD-Li-OXP"/>
+                    </connections>
+                </slider>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume1.png" translatesAutoresizingMaskIntoConstraints="NO" id="0CZ-0d-2si">
+                    <rect key="frame" x="21" y="110" width="15" height="15"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ad8-o0-pmQ">
+                    <rect key="frame" x="339" y="110" width="15" height="15"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4ov-Vz-2J3">
+                    <rect key="frame" x="52" y="277" width="90" height="90"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="z3h-Xy-S8C">
+                    <rect key="frame" x="142" y="367" width="90" height="90"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RAJ-4v-Ywl">
+                    <rect key="frame" x="142" y="188" width="90" height="90"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4jw-A1-Bop">
+                    <rect key="frame" x="231" y="277" width="90" height="90"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="428.5" y="288.5"/>
+            <point key="canvasLocation" x="632.5" y="285.5"/>
         </view>
     </objects>
     <resources>
+        <image name="1111.jpg" width="751" height="1334"/>
+        <image name="3333.JPG" width="640" height="960"/>
+        <image name="Unknown-1.png" width="32" height="32"/>
         <image name="Unknown-2.png" width="32" height="32"/>
         <image name="Unknown-4.png" width="33" height="32"/>
         <image name="Unknown-6.png" width="32" height="32"/>
         <image name="Unknown-7.png" width="32" height="32"/>
         <image name="Unknown-8.png" width="32" height="32"/>
+        <image name="volume1.png" width="16" height="16"/>
+        <image name="volume2.png" width="16" height="16"/>
     </resources>
 </document>

@@ -13,14 +13,34 @@
 #import "UIImageView+WebCache.h"
 #import "RadioPlayViewController.h"
 
+
 @interface ListViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, assign) NSInteger num;
+@property (nonatomic, strong) NSMutableArray *refreshArray;
+@property (nonatomic, strong) NSMutableSet *mSet;
 
 @end
 
 @implementation ListViewController
+
+-(NSMutableSet *)mSet
+{
+    if (_mSet == nil) {
+        _mSet = [[NSMutableSet alloc]init];
+    }
+    return _mSet;
+}
+
+-(NSMutableArray *)refreshArray
+{
+    if (_refreshArray == nil) {
+        _refreshArray = [[NSMutableArray alloc]init];
+    }
+    return _refreshArray;
+}
 
 -(NSMutableArray *)dataArray
 {
@@ -52,18 +72,42 @@
     _tableView.backgroundColor = [UIColor clearColor];
     
     self.tableView.backgroundView = nil;
-    self.tableView.bounces = NO;
+    self.tableView.bounces = YES;
     self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     
 }
 
 
+-(void)refreshRequset
+{
+    NSString *str1 = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album/track?albumId=%@&device=iPhone&isAsc=true&pageId=%ld&pageSize=20&statPosition%@",self.albumId,self.num + 1,self.statPosition];
+    [DownLoad downLoadWithUrl:str1 postBody:nil resultBlock:^(NSData *data) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSArray *arr = dic[@"data"][@"list"];
+        for (NSDictionary *dc2 in arr) {
+            ListModel *model = [[ListModel alloc]init];
+            [model setValuesForKeysWithDictionary:dc2];
+            [self.refreshArray addObject:model];
+        }
+
+        [self.dataArray addObjectsFromArray:self.refreshArray];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tableView.mj_footer endRefreshing];
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+
+
 -(void)requestData
 {
+    
     NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album?albumId=%@&device=iPhone&pageSize=20&statPosition=%@",self.albumId,self.statPosition];
     
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];       NSDictionary *dic1 = dic[@"data"][@"tracks"];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *dic1 = dic[@"data"][@"tracks"];
         NSArray *arr = dic1[@"list"];
             for (NSDictionary *dc2 in arr) {
                 ListModel *model = [[ListModel alloc]init];
@@ -81,12 +125,13 @@
     self.title = self.Name;
     [self requestData];
     [self createTableView];
-    
-//    UIImageView *imageView1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
     self.view.backgroundColor = [UIColor clearColor];
-//    imageView1.image = [UIImage imageNamed:@"a2.JPG"];
-//    [self.view addSubview:imageView1];
     
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _num += 1;
+        [self refreshRequset];
+    }];
+
     
     
 }
@@ -94,13 +139,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    _tableView.mj_footer.hidden = self.dataArray.count == 0;
     return self.dataArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
-    
     ListModel *model = self.dataArray[indexPath.row];
     cell.imageBB.layer.cornerRadius = 30;
     cell.imageBB.layer.masksToBounds = YES;
