@@ -13,7 +13,7 @@
 #import "ResultModel.h"
 #import "XFAnnotation.h"
 
-@interface XFMapViewController ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKPoiSearchDelegate,BMKRouteSearchDelegate>
+@interface XFMapViewController ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKPoiSearchDelegate,BMKRouteSearchDelegate,BMKRouteSearchDelegate>
 @property(nonatomic,strong)BMKMapView  *mapView;
 
 @property(nonatomic,strong)BMKLocationService*  locService;
@@ -22,16 +22,21 @@
 @property(nonatomic,strong)BMKPoiSearch  *detailSearcher;
 @property(nonatomic,strong)BMKRouteSearch  *routeSearch;
 @property(nonatomic,strong)BMKPointAnnotation  *pointAnnotation;
+@property(nonatomic,strong)BMKAnnotationView  *endPointAnnotation;
+
 
 @property(nonatomic,strong)NSString  *detailUid;
 @property(nonatomic,strong)NSMutableArray  *resultList;
 @property(nonatomic,strong)NSMutableArray  *AnnotationPs;
 @property(nonatomic,assign)CLLocationCoordinate2D  startPs;
 @property(nonatomic,assign)BMKUserLocation*  bmkstart;
+@property(nonatomic,assign)BOOL  State;
+@property(nonatomic,strong)UISegmentedControl  *seg;
 
 @end
 
 @implementation XFMapViewController
+
 -(NSMutableArray *)resultList{
     
     
@@ -39,59 +44,126 @@
         _resultList = [NSMutableArray new];
     }
     return _resultList;
-
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+  //  self.mapManager = [[BMKMapManager alloc]init];
     self.title = @"XF";
     self.view.backgroundColor = [UIColor greenColor];
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pop)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(340, 20, 50, 50);
+    btn.frame = CGRectMake(300, 20, 50, 50);
     [btn setImage:[UIImage imageNamed:@"ic_right - circle - o.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
+ 
+    self.seg = [[UISegmentedControl alloc]initWithItems:[NSArray arrayWithObjects:@"步行",@"公交",@"驾驶", nil]];
+    [self.seg addTarget:self action:@selector(segchange) forControlEvents:UIControlEventValueChanged];
+    //    self.seg.selectedSegmentIndex = 0;
+    self.seg.frame = CGRectMake(0, 0, 150, 30);
+    self.seg.layer.position = CGPointMake(SCWI/2, 40);
     
+    
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8) {
+        //由于IOS8中定位的授权机制改变 需要进行手动授权
+        CLLocationManager  *locationManager = [[CLLocationManager alloc] init];
+        //获取授权认证
+        [locationManager requestAlwaysAuthorization];
+        [locationManager requestWhenInUseAuthorization];
+    }
     
 #pragma mark - 地图功能
-    //    创建定位
-    //    初始化BMKLocationService
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
-    //    启动LocationService
-    [_locService startUserLocationService];
+    
     
     //创建地图
     self.mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, SCWI,SCHI)];
     [self.view addSubview:self.mapView];
     self.mapView.zoomLevel = 15;
     
-    
+    //    创建定位
+    //    初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    //    启动LocationService
+     _mapView.showsUserLocation = YES;//显示定位图层
+    [_locService startUserLocationService];
+    self.mapView.userTrackingMode = BMKUserTrackingModeFollow;
     
     [self.mapView addSubview:btn];
+    [self.mapView addSubview:self.seg];
+    
+    
+    //个人位置蓝色图标设置
+    BMKLocationViewDisplayParam *displayParam = [[BMKLocationViewDisplayParam alloc]init];
+    displayParam.isRotateAngleValid = NO;
+    displayParam.isAccuracyCircleShow = NO;
+    displayParam.locationViewOffsetX = 0;//定位偏移量(经度)
+    displayParam.locationViewOffsetY = 0;//定位偏移量（纬度）
+    [_mapView updateLocationViewWithParam:displayParam];
+    
+   
     
     //普通态
     //以下_mapView为BMKMapView对象
     //    self.mapView.zoomLevel = 10;
     
-    _mapView.showsUserLocation = YES;//显示定位图层
-    [self.locService startUserLocationService];
+    //    _mapView.showsUserLocation = YES;//显示定位图层
+    //    [self.locService startUserLocationService];
+    //
     
-    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
     
     
-    [_mapView updateLocationData:_locService.userLocation];
+    //    [_mapView updateLocationData:_locService.userLocation];
+    //#pragma mark - POI
+    //    //初始化检索对象
+    //    _searcher =[[BMKPoiSearch alloc]init];
+    //    _searcher.delegate = self;
+    //    //发起检索
+    //    BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
+    //
+    //    option.pageIndex = 1;
+    //    option.pageCapacity = 10;
+    //    // option.location =self.locService.userLocation.location.coordinate;
+    //    option.location = self.startPs;
+    //    NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
+    //    option.keyword = self.searchBarText;
+    //
+    //    BOOL flag = [_searcher poiSearchNearBy:option];
+    //
+    //    if(flag)
+    //    {
+    //        NSLog(@"%@周边检索发送成功",option.keyword);
+    //    }
+    //    else
+    //    {
+    //        NSLog(@"周边检索发送失败");
+    //    }
+    
+    
+    
+#pragma mark - 详情检索
+    self.detailSearcher = [[BMKPoiSearch alloc]init];
+    self.detailSearcher.delegate = self;
+    
+    
+    
+}
+-(void)search{
 #pragma mark - POI
     //初始化检索对象
     _searcher =[[BMKPoiSearch alloc]init];
     _searcher.delegate = self;
     //发起检索
     BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
-
+    
     option.pageIndex = 1;
     option.pageCapacity = 10;
-    option.location =CLLocationCoordinate2DMake(39.915, 116.404);
+     option.location =self.locService.userLocation.location.coordinate;
+    option.location = self.startPs;
+    NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
     option.keyword = self.searchBarText;
     
     BOOL flag = [_searcher poiSearchNearBy:option];
@@ -105,21 +177,23 @@
         NSLog(@"周边检索发送失败");
     }
     
-#pragma mark - 详情检索
-    self.detailSearcher = [[BMKPoiSearch alloc]init];
-    self.detailSearcher.delegate = self;
-    
-    
-    
 }
 
 -(void)pop{
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    //    [self.navigationController popViewControllerAnimated:YES];
+    //    if (self.delegate && [self.delegate respondsToSelector:@selector(backToMapViewController:)]) {
+    //        [self.delegate backToMapViewController:self];
+    //    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    self.State = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -127,6 +201,8 @@
     _mapView.delegate = nil; // 不用时，置nil
     _searcher.delegate = nil;
     _detailSearcher.delegate = nil;
+    _locService.delegate = nil;
+    self.State = NO;
 }
 
 
@@ -134,18 +210,58 @@
 //处理方向变更信息
 - (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
 {
-    NSLog(@"heading is %@",userLocation.heading);
+    [_mapView updateLocationData:_locService.userLocation];
+    //  NSLog(@"heading is %@",userLocation.heading);
 }
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
+   
     NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-    self.bmkstart = userLocation;
+    //    _mapView.centerCoordinate = userLocation.location.coordinate;
+    [_mapView updateLocationData:userLocation];
+    self.startPs = userLocation.location.coordinate;
+    //    static CLLocationCoordinate2D staticLocation = self.startPs;
+    
+    if (CLLocationCoordinate2DIsValid(self.startPs) && self.State == YES) {
+        self.State = NO;
+#pragma mark - POI
+        //初始化检索对象
+        _searcher =[[BMKPoiSearch alloc]init];
+        _searcher.delegate = self;
+        //发起检索
+        BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
+        
+        option.pageIndex = 1;
+        option.pageCapacity = 10;
+        // option.location =self.locService.userLocation.location.coordinate;
+        option.location = self.startPs;
+        NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
+        option.keyword = self.searchBarText;
+        
+        BOOL flag = [_searcher poiSearchNearBy:option];
+        
+        if(flag)
+        {
+            NSLog(@"%@周边检索发送成功",option.keyword);
+        }
+        else
+        {
+            NSLog(@"周边检索发送失败");
+        }
+        
+        
+    }
+    
     
 }
 
+- (void)willStartLocatingUser
+{
+    NSLog(@"start locate");
+}
 -(void)mapView:(BMKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-   // NSLog(@"显示区域将要方式改变");
+    // NSLog(@"显示区域将要方式改变");
 }
 
 #pragma mark - 定位
@@ -159,29 +275,29 @@
 - (void)onGetPoiResult:(BMKPoiSearch*)searcher result:(BMKPoiResult*)poiResultList errorCode:(BMKSearchErrorCode)error
 {
     if (error == BMK_SEARCH_NO_ERROR) {
-        NSLog(@"%d,%@",poiResultList.totalPoiNum,poiResultList);
+        //   NSLog(@"%d,%@",poiResultList.totalPoiNum,poiResultList);
         
-//        self.resultList = poiResultList.poiInfoList;
+        //        self.resultList = poiResultList.poiInfoList;
         for (ResultModel *poi in poiResultList.poiInfoList) {
             [self.resultList addObject:poi];
-            NSLog(@"resultList:%ld,%@,%f,%f",self.resultList.count,poi.name,poi.pt.latitude,poi.pt.longitude);
+            //      NSLog(@"resultList:%ld,%@,%f,%f",self.resultList.count,poi.name,poi.pt.latitude,poi.pt.longitude);
             [self setAnnotation:poi.pt name:poi.name adress:poi.address];
             
         }
 #pragma mark - POI检索成功后详情检索
         BMKPoiDetailSearchOption *detailOption = [[BMKPoiDetailSearchOption alloc]init];
-         detailOption.poiUid = [poiResultList.poiInfoList[0] uid] ;//POI搜索结果中获取的uid
+        detailOption.poiUid = [poiResultList.poiInfoList[0] uid] ;//POI搜索结果中获取的uid
         BOOL DetailFlag = [self.detailSearcher poiDetailSearch:detailOption];
         
         if(DetailFlag)
         {
-        NSLog(@"%@详情检索发送成功",[self.resultList[0] name]);
+            NSLog(@"%@详情检索发送成功",[self.resultList[0] name]);
         }
         else
         {
             NSLog(@"详情检索发送失败");
         }
- 
+        
         
         
     }
@@ -198,7 +314,7 @@
         [alertC addAction:act];
         [self presentViewController:alertC animated:true completion:nil];
         
-        NSLog(@"抱歉，未找到结果");
+        
     }
 }
 #pragma markl - 详情
@@ -228,25 +344,67 @@
         self.pointAnnotation = annotation;
         
         //用于自定义弹出视图
-//        XFAnnotation *b2 = [[XFAnnotation alloc]init];
-//        BMKActionPaopaoView *a = [[BMKActionPaopaoView alloc]initWithCustomView:b2];
-//        newAnnotationView.paopaoView = a;
+        //        XFAnnotation *b2 = [[XFAnnotation alloc]init];
+        //        BMKActionPaopaoView *a = [[BMKActionPaopaoView alloc]initWithCustomView:b2];
+        //        newAnnotationView.paopaoView = a;
         return newAnnotationView;
     }
     return nil;
 }
 
 -(void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view{
-    NSLog(@"弹出的气泡");
+    NSLog(@"我是气泡yeah");
     //初始化检索对象
     self.routeSearch = [[BMKRouteSearch alloc]init];
     self.routeSearch.delegate = self;
+    self.endPointAnnotation = view;
+    [self segchange];
+    
+}
+-(void)segchange{
+   
     //发起检索
     BMKPlanNode* start = [[BMKPlanNode alloc]init] ;
-    start.pt = (CLLocationCoordinate2D){0,0};
-//    start.pt = (CLLocationCoordinate2D){self.bmkstart,};
+    start.pt = self.startPs;
+    NSLog(@"%f,%f",start.pt.longitude,start.pt.latitude);
     BMKPlanNode* end = [[BMKPlanNode alloc]init] ;
-//    end.name = @"西单";
+    end.pt = self.pointAnnotation.coordinate;
+    NSLog(@"%f,%f",end.pt.longitude,end.pt.latitude);
     
+    BMKBaseRoutePlanOption *option = [[BMKBaseRoutePlanOption alloc]init];
+    
+    option.from.pt = self.startPs ;
+    option.to.pt = self.pointAnnotation.coordinate;
+    
+    
+    switch (self.seg.selectedSegmentIndex) {
+        case 0:
+            option =  [[BMKWalkingRoutePlanOption alloc]init];
+            [self.routeSearch walkingSearch:option];
+            break;
+        case 1:
+            option = [[BMKTransitRoutePlanOption alloc]init];
+            [self.routeSearch transitSearch:option];
+            break;
+        case 2:{
+            option = [[BMKDrivingRoutePlanOption alloc]init];
+            [self.routeSearch drivingSearch:option];
+        }
+        default:
+            break;
+    }
+    
+    
+    
+}
+
+- (void)onGetTransitRouteResult:(BMKRouteSearch*)searcher result:(BMKTransitRouteResult*)result errorCode:(BMKSearchErrorCode)error{
+    NSLog(@"bus");
+}
+-(void)onGetWalkingRouteResult:(BMKRouteSearch *)searcher result:(BMKWalkingRouteResult *)result errorCode:(BMKSearchErrorCode)error{
+    NSLog(@"walk");
+}
+-(void)onGetDrivingRouteResult:(BMKRouteSearch *)searcher result:(BMKDrivingRouteResult *)result errorCode:(BMKSearchErrorCode)error{
+    NSLog(@"drive");
 }
 @end
