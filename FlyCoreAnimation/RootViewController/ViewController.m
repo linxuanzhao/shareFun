@@ -395,13 +395,21 @@
     
     CALayer *biglayer =  [self.viewArr[0] layer];
     self.tag =   [self.viewArr[0] tag];
-    [biglayer addAnimation:anim forKey:@"big"];
-
-    for (int i = 1; i < self.viewArr.count; i++) {
-        UIView *Iv = self.viewArr[i];
-        Iv.hidden = YES;
-        
-    }
+    
+    // [biglayer addAnimation:anim forKey:@"big"];
+    //    NSLog(@"%ld %@",(long)self.tag,[self.viewArr[0] backgroundColor]);
+    
+    //    for (int i = 1; i < self.viewArr.count; i++) {
+    //        UIView *Iv = self.viewArr[i];
+    //        Iv.hidden = YES;
+    //
+    //    }
+    CATransition *anim = [CATransition animation];
+    anim.type = bgtype;
+    anim.duration = 0.8;
+    
+    [self.view.layer addAnimation:anim forKey:nil];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIViewController *VC = [[UIViewController alloc]init];
         UIView *alpView = [[UIView alloc]init];
