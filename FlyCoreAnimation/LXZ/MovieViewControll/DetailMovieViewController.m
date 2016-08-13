@@ -30,6 +30,8 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, strong) NSMutableArray *logo1;
 @property (nonatomic, strong) NSMutableArray *logo;
+@property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @property (nonatomic, strong) MovieAnimation *animation;
 
@@ -131,6 +133,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerClass:[MovieDetailOneCell class] forCellReuseIdentifier:@"desc"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     // headView
@@ -199,10 +202,7 @@
     self.durationLabel.font = [UIFont systemFontOfSize:14];
     self.durationLabel.textAlignment = NSTextAlignmentLeft;
     [self.headView addSubview:self.durationLabel];
-    
 
-
-    
 }
 
 
@@ -235,12 +235,35 @@
 {
     MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
     cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
+//    cell.descLabel.backgroundColor = [UIColor greenColor];
     
-    self.height = [cell.descLabel.text boundingRectWithSize:CGSizeMake(SCWI - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:nil].size.height;
-    cell.descLabel.frame = CGRectMake(20, 5, SCWI - 40, self.height);
-    NSLog(@"%f", self.height);
+//    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:cell.descLabel.text];
+//    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+//    [att addAttribute:NSParagraphStyleAttributeName value:parStyle range:NSMakeRange(0, cell.descLabel.text.length)];
+//    
+//    parStyle.lineSpacing = 5;
+//    parStyle.headIndent = 35;
+//    cell.descLabel.attributedText = att;
+//    [cell.descLabel sizeToFit];
+    
+    if (indexPath == self.selectedIndexPath) {
+        
+        CGRect rect = [cell.descLabel.text boundingRectWithSize:CGSizeMake(SCWI - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:nil];
+        
+        self.height = rect.size.height;
+        cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, self.height);
+        
+    }
+    else
+    {
+        cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, 100);
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
+
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
@@ -255,9 +278,47 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.height;
+    
+    if (indexPath == self.selectedIndexPath) {
+        return self.height;
+    }
+    else
+    {
+        return 100;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    if (self.selectedIndexPath == nil) {
+        self.selectedIndexPath = indexPath;
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
+    
+    else
+    {
+//        BOOL hasSelectedOtherRow =![self.selectedIndexPath isEqual:indexPath];
+        
+//        NSIndexPath *temp=self.selectedIndexPath;
+        self.selectedIndexPath=nil;
+        
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+        
+//        if(hasSelectedOtherRow){
+//            self.selectedIndexPath=indexPath;
+//            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        }
+    }
+    
+
+    
+
 
 }
+
 
 
 

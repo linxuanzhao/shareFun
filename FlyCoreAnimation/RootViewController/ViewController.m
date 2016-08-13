@@ -352,7 +352,7 @@
     CALayer *biglayer =  [self.viewArr[0] layer];
     self.tag =   [self.viewArr[0] tag];
     [biglayer addAnimation:anim forKey:@"big"];
-    NSLog(@"%ld %@",(long)self.tag,[self.viewArr[0] backgroundColor]);
+
     for (int i = 1; i < self.viewArr.count; i++) {
         UIView *Iv = self.viewArr[i];
         Iv.hidden = YES;
