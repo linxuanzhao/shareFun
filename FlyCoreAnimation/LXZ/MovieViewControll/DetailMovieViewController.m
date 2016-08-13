@@ -226,6 +226,11 @@
 
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
@@ -233,35 +238,45 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
-    cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
-//    cell.descLabel.backgroundColor = [UIColor greenColor];
-    
-//    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:cell.descLabel.text];
-//    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
-//    [att addAttribute:NSParagraphStyleAttributeName value:parStyle range:NSMakeRange(0, cell.descLabel.text.length)];
-//    
-//    parStyle.lineSpacing = 5;
-//    parStyle.headIndent = 35;
-//    cell.descLabel.attributedText = att;
-//    [cell.descLabel sizeToFit];
-    
-    if (indexPath == self.selectedIndexPath) {
+    if (indexPath.section == 0) {
+        MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
+        cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
         
-        CGRect rect = [cell.descLabel.text boundingRectWithSize:CGSizeMake(SCWI - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:nil];
         
-        self.height = rect.size.height;
-        cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, self.height);
+        //    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:cell.descLabel.text];
+        //    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+        //    [att addAttribute:NSParagraphStyleAttributeName value:parStyle range:NSMakeRange(0, cell.descLabel.text.length)];
+        //    parStyle.lineSpacing = 5;
+        //    parStyle.headIndent = 35;
+        //    cell.descLabel.attributedText = att;
+        //    [cell.descLabel sizeToFit];
         
+        if (indexPath == self.selectedIndexPath) {
+            
+            CGRect rect = [cell.descLabel.text boundingRectWithSize:CGSizeMake(SCWI - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:nil];
+            
+            self.height = rect.size.height;
+            cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, self.height);
+            
+        }
+        else
+        {
+            cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, 100);
+            //    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:cell.descLabel.text];
+            //    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+            //    [att addAttribute:NSParagraphStyleAttributeName value:parStyle range:NSMakeRange(0, cell.descLabel.text.length)];
+            //    parStyle.lineSpacing = 5;
+            //    parStyle.headIndent = 35;
+            //    cell.descLabel.attributedText = att;
+            //    [cell.descLabel sizeToFit];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
-    else
-    {
-        cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, 100);
-    }
+    return nil;
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    return cell;
 }
 
 
@@ -278,48 +293,54 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath == self.selectedIndexPath) {
-        return self.height;
+    if (indexPath.section == 0) {
+        if (indexPath == self.selectedIndexPath) {
+            return self.height;
+        }
+        else
+        {
+            return 100;
+        }
+
     }
-    else
-    {
-        return 100;
-    }
+        return 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    if (self.selectedIndexPath == nil) {
-        self.selectedIndexPath = indexPath;
+    if (indexPath.section == 0) {
+        if (self.selectedIndexPath == nil) {
+            self.selectedIndexPath = indexPath;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+        }
         
-    }
-    
-    else
-    {
-//        BOOL hasSelectedOtherRow =![self.selectedIndexPath isEqual:indexPath];
-        
-//        NSIndexPath *temp=self.selectedIndexPath;
-        self.selectedIndexPath=nil;
-        
+        else
+        {
+            //        BOOL hasSelectedOtherRow =![self.selectedIndexPath isEqual:indexPath];
+            
+            //        NSIndexPath *temp=self.selectedIndexPath;
+            self.selectedIndexPath=nil;
+            
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    
-        
-//        if(hasSelectedOtherRow){
-//            self.selectedIndexPath=indexPath;
-//            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        }
-    }
-    
+            
+            
+            //        if(hasSelectedOtherRow){
+            //            self.selectedIndexPath=indexPath;
+            //            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            //        }
+        }
 
+}
     
-
+    
 
 }
 
-
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 10;
+//}
 
 
 
