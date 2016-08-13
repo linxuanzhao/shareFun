@@ -18,10 +18,12 @@
     if (self) {
         
         self.descLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.descLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
-        NSLog(@"%f", self.descLabel.font.leading);
+        self.descLabel.font = [UIFont systemFontOfSize:14];
         self.descLabel.numberOfLines = 0;
+    
+    
         [self.contentView addSubview:self.descLabel];
+    
     }
     return self;
 }
