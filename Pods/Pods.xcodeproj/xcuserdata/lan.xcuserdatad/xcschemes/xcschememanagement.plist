@@ -13,47 +13,26 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-FlyCoreAnimation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1C71AF31E8E640828D204EAE46D1F481</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>23CF27B2BA6AC7125EFFEDA8C5AA819F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>29DD99664D189A7CA206368F493B1E0B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2FEFF814987EC2A22B105093E1DBCAD4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4BD8B8655BAE1499D6146E0A47C78C21</key>
 		<dict>
 			<key>primary</key>
 			<true/>

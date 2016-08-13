@@ -11,12 +11,14 @@
 #import "XFShareViewController.h"
 #import "MovieViewController.h"
 #import "RadioViewController.h"
+//#import "RadioViewController.h"
 
 #define marginX 120
 #define marginY1 100
 #define marginY2 40
-
-@interface ViewController ()
+#define bgtype @"rippleEffect"
+#import "XFExplodeAnimationController.h"
+@interface ViewController ()<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BackViewControllerDelegate>
 
 
 @property(nonatomic,strong)UIView  *view0;
@@ -36,19 +38,32 @@
 @property(nonatomic,strong)UITouch*  mtouch;
 
 @property(nonatomic,strong)UIButton  *btn;
+@property(nonatomic,strong)UILabel  *str;
 
 @property(nonatomic,strong)NSMutableArray  *viewArr;
 @property(nonatomic,strong)NSMutableArray  *rightRowArr;
 @property(nonatomic,strong)NSMutableArray  *leftRowArr;
 @property(nonatomic,strong)NSMutableArray  *finalArr;
+@property(nonatomic,strong)NSMutableArray  *strArr;
 
 @property(nonatomic,assign)NSInteger  tag;
+@property(nonatomic,strong)XFExplodeAnimationController  *XFExplode;
 @end
 
 @implementation ViewController
+-(XFExplodeAnimationController *)XFExplode{
+    
+    
+    if (!_XFExplode) {
+        _XFExplode = [XFExplodeAnimationController new];
+    }
+    return _XFExplode;
+    
+}
 
 -(void)viewWillAppear:(BOOL)animated{
-
+#warning navBar
+    self.navigationController.navigationBarHidden = YES;
     [self rightViewToMid:self.viewArr[0] withCATransform3d:self.CA1];
     [self midViewToLeft:self.viewArr[3] CATransfrom:self.CA0];
     [self leftViewToFar:self.viewArr[2] CATransform:self.CA3];
@@ -67,9 +82,20 @@
     [self left2far];
     self.state = 0;
     [self initWithButton];
+    
+    [self initLabel];
 }
 
-
+#pragma mark - 标题
+-(void)initLabel{
+    self.strArr = [NSMutableArray arrayWithObjects:@"电影",@"你的月亮我的心",@"提姆队长",@"正在送命", nil];
+    self.str = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 100)];
+    self.str.layer.position = CGPointMake(SCWI/2, SCHI/2+300);
+    self.str.textAlignment = NSTextAlignmentCenter ;
+    self.str.text = self.strArr.firstObject;
+    [self.view addSubview:self.str];
+    
+}
 
 #pragma mark - 动画
 -(void)view2Plan{
@@ -81,12 +107,12 @@
     CATransform3D CA2 = CATransform3DRotate(CA, 0, 0, 0, 0);
     CATransform3D CA3 = CATransform3DScale(CA2, 1.5, 1.5, 1);
     self.CA1 =CA3;
-
+    
 }
 -(void)mid2Left{
     CATransform3D CA = CATransform3DMakeTranslation(-marginX, -marginY2, 0);
     CATransform3D CA2 = CATransform3DRotate(CA, M_PI_2, 0, 1, 1);
- 
+    
     self.CA0 = CA2;
 }
 -(void)far2right{
@@ -120,8 +146,8 @@
     anim.toValue = [NSValue valueWithCATransform3D:CA];
     
     [view.layer addAnimation:anim forKey:@"far2Right"];
-
-
+    
+    
 }
 -(void)leftViewToFar:(UIView *)view CATransform:(CATransform3D)CA{
     CABasicAnimation *anim = [CABasicAnimation animation];
@@ -136,10 +162,10 @@
 }
 -(void)midViewToLeft:(UIView *)view CATransfrom:(CATransform3D)CA{
     CABasicAnimation *anim = [CABasicAnimation animation];
-     anim.keyPath=@"transform";
+    anim.keyPath=@"transform";
     anim.fillMode = kCAFillModeForwards;
     anim.removedOnCompletion = NO;
-   
+    
     anim.toValue = [NSValue valueWithCATransform3D:CA];
     
     [view.layer addAnimation:anim forKey:@"mid2Left"];
@@ -150,16 +176,16 @@
 //    if (self.P.x > self.MP.x) {
 //        NSLog(@"%@",[NSValue valueWithCGPoint:self.scr.contentOffset]);
 //        self.rightRowArr = [NSMutableArray arrayWithObjects:self.viewArr[1],self.viewArr[2],self.viewArr[3],self.viewArr[0], nil];
-//        
+//
 //        [self midViewToLeft:self.viewArr[0] CATransfrom:self.CA0 ];
 //        [self leftViewToFar:self.viewArr[3] CATransform:self.CA3];
 //        [self farViewToRight:self.viewArr[2] CATransform3d:self.CA2];
 //        [self rightViewToMid:self.viewArr[1] withCATransform3d:self.CA1];
-//   
+//
 //        self.viewArr = self.rightRowArr;
 //     //   self.scr.contentOffset = CGPointMake(0, 0);
-//        
-//        
+//
+//
 //    }else{
 //        if (self.P.x < self.MP.x) {
 //            NSLog(@"%@",[NSValue valueWithCGPoint:self.scr.contentOffset]);
@@ -172,7 +198,7 @@
 //           //  self.scr.contentOffset = CGPointMake(0, 0);
 //        }
 //    }
-//    
+//
 //
 //}
 //
@@ -189,7 +215,7 @@
 {
     UIImage *oldImage = [UIImage imageNamed:@"Home_refresh_bg.png"];
     
-    UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, 0.0);
     [oldImage drawInRect:self.view.bounds];
     
     UIImage *newImage =UIGraphicsGetImageFromCurrentImageContext();
@@ -200,14 +226,16 @@
 
 
 
-    
+
 #pragma mark - View的创建
 
 -(void)initView{
     self.view3 = [[UIView alloc]initWithFrame:CGRectMake(0,0, 100, 100)];
     self.view3.layer.position = CGPointMake(SCWI/2, SCHI/2);
     self.view3.tag = 103;
-    self.view3.layer.backgroundColor = [UIColor redColor].CGColor;
+   
+    [self.view3 setBackgroundColor:[UIColor redColor]];
+    //    self.view3.layer.backgroundColor = [UIColor redColor].CGColor;
     [self.view addSubview:self.view3];
     
     self.view0 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -244,22 +272,24 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     self.touch = [touches anyObject];
     self.P = [self.touch locationInView:self.view];
-
+    
     
     
 }
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     self.mtouch = [touches anyObject];
     self.MP = [self.mtouch locationInView:self.view];
-
+    
     
 }
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
     for (UIView *vi in self.viewArr) {
         vi.hidden = NO  ;
+        
     }
     if (self.P.x - self.MP.x>10 && self.MP.x != 0) {
-       
+        self.state++;
         self.rightRowArr = [NSMutableArray arrayWithObjects:self.viewArr[1],self.viewArr[2],self.viewArr[3],self.viewArr[0], nil];
         
         [self midViewToLeft:self.viewArr[0] CATransfrom:self.CA0 ];
@@ -267,20 +297,29 @@
         [self farViewToRight:self.viewArr[2] CATransform3d:self.CA2];
         [self rightViewToMid:self.viewArr[1] withCATransform3d:self.CA1];
         self.viewArr = self.rightRowArr;
+        if (self.state == 4) {
+            self.state = 0;
+        }
+        self.str.text = self.strArr[self.state];
     }else{
         if (self.P.x < self.MP.x) {
+            self.state--;
             self.leftRowArr = [NSMutableArray arrayWithObjects: self.viewArr[3],self.viewArr[0],self.viewArr[1],self.viewArr[2], nil];
             [self midViewToLeft:self.viewArr[0] CATransfrom:self.CA2 ];
             [self leftViewToFar:self.viewArr[3] CATransform:self.CA1];
             [self farViewToRight:self.viewArr[2] CATransform3d:self.CA0];
             [self rightViewToMid:self.viewArr[1] withCATransform3d:self.CA3];
             self.viewArr = self.leftRowArr;
-         }
+            if (self.state == -1) {
+                self.state = 3;
+            }
+            self.str.text = self.strArr[self.state];
+        }
     }
     self.P = CGPointZero;
     self.MP = CGPointZero;
     
-
+    
 }
 #pragma mark - 初始状态
 -(void)textTransform2{
@@ -294,7 +333,7 @@
     animRota.duration = 0.8;
     
     [self.view2.layer addAnimation:animRota forKey:nil];
-   
+    
     
 }
 
@@ -306,7 +345,7 @@
     anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.5, 1.5, 1)];
     anim.removedOnCompletion = NO;
     anim.fillMode =kCAFillModeForwards;
-
+    
     anim.duration = 0.8;
     [self.view0.layer addAnimation:anim forKey:nil];
 }
@@ -316,7 +355,7 @@
     CATransform3D tra =  CATransform3DMakeTranslation(-marginX, -marginY2, 0);
     CATransform3D tra2 = CATransform3DRotate(tra, M_PI_2, 0, 1, 1);
     anim.toValue = [NSValue valueWithCATransform3D:tra2];
- 
+    
     anim.duration = 0.8;
     
     anim.removedOnCompletion = NO;
@@ -332,7 +371,7 @@
     CATransform3D tra2 = CATransform3DRotate(tra, -M_PI_2, 0, 1, 1);
     anim.toValue = [NSValue valueWithCATransform3D:tra2];
     anim.duration = 0.8;
-     anim.removedOnCompletion = NO;
+    anim.removedOnCompletion = NO;
     anim.fillMode =kCAFillModeForwards;
     [self.view1.layer addAnimation:anim forKey:nil];
 }
@@ -340,52 +379,107 @@
 #pragma mark - 跳转进控制器
 -(void)push{
     self.finalArr = [NSMutableArray arrayWithArray:self.viewArr];
-    CABasicAnimation *anim = [CABasicAnimation animation];
-    anim.keyPath = @"transform";
-    anim.duration = 0.8;
-    CATransform3D CA = CATransform3DMakeRotation(-M_PI, 0, 0, 1);
-    anim.toValue = [NSValue valueWithCATransform3D:CATransform3DScale(CA, SCWI/100, SCHI/100, 0)];
-    anim.removedOnCompletion = NO;
-    anim.fillMode =kCAFillModeForwards;
+    /*
+     CABasicAnimation *anim = [CABasicAnimation animation];
+     anim.keyPath = @"transform";
+     anim.duration = 0.8;
+     CATransform3D CA = CATransform3DMakeRotation(-M_PI, 0, 0, 1);
+     anim.toValue = [NSValue valueWithCATransform3D:CATransform3DScale(CA, SCWI/75, SCHI/134, 0)];
+     // anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(SCWI/75, SCHI/134, 0)];
+     anim.removedOnCompletion = NO;
+     anim.fillMode =kCAFillModeForwards;
+     */
+    //      anim.subtype = kCATransitionFromRight;
+    
     
     
     CALayer *biglayer =  [self.viewArr[0] layer];
     self.tag =   [self.viewArr[0] tag];
-    [biglayer addAnimation:anim forKey:@"big"];
-    NSLog(@"%ld %@",(long)self.tag,[self.viewArr[0] backgroundColor]);
-    for (int i = 1; i < self.viewArr.count; i++) {
-        UIView *Iv = self.viewArr[i];
-        Iv.hidden = YES;
-        
-    }
+    
+    // [biglayer addAnimation:anim forKey:@"big"];
+    //    NSLog(@"%ld %@",(long)self.tag,[self.viewArr[0] backgroundColor]);
+    
+    //    for (int i = 1; i < self.viewArr.count; i++) {
+    //        UIView *Iv = self.viewArr[i];
+    //        Iv.hidden = YES;
+    //
+    //    }
+    CATransition *anim = [CATransition animation];
+    anim.type = bgtype;
+    anim.duration = 0.8;
+    
+    [self.view.layer addAnimation:anim forKey:nil];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIViewController *VC = [[UIViewController alloc]init];
+        UIView *alpView = [[UIView alloc]init];
+        alpView.alpha = 0;
+        
         switch (self.tag) {
                 //青色 地图
-            
+                
             case 100:{
-           VC =     [[MovieViewController alloc]init];
+                VC =     [[MovieViewController alloc]init];
+              
+                [self.navigationController pushViewController:VC animated:YES];
+//                [self presentViewController:VC animated:YES completion:nil];
             }
                 break;
-            case 101:{
+            case 101:{ 
                 VC =     [[RadioViewController alloc]init];
+ 
+                [self.navigationController pushViewController:VC animated:YES];
             }
                 break;
             case 102:{
-                VC =     [[XFShareViewController alloc]init];
+                XFShareViewController *XFShare =     [[XFShareViewController alloc]init];
+                XFShare.transitioningDelegate =self;
+                XFShare.delegate = self;
+                     [self presentViewController:XFShare
+                                   animated:YES completion:nil];
             }
                 break;
             case 103:{
-          //      VC =     [[XFShareViewController alloc]init];
+//                XFShareViewController *XFShare =     [[XFShareViewController alloc]init];
+//                XFShare.transitioningDelegate =self;
+//                XFShare.delegate = self;
+//                //    UINavigationController *naVc = [[UINavigationController alloc]];
+//                [self presentViewController:XFShare
+//                                   animated:YES completion:nil];
+                
+                
             }
                 break;
                 
             default:
                 break;
         }
-        [self.navigationController pushViewController:VC animated:NO];
-           });
-   
+        //转场
+        
+        
+        //    [self.navigationController pushViewController:VC animated:NO];
+        
+        
+    });
+    
+    
+    
 }
+#pragma mark - 控制器跳转动画
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    
+    return self.XFExplode;
+}
+// 3. Implement the methods to supply proper objects.
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return self.XFExplode;
+}
+//返回来这个控制器
+-(void)modalViewControllerDidClickedDismissButton:(XFShareViewController *)viewController{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
