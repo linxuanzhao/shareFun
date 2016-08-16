@@ -15,7 +15,7 @@
 #import "MovieAnimation.h"
 #import "UIViewController+Trainsition.h"
 
-@interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationControllerDelegate>
+@interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
@@ -36,47 +36,50 @@
     [super viewDidLoad];
     self.title = @"热映电影";
     
+    
     self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
     [self createCollectionView];
     [self getData];
-   
-    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
-    screen.edges = UIRectEdgeLeft;
-    [self.view addGestureRecognizer:screen];
+
+//    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
+//    screen.edges = UIRectEdgeLeft;
+//    [self.view addGestureRecognizer:screen];
     
     
 }
 
-- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
-{
-    CGPoint pt = [screen translationInView:self.view];
-    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
-
-    [screen setTranslation:CGPointZero inView:self.view];
-    
-    if (screen.state == UIGestureRecognizerStateEnded) {
-        if (self.view.frame.origin.x > SCWI / 2) {
-            
-           [UIView animateWithDuration:0.2 animations:^{
-               self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
-               
-           } completion:^(BOOL finished) {
-               [self.navigationController popViewControllerAnimated:YES];
-           }];
-        }
-        else
-        {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
-            }];
-        }
-    }
-}
-
+//- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
+//{
+//    CGPoint pt = [screen translationInView:self.view];
+//    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
+//
+//    [screen setTranslation:CGPointZero inView:self.view];
+//    
+//    if (screen.state == UIGestureRecognizerStateEnded) {
+//        if (self.view.frame.origin.x > SCWI / 2) {
+//            
+//           [UIView animateWithDuration:0.2 animations:^{
+//               self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
+//               
+//           } completion:^(BOOL finished) {
+//               
+//           }];
+//           
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//        else
+//        {
+//            [UIView animateWithDuration:0.2 animations:^{
+//                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
+//            }];
+//        }
+//    }
+//}
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     self.navigationController.delegate = self;
 }
 
@@ -96,7 +99,6 @@
     [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100" postBody:nil resultBlock:^(NSData *data) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
         
         NSArray *array = dic[@"list"];
         for (NSDictionary *movieDic in array) {
@@ -126,7 +128,7 @@
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView registerClass:[MovieCell class] forCellWithReuseIdentifier:@"movie"];
-    self.collectionView.backgroundColor = [UIColor lightGrayColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectionView];
     
 }
@@ -171,7 +173,6 @@
     detailMovieVC.releaseDate = cell.movie.releaseDate;
     
     [self.navigationController pushViewController:detailMovieVC animated:YES];
-
 } 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
@@ -195,14 +196,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

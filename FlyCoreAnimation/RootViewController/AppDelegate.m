@@ -32,9 +32,9 @@
  //   [self.window makeKeyAndVisible];
  //-------------------------------------------//
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    UIImageView *imageV = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    imageV.image = [UIImage imageNamed:@"ggg.JPG"];
-    [self.window addSubview:imageV];
+//    UIImageView *imageV = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+//    imageV.image = [UIImage imageNamed:@"ggg.JPG"];
+//    [self.window addSubview:imageV];
     [self.window makeKeyAndVisible];
     ViewController *VC = [[ViewController alloc]init];
     UINavigationController *Navc = [[UINavigationController alloc]initWithRootViewController:VC];

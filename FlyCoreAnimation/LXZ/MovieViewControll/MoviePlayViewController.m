@@ -84,7 +84,7 @@
         float result = startSenconds + durationSeconds;
         CMTime duration = self.avManager.playerItem.duration;
         float totalDuration = CMTimeGetSeconds(duration);
-        [self.progressView setProgress:result / totalDuration animated:NO];
+        [self.progressView setProgress:result / totalDuration animated:YES];
     }
     else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"])
     {
@@ -280,7 +280,7 @@
 - (void)AutoHiddenPlayControl
 {
     self.hiddenTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(disapper) userInfo:nil repeats:NO];
-            [[NSRunLoop mainRunLoop] addTimer:self.hiddenTimer forMode:NSRunLoopCommonModes];
+    [[NSRunLoop mainRunLoop] addTimer:self.hiddenTimer forMode:NSRunLoopCommonModes];
 }
 
 

@@ -10,7 +10,5 @@
 
 @interface MovieViewController : UIViewController
 
-
-
 @end
  

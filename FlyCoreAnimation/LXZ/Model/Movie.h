@@ -22,5 +22,6 @@
 @property (nonatomic, strong) NSString *grade;
 @property (nonatomic, strong) NSString *area;
 @property (nonatomic, strong) NSString *releaseDate;
+@property (nonatomic, strong) NSString *screenings;
 
 @end

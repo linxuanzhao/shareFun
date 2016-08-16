@@ -4,6 +4,8 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - MJRefresh (3.1.10)
+  - SDCycleScrollView (1.65):
+    - SDWebImage (~> 3.7)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
@@ -12,14 +14,16 @@ DEPENDENCIES:
   - BaiduMapKit (~> 3.0.0)
   - FMDB (~> 2.6.2)
   - MJRefresh (~> 3.1.10)
+  - SDCycleScrollView (~> 1.65)
   - SDWebImage (~> 3.8.1)
 
 SPEC CHECKSUMS:
   BaiduMapKit: de2a726d5296d6b2dc0e974b683af73153608dcd
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
+  SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
-PODFILE CHECKSUM: 741d306d5b0fd7a837c3d3b1ffd8f308d1f78cd7
+PODFILE CHECKSUM: ea2c1eab6ac6bf648292148c11879ef31c1bdb58
 
 COCOAPODS: 1.0.1

@@ -66,6 +66,7 @@
 		3F22D7A11D596A1800820C61 /* Unknown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7811D596A1800820C61 /* Unknown.png */; settings = {ASSET_TAGS = (); }; };
 		3F22D7A21D596A1800820C61 /* Unknown3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7821D596A1800820C61 /* Unknown3.png */; settings = {ASSET_TAGS = (); }; };
 		3F22D7A31D596A1800820C61 /* 樱花瓣2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7831D596A1800820C61 /* 樱花瓣2.png */; settings = {ASSET_TAGS = (); }; };
+		3F3357D81D61DC69004455EE /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3357D71D61DC69004455EE /* PhotoViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3F6C15CA1D48DFC90016A020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6C15C91D48DFC90016A020 /* Assets.xcassets */; };
 		3F6C15D81D48DFCA0016A020 /* FlyCoreAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15D71D48DFCA0016A020 /* FlyCoreAnimationTests.m */; };
 		3F6C15E31D48DFCA0016A020 /* FlyCoreAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15E21D48DFCA0016A020 /* FlyCoreAnimationUITests.m */; };
@@ -132,6 +133,9 @@
 		3FB6C8021D5B06A400B0BBFD /* LisstModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C8011D5B06A400B0BBFD /* LisstModel.m */; settings = {ASSET_TAGS = (); }; };
 		3FB6C8091D5B06EA00B0BBFD /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C8071D5B06EA00B0BBFD /* ListTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		3FB6C80A1D5B06EA00B0BBFD /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6C8081D5B06EA00B0BBFD /* ListTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3FBC69521D62AD3F0032F54B /* MovieTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC69511D62AD3F0032F54B /* MovieTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		3FBC69551D62AE9A0032F54B /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC69541D62AE9A0032F54B /* MovieTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		3FBC69591D6304820032F54B /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FBC69581D6304820032F54B /* movie.png */; settings = {ASSET_TAGS = (); }; };
 		3FEE7DE71D5EFC8F00740438 /* XFExplodeAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7DE31D5EFC8F00740438 /* XFExplodeAnimationController.m */; settings = {ASSET_TAGS = (); }; };
 		3FEE7DE81D5EFC8F00740438 /* XFReversibleAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7DE61D5EFC8F00740438 /* XFReversibleAnimationController.m */; settings = {ASSET_TAGS = (); }; };
 		3FEE7DEA1D5F08D100740438 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FEE7DE91D5F08D100740438 /* CoreLocation.framework */; };
@@ -242,6 +246,8 @@
 		3F22D7811D596A1800820C61 /* Unknown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unknown.png; sourceTree = "<group>"; };
 		3F22D7821D596A1800820C61 /* Unknown3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unknown3.png; sourceTree = "<group>"; };
 		3F22D7831D596A1800820C61 /* 樱花瓣2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "樱花瓣2.png"; sourceTree = "<group>"; };
+		3F3357D61D61DC69004455EE /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		3F3357D71D61DC69004455EE /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		3F6C15BA1D48DFC90016A020 /* FlyCoreAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyCoreAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6C15C91D48DFC90016A020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F6C15CC1D48DFC90016A020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -350,6 +356,11 @@
 		3FB6C8061D5B06EA00B0BBFD /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
 		3FB6C8071D5B06EA00B0BBFD /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 		3FB6C8081D5B06EA00B0BBFD /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
+		3FBC69501D62AD3F0032F54B /* MovieTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewController.h; sourceTree = "<group>"; };
+		3FBC69511D62AD3F0032F54B /* MovieTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewController.m; sourceTree = "<group>"; };
+		3FBC69531D62AE9A0032F54B /* MovieTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewCell.h; sourceTree = "<group>"; };
+		3FBC69541D62AE9A0032F54B /* MovieTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewCell.m; sourceTree = "<group>"; };
+		3FBC69581D6304820032F54B /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movie.png; sourceTree = "<group>"; };
 		3FEE7DE31D5EFC8F00740438 /* XFExplodeAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFExplodeAnimationController.m; sourceTree = "<group>"; };
 		3FEE7DE41D5EFC8F00740438 /* XFExplodeAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFExplodeAnimationController.h; sourceTree = "<group>"; };
 		3FEE7DE51D5EFC8F00740438 /* XFReversibleAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFReversibleAnimationController.h; sourceTree = "<group>"; };
@@ -736,8 +747,12 @@
 			children = (
 				3FA420111D58B6C000BEA989 /* MovieViewController.h */,
 				3FA420121D58B6C000BEA989 /* MovieViewController.m */,
+				3FBC69501D62AD3F0032F54B /* MovieTableViewController.h */,
+				3FBC69511D62AD3F0032F54B /* MovieTableViewController.m */,
 				3FA4200D1D58B6C000BEA989 /* DetailMovieViewController.h */,
 				3FA4200E1D58B6C000BEA989 /* DetailMovieViewController.m */,
+				3F3357D61D61DC69004455EE /* PhotoViewController.h */,
+				3F3357D71D61DC69004455EE /* PhotoViewController.m */,
 				3FA4200F1D58B6C000BEA989 /* MoviePlayViewController.h */,
 				3FA420101D58B6C000BEA989 /* MoviePlayViewController.m */,
 			);
@@ -788,6 +803,7 @@
 			isa = PBXGroup;
 			children = (
 				3F22D7631D596A1800820C61 /* Images */,
+				3FBC69581D6304820032F54B /* movie.png */,
 				3FA420551D58B74200BEA989 /* back.png */,
 				3FA420561D58B74200BEA989 /* cancle.png */,
 				3FA420571D58B74200BEA989 /* dot.png */,
@@ -827,6 +843,8 @@
 				3F7EFCE21D5C52E700651AB7 /* MovieDetailOneCell.m */,
 				3FA420881D58C32200BEA989 /* MovieCell.h */,
 				3FA420891D58C32200BEA989 /* MovieCell.m */,
+				3FBC69531D62AE9A0032F54B /* MovieTableViewCell.h */,
+				3FBC69541D62AE9A0032F54B /* MovieTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1043,7 +1061,7 @@
 				TargetAttributes = {
 					3F6C15B91D48DFC90016A020 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = PGVM9FG9AT;
+						DevelopmentTeam = T8Y484EXVL;
 					};
 					3F6C15D21D48DFCA0016A020 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1136,6 +1154,7 @@
 				3FB6C80A1D5B06EA00B0BBFD /* ListTableViewCell.xib in Resources */,
 				3F22D7981D596A1800820C61 /* slider.png in Resources */,
 				3F7EFCF81D5C61C000651AB7 /* CompositeCell.xib in Resources */,
+				3FBC69591D6304820032F54B /* movie.png in Resources */,
 				3F9E07B51D5DD2C50001E6F0 /* 3333.JPG in Resources */,
 				3F22D7971D596A1800820C61 /* qqq.jpg in Resources */,
 				3FA4206D1D58B74300BEA989 /* pause.png in Resources */,
@@ -1227,11 +1246,13 @@
 				3FA420411D58B6C000BEA989 /* Map.mm in Sources */,
 				3F22D7471D5968BB00820C61 /* NewsDetailModel.m in Sources */,
 				3F22D7331D5967FC00820C61 /* ListCell.m in Sources */,
+				3F3357D81D61DC69004455EE /* PhotoViewController.m in Sources */,
 				3FA4203F1D58B6C000BEA989 /* MovieViewController.m in Sources */,
 				3F22D71D1D5967CC00820C61 /* ListViewController.m in Sources */,
 				3F93641C1D5F4CBB00344037 /* MovieDetailTwoCell.m in Sources */,
 				3FB6C7F51D5AD67E00B0BBFD /* StoryModel.m in Sources */,
 				3F7EFCE91D5C530400651AB7 /* MovieAnimation.m in Sources */,
+				3FBC69551D62AE9A0032F54B /* MovieTableViewCell.m in Sources */,
 				3F22D71C1D5967CC00820C61 /* DetailViewController.m in Sources */,
 				3FA4203A1D58B6C000BEA989 /* Movie.m in Sources */,
 				3F9E07BC1D5DD45A0001E6F0 /* StoryViewController.m in Sources */,
@@ -1242,6 +1263,7 @@
 				3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */,
 				3F22D7481D5968BB00820C61 /* NewsModel.m in Sources */,
 				3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */,
+				3FBC69521D62AD3F0032F54B /* MovieTableViewController.m in Sources */,
 				3F22D7251D5967D900820C61 /* RadioModel.m in Sources */,
 				3FA4203D1D58B6C000BEA989 /* DetailMovieViewController.m in Sources */,
 				3F22D7611D5969E900820C61 /* ImageCell.m in Sources */,
@@ -1416,7 +1438,7 @@
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jaff-h.ShareFun";
+				PRODUCT_BUNDLE_IDENTIFIER = "jaf-h.ShareFun";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1433,7 +1455,7 @@
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jaff-h.ShareFun";
+				PRODUCT_BUNDLE_IDENTIFIER = "jaf-h.ShareFun";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

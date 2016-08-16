@@ -11,6 +11,7 @@
 #import "XFShareViewController.h"
 #import "MovieViewController.h"
 #import "RadioViewController.h"
+#import "MovieTableViewController.h"
 //#import "RadioViewController.h"
 
 #define marginX 120
@@ -419,7 +420,7 @@
                 //青色 地图
                 
             case 100:{
-                VC =     [[MovieViewController alloc]init];
+                VC =     [[MovieTableViewController alloc]init];
               
                 [self.navigationController pushViewController:VC animated:YES];
 //                [self presentViewController:VC animated:YES completion:nil];
