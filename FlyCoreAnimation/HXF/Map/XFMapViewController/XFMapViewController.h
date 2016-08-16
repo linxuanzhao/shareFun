@@ -18,7 +18,7 @@
 @interface XFMapViewController : UIViewController
 
 @property(nonatomic,strong)NSString  *searchBarText;
-
+@property(nonatomic,assign)int  raidu;
 
 @property (nonatomic, weak) id<BackMapViewControllerDelegate> delegate;
 @end

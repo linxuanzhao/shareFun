@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F04BDCB1D62A7D500F1007C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDCA1D62A7D500F1007C /* AudioToolbox.framework */; };
+		3F04BDCD1D62A7E400F1007C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDCC1D62A7E400F1007C /* ImageIO.framework */; };
+		3F04BDCF1D62A7EC00F1007C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDCE1D62A7EC00F1007C /* CoreMotion.framework */; };
+		3F04BDD11D62A80200F1007C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDD01D62A80200F1007C /* CoreTelephony.framework */; };
+		3F04BDD31D62A80B00F1007C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDD21D62A80B00F1007C /* MediaPlayer.framework */; };
+		3F04BDD51D62A81400F1007C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDD41D62A81400F1007C /* AVFoundation.framework */; };
+		3F04BDD71D62A82900F1007C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDD61D62A82900F1007C /* SystemConfiguration.framework */; };
+		3F04BDD91D62A83400F1007C /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDD81D62A83400F1007C /* JavaScriptCore.framework */; };
+		3F04BDDB1D62A83B00F1007C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDDA1D62A83B00F1007C /* Security.framework */; };
+		3F04BDDD1D62A84500F1007C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDDC1D62A84500F1007C /* OpenGLES.framework */; };
+		3F04BDDF1D62A84F00F1007C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDDE1D62A84F00F1007C /* GLKit.framework */; };
+		3F04BDE11D62A85D00F1007C /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDE01D62A85D00F1007C /* libstdc++.6.0.9.tbd */; };
+		3F04BDE31D62A86700F1007C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDE21D62A86700F1007C /* libsqlite3.0.tbd */; };
+		3F04BDE51D62A87200F1007C /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDE41D62A87200F1007C /* libz.1.2.5.tbd */; };
 		3F0FF4F61D5978E200DBEEAA /* PFGoldenSectionSpiral.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4EF1D5978E200DBEEAA /* PFGoldenSectionSpiral.m */; settings = {ASSET_TAGS = (); }; };
 		3F0FF4F71D5978E200DBEEAA /* ZYQSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4F51D5978E200DBEEAA /* ZYQSphereView.m */; settings = {ASSET_TAGS = (); }; };
 		3F0FF4FE1D59AF7900DBEEAA /* ResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0FF4FD1D59AF7900DBEEAA /* ResultModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -125,6 +139,7 @@
 		3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4207E1D58BA0A00BEA989 /* YZLAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420821D58BA7600BEA989 /* LXZAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420811D58BA7600BEA989 /* LXZAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA4208A1D58C32200BEA989 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420891D58C32200BEA989 /* MovieCell.m */; settings = {ASSET_TAGS = (); }; };
+		3FAEA7D71D619CF80059ED8C /* UIView+XFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAEA7D61D619CF80059ED8C /* UIView+XFView.m */; settings = {ASSET_TAGS = (); }; };
 		3FB6C7F51D5AD67E00B0BBFD /* StoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F41D5AD67E00B0BBFD /* StoryModel.m */; settings = {ASSET_TAGS = (); }; };
 		3FB6C7F91D5AD69D00B0BBFD /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F71D5AD69D00B0BBFD /* StoryTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		3FB6C7FA1D5AD69D00B0BBFD /* StoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6C7F81D5AD69D00B0BBFD /* StoryTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -134,6 +149,7 @@
 		3FEE7DE71D5EFC8F00740438 /* XFExplodeAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7DE31D5EFC8F00740438 /* XFExplodeAnimationController.m */; settings = {ASSET_TAGS = (); }; };
 		3FEE7DE81D5EFC8F00740438 /* XFReversibleAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7DE61D5EFC8F00740438 /* XFReversibleAnimationController.m */; settings = {ASSET_TAGS = (); }; };
 		3FEE7DEA1D5F08D100740438 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FEE7DE91D5F08D100740438 /* CoreLocation.framework */; };
+		3FEE7E821D60421300740438 /* DBSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7E811D60421300740438 /* DBSphereView.m */; settings = {ASSET_TAGS = (); }; };
 		DEAC44B51C5F5432BB1DFD32 /* Pods_FlyCoreAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +171,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F04BDCA1D62A7D500F1007C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3F04BDCC1D62A7E400F1007C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		3F04BDCE1D62A7EC00F1007C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		3F04BDD01D62A80200F1007C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3F04BDD21D62A80B00F1007C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		3F04BDD41D62A81400F1007C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3F04BDD61D62A82900F1007C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3F04BDD81D62A83400F1007C /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		3F04BDDA1D62A83B00F1007C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3F04BDDC1D62A84500F1007C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		3F04BDDE1D62A84F00F1007C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		3F04BDE01D62A85D00F1007C /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		3F04BDE21D62A86700F1007C /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		3F04BDE41D62A87200F1007C /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		3F0FF4ED1D5978E200DBEEAA /* PFAxisDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAxisDirection.h; sourceTree = "<group>"; };
 		3F0FF4EE1D5978E200DBEEAA /* PFGoldenSectionSpiral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGoldenSectionSpiral.h; sourceTree = "<group>"; };
 		3F0FF4EF1D5978E200DBEEAA /* PFGoldenSectionSpiral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGoldenSectionSpiral.m; sourceTree = "<group>"; };
@@ -337,6 +367,8 @@
 		3FA420811D58BA7600BEA989 /* LXZAVManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXZAVManager.m; sourceTree = "<group>"; };
 		3FA420881D58C32200BEA989 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
 		3FA420891D58C32200BEA989 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
+		3FAEA7D51D619CF80059ED8C /* UIView+XFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XFView.h"; sourceTree = "<group>"; };
+		3FAEA7D61D619CF80059ED8C /* UIView+XFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XFView.m"; sourceTree = "<group>"; };
 		3FB6C7F31D5AD67E00B0BBFD /* StoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryModel.h; sourceTree = "<group>"; };
 		3FB6C7F41D5AD67E00B0BBFD /* StoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryModel.m; sourceTree = "<group>"; };
 		3FB6C7F61D5AD69D00B0BBFD /* StoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryTableViewCell.h; sourceTree = "<group>"; };
@@ -352,6 +384,10 @@
 		3FEE7DE51D5EFC8F00740438 /* XFReversibleAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFReversibleAnimationController.h; sourceTree = "<group>"; };
 		3FEE7DE61D5EFC8F00740438 /* XFReversibleAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFReversibleAnimationController.m; sourceTree = "<group>"; };
 		3FEE7DE91D5F08D100740438 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3FEE7E7E1D60421300740438 /* DBMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMatrix.h; sourceTree = "<group>"; };
+		3FEE7E7F1D60421300740438 /* DBPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPoint.h; sourceTree = "<group>"; };
+		3FEE7E801D60421300740438 /* DBSphereView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSphereView.h; sourceTree = "<group>"; };
+		3FEE7E811D60421300740438 /* DBSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSphereView.m; sourceTree = "<group>"; };
 		7DB5884A71858E768C3064DD /* Pods-FlyCoreAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.debug.xcconfig"; sourceTree = "<group>"; };
 		B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlyCoreAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35953EDB7E950D2FF662D15 /* Pods-FlyCoreAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.release.xcconfig"; sourceTree = "<group>"; };
@@ -362,7 +398,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F04BDE51D62A87200F1007C /* libz.1.2.5.tbd in Frameworks */,
+				3F04BDE31D62A86700F1007C /* libsqlite3.0.tbd in Frameworks */,
+				3F04BDE11D62A85D00F1007C /* libstdc++.6.0.9.tbd in Frameworks */,
+				3F04BDDF1D62A84F00F1007C /* GLKit.framework in Frameworks */,
+				3F04BDDD1D62A84500F1007C /* OpenGLES.framework in Frameworks */,
+				3F04BDDB1D62A83B00F1007C /* Security.framework in Frameworks */,
+				3F04BDD91D62A83400F1007C /* JavaScriptCore.framework in Frameworks */,
+				3F04BDD71D62A82900F1007C /* SystemConfiguration.framework in Frameworks */,
+				3F04BDD51D62A81400F1007C /* AVFoundation.framework in Frameworks */,
+				3F04BDD31D62A80B00F1007C /* MediaPlayer.framework in Frameworks */,
+				3F04BDD11D62A80200F1007C /* CoreTelephony.framework in Frameworks */,
 				3FEE7DEA1D5F08D100740438 /* CoreLocation.framework in Frameworks */,
+				3F04BDCF1D62A7EC00F1007C /* CoreMotion.framework in Frameworks */,
+				3F04BDCD1D62A7E400F1007C /* ImageIO.framework in Frameworks */,
+				3F04BDCB1D62A7D500F1007C /* AudioToolbox.framework in Frameworks */,
 				DEAC44B51C5F5432BB1DFD32 /* Pods_FlyCoreAnimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +715,7 @@
 		3FA41FF91D58B6C000BEA989 /* HXF */ = {
 			isa = PBXGroup;
 			children = (
+				3FEE7E7D1D60421300740438 /* DBSphereTagCloud */,
 				3F0FF4EC1D5978E200DBEEAA /* SphereView */,
 				3FA41FFA1D58B6C000BEA989 /* Map */,
 				3FA41FFE1D58B6C000BEA989 /* Share */,
@@ -760,6 +811,7 @@
 		3FA420191D58B6C000BEA989 /* RootViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3FAEA7D41D619CD70059ED8C /* XFView */,
 				3FA4201A1D58B6C000BEA989 /* AppDelegate.h */,
 				3FA4201B1D58B6C000BEA989 /* AppDelegate.m */,
 				3FA4201C1D58B6C000BEA989 /* ViewController.h */,
@@ -824,6 +876,15 @@
 				3FA420891D58C32200BEA989 /* MovieCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3FAEA7D41D619CD70059ED8C /* XFView */ = {
+			isa = PBXGroup;
+			children = (
+				3FAEA7D51D619CF80059ED8C /* UIView+XFView.h */,
+				3FAEA7D61D619CF80059ED8C /* UIView+XFView.m */,
+			);
+			path = XFView;
 			sourceTree = "<group>";
 		};
 		3FB6C7E41D5AD51B00B0BBFD /* StoryRadio */ = {
@@ -950,9 +1011,34 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		3FEE7E7D1D60421300740438 /* DBSphereTagCloud */ = {
+			isa = PBXGroup;
+			children = (
+				3FEE7E7E1D60421300740438 /* DBMatrix.h */,
+				3FEE7E7F1D60421300740438 /* DBPoint.h */,
+				3FEE7E801D60421300740438 /* DBSphereView.h */,
+				3FEE7E811D60421300740438 /* DBSphereView.m */,
+			);
+			path = DBSphereTagCloud;
+			sourceTree = "<group>";
+		};
 		43166CF9420B07E7EB1A24E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F04BDE41D62A87200F1007C /* libz.1.2.5.tbd */,
+				3F04BDE21D62A86700F1007C /* libsqlite3.0.tbd */,
+				3F04BDE01D62A85D00F1007C /* libstdc++.6.0.9.tbd */,
+				3F04BDDE1D62A84F00F1007C /* GLKit.framework */,
+				3F04BDDC1D62A84500F1007C /* OpenGLES.framework */,
+				3F04BDDA1D62A83B00F1007C /* Security.framework */,
+				3F04BDD81D62A83400F1007C /* JavaScriptCore.framework */,
+				3F04BDD61D62A82900F1007C /* SystemConfiguration.framework */,
+				3F04BDD41D62A81400F1007C /* AVFoundation.framework */,
+				3F04BDD21D62A80B00F1007C /* MediaPlayer.framework */,
+				3F04BDD01D62A80200F1007C /* CoreTelephony.framework */,
+				3F04BDCE1D62A7EC00F1007C /* CoreMotion.framework */,
+				3F04BDCC1D62A7E400F1007C /* ImageIO.framework */,
+				3F04BDCA1D62A7D500F1007C /* AudioToolbox.framework */,
 				3FEE7DE91D5F08D100740438 /* CoreLocation.framework */,
 				B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */,
 			);
@@ -1256,7 +1342,9 @@
 				3FA4203C1D58B6C000BEA989 /* (null) in Sources */,
 				3FA420781D58B9B500BEA989 /* DownLoad.m in Sources */,
 				3FA4203E1D58B6C000BEA989 /* MoviePlayViewController.m in Sources */,
+				3FAEA7D71D619CF80059ED8C /* UIView+XFView.m in Sources */,
 				3FA420431D58B6C000BEA989 /* ViewController.m in Sources */,
+				3FEE7E821D60421300740438 /* DBSphereView.m in Sources */,
 				3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */,
 				3F22D7241D5967D900820C61 /* ListModel.m in Sources */,
 				3F7EFCF71D5C61C000651AB7 /* CompositeCell.m in Sources */,

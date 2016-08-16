@@ -59,10 +59,10 @@
     [btn setImage:[UIImage imageNamed:@"ic_right - circle - o.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
  
-    self.seg = [[UISegmentedControl alloc]initWithItems:[NSArray arrayWithObjects:@"步行",@"公交",@"驾驶", nil]];
+    self.seg = [[UISegmentedControl alloc]initWithItems:[NSArray arrayWithObjects:@"步行",@"公交",@"驾车", nil]];
     [self.seg addTarget:self action:@selector(segchange) forControlEvents:UIControlEventValueChanged];
-    //    self.seg.selectedSegmentIndex = 0;
-    self.seg.frame = CGRectMake(0, 0, 150, 30);
+        self.seg.selectedSegmentIndex = 0;
+    self.seg.frame = CGRectMake(0, 0, 200, 30);
     self.seg.layer.position = CGPointMake(SCWI/2, 40);
     
     
@@ -105,7 +105,6 @@
     [_mapView updateLocationViewWithParam:displayParam];
     
    
-    
     //普通态
     //以下_mapView为BMKMapView对象
     //    self.mapView.zoomLevel = 10;
@@ -149,7 +148,6 @@
     self.detailSearcher.delegate = self;
     
     
-    
 }
 -(void)search{
 #pragma mark - POI
@@ -158,9 +156,12 @@
     _searcher.delegate = self;
     //发起检索
     BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
+//    if (!self.raidu) {
+        option.radius = 2000;
+//    }
     
     option.pageIndex = 1;
-    option.pageCapacity = 10;
+  option.pageCapacity = 10;
      option.location =self.locService.userLocation.location.coordinate;
     option.location = self.startPs;
     NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
@@ -193,6 +194,7 @@
 {
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+   
     self.State = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
@@ -234,6 +236,7 @@
         
         option.pageIndex = 1;
         option.pageCapacity = 10;
+        option.radius = 5000;
         // option.location =self.locService.userLocation.location.coordinate;
         option.location = self.startPs;
         NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
@@ -355,14 +358,17 @@
 -(void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view{
     NSLog(@"我是气泡yeah");
     //初始化检索对象
+    //路线搜索
     self.routeSearch = [[BMKRouteSearch alloc]init];
     self.routeSearch.delegate = self;
+
     self.endPointAnnotation = view;
     [self segchange];
+   
     
 }
 -(void)segchange{
-   
+   /*
     //发起检索
     BMKPlanNode* start = [[BMKPlanNode alloc]init] ;
     start.pt = self.startPs;
@@ -371,25 +377,45 @@
     end.pt = self.pointAnnotation.coordinate;
     NSLog(@"%f,%f",end.pt.longitude,end.pt.latitude);
     
-    BMKBaseRoutePlanOption *option = [[BMKBaseRoutePlanOption alloc]init];
-    
-    option.from.pt = self.startPs ;
-    option.to.pt = self.pointAnnotation.coordinate;
+    //BMKBaseRoutePlanOption *option = [[BMKBaseRoutePlanOption alloc]init];
+    */
+   
     
     
     switch (self.seg.selectedSegmentIndex) {
-        case 0:
-            option =  [[BMKWalkingRoutePlanOption alloc]init];
+        case 0:{
+           
+            BMKWalkingRoutePlanOption *option =  [[BMKWalkingRoutePlanOption alloc]init];
+            option.from = [[BMKPlanNode alloc]init];
+            option.from.pt = self.startPs;
+            option.to = [[BMKPlanNode alloc]init];
+            option.to.pt = CLLocationCoordinate2DMake(self.pointAnnotation.coordinate.latitude, self.pointAnnotation.coordinate.longitude);
             [self.routeSearch walkingSearch:option];
-            break;
-        case 1:
-            option = [[BMKTransitRoutePlanOption alloc]init];
+             
+//            [_mapView setMapType:BMKMapTypeStandard];
+        } break;
+        case 1:{
+           
+          BMKTransitRoutePlanOption  *option = [[BMKTransitRoutePlanOption alloc]init];
+            option.from = [[BMKPlanNode alloc]init];
+            option.from.pt = self.startPs ;
+            option.to = [[BMKPlanNode alloc]init];
+            option.to.pt = self.pointAnnotation.coordinate;
             [self.routeSearch transitSearch:option];
-            break;
+//            [_mapView setMapType:BMKMapTypeSatellite];
+        } break;
         case 2:{
-            option = [[BMKDrivingRoutePlanOption alloc]init];
+            
+            BMKDrivingRoutePlanOption  *option = [[BMKDrivingRoutePlanOption alloc]init];
+            option.from = [[BMKPlanNode alloc]init];
+            option.from.pt = self.startPs ;
+            option.to = [[BMKPlanNode alloc]init];
+            option.to.pt = self.pointAnnotation.coordinate;
             [self.routeSearch drivingSearch:option];
-        }
+            //            [_mapView setMapType:BMKMapTypeSatellite];
+        } break;
+
+    
         default:
             break;
     }
@@ -399,7 +425,29 @@
 }
 
 - (void)onGetTransitRouteResult:(BMKRouteSearch*)searcher result:(BMKTransitRouteResult*)result errorCode:(BMKSearchErrorCode)error{
-    NSLog(@"bus");
+    if (error == BMK_SEARCH_NO_ERROR) {
+        //在此处理正常结果
+        
+        for (BMKTransitRouteLine *line in result.routes) {
+            //            ///路线长度 单位： 米
+            //            @property (nonatomic) int distance;
+            //            ///路线耗时 单位： 秒
+            //            @property (nonatomic, strong) BMKTime* duration;
+            //            ///路线起点信息
+            //            @property (nonatomic, strong) BMKRouteNode* starting;
+            //            ///路线终点信息
+            //            @property (nonatomic, strong) BMKRouteNode* terminal;
+            NSString *routeDescription = [NSString stringWithFormat:@"路程长度: %d\n路线耗时: %d小时%d分%d秒", line.distance, line.duration.hours, line.duration.minutes, line.duration.seconds];
+            NSLog(@"%@", routeDescription);
+        }
+    }
+    else if (error == BMK_SEARCH_AMBIGUOUS_ROURE_ADDR){
+        //当路线起终点有歧义时通，获取建议检索起终点
+        //result.routeAddrResult
+    }
+    else {
+        NSLog(@"抱歉，未找到结果");
+    }
 }
 -(void)onGetWalkingRouteResult:(BMKRouteSearch *)searcher result:(BMKWalkingRouteResult *)result errorCode:(BMKSearchErrorCode)error{
     NSLog(@"walk");
