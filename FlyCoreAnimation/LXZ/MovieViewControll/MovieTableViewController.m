@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *hotArray;
 @property (nonatomic, strong) NSMutableArray *NotifyArray;
 @property (nonatomic, strong) NSMutableArray*listArray;
+@property (nonatomic, strong) UITableView *predictTableView;
 
 @end
 
@@ -31,11 +32,16 @@
     [super viewDidLoad];
     self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
     [self createSegmentedControl];
+    
+    [self createPredictView];
     [self createTableView];
-    [self createMJRefresh];
-    [self.tableView registerClass:[MovieTableViewCell class] forCellReuseIdentifier:@"movie"];
+    [self getData];
+    [self getPredictData];
 
-        
+    [self createSegmentedControl];
+    [self createMJRefresh];
+    [self createPreMJRefresh];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -97,10 +103,8 @@
                 [movie setValuesForKeysWithDictionary:movieDic];
                 [self.hotArray addObject:movie];
             }
-            self.dataArray = self.hotArray;
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
-            
                 [self.tableView reloadData];
             });
          
@@ -112,37 +116,34 @@
 {
     [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100&type=1" postBody:nil resultBlock:^(NSData *data) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        //            NSArray *NotifyArray = dic[@"maxNotifyList"];
-        NSArray *listArray = dic[@"list"];
+            NSArray *NotifyArray = dic[@"maxNotifyList"];
+            NSArray *listArray = dic[@"list"];
         
-        //            for (NSDictionary *movieDic in NotifyArray) {
-        //                Movie *movie = [[Movie alloc] init];
-        //                [movie setValuesForKeysWithDictionary:movieDic];
-        //                [self.NotifyArray addObject:movie];
-        //            }
+        for (NSDictionary *movieDic in NotifyArray) {
+            Movie *movie = [[Movie alloc] init];
+            [movie setValuesForKeysWithDictionary:movieDic];
+            [self.NotifyArray addObject:movie];
+        }
         
         for (NSDictionary *movieDic in listArray) {
             Movie *movie = [[Movie alloc] init];
             [movie setValuesForKeysWithDictionary:movieDic];
             [self.listArray addObject:movie];
         }
-        self.dataArray = self.listArray;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
+            [self.predictTableView reloadData];
         });
         
     }];
 
 }
 
-
 - (void)createSegmentedControl
 {
     self.segment = [[UISegmentedControl alloc] initWithItems:@[@"热映", @"预告"]];
     self.segment.frame = CGRectMake(0, 0, 0, 30);
     self.segment.selectedSegmentIndex = 0;
-//    self.segment.tintColor = [UIColor clearColor];
     [self.segment addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.segment;
     [self segmentAction:self.segment];
@@ -155,14 +156,18 @@
     switch (sg.selectedSegmentIndex) {
         case 0:
         {
-            self.hotArray = nil;
-            [self getData];
+            self.tableView.scrollsToTop = YES;
+            self.predictTableView.scrollsToTop = NO;
+            [self.view insertSubview:self.tableView aboveSubview:self.predictTableView];
+           
             break;
         }
         case 1:
         {
-            self.listArray = nil;
-            [self getPredictData];
+            self.predictTableView.scrollsToTop = YES;
+            self.tableView.scrollsToTop = NO;
+            [self.view insertSubview:self.predictTableView aboveSubview:self.tableView];
+            
             break;
         }
         default:
@@ -175,22 +180,13 @@
 {
     
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
-        if (self.segment.selectedSegmentIndex == 0) {
-            self.dataArray = nil;
-            self.dataArray = self.hotArray;
-            [self.tableView reloadData];
-            [self.tableView.mj_header endRefreshing];
-        }
-        else if (self.segment.selectedSegmentIndex == 1)
-        {
-            self.dataArray = nil;
-            self.dataArray = self.listArray;
-            [self.tableView reloadData];
-            [self.tableView.mj_header endRefreshing];
-        }
-        
+        self.hotArray = nil;
+        [self getData];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
         
     }];
+    
     self.tableView.mj_header = header;
     NSArray *imageArray1 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
     NSArray *imageArray2 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
@@ -204,40 +200,117 @@
     header.stateLabel.hidden = YES;
 }
 
-
-- (void)createTableView
+- (void)createPreMJRefresh
 {
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+        self.listArray = nil;
+        [self getPredictData];
+        [self.predictTableView reloadData];
+        [self.predictTableView.mj_header endRefreshing];
+      
+    }];
+    self.predictTableView.mj_header = header;
+    NSArray *imageArray1 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
+    NSArray *imageArray2 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
+    NSArray *imageArray3 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.tableView];
+    [header setImages:imageArray1 forState:MJRefreshStateIdle];
+    [header setImages:imageArray2 forState:MJRefreshStateRefreshing];
+    [header setImages:imageArray3 forState:MJRefreshStatePulling];
+    
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+
 }
 
 
 
 
+- (void)createTableView
+{
+
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCWI, SCHI - 64) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[MovieTableViewCell class] forCellReuseIdentifier:@"movie"];
+    [self.view addSubview:self.tableView];
+}
+
+- (void)createPredictView
+{
+    self.predictTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCWI, SCHI) style:UITableViewStylePlain];
+    self.predictTableView.dataSource = self;
+    self.predictTableView.delegate = self;
+    self.predictTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.predictTableView registerClass:[MovieTableViewCell class] forCellReuseIdentifier:@"list"];
+    [self.predictTableView registerClass:[MovieTableViewCell class] forCellReuseIdentifier:@"notify"];
+    [self.view addSubview:self.predictTableView];
+
+}
 
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if ([tableView isEqual:self.predictTableView]) {
+        return 2;
+    }
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    
-    return self.dataArray.count;
-    
+    if ([tableView isEqual:self.tableView]) {
+        return self.hotArray.count;
+    }
+    else if ([tableView isEqual:self.predictTableView])
+    {
+        if (section == 0) {
+            return self.NotifyArray.count;
+        }
+        else if (section == 1)
+        {
+            return self.listArray.count;
+        }
+        
+        
+    }
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"movie"];
-    Movie *movie = self.dataArray[indexPath.row];
-    cell.movie = movie;
-    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
-    return cell;
+   
+    if ([tableView isEqual:self.tableView]) {
+        MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"movie"];
+        Movie *movie = self.hotArray[indexPath.row];
+        cell.movie = movie;
+        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
+                return cell;
+    }
+    
+    else if ([tableView isEqual:self.predictTableView])
+    {
+        if (indexPath.section == 1) {
+            MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"list"];
+            Movie *movie = self.listArray[indexPath.row];
+            cell.movie = movie;
+            [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
+            return cell;
+        }
+        else if (indexPath.section == 0)
+        {
+            MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notify"];
+            Movie *movie = self.NotifyArray[indexPath.row];
+            cell.movie = movie;
+            [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
+            return cell;
+        }
+        
+    }
+    return nil;
 
     
     
@@ -282,6 +355,10 @@
         return nil;
     }
 }
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
