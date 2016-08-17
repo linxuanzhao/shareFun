@@ -16,12 +16,12 @@
 @interface MovieTableViewController () <UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
 @property (nonatomic, strong) MovieAnimation *animation;
-
 @property (nonatomic, strong) UITableView *tableView;
-
 @property (nonatomic, strong) UISegmentedControl *segment;
+@property (nonatomic, strong) NSMutableArray *hotArray;
+@property (nonatomic, strong) NSMutableArray *NotifyArray;
+@property (nonatomic, strong) NSMutableArray*listArray;
 
 @end
 
@@ -34,11 +34,8 @@
     [self createTableView];
     [self createMJRefresh];
     [self.tableView registerClass:[MovieTableViewCell class] forCellReuseIdentifier:@"movie"];
-    [self getData];
-    
-    
 
-
+        
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -61,29 +58,84 @@
     return _dataArray;
 }
 
+- (NSMutableArray *)hotArray
+{
+    if (!_hotArray) {
+        _hotArray = [NSMutableArray array];
+    }
+    return _hotArray;
+}
+
+- (NSMutableArray *)NotifyArray
+{
+    if (!_NotifyArray) {
+        _NotifyArray = [NSMutableArray array];
+    }
+    return _NotifyArray;
+}
+
+- (NSMutableArray *)listArray
+{
+    if (!_listArray) {
+        _listArray = [NSMutableArray array];
+    }
+    return _listArray;
+}
+
 - (void)getData
 {
     //    http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100
     //    latitude=23.18037&longitude=113.35261&offen_cinema_ids=&type=0
     
-    [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100" postBody:nil resultBlock:^(NSData *data) {
-        
+        [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100" postBody:nil resultBlock:^(NSData *data) {
+            
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            NSArray *array = dic[@"list"];
+            for (NSDictionary *movieDic in array) {
+                Movie *movie = [[Movie alloc] init];
+                [movie setValuesForKeysWithDictionary:movieDic];
+                [self.hotArray addObject:movie];
+            }
+            self.dataArray = self.hotArray;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+            
+                [self.tableView reloadData];
+            });
+         
+        }];
+    
+}
+
+- (void)getPredictData
+{
+    [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100&type=1" postBody:nil resultBlock:^(NSData *data) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        //            NSArray *NotifyArray = dic[@"maxNotifyList"];
+        NSArray *listArray = dic[@"list"];
         
-        NSArray *array = dic[@"list"];
-        for (NSDictionary *movieDic in array) {
+        //            for (NSDictionary *movieDic in NotifyArray) {
+        //                Movie *movie = [[Movie alloc] init];
+        //                [movie setValuesForKeysWithDictionary:movieDic];
+        //                [self.NotifyArray addObject:movie];
+        //            }
+        
+        for (NSDictionary *movieDic in listArray) {
             Movie *movie = [[Movie alloc] init];
             [movie setValuesForKeysWithDictionary:movieDic];
-            [self.dataArray addObject:movie];
+            [self.listArray addObject:movie];
         }
+        self.dataArray = self.listArray;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
         
     }];
-    
+
 }
+
 
 - (void)createSegmentedControl
 {
@@ -93,24 +145,26 @@
 //    self.segment.tintColor = [UIColor clearColor];
     [self.segment addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.segment;
+    [self segmentAction:self.segment];
 }
 
 
 - (void)segmentAction:(UISegmentedControl *)sg
 {
+    
     switch (sg.selectedSegmentIndex) {
         case 0:
         {
-            [self.view addSubview:self.tableView];
-        }
+            self.hotArray = nil;
+            [self getData];
             break;
-            
+        }
         case 1:
         {
-        
-        }
+            self.listArray = nil;
+            [self getPredictData];
             break;
-            
+        }
         default:
             break;
     }
@@ -119,11 +173,23 @@
 
 - (void)createMJRefresh
 {
+    
     MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
-        self.dataArray = nil;
-        [self getData];
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView reloadData];
+        if (self.segment.selectedSegmentIndex == 0) {
+            self.dataArray = nil;
+            self.dataArray = self.hotArray;
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+        }
+        else if (self.segment.selectedSegmentIndex == 1)
+        {
+            self.dataArray = nil;
+            self.dataArray = self.listArray;
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+        }
+        
+        
     }];
     self.tableView.mj_header = header;
     NSArray *imageArray1 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
@@ -144,36 +210,37 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
 }
 
-- (void)createPredictTableView
-{
-
-}
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+
 
 #pragma mark - Table view data source
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
+    
     return self.dataArray.count;
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"movie"];
     Movie *movie = self.dataArray[indexPath.row];
     cell.movie = movie;
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
-
     return cell;
+
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -216,5 +283,10 @@
     }
 }
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end
