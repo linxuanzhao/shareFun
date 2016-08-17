@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSMutableArray *NotifyArray;
 @property (nonatomic, strong) NSMutableArray*listArray;
 @property (nonatomic, strong) UITableView *predictTableView;
+@property (nonatomic, strong) NSMutableArray *nameArray1;
+@property (nonatomic, strong) NSMutableArray *nameArray2;
 
 @end
 
@@ -88,6 +90,23 @@
     return _listArray;
 }
 
+- (NSMutableArray *)nameArray1
+{
+    if (!_nameArray1) {
+        _nameArray1 = [NSMutableArray array];
+    }
+    return _nameArray1;
+}
+
+- (NSMutableArray *)nameArray2
+{
+    if (!_nameArray2) {
+        _nameArray2 = [NSMutableArray array];
+    }
+    return _nameArray2;
+}
+
+
 - (void)getData
 {
     //    http://piao.163.com/m/movie/list.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100
@@ -119,17 +138,27 @@
             NSArray *NotifyArray = dic[@"maxNotifyList"];
             NSArray *listArray = dic[@"list"];
         
-        for (NSDictionary *movieDic in NotifyArray) {
-            Movie *movie = [[Movie alloc] init];
-            [movie setValuesForKeysWithDictionary:movieDic];
-            [self.NotifyArray addObject:movie];
-        }
-        
         for (NSDictionary *movieDic in listArray) {
             Movie *movie = [[Movie alloc] init];
             [movie setValuesForKeysWithDictionary:movieDic];
             [self.listArray addObject:movie];
+            [self.nameArray1 addObject:movie.name];
+
         }
+        
+        for (NSDictionary *movieDic in NotifyArray) {
+            Movie *movie = [[Movie alloc] init];
+            [movie setValuesForKeysWithDictionary:movieDic];
+            [self.NotifyArray addObject:movie];
+            [self.nameArray2 addObject:movie.name];
+        }
+
+        
+        NSLog(@"%@", self.nameArray2);
+        
+        
+
+        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.predictTableView reloadData];
@@ -202,24 +231,24 @@
 
 - (void)createPreMJRefresh
 {
-    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
-        self.listArray = nil;
-        [self getPredictData];
-        [self.predictTableView reloadData];
-        [self.predictTableView.mj_header endRefreshing];
-      
-    }];
-    self.predictTableView.mj_header = header;
-    NSArray *imageArray1 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
-    NSArray *imageArray2 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
-    NSArray *imageArray3 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
-    
-    [header setImages:imageArray1 forState:MJRefreshStateIdle];
-    [header setImages:imageArray2 forState:MJRefreshStateRefreshing];
-    [header setImages:imageArray3 forState:MJRefreshStatePulling];
-    
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
+//    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+//        self.listArray = nil;
+//        [self getPredictData];
+//        [self.predictTableView reloadData];
+//        [self.predictTableView.mj_header endRefreshing];
+//      
+//    }];
+//    self.predictTableView.mj_header = header;
+//    NSArray *imageArray1 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
+//    NSArray *imageArray2 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
+//    NSArray *imageArray3 = [NSArray arrayWithObject:[UIImage imageNamed:@"movie.png"]];
+//    
+//    [header setImages:imageArray1 forState:MJRefreshStateIdle];
+//    [header setImages:imageArray2 forState:MJRefreshStateRefreshing];
+//    [header setImages:imageArray3 forState:MJRefreshStatePulling];
+//    
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.stateLabel.hidden = YES;
 
 }
 
@@ -296,6 +325,7 @@
         if (indexPath.section == 1) {
             MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"list"];
             Movie *movie = self.listArray[indexPath.row];
+            
             cell.movie = movie;
             [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
             return cell;
@@ -312,8 +342,6 @@
     }
     return nil;
 
-    
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -356,7 +384,13 @@
     }
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([tableView isEqual:self.predictTableView]) {
+        return 30;
+    }
+    return 0;
+}
 
 
 
