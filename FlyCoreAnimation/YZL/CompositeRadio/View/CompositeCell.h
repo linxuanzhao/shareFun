@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *descLable;
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
 @property (weak, nonatomic) IBOutlet UILabel *trcakLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBVBBB;
 
 @end

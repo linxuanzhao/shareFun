@@ -11,7 +11,7 @@
                 <outlet property="VolumeSlider" destination="uQ7-Yc-xwa" id="DlA-Dm-PPb"/>
                 <outlet property="allTime" destination="JsA-Jh-l9l" id="wXL-vk-gEa"/>
                 <outlet property="curTime" destination="XGp-oy-t1E" id="PKl-2i-N5U"/>
-                <outlet property="imageV" destination="Oo8-b6-Ts2" id="F6T-u6-LC3"/>
+                <outlet property="progressView" destination="1Ud-gC-WJH" id="GZO-CE-5DW"/>
                 <outlet property="scImageView" destination="d6j-Br-d9a" id="b42-S0-Dnf"/>
                 <outlet property="slider" destination="PnC-TI-aJ8" id="F8n-Yc-dTE"/>
                 <outlet property="startBtn" destination="saL-fz-Gfd" id="2d7-W2-e3a"/>
@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3333.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="d6j-Br-d9a">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="music-1.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="d6j-Br-d9a">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-ht-gzQ">
@@ -52,16 +52,11 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PnC-TI-aJ8">
-                    <rect key="frame" x="78" y="547" width="218" height="31"/>
-                    <connections>
-                        <action selector="changeProgress:" destination="-1" eventType="valueChanged" id="GnA-ui-xzU"/>
-                    </connections>
-                </slider>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otx-fG-2Lr">
                     <rect key="frame" x="33" y="495" width="32" height="32"/>
                     <state key="normal" image="Unknown-1.png"/>
                     <connections>
+                        <action selector="downLoadBtnAction:" destination="-1" eventType="touchUpInside" id="nTN-SA-zy1"/>
                         <action selector="download:" destination="-1" eventType="touchUpInside" id="dcr-mm-CzK"/>
                     </connections>
                 </button>
@@ -72,9 +67,6 @@
                         <action selector="repeatOneBtnAction:" destination="-1" eventType="touchUpInside" id="b5W-w4-BP4"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oo8-b6-Ts2">
-                    <rect key="frame" x="142" y="277" width="90" height="90"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dh-0N-bfr">
                     <rect key="frame" x="171" y="495" width="32" height="32"/>
                     <state key="normal" image="Unknown-8.png"/>
@@ -98,33 +90,31 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ad8-o0-pmQ">
                     <rect key="frame" x="339" y="110" width="15" height="15"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4ov-Vz-2J3">
-                    <rect key="frame" x="52" y="277" width="90" height="90"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="z3h-Xy-S8C">
-                    <rect key="frame" x="142" y="367" width="90" height="90"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="RAJ-4v-Ywl">
-                    <rect key="frame" x="142" y="188" width="90" height="90"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1111.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4jw-A1-Bop">
-                    <rect key="frame" x="231" y="277" width="90" height="90"/>
-                </imageView>
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PnC-TI-aJ8">
+                    <rect key="frame" x="78" y="547" width="218" height="31"/>
+                    <color key="maximumTrackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="changeProgress:" destination="-1" eventType="valueChanged" id="GnA-ui-xzU"/>
+                    </connections>
+                </slider>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ud-gC-WJH">
+                    <rect key="frame" x="73" y="477" width="221" height="2"/>
+                    <color key="progressTintColor" red="0.80363343249999997" green="0.30832881340000001" blue="0.31444552059999997" alpha="1" colorSpace="calibratedRGB"/>
+                </progressView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="632.5" y="285.5"/>
+            <point key="canvasLocation" x="727.5" y="204.5"/>
         </view>
     </objects>
     <resources>
-        <image name="1111.jpg" width="751" height="1334"/>
-        <image name="3333.JPG" width="640" height="960"/>
         <image name="Unknown-1.png" width="32" height="32"/>
         <image name="Unknown-2.png" width="32" height="32"/>
         <image name="Unknown-4.png" width="33" height="32"/>
         <image name="Unknown-6.png" width="32" height="32"/>
         <image name="Unknown-7.png" width="32" height="32"/>
         <image name="Unknown-8.png" width="32" height="32"/>
+        <image name="music-1.JPG" width="1200" height="2133"/>
         <image name="volume1.png" width="16" height="16"/>
         <image name="volume2.png" width="16" height="16"/>
     </resources>

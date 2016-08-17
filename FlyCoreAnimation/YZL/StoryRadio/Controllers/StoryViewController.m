@@ -13,14 +13,24 @@
 #import "UIImageView+WebCache.h"
 #import "StoryListViewController.h"
 
-@interface StoryViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface StoryViewController ()<UITableViewDataSource,UITableViewDelegate,MBProgressHUDDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *storyArray;
-
+@property (nonatomic, strong) NSMutableArray *newArray;
+@property (nonatomic, assign) NSInteger num;
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation StoryViewController
+
+-(NSMutableArray *)newArray
+{
+    if (_newArray == nil) {
+        _newArray = [[NSMutableArray alloc]init];
+    }
+    return _newArray;
+}
 
 -(NSMutableArray *)storyArray
 {
@@ -32,13 +42,47 @@
 
 -(void)createTableView
 {
+    
+    UIImageView *storyImage = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    storyImage.image = [UIImage imageNamed:@"story-1.JPG"];
+   // storyImage.contentMode = UIViewContentModeScaleAspectFill;
+    storyImage.userInteractionEnabled = YES;
+    [self.view addSubview: storyImage];
+    
     _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"StoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"storyCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor clearColor];
+    
+    [storyImage addSubview:_tableView];
 }
+
+-(void)refreshRequest
+{
+    [self.newArray removeAllObjects];
+    NSString *str1 = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=107&pageId=%ld&pageSize=20&version=5.4.21",self.num + 1];
+    [DownLoad downLoadWithUrl:str1 postBody:nil resultBlock:^(NSData *data) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+        NSArray *array = [dic valueForKey:@"list"];
+        for (NSDictionary *dict in array) {
+            StoryModel *model = [[StoryModel alloc]init];
+            [model setValuesForKeysWithDictionary:dict];
+            [self.newArray addObject:model];
+        }
+        [self.storyArray addObjectsFromArray:self.newArray];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tableView.mj_footer endRefreshing];
+            [self.tableView reloadData];
+        });
+    }];
+
+    
+}
+
 
 -(void)requestStoryData
 {
@@ -62,10 +106,23 @@
     self.view.backgroundColor = [UIColor redColor];
     [self requestStoryData];
     [self createTableView];
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.num += 1;
+        [self refreshRequest];
+    }];
+    _hud  = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    _hud.activityIndicatorColor = [UIColor blackColor];
+    _hud.color = [UIColor clearColor];
+    _hud.labelColor = [UIColor blackColor];
+    _hud.labelFont = [UIFont systemFontOfSize:14];
+    _hud.labelText = @"~主淫,马上就加载好了哦~";
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    _tableView.mj_footer.hidden = self.storyArray.count == 0;
     return self.storyArray.count;
 }
 
@@ -78,15 +135,19 @@
     cell.countLable.text = model.playsCounts.stringValue;
     cell.trackLable.text = model.tracks.stringValue;
     [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"2.png"]];
-    cell.imageViewA.layer.cornerRadius = 8;
-    cell.imageViewA.layer.masksToBounds = YES;
+    cell.imageViewA.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.imageViewA.layer.borderWidth = 2;
     cell.bottomImageView.layer.cornerRadius = 5;
     cell.bottomImageView.layer.masksToBounds = YES;
+    cell.bottomImageView.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.bottomImageView.layer.borderWidth = 1;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 90;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,7 +161,10 @@
 }
 
 
-
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_hud hide:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
