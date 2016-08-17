@@ -11,7 +11,6 @@
 #import "XFShareViewController.h"
 #import "MovieViewController.h"
 #import "RadioViewController.h"
-//#import "RadioViewController.h"
 
 #define marginX 120
 #define marginY1 20
@@ -137,7 +136,9 @@
 #pragma mark - 标题
 -(void)initLabel{
     self.strArr = [NSMutableArray arrayWithObjects:@"电影",@"电台",@"附近",@"分享", nil];
-    self.str = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 100)];
+    
+    self.str = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 150)];
+    self.str.font = [UIFont systemFontOfSize:25];
     self.str.layer.position = CGPointMake(SCWI/2, SCHI/2+220);
     self.str.textAlignment = NSTextAlignmentCenter ;
     self.str.text = self.strArr.firstObject;
@@ -473,7 +474,8 @@
             }
                 break;
             case 103:{
-//                XFShareViewController *XFShare =     [[XFShareViewController alloc]init];
+                MovieViewController *VC =     [[MovieViewController alloc]init];
+                [self.navigationController pushViewController:VC animated:YES];
 //                XFShare.transitioningDelegate =self;
 //                XFShare.delegate = self;
 //                //    UINavigationController *naVc = [[UINavigationController alloc]];
