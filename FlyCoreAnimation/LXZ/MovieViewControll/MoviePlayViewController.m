@@ -84,7 +84,7 @@
         float result = startSenconds + durationSeconds;
         CMTime duration = self.avManager.playerItem.duration;
         float totalDuration = CMTimeGetSeconds(duration);
-        [self.progressView setProgress:result / totalDuration animated:NO];
+        [self.progressView setProgress:result / totalDuration animated:YES];
     }
     else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"])
     {
@@ -99,10 +99,12 @@
 
 - (void)movieDidFinish
 {
-    [self removeObserver];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.timer invalidate];
-    self.timer = nil;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self removeObserver];
+        [self.timer invalidate];
+        self.timer = nil;
+    }];
+   
 }
 
 
@@ -112,12 +114,6 @@
     [self disapper];
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
-}
 
 - (void)chanageTime
 {
@@ -141,6 +137,7 @@
     {
         [self.activityView startAnimating];
     }
+    
     
 }
 
@@ -234,9 +231,13 @@
 
 - (void)backToDetail
 {
-    [self removeObserver];
+    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.avManager.player pause];
+        [self removeObserver];
+
+        [self.timer invalidate];
+        self.timer = nil;
     }];
     
     
@@ -280,7 +281,7 @@
 - (void)AutoHiddenPlayControl
 {
     self.hiddenTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(disapper) userInfo:nil repeats:NO];
-            [[NSRunLoop mainRunLoop] addTimer:self.hiddenTimer forMode:NSRunLoopCommonModes];
+    [[NSRunLoop mainRunLoop] addTimer:self.hiddenTimer forMode:NSRunLoopCommonModes];
 }
 
 
@@ -294,8 +295,7 @@
 }
 
 - (void)removeObserver
-{
-    [self.avManager.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
+{   [self.avManager.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
     [self.avManager.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
 }
 

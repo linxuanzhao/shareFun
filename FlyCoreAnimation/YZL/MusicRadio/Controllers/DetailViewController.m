@@ -18,10 +18,10 @@
 @interface DetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, assign) NSInteger num;
 @property (nonatomic, strong) NSMutableArray *array;
 @property (nonatomic, assign) NSInteger num1;
-@property (nonatomic, strong) NSMutableArray *array12345;
+@property (nonatomic, strong) MBProgressHUD *hud;
+
 
 
 @end
@@ -48,30 +48,37 @@
 -(void)createTableView
 {
     UIImageView *image1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    image1.image = [UIImage imageNamed:@"1111.jpg"];
+    image1.image = [UIImage imageNamed:@"music-1.JPG"];
+    image1.contentMode = UIViewContentModeScaleAspectFill;
+    
     [self.view addSubview: image1];
     image1.userInteractionEnabled = YES;
-    UIView *view = [[UIView alloc]initWithFrame:image1.frame];
-    view.backgroundColor = [UIColor lightGrayColor];
-    view.alpha = 0.5;
-    [image1 addSubview:view];
+//    UIToolbar *toobar = [[UIToolbar alloc]initWithFrame:image1.frame];
+//    toobar.barStyle = UIBarStyleDefault;
+//    [image1 addSubview:toobar];
+//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:effect];
+//    effectView.frame = image1.frame;
+//    [image1 addSubview:effectView];
+    
+    
 
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"DetailCell" bundle:nil] forCellReuseIdentifier:@"detailCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [image1 addSubview:_tableView];
     _tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.backgroundView = nil;
-    self.tableView.bounces = YES;
-    self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
+    [image1 addSubview:_tableView];
+
+    
     
 }
 
 -(void)refreshRequset
 {
-
+    
+    [self.array removeAllObjects];
         NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=102&pageId=%ld&pageSize=20&status=0&version=5.4.21",self.num1 + 1];
         [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
             
@@ -83,13 +90,12 @@
                 [model setValuesForKeysWithDictionary:dic2];
                 [self.array addObject:model];
             }
-            [self.dataArray removeAllObjects];
+            //[self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:self.array];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_tableView.mj_footer endRefreshing];
                 [self.tableView reloadData];
             });
-            
         }];
 }
 
@@ -97,14 +103,17 @@
 {
   
     [DownLoad downLoadWithUrl:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=102&pageId=1&pageSize=20&statEvent=pageview%2Fcategory%40%E7%94%B5%E5%8F%B0&statModule=%E7%94%B5%E5%8F%B0&statPage=tab%40%E5%8F%91%E7%8E%B0_%E5%88%86%E7%B1%BB&status=0&version=5.4.21" postBody:nil resultBlock:^(NSData *data) {
-        
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSArray *array = dic[@"list"];
-        for (NSDictionary *dict in array) {
-            RadioModel *model = [RadioModel new];
-            [model setValuesForKeysWithDictionary:dict];
-            
-            [self.array addObject:model];
+        if (data == nil) {
+            [self createAlertView];
+        }else{
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSArray *array = dic[@"list"];
+            for (NSDictionary *dict in array) {
+                RadioModel *model = [RadioModel new];
+                [model setValuesForKeysWithDictionary:dict];
+                
+                [self.array addObject:model];
+            }
         }
         [self.dataArray addObjectsFromArray:self.array];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -120,13 +129,23 @@
     self.title = @"音乐电台";
     [self requestLoadData];
     [self createTableView];
-    
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.num1 += 1;
-        NSLog(@"123496798798798789798 == %ld",self.num1);
         [self refreshRequset];
     }];
-   
+
+    _hud  = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    _hud.color = [UIColor clearColor];
+    _hud.activityIndicatorColor = [UIColor blackColor];
+    
+}
+
+
+
+-(void)createAlertView
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"数据没有回来哦" message:@"怎么办" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"sure", nil];
+    [alertView show];
     
 }
 
@@ -143,26 +162,26 @@
     RadioModel *model = self.dataArray[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     
-    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"qqq.jpg"]];
-    cell.imageV.layer.cornerRadius = 10;
-    cell.imageV.layer.masksToBounds = YES;
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"cellImage-1"]];
+//    cell.imageV.layer.cornerRadius = 5;
+//    cell.imageV.layer.masksToBounds = YES;
     cell.titleLable.text = model.title;
     cell.descLable.text = model.intro;
     cell.numberLable.text = model.playsCounts.stringValue;
     cell.EpisodesLable.text = model.tracks.stringValue;
     cell.HandleImageView.layer.cornerRadius = 10;
     cell.HandleImageView.layer.masksToBounds = YES;
-    
-    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
-    view1.backgroundColor = [UIColor clearColor];
-    cell.selectedBackgroundView = view1;
-    
+    cell.imageV.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.imageV.layer.borderWidth = 2;
+    cell.HandleImageView.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.HandleImageView.layer.borderWidth = 1;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 90;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -179,10 +198,11 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-    [UIView animateWithDuration:0.25 animations:^{
-        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-    }];
+    [_hud hide:YES];
+//    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+//    [UIView animateWithDuration:0.25 animations:^{
+//        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+//    }];
 }
 
 

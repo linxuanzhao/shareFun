@@ -9,12 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-FlyCoreAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDCycleScrollView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,12 +47,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6DD1B9A833771B7BBE7592964672C5D6</key>
+		<key>362DC54D2C8333C0CB5E9D77479297D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C068140F29E8F4AB0411A626977C734D</key>
+		<key>520C28C435879CEA8E82C563662151E8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>823186126896AF2E115D9E50C4CE8BE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
 		<dict>
 			<key>primary</key>
 			<true/>

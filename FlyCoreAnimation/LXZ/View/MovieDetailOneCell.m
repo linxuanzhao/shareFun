@@ -8,6 +8,7 @@
 
 #import "MovieDetailOneCell.h"
 
+
 @implementation MovieDetailOneCell
 
 
@@ -20,7 +21,7 @@
         self.descLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.descLabel.font = [UIFont systemFontOfSize:14];
         self.descLabel.numberOfLines = 0;
-    
+        self.descLabel.textAlignment = NSTextAlignmentLeft;
     
         [self.contentView addSubview:self.descLabel];
     

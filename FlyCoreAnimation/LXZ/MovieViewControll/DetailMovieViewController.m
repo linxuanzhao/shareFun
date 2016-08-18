@@ -7,13 +7,15 @@
 //
 
 #import "DetailMovieViewController.h"
-#import "UIImageView+WebCache.h"
 #import "MoviePlayViewController.h"
 #import "UIViewController+Trainsition.h"
 #import "MovieAnimation.h"
 #import "MovieDetailOneCell.h"
+#import "MovieDetailTwoCell.h"
+#import "PhotoViewController.h"
+#import "MBProgressHUD.h"
 
-@interface DetailMovieViewController () <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate>
+@interface DetailMovieViewController () <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIImageView *topView;
@@ -28,10 +30,13 @@
 @property (nonatomic, strong) UILabel *durationLabel;
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, assign) CGFloat height;
-@property (nonatomic, strong) NSMutableArray *logo1;
-@property (nonatomic, strong) NSMutableArray *logo;
-@property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, strong) NSMutableArray *logo1Array; // 小图
+@property (nonatomic, strong) NSMutableArray *logoArray; // 大图
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) NSMutableArray *photoArray;
+@property (nonatomic, strong) UIButton *collectBtn;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @property (nonatomic, strong) MovieAnimation *animation;
 
@@ -48,36 +53,36 @@
     [self getData];
     
     
-    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
-    screen.edges = UIRectEdgeLeft;
-    [self.view addGestureRecognizer:screen];
+//    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
+//    screen.edges = UIRectEdgeLeft;
+//    [self.view addGestureRecognizer:screen];
 }
 
-- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
-{
-    CGPoint pt = [screen translationInView:self.view];
-    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
-    
-    [screen setTranslation:CGPointZero inView:self.view];
-    
-    if (screen.state == UIGestureRecognizerStateEnded) {
-        if (self.view.frame.origin.x > SCWI / 2) {
-            
-            [UIView animateWithDuration:0.2 animations:^{
-                self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
-                
-            } completion:^(BOOL finished) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
-        }
-        else
-        {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
-            }];
-        }
-    }
-}
+//- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
+//{
+//    CGPoint pt = [screen translationInView:self.view];
+//    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
+//    
+//    [screen setTranslation:CGPointZero inView:self.view];
+//    
+//    if (screen.state == UIGestureRecognizerStateEnded) {
+//        if (self.view.frame.origin.x > SCWI / 2) {
+//            
+//            [UIView animateWithDuration:0.2 animations:^{
+//                self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
+//                
+//            } completion:^(BOOL finished) {
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }];
+//        }
+//        else
+//        {
+//            [UIView animateWithDuration:0.2 animations:^{
+//                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
+//            }];
+//        }
+//    }
+//}
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -95,6 +100,23 @@
     return _dataArray;
 }
 
+- (NSMutableArray *)logoArray
+{
+    if (!_logoArray) {
+        _logoArray = [NSMutableArray array];
+    }
+    return _logoArray;
+}
+
+- (NSMutableArray *)logo1Array
+{
+    if (!_logo1Array) {
+        _logo1Array = [NSMutableArray array];
+    }
+    return _logo1Array;
+}
+
+
 - (void)getData
 {
     [DownLoad downLoadWithUrl:@"http://piao.163.com/m/movie/detail.html?app_id=2&mobileType=iPhone&ver=3.7.1&channel=lede&deviceId=E91204AD-3F7F-446E-A42E-BCEE5FEDFDF8&apiVer=21&city=440100" postBody:[NSString stringWithFormat:@"movie_id=%@", self.movieId] resultBlock:^(NSData *data) {
@@ -102,25 +124,26 @@
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         self.desc = dict[@"object"][@"description"];
     
-//        NSArray *array1 = dic[@"stillsList"];
-//        
-//        self.logo = [NSMutableArray array];
-//        
-//        self.logo1 = [NSMutableArray array];
-//        
-//        for (NSDictionary *tempDict in array1)
-//        {
-//           [self.logo addObject:tempDict[@"logo"]];
-//            
-//           [self.logo1 addObject:tempDict[@"logo1"]];
-//        }
+        NSArray *array = dict[@"object"][@"stillsList"];
+       
+        for (NSDictionary *photoDict in array)
+        {
+            NSString *urlImgStr = photoDict[@"logo"];
+            NSString *str = [urlImgStr substringToIndex:urlImgStr.length - 4];
+            urlImgStr = [str stringByAppendingString:@"jpg"];
+            
+            NSString *urlImgStr1 = photoDict[@"logo1"];
+            NSString *str1 = [urlImgStr1 substringToIndex:urlImgStr1.length - 4];
+            urlImgStr1 = [str1 stringByAppendingString:@"jpg"];
+
+            [self.logoArray addObject:urlImgStr];
+            [self.logo1Array addObject:urlImgStr1];
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
-        
-        
-       
+
     }];
 }
 
@@ -133,6 +156,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerClass:[MovieDetailOneCell class] forCellReuseIdentifier:@"desc"];
+    [self.tableView registerClass:[MovieDetailTwoCell class] forCellReuseIdentifier:@"photo"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
@@ -202,9 +226,59 @@
     self.durationLabel.font = [UIFont systemFontOfSize:14];
     self.durationLabel.textAlignment = NSTextAlignmentLeft;
     [self.headView addSubview:self.durationLabel];
-
+    
+    // collectBtn
+    self.collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.collectBtn.frame = CGRectMake(SCWI - 10 - 32, 50, 32, 32);
+    [self.collectBtn addTarget:self action:@selector(collect:) forControlEvents:UIControlEventTouchUpInside];
+    [self.collectBtn setImage:[UIImage imageNamed:@"collection.png"] forState:UIControlStateNormal];
+    [self.collectBtn setImage:[UIImage imageNamed:@"haveCollection.png"] forState:UIControlStateSelected];
+    [self.topView addSubview:self.collectBtn];
+    
+   
+    
+    
+    
 }
 
+- (void)collect:(UIButton *)btn
+{
+   
+    // MBProgressHUD
+    if (!btn.selected) {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:self.progressHUD];
+        self.progressHUD.labelText = @"已收藏";
+        self.progressHUD.mode = MBProgressHUDModeText;
+        self.progressHUD.minShowTime = 1;
+        [self.progressHUD showAnimated:YES whileExecutingBlock:^{
+
+        } completionBlock:^{
+            [self.progressHUD removeFromSuperview];
+            self.progressHUD = nil;
+        }];
+    }
+    else
+    {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:self.progressHUD];
+        self.progressHUD.labelText = @"取消收藏";
+        self.progressHUD.mode = MBProgressHUDModeText;
+        self.progressHUD.minShowTime = 1;
+        [self.progressHUD showAnimated:YES whileExecutingBlock:^{
+            
+
+        } completionBlock:^{
+            [self.progressHUD removeFromSuperview];
+            self.progressHUD = nil;
+        }];
+
+    }
+    
+    
+    
+    btn.selected = !btn.selected;
+}
 
 
 - (void)presentMovie
@@ -226,6 +300,11 @@
 
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
@@ -233,36 +312,88 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
-    cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
-//    cell.descLabel.backgroundColor = [UIColor greenColor];
-    
-//    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:cell.descLabel.text];
-//    NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
-//    [att addAttribute:NSParagraphStyleAttributeName value:parStyle range:NSMakeRange(0, cell.descLabel.text.length)];
-//    
-//    parStyle.lineSpacing = 5;
-//    parStyle.headIndent = 35;
-//    cell.descLabel.attributedText = att;
-//    [cell.descLabel sizeToFit];
-    
-    if (indexPath == self.selectedIndexPath) {
+    if (indexPath.section == 0) {
+        MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
+        cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
         
-        CGRect rect = [cell.descLabel.text boundingRectWithSize:CGSizeMake(SCWI - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:nil];
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:cell.descLabel.text];
+        NSMutableParagraphStyle *parStyle = [[NSMutableParagraphStyle alloc] init];
+        [att addAttribute:NSParagraphStyleAttributeName value:parStyle range:NSMakeRange(0, cell.descLabel.text.length)];
+        parStyle.lineSpacing = 5;
+        parStyle.headIndent = 35;
+        cell.descLabel.attributedText = att;
+        [cell.descLabel sizeToFit];
         
-        self.height = rect.size.height;
-        cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, self.height);
+        self.height = CGRectGetHeight(cell.descLabel.frame);
         
-    }
-    else
-    {
-        cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, 100);
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath == self.selectedIndexPath) {
 
-    return cell;
+            cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, self.height);
+            
+        }
+        else
+        {
+            cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, 120);
+                      
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    }
+    
+    else if (indexPath.section == 1){
+        MovieDetailTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photo"];
+        cell.photoArray = self.logo1Array;
+        for (int i = 0; i < self.logo1Array.count; i++) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 120, 0, 100, 100)];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:self.logo1Array[i]]];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+            imageView.userInteractionEnabled = YES;
+            [imageView addGestureRecognizer:tap];
+            [cell.scrollView addSubview:imageView];
+            [self.photoArray addObject:imageView];
+
+        }
+       
+        return cell;
+    }
+    
+    
+    return nil;
+    
 }
+
+
+
+- (NSMutableArray *)photoArray
+{
+    if (!_photoArray) {
+        _photoArray = [NSMutableArray array];
+    }
+    return _photoArray;
+}
+
+- (void)tapAction:(UITapGestureRecognizer*)tap
+{
+
+    for (UIImageView *imageV in self.photoArray) {
+        if (imageV == tap.view ) {
+            self.index = [self.photoArray indexOfObject:imageV];
+            
+        }
+    }
+    PhotoViewController *photoVC = [[PhotoViewController alloc] init];
+    photoVC.photoArray = self.logoArray;
+    photoVC.index = self.index;
+    
+    UINavigationController *photoNav = [[UINavigationController alloc] initWithRootViewController:photoVC];
+    
+    [self presentViewController:photoNav animated:YES completion:nil];
+}
+
+
 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
@@ -278,64 +409,63 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        if (indexPath == self.selectedIndexPath) {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            return self.height;
+            
+        }
+        else
+        {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            return 120;
+        }
+
+    }
     
-    if (indexPath == self.selectedIndexPath) {
-        return self.height;
+    else if (indexPath.section == 1){
+        return 140;
     }
-    else
-    {
-        return 100;
-    }
+
+        return 0;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    if (self.selectedIndexPath == nil) {
-        self.selectedIndexPath = indexPath;
+    if (indexPath.section == 0) {
+        if (self.selectedIndexPath == nil)
+        {
+            self.selectedIndexPath = indexPath;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
         
-    }
-    
-    else
-    {
-//        BOOL hasSelectedOtherRow =![self.selectedIndexPath isEqual:indexPath];
-        
-//        NSIndexPath *temp=self.selectedIndexPath;
-        self.selectedIndexPath=nil;
-        
+        else
+        {
+            self.selectedIndexPath = nil;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    
-        
-//        if(hasSelectedOtherRow){
-//            self.selectedIndexPath=indexPath;
-//            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        }
+        }
     }
-    
-
-    
-
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
 
-
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor lightGrayColor];
+    view.alpha = 0.6;
+    return view;
+}
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

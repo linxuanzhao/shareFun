@@ -19,6 +19,7 @@
 #import "StoryViewController.h"
 #import "LiteraryViewController.h"
 #import "CompositeViewController.h"
+#import "PianKeViewController.h"
 
 
 @interface RadioViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,XRCarouselViewDelegate>
@@ -43,14 +44,14 @@
     [self.view addSubview:_collectionView];
     [_collectionView registerClass:[ImageCell class] forCellWithReuseIdentifier:@"imageCell"];
     //_carouselView.backgroundColor = [UIColor lightGrayColor];
-    _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.backgroundColor = [UIColor whiteColor];
     
     
 }
 
 -(void)createData
 {
-    _nameArray = @[@"综合台",@"文艺台",@"音乐台",@"新闻台",@"故事台",@"本地文件"];
+    _nameArray = @[@"综合台",@"文艺台",@"音乐台",@"新闻台",@"故事台",@"PK"];
     UIImage *image1 = [UIImage imageNamed:@"1.jpg"];
     UIImage *image2 = [UIImage imageNamed:@"2.png"];
     UIImage *image3 = [UIImage imageNamed:@"3.jpeg"];
@@ -64,7 +65,9 @@
 -(void)createScrollView
 {
     UIImageView *scrImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, WHDTH, 180)];
+    
     scrImageView.backgroundColor = [UIColor lightGrayColor];
+    scrImageView.userInteractionEnabled = YES;
     [self.view addSubview:scrImageView];
     
     self.carouselView = [[XRCarouselView alloc]initWithFrame:scrImageView.bounds];
@@ -82,7 +85,7 @@
     [super viewDidLoad];
     
     self.title = @"电台列表";
-    [self createCAEmitter];
+    //[self createCAEmitter];
     [self createCollectionView];
     [self createData];
     [self createScrollView];
@@ -124,6 +127,10 @@ collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInte
     if (indexPath.row == 4) {
         StoryViewController *storyVC = [[StoryViewController alloc]init];
         [self.navigationController pushViewController:storyVC animated:YES];
+    }
+    if (indexPath.row == 5) {
+        PianKeViewController *pkVc = [[PianKeViewController alloc]init];
+        [self.navigationController pushViewController:pkVc animated:YES];
     }
     
 }

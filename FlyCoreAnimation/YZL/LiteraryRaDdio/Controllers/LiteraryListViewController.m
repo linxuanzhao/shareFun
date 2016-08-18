@@ -11,15 +11,26 @@
 #import "LiteraryListModel.h"
 #import "LiteraryListCell.h"
 #import "UIImageView+WebCache.h"
+#import "LiteraryPlayViewController.h"
 
 @interface LiteraryListViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *listArray;
-
+@property (nonatomic, strong) NSMutableArray *newArray;
+@property (nonatomic, assign) NSInteger num;
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation LiteraryListViewController
+
+-(NSMutableArray *)newArray
+{
+    if (_newArray == nil) {
+        _newArray = [[NSMutableArray alloc]init];
+    }
+    return _newArray;
+}
 
 -(NSMutableArray *)listArray
 {
@@ -32,25 +43,45 @@
 -(void)createTableView
 {
     UIImageView *ListImageView = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    ListImageView.image = [UIImage imageNamed:@"3333.JPG"];
+    ListImageView.image = [UIImage imageNamed:@"literary.JPG"];
     ListImageView.userInteractionEnabled = YES;
     [self.view addSubview:ListImageView];
-    UIView *listView = [[UIView alloc]initWithFrame:self.view.bounds];
-    listView.backgroundColor = [UIColor grayColor];
-    listView.alpha = 0.5;
-    [ListImageView addSubview:listView];
+ 
     
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 375, self.view.bounds.size.height - 64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView .dataSource = self;
     _tableView.delegate = self;
     [_tableView registerNib:[UINib nibWithNibName:@"LiteraryListCell" bundle:nil] forCellReuseIdentifier:@"listCell"];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundView = nil;
-    self.tableView.bounces = NO;
+    self.tableView.bounces = YES;
     self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     [ListImageView addSubview:_tableView];
+}
+
+-(void)refreshRequest
+{
+    [self.newArray removeAllObjects];
+    NSString *str1 = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album/track?albumId=%@&device=iPhone&isAsc=true&pageId=%ld&pageSize=20&statPosition=%@",self.albumID,self.num + 1,self.statPosition];
+    [DownLoad downLoadWithUrl:str1 postBody:nil resultBlock:^(NSData *data) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSArray *array = dic[@"data"][@"list"];
+        for (NSDictionary *dict3 in array) {
+            LiteraryListModel *model = [[LiteraryListModel alloc]init];
+            [model setValuesForKeysWithDictionary:dict3];
+            [self.newArray addObject:model];
+        }
+        [self.listArray addObjectsFromArray:self.newArray];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView.mj_footer endRefreshing];
+            [self.tableView reloadData];
+        });
+        
+    }];
+
+    
 }
 
 -(void)requestListData
@@ -77,10 +108,23 @@
     
     [self requestListData];
     [self createTableView];
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        self.num += 1;
+        [self refreshRequest];
+    }];
+    _hud  = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    _hud.activityIndicatorColor = [UIColor blackColor];
+    _hud.color = [UIColor clearColor];
+    _hud.labelColor = [UIColor blackColor];
+    _hud.labelFont = [UIFont systemFontOfSize:14];
+    _hud.labelText = @"~主淫,马上就加载好了哦~";
+  
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    self.tableView.mj_footer.hidden = self.listArray.count == 0;
     return self.listArray.count;
 }
 
@@ -94,6 +138,13 @@
     cell.dayLable.text = model.likes.stringValue;
     cell.countLable.text = model.duration.stringValue;
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.imageViewA.layer.borderWidth = 2;
+    cell.imageViewA.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.listImageView.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.listImageView.layer.borderWidth = 1;
+    cell.listImageView.layer.cornerRadius = 10;
+    cell.listImageView.layer.masksToBounds = YES;
     
     return cell;
     
@@ -102,6 +153,23 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 90;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LiteraryPlayViewController *playVC = [[LiteraryPlayViewController alloc]init];
+    LiteraryListModel *model = self.listArray[indexPath.row];
+    playVC.literaryUrls = self.listArray;
+    playVC.indexPath = indexPath.row;
+    playVC.title = model.title;
+    
+    [self.navigationController pushViewController:playVC animated:YES];
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_hud hide:YES];
 }
 
 - (void)didReceiveMemoryWarning {

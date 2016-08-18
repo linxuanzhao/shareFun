@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *coverSmall;
 @property (nonatomic, strong) NSNumber *likes;
 @property (nonatomic, strong) NSNumber *playtimes;
+@property (nonatomic, strong) NSString *coverLarge;
 
 
 

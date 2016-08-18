@@ -13,7 +13,8 @@
 #import "YZLAVManager.h"
 #import "DownLoad.h"
 #import "MJRefresh.h"
-
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
 
 
 

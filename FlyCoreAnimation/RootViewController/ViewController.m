@@ -453,7 +453,7 @@
                 //青色 地图
                 
             case 100:{
-                VC =     [[MovieViewController alloc]init];
+                VC =     [[MovieTableViewController alloc]init];
               
                 [self.navigationController pushViewController:VC animated:YES];
 //                [self presentViewController:VC animated:YES completion:nil];

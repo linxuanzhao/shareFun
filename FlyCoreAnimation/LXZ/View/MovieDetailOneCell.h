@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface MovieDetailOneCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *descLabel;

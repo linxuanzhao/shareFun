@@ -11,6 +11,7 @@
 #import "ListModel.h"
 #import "UIImageView+WebCache.h"
 #import "XRCarouselView.h"
+#import "RadioDBManager.h"
 
 
 
@@ -40,6 +41,9 @@
 @property (nonatomic, assign) BOOL isPlay;
 
 @property (weak, nonatomic) IBOutlet UISlider *VolumeSlider;
+
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+
 
 
 
@@ -90,20 +94,24 @@
     
 }
 
+-(void)chanageSliderImage
+{
+    self.slider.value = 0;
+    self.VolumeSlider.value = 1.0;
+    
+    [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+    [self.VolumeSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //self.view.backgroundColor = [UIColor redColor];
     [self changeTitleView];
-    self.slider.value = 0;
-    self.VolumeSlider.value = 0;
-    self.avManager.avPlay.volume = self.VolumeSlider.value;
+    [self chanageSliderImage];
     [self addBackground];
     //[self imageScrollView];
     [self changeImage];
     
-    [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
-    [self.VolumeSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+
 
     self.avManager = [YZLAVManager shareInstance];
     
@@ -115,14 +123,41 @@
     [self.avManager setPlayList:arr flag:self.number];
       NSLog(@"%ld",self.urls.count);
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
+    
+    self.progressView.tintColor = [UIColor blackColor];
     [self.avManager.avPlay play];
+
+    
+    [self.avManager.playItem addObserver:self forKeyPath:@"loadedTimeRanges"  options:NSKeyValueObservingOptionNew context:nil];
+
+    
+ 
      
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.navigationController.navigationBar.hidden = YES;
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.navigationController.navigationBar.hidden = YES;
+//    });
     
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+        if (self.avManager.playItem.loadedTimeRanges) {
+            NSArray *loadedTimeRanges = [self.avManager.avPlay.currentItem loadedTimeRanges];
+            CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];
+            float startSenconds = CMTimeGetSeconds(timeRange.start);
+            float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+            float result = startSenconds + durationSeconds;
+            CMTime duration = self.avManager.playItem.duration;
+            float totalDuration = CMTimeGetSeconds(duration);
+            [self.progressView setProgress:result / totalDuration animated:NO];
+        }
+        
+       
+    }
+    
+  
+}
 
 -(void)changeItem
 {
@@ -130,14 +165,14 @@
 }
 
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    self.navigationController.navigationBar.hidden = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.navigationController.navigationBar.hidden = YES;
-    });
-    
-}
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    self.navigationController.navigationBar.hidden = NO;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.navigationController.navigationBar.hidden = YES;
+//    });
+//    
+//}
 
 -(void)changeTitleView
 {
@@ -180,17 +215,18 @@
 - (IBAction)startAndStop:(id)sender
 {
     if (!self.isPlay) {
-        [_timer setFireDate:[NSDate distantPast]];
+       // [_timer setFireDate:[NSDate distantPast]];
         [self.avManager.avPlay play];
         [self.startBtn setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
         self.isPlay = YES;
     }else{
         [self.startBtn setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
         [self.avManager.avPlay pause];
-        [_timer setFireDate:[NSDate distantFuture]];
+       // [_timer setFireDate:[NSDate distantFuture]];
         self.isPlay = NO;
     }
-    [self.avManager playWithBtn:nil];}
+    //[self.avManager playWithBtn:nil];
+}
 //上一首
 - (IBAction)back:(id)sender
 {
@@ -213,7 +249,9 @@
 
 //歌曲进度条
 - (IBAction)changeProgress:(id)sender {
+    [self.avManager.avPlay pause];
     [self.avManager playProgress:self.slider.value];
+    [self.avManager.avPlay play];
 }
 
 //控制音量的大小
@@ -226,7 +264,15 @@
 {
     
 }
-
+//下载
+- (IBAction)downLoadBtnAction:(id)sender
+{
+    if (sender) {
+        RadioDBManager *dbManager = [[RadioDBManager alloc]init];
+        [dbManager createTable];
+        
+    }
+}
 
 -(void)addBackground
 {

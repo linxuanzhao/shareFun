@@ -21,6 +21,7 @@
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, strong) NSMutableArray *refreshArray;
 @property (nonatomic, strong) NSMutableSet *mSet;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -53,15 +54,14 @@
 -(void)createTableView
 {
     UIImageView *imageView1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    imageView1.image = [UIImage imageNamed:@"2222.JPG"];
+    imageView1.image = [UIImage imageNamed:@"music-1.JPG"];
     imageView1.userInteractionEnabled = YES;
     [self.view addSubview: imageView1];
-    UIView *view1 = [[UIView alloc]initWithFrame:self.view.bounds];
-    view1.backgroundColor = [UIColor lightGrayColor];
-    view1.alpha = 0.3;
-    [imageView1 addSubview:view1];
+//    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:imageView1.frame];
+//    toolbar.barStyle = UIBarStyleDefault;
+//    [imageView1 addSubview:toolbar];
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 375, self.view.bounds.size.height-64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
@@ -71,16 +71,14 @@
     [imageView1 addSubview:_tableView];
     _tableView.backgroundColor = [UIColor clearColor];
     
-    self.tableView.backgroundView = nil;
-    self.tableView.bounces = YES;
-    self.tableView.sectionIndexTrackingBackgroundColor  = [UIColor redColor];
     
 }
 
 
 -(void)refreshRequset
 {
-    NSString *str1 = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album/track?albumId=%@&device=iPhone&isAsc=true&pageId=%ld&pageSize=20&statPosition%@",self.albumId,self.num + 1,self.statPosition];
+    [self.refreshArray removeAllObjects];
+    NSString *str1 = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album/track?albumId=%@&device=iPhone&isAsc=true&pageId=%ld&pageSize=10&statPosition%@",self.albumId,self.num + 1,self.statPosition];
     [DownLoad downLoadWithUrl:str1 postBody:nil resultBlock:^(NSData *data) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *arr = dic[@"data"][@"list"];
@@ -89,7 +87,7 @@
             [model setValuesForKeysWithDictionary:dc2];
             [self.refreshArray addObject:model];
         }
-
+        
         [self.dataArray addObjectsFromArray:self.refreshArray];
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tableView.mj_footer endRefreshing];
@@ -131,6 +129,9 @@
         _num += 1;
         [self refreshRequset];
     }];
+    _hud  = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    _hud.dimBackground = YES;
+
 
     
     
@@ -147,22 +148,27 @@
 {
     ListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
     ListModel *model = self.dataArray[indexPath.row];
-    cell.imageBB.layer.cornerRadius = 30;
-    cell.imageBB.layer.masksToBounds = YES;
+    //cell.imageBB.layer.cornerRadius = 30;
+    //cell.imageBB.layer.masksToBounds = YES;
     [cell.imageBB sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
+    cell.imageBB.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.imageBB.layer.borderWidth = 2;
     cell.countLable.text = model.playtimes.stringValue;
     cell.titleLable.text = model.title;
     cell.dayLable.text = model.likes.stringValue;
     cell.beijingImagevIew.layer.cornerRadius = 10;
     cell.beijingImagevIew.layer.masksToBounds = YES;
+    cell.beijingImagevIew.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.beijingImagevIew.layer.borderWidth = 1;
+    
     cell.backgroundColor  = [UIColor clearColor];
     
     float num = [model.duration floatValue]/60;
     NSString *str = [NSString stringWithFormat:@"%.2f",num];
     
-    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
-    view1.backgroundColor = [UIColor clearColor];
-    cell.selectedBackgroundView = view1;
+//    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
+//    view1.backgroundColor = [UIColor clearColor];
+//    cell.selectedBackgroundView = view1;
     
     cell.timeLable.text = str;
     return cell;
@@ -183,6 +189,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [_hud hide:YES];
     cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
     [UIView animateWithDuration:0.25 animations:^{
         cell.layer.transform = CATransform3DMakeScale(1, 1, 1);

@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSMutableArray *musicUrls;
 
+@property (nonatomic, strong) AVPlayerItem *playItem;
+
 //创建一个播放音乐的单列
 +(YZLAVManager *)shareInstance;
 //添加音乐的播放队列(文件)

@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *satrt;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlay;
+@property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
+@property (weak, nonatomic) IBOutlet UIImageView *centerImageView;
 
 
 @end
@@ -47,16 +49,23 @@
     
 }
 
+-(void)changeSliderImage
+{
+    self.slider.value = 0;
+    self.volumeSlider.value = 1.0;
+    [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+    [self.volumeSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self changeTitleView];
-    self.slider.value = 0;
+    [self changeSliderImage];
     [self addBackground];
-    [self imageScrollView];
+    //[self imageScrollView];
     
-    [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
     
     self.avManager = [YZLAVManager shareInstance];
     
@@ -66,17 +75,22 @@
         [arr addObject:model.playUrl32];
     }
     [self.avManager setPlayList:arr flag:self.number];
-    NSLog(@"%ld",self.urls.count);
+    [self.avManager.avPlay play];
+
     
 
 
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.navigationController.navigationBar.hidden = YES;
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.navigationController.navigationBar.hidden = YES;
+//    });
   
+}
+- (IBAction)changeVolumeAction:(id)sender
+{
+    self.avManager.avPlay.volume = self.volumeSlider.value;
 }
 
 -(void)changeItem
@@ -85,14 +99,14 @@
 }
 
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    self.navigationController.navigationBar.hidden = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.navigationController.navigationBar.hidden = YES;
-    });
-    
-}
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    self.navigationController.navigationBar.hidden = NO;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.navigationController.navigationBar.hidden = YES;
+//    });
+//    
+//}
 
 -(void)changeTitleView
 {
@@ -146,17 +160,15 @@
 - (IBAction)startAndStopBtnAction:(id)sender
 {
     if (!self.isPlay) {
-        [_timer setFireDate:[NSDate distantPast]];
         [self.avManager.avPlay play];
         [self.satrt setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
         self.isPlay = YES;
     }else{
         [self.satrt setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
         [self.avManager.avPlay pause];
-        [_timer setFireDate:[NSDate distantFuture]];
          self.isPlay = NO;
     }
-    [self.avManager playWithBtn:nil];
+    //[self.avManager playWithBtn:nil];
 }
 - (IBAction)nextBtnAction:(id)sender {
     self.number++;
@@ -175,7 +187,9 @@
 - (IBAction)collectBtnAction:(id)sender {
 }
 - (IBAction)chanageProgress:(id)sender {
+    [self.avManager.avPlay pause];
     [self.avManager playProgress:self.slider.value];
+    [self.avManager.avPlay play];
 }
 
 -(void)addBackground

@@ -53,8 +53,8 @@
     //创建播放器
     NSString *urls = playList[number];
     NSURL *url = [NSURL URLWithString:urls];
-    AVPlayerItem *item = [[AVPlayerItem alloc]initWithURL:url];
-    self.avPlay = [[AVPlayer alloc]initWithPlayerItem:item];
+    self.playItem = [[AVPlayerItem alloc]initWithURL:url];
+    self.avPlay = [[AVPlayer alloc]initWithPlayerItem:self.playItem];
     
     NSTimer *t2 = [NSTimer scheduledTimerWithTimeInterval:0.11 target:self selector:@selector(autonext) userInfo:nil repeats:YES];
     [t2 fire];
