@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Movie.h"
 
 @interface DetailMovieViewController : UIViewController
 
@@ -22,5 +23,7 @@
 @property (nonatomic, strong) NSString *area;
 @property (nonatomic, strong) NSString *logo520692;
 @property (nonatomic, strong) NSString *releaseDate;
+
+@property (nonatomic, strong) Movie *movie;
   
 @end

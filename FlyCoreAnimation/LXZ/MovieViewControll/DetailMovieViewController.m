@@ -14,6 +14,7 @@
 #import "MovieDetailTwoCell.h"
 #import "PhotoViewController.h"
 #import "MBProgressHUD.h"
+#import "DBManager.h"
 
 @interface DetailMovieViewController () <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @property (nonatomic, strong) MovieAnimation *animation;
+@property (nonatomic, strong) DBManager *dbManager;
 
 @end
 
@@ -51,8 +53,9 @@
     self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPop andDuration:1.5];
     [self createDetailMovieView];
     [self getData];
-    
-    
+    self.dbManager = [DBManager shareInstance];
+
+
 //    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
 //    screen.edges = UIRectEdgeLeft;
 //    [self.view addGestureRecognizer:screen];
@@ -83,6 +86,25 @@
 //        }
 //    }
 //}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray *array = [self.dbManager selectFromTable];
+    if (array.count) {
+        for (Movie *movie in array) {
+            if ([self.movie.name isEqualToString:movie.name]) {
+                self.collectBtn.selected = YES;
+                
+            }
+        }
+    }
+    else{
+        self.collectBtn.selected = NO;
+        
+    }
+
+}
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -234,16 +256,13 @@
     [self.collectBtn setImage:[UIImage imageNamed:@"collection.png"] forState:UIControlStateNormal];
     [self.collectBtn setImage:[UIImage imageNamed:@"haveCollection.png"] forState:UIControlStateSelected];
     [self.topView addSubview:self.collectBtn];
-    
-   
-    
-    
-    
+  
 }
 
 - (void)collect:(UIButton *)btn
 {
-   
+    self.collectBtn = btn;
+    
     // MBProgressHUD
     if (!btn.selected) {
         self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -252,8 +271,11 @@
         self.progressHUD.mode = MBProgressHUDModeText;
         self.progressHUD.minShowTime = 1;
         [self.progressHUD showAnimated:YES whileExecutingBlock:^{
-
+        
+            [self.dbManager addMovie:self.movie];
+    
         } completionBlock:^{
+            
             [self.progressHUD removeFromSuperview];
             self.progressHUD = nil;
         }];
@@ -267,16 +289,14 @@
         self.progressHUD.minShowTime = 1;
         [self.progressHUD showAnimated:YES whileExecutingBlock:^{
             
-
+            [self.dbManager deleteMovie:self.movie];
+            
         } completionBlock:^{
             [self.progressHUD removeFromSuperview];
             self.progressHUD = nil;
         }];
 
     }
-    
-    
-    
     btn.selected = !btn.selected;
 }
 

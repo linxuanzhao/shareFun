@@ -11,7 +11,7 @@
 #import "ListModel.h"
 #import "UIImageView+WebCache.h"
 #import "XRCarouselView.h"
-#import "RadioDBManager.h"
+
 
 
 
@@ -267,11 +267,7 @@
 //下载
 - (IBAction)downLoadBtnAction:(id)sender
 {
-    if (sender) {
-        RadioDBManager *dbManager = [[RadioDBManager alloc]init];
-        [dbManager createTable];
-        
-    }
+
 }
 
 -(void)addBackground

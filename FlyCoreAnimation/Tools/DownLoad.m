@@ -29,7 +29,9 @@
         request.HTTPMethod = @"POST";
         request.HTTPBody = [postBody dataUsingEncoding:NSUTF8StringEncoding];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      
             resultBlock(data);
+            
         }];
         [task resume];
     

@@ -77,6 +77,11 @@
 		3F9047F21D655854004BAAEA /* PKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9047E81D655854004BAAEA /* PKModel.m */; settings = {ASSET_TAGS = (); }; };
 		3F9047F31D655854004BAAEA /* PKTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9047EB1D655854004BAAEA /* PKTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		3F9047F41D655854004BAAEA /* PKTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9047EC1D655854004BAAEA /* PKTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3F9047F71D655A56004BAAEA /* collection.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F9047F51D655A56004BAAEA /* collection.png */; settings = {ASSET_TAGS = (); }; };
+		3F9047F81D655A56004BAAEA /* haveCollection.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F9047F61D655A56004BAAEA /* haveCollection.png */; settings = {ASSET_TAGS = (); }; };
+		3F9047FB1D655E07004BAAEA /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9047FA1D655E07004BAAEA /* DBManager.m */; settings = {ASSET_TAGS = (); }; };
+		3F9047FE1D6598F4004BAAEA /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9047FD1D6598F4004BAAEA /* CollectViewController.m */; settings = {ASSET_TAGS = (); }; };
+		3F9048011D659B56004BAAEA /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9048001D659B56004BAAEA /* AboutViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3F9E07B31D5DD2C50001E6F0 /* 1111.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F9E07B01D5DD2C50001E6F0 /* 1111.jpg */; settings = {ASSET_TAGS = (); }; };
 		3F9E07B41D5DD2C50001E6F0 /* 2222.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3F9E07B11D5DD2C50001E6F0 /* 2222.JPG */; settings = {ASSET_TAGS = (); }; };
 		3F9E07B51D5DD2C50001E6F0 /* 3333.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3F9E07B21D5DD2C50001E6F0 /* 3333.JPG */; settings = {ASSET_TAGS = (); }; };
@@ -144,10 +149,8 @@
 		3FCAA2BB1D649D000073C5D5 /* RadioDownLoadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA2471D649D000073C5D5 /* RadioDownLoadModel.m */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2BC1D649D000073C5D5 /* RadioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA2491D649D000073C5D5 /* RadioModel.m */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2BD1D649D000073C5D5 /* ClearnCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA24C1D649D000073C5D5 /* ClearnCache.m */; settings = {ASSET_TAGS = (); }; };
-		3FCAA2BE1D649D000073C5D5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA24E1D649D000073C5D5 /* DBManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2BF1D649D000073C5D5 /* MyLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA2501D649D000073C5D5 /* MyLayout.m */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2C01D649D000073C5D5 /* NetWorkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA2521D649D000073C5D5 /* NetWorkRequestManager.m */; settings = {ASSET_TAGS = (); }; };
-		3FCAA2C11D649D000073C5D5 /* RadioDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA2541D649D000073C5D5 /* RadioDBManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2C21D649D000073C5D5 /* psb.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3FCAA2561D649D000073C5D5 /* psb.jpeg */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2C31D649D000073C5D5 /* XRCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAA2581D649D000073C5D5 /* XRCarouselView.m */; settings = {ASSET_TAGS = (); }; };
 		3FCAA2C41D649D000073C5D5 /* XRPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FCAA2591D649D000073C5D5 /* XRPlaceholder.png */; settings = {ASSET_TAGS = (); }; };
@@ -305,6 +308,14 @@
 		3F9047EA1D655854004BAAEA /* PKTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKTableViewCell.h; sourceTree = "<group>"; };
 		3F9047EB1D655854004BAAEA /* PKTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKTableViewCell.m; sourceTree = "<group>"; };
 		3F9047EC1D655854004BAAEA /* PKTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PKTableViewCell.xib; sourceTree = "<group>"; };
+		3F9047F51D655A56004BAAEA /* collection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collection.png; sourceTree = "<group>"; };
+		3F9047F61D655A56004BAAEA /* haveCollection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = haveCollection.png; sourceTree = "<group>"; };
+		3F9047F91D655E07004BAAEA /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		3F9047FA1D655E07004BAAEA /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		3F9047FC1D6598F4004BAAEA /* CollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectViewController.h; sourceTree = "<group>"; };
+		3F9047FD1D6598F4004BAAEA /* CollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectViewController.m; sourceTree = "<group>"; };
+		3F9047FF1D659B56004BAAEA /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		3F9048001D659B56004BAAEA /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		3F9E07B01D5DD2C50001E6F0 /* 1111.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1111.jpg; sourceTree = "<group>"; };
 		3F9E07B11D5DD2C50001E6F0 /* 2222.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2222.JPG; sourceTree = "<group>"; };
 		3F9E07B21D5DD2C50001E6F0 /* 3333.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3333.JPG; sourceTree = "<group>"; };
@@ -403,14 +414,10 @@
 		3FCAA2491D649D000073C5D5 /* RadioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioModel.m; sourceTree = "<group>"; };
 		3FCAA24B1D649D000073C5D5 /* ClearnCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearnCache.h; sourceTree = "<group>"; };
 		3FCAA24C1D649D000073C5D5 /* ClearnCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearnCache.m; sourceTree = "<group>"; };
-		3FCAA24D1D649D000073C5D5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
-		3FCAA24E1D649D000073C5D5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3FCAA24F1D649D000073C5D5 /* MyLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLayout.h; sourceTree = "<group>"; };
 		3FCAA2501D649D000073C5D5 /* MyLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLayout.m; sourceTree = "<group>"; };
 		3FCAA2511D649D000073C5D5 /* NetWorkRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkRequestManager.h; sourceTree = "<group>"; };
 		3FCAA2521D649D000073C5D5 /* NetWorkRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkRequestManager.m; sourceTree = "<group>"; };
-		3FCAA2531D649D000073C5D5 /* RadioDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioDBManager.h; sourceTree = "<group>"; };
-		3FCAA2541D649D000073C5D5 /* RadioDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioDBManager.m; sourceTree = "<group>"; };
 		3FCAA2561D649D000073C5D5 /* psb.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = psb.jpeg; sourceTree = "<group>"; };
 		3FCAA2571D649D000073C5D5 /* XRCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRCarouselView.h; sourceTree = "<group>"; };
 		3FCAA2581D649D000073C5D5 /* XRCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRCarouselView.m; sourceTree = "<group>"; };
@@ -680,14 +687,14 @@
 		3F9047BB1D6557A1004BAAEA /* MovieViewControll */ = {
 			isa = PBXGroup;
 			children = (
+				3F9047C21D6557A1004BAAEA /* MovieViewController.h */,
+				3F9047C31D6557A1004BAAEA /* MovieViewController.m */,
+				3F9047C01D6557A1004BAAEA /* MovieTableViewController.h */,
+				3F9047C11D6557A1004BAAEA /* MovieTableViewController.m */,
 				3F9047BC1D6557A1004BAAEA /* DetailMovieViewController.h */,
 				3F9047BD1D6557A1004BAAEA /* DetailMovieViewController.m */,
 				3F9047BE1D6557A1004BAAEA /* MoviePlayViewController.h */,
 				3F9047BF1D6557A1004BAAEA /* MoviePlayViewController.m */,
-				3F9047C01D6557A1004BAAEA /* MovieTableViewController.h */,
-				3F9047C11D6557A1004BAAEA /* MovieTableViewController.m */,
-				3F9047C21D6557A1004BAAEA /* MovieViewController.h */,
-				3F9047C31D6557A1004BAAEA /* MovieViewController.m */,
 				3F9047C41D6557A1004BAAEA /* PhotoViewController.h */,
 				3F9047C51D6557A1004BAAEA /* PhotoViewController.m */,
 			);
@@ -825,6 +832,10 @@
 				3FA4201B1D58B6C000BEA989 /* AppDelegate.m */,
 				3FA4201C1D58B6C000BEA989 /* ViewController.h */,
 				3FA4201D1D58B6C000BEA989 /* ViewController.m */,
+				3F9047FF1D659B56004BAAEA /* AboutViewController.h */,
+				3F9048001D659B56004BAAEA /* AboutViewController.m */,
+				3F9047FC1D6598F4004BAAEA /* CollectViewController.h */,
+				3F9047FD1D6598F4004BAAEA /* CollectViewController.m */,
 			);
 			path = RootViewController;
 			sourceTree = "<group>";
@@ -832,6 +843,8 @@
 		3FA420541D58B74200BEA989 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				3F9047F51D655A56004BAAEA /* collection.png */,
+				3F9047F61D655A56004BAAEA /* haveCollection.png */,
 				3F22D7631D596A1800820C61 /* Images */,
 				3FBC69581D6304820032F54B /* movie.png */,
 				3FA420551D58B74200BEA989 /* back.png */,
@@ -860,6 +873,8 @@
 				3FA4207E1D58BA0A00BEA989 /* YZLAVManager.m */,
 				3FA420801D58BA7500BEA989 /* LXZAVManager.h */,
 				3FA420811D58BA7600BEA989 /* LXZAVManager.m */,
+				3F9047F91D655E07004BAAEA /* DBManager.h */,
+				3F9047FA1D655E07004BAAEA /* DBManager.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1026,14 +1041,10 @@
 			children = (
 				3FCAA24B1D649D000073C5D5 /* ClearnCache.h */,
 				3FCAA24C1D649D000073C5D5 /* ClearnCache.m */,
-				3FCAA24D1D649D000073C5D5 /* DBManager.h */,
-				3FCAA24E1D649D000073C5D5 /* DBManager.m */,
 				3FCAA24F1D649D000073C5D5 /* MyLayout.h */,
 				3FCAA2501D649D000073C5D5 /* MyLayout.m */,
 				3FCAA2511D649D000073C5D5 /* NetWorkRequestManager.h */,
 				3FCAA2521D649D000073C5D5 /* NetWorkRequestManager.m */,
-				3FCAA2531D649D000073C5D5 /* RadioDBManager.h */,
-				3FCAA2541D649D000073C5D5 /* RadioDBManager.m */,
 				3FCAA2551D649D000073C5D5 /* XRCarouselView */,
 			);
 			path = Tools;
@@ -1363,12 +1374,14 @@
 				3F22D79E1D596A1800820C61 /* Unknown-6.png in Resources */,
 				3FA420691D58B74300BEA989 /* ic_left - circle.png in Resources */,
 				3FCAA2A41D649D000073C5D5 /* CompositePlayViewController.xib in Resources */,
+				3F9047F81D655A56004BAAEA /* haveCollection.png in Resources */,
 				3F22D7841D596A1800820C61 /* 1.jpg in Resources */,
 				3F22D7871D596A1800820C61 /* 4.jpg in Resources */,
 				3F22D7991D596A1800820C61 /* time.png in Resources */,
 				3FA420621D58B74300BEA989 /* back.png in Resources */,
 				3F22D7911D596A1800820C61 /* c1.jpg in Resources */,
 				3F22D7931D596A1800820C61 /* ggg.JPG in Resources */,
+				3F9047F71D655A56004BAAEA /* collection.png in Resources */,
 				3F9E07B41D5DD2C50001E6F0 /* 2222.JPG in Resources */,
 				3FCAA2E61D649D000073C5D5 /* StoryTableViewCell.xib in Resources */,
 				3F22D79B1D596A1800820C61 /* Unknown-2.png in Resources */,
@@ -1476,6 +1489,7 @@
 				3FCAA2CF1D649D000073C5D5 /* NewsCell.m in Sources */,
 				3FCAA2A71D649D000073C5D5 /* CompositeModel.m in Sources */,
 				3FCAA2BA1D649D000073C5D5 /* ListModel.m in Sources */,
+				3F9047FE1D6598F4004BAAEA /* CollectViewController.m in Sources */,
 				3FCAA2C01D649D000073C5D5 /* NetWorkRequestManager.m in Sources */,
 				3FCAA2AA1D649D000073C5D5 /* CompositeListCell.m in Sources */,
 				3FCAA2DC1D649D000073C5D5 /* RadioViewController.m in Sources */,
@@ -1492,7 +1506,6 @@
 				3FCAA2BD1D649D000073C5D5 /* ClearnCache.m in Sources */,
 				3FCAA2E51D649D000073C5D5 /* StoryTableViewCell.m in Sources */,
 				3FCAA2BF1D649D000073C5D5 /* MyLayout.m in Sources */,
-				3FCAA2C11D649D000073C5D5 /* RadioDBManager.m in Sources */,
 				3FCAA2AD1D649D000073C5D5 /* LiteraryPlayViewController.m in Sources */,
 				3F9047D71D6557A1004BAAEA /* MovieCell.m in Sources */,
 				3F9047F31D655854004BAAEA /* PKTableViewCell.m in Sources */,
@@ -1514,6 +1527,7 @@
 				3FCAA2DE1D649D000073C5D5 /* StoryPlayViewController.m in Sources */,
 				3FCAA2E01D649D000073C5D5 /* StoryViewController.m in Sources */,
 				3FCAA2C91D649D000073C5D5 /* NewsDetailViewController.m in Sources */,
+				3F9048011D659B56004BAAEA /* AboutViewController.m in Sources */,
 				3F9047D01D6557A1004BAAEA /* MovieAnimation.m in Sources */,
 				3FA420381D58B6C000BEA989 /* XFShareViewController.m in Sources */,
 				3F9047ED1D655854004BAAEA /* PianKeViewController.m in Sources */,
@@ -1544,11 +1558,11 @@
 				3F9047D21D6557A1004BAAEA /* DetailMovieViewController.m in Sources */,
 				3FEE7E821D60421300740438 /* DBSphereView.m in Sources */,
 				3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */,
+				3F9047FB1D655E07004BAAEA /* DBManager.m in Sources */,
 				3F9047D31D6557A1004BAAEA /* MoviePlayViewController.m in Sources */,
 				3FA420401D58B6C000BEA989 /* main.m in Sources */,
 				3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */,
 				3FCAA2B11D649D000073C5D5 /* LiteraryModel.m in Sources */,
-				3FCAA2BE1D649D000073C5D5 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

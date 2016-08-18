@@ -295,6 +295,7 @@
     detailMovieVC.logo520692 = cell.movie.logo520692;
     detailMovieVC.name = cell.movie.name;
     detailMovieVC.releaseDate = cell.movie.releaseDate;
+    detailMovieVC.movie = cell.movie;
     
     [self.navigationController pushViewController:detailMovieVC animated:YES];
 }

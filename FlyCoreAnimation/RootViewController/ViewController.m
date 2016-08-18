@@ -12,7 +12,7 @@
 #import "MovieViewController.h"
 #import "RadioViewController.h"
 #import "MovieTableViewController.h"
-//#import "RadioViewController.h"
+#import "AboutViewController.h"
 
 #define marginX 120
 #define marginY1 20
@@ -474,12 +474,8 @@
             }
                 break;
             case 103:{
-//                XFShareViewController *XFShare =     [[XFShareViewController alloc]init];
-//                XFShare.transitioningDelegate =self;
-//                XFShare.delegate = self;
-//                //    UINavigationController *naVc = [[UINavigationController alloc]];
-//                [self presentViewController:XFShare
-//                                   animated:YES completion:nil];
+                VC = [[AboutViewController alloc] init];
+                [self.navigationController pushViewController:VC animated:YES];
                 
                 
             }

@@ -35,19 +35,27 @@
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(backPhoto)];
-    
+//    NSMutableArray *arr = [NSMutableArray array];
+//    for (NSString *str in self.photoArray) {
+//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:str]]];
+//     //   NSNumber *hi = [[NSNumber alloc]initWithFloat:image.size.height];
+//        [arr addObject:[NSNumber numberWithFloat:image.size.height]];
+//    }
     
     self.cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, SCHI / 3 - 64, SCWI, SCHI / 3)imageURLStringsGroup:self.photoArray];
+    
+    self.cycleScrollView.backgroundColor=[UIColor blueColor];
     self.cycleScrollView.backgroundColor = [UIColor clearColor];
     self.cycleScrollView.autoScroll = NO;
     self.cycleScrollView.infiniteLoop = NO;
     self.cycleScrollView.firstIndex = self.index;
     self.cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
-    self.cycleScrollView.titleLabelBackgroundColor = [UIColor redColor];
     [self.view addSubview:self.cycleScrollView];
     
     
 }
+
+
 
 
 - (void)disapper
