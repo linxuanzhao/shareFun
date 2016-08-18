@@ -18,18 +18,18 @@
  *@param y 垂直方向的坐标值
  *@return 根据指定参数生成的BMKMapPoint对象
  */
-UIKIT_STATIC_INLINE BMKMapPoint BMKMapPointMake(double x, double y) {
-    return (BMKMapPoint){x, y};
-}
+//UIKIT_STATIC_INLINE BMKMapPoint BMKMapPointMake(double x, double y) {
+//    return (BMKMapPoint){x, y};
+//}
 /**
  *构造BMKMapSize对象
  *@param width 宽度
  *@param height 高度
  *@return 根据指定参数生成的BMKMapSize对象
  */
-UIKIT_STATIC_INLINE BMKMapSize BMKMapSizeMake(double width, double height) {
-    return (BMKMapSize){width, height};
-}
+//UIKIT_STATIC_INLINE BMKMapSize BMKMapSizeMake(double width, double height) {
+//    return (BMKMapSize){width, height};
+//}
 
 
 @interface RouteAnnotation : BMKPointAnnotation
@@ -93,7 +93,7 @@ UIKIT_STATIC_INLINE BMKMapSize BMKMapSizeMake(double width, double height) {
     
   //  self.mapManager = [[BMKMapManager alloc]init];
     self.title = @"XF";
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pop)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(300, 20, 50, 50);
@@ -244,6 +244,7 @@ UIKIT_STATIC_INLINE BMKMapSize BMKMapSizeMake(double width, double height) {
     _detailSearcher.delegate = nil;
     _locService.delegate = nil;
     self.State = NO;
+    [self.mapView removeFromSuperview];
 }
 
 
@@ -376,7 +377,7 @@ UIKIT_STATIC_INLINE BMKMapSize BMKMapSizeMake(double width, double height) {
     if(errorCode == BMK_SEARCH_NO_ERROR){
         //在此处理正常结果
         self.detailUid = poiDetailResult.uid;
-        NSLog(@"%@",poiDetailResult.uid);
+       
     }
 }
 -(void)setAnnotation:(CLLocationCoordinate2D)pt name:(NSString *)name adress:(NSString *)adress{

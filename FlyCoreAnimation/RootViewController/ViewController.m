@@ -11,7 +11,7 @@
 #import "XFShareViewController.h"
 #import "MovieViewController.h"
 #import "RadioViewController.h"
-
+#import "MovieTableViewController.h"
 #define marginX 120
 #define marginY1 20
 #define marginY2 40

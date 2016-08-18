@@ -19,7 +19,10 @@
     {
         NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             // 通过block将请求到的数据传到外面
-            resultBlock(data);
+            if (data) {
+                 resultBlock(data);
+            }
+           
         }];
         [task resume];
     }

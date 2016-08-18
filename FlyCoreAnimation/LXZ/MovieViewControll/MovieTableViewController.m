@@ -40,7 +40,7 @@
     [self createSegmentedControl];
     [self createMJRefresh];
     [self createPreMJRefresh];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

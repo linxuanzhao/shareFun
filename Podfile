@@ -8,4 +8,5 @@ target 'FlyCoreAnimation’ do
   pod 'MJRefresh', '~> 3.1.10’
   pod 'SDCycleScrollView', '~> 1.65'
   pod 'MBProgressHUD', '~> 0.9.2'
+  pod ‘AFNetworking’, '~> 2.0’
 end
