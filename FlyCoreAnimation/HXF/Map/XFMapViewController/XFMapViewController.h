@@ -16,7 +16,6 @@
 @end
 
 @interface XFMapViewController : UIViewController
-
 @property(nonatomic,strong)NSString  *searchBarText;
 @property(nonatomic,assign)int  raidu;
 

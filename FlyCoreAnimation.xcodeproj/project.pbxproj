@@ -96,7 +96,7 @@
 		3F9E07C21D5DEC270001E6F0 /* volume1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F9E07C11D5DEC270001E6F0 /* volume1.png */; settings = {ASSET_TAGS = (); }; };
 		3F9E07C41D5DEC2B0001E6F0 /* volume2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F9E07C31D5DEC2B0001E6F0 /* volume2.png */; settings = {ASSET_TAGS = (); }; };
 		3FA41FF81D58A60800BEA989 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FA41FF71D58A60800BEA989 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		3FA420371D58B6C000BEA989 /* XFMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3FA41FFD1D58B6C000BEA989 /* XFMapViewController.mm */; settings = {ASSET_TAGS = (); }; };
+		3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA41FFD1D58B6C000BEA989 /* XFMapViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420381D58B6C000BEA989 /* XFShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420011D58B6C000BEA989 /* XFShareViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420391D58B6C000BEA989 /* XFShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA420021D58B6C000BEA989 /* XFShareViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		3FA4203A1D58B6C000BEA989 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420061D58B6C000BEA989 /* Movie.m */; settings = {ASSET_TAGS = (); }; };
@@ -311,7 +311,7 @@
 		3F9E07C31D5DEC2B0001E6F0 /* volume2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume2.png; sourceTree = "<group>"; };
 		3FA41FF71D58A60800BEA989 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FA41FFC1D58B6C000BEA989 /* XFMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFMapViewController.h; sourceTree = "<group>"; };
-		3FA41FFD1D58B6C000BEA989 /* XFMapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XFMapViewController.mm; sourceTree = "<group>"; };
+		3FA41FFD1D58B6C000BEA989 /* XFMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFMapViewController.m; sourceTree = "<group>"; };
 		3FA420001D58B6C000BEA989 /* XFShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFShareViewController.h; sourceTree = "<group>"; };
 		3FA420011D58B6C000BEA989 /* XFShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFShareViewController.m; sourceTree = "<group>"; };
 		3FA420021D58B6C000BEA989 /* XFShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XFShareViewController.xib; sourceTree = "<group>"; };
@@ -709,7 +709,7 @@
 			isa = PBXGroup;
 			children = (
 				3FA41FFC1D58B6C000BEA989 /* XFMapViewController.h */,
-				3FA41FFD1D58B6C000BEA989 /* XFMapViewController.mm */,
+				3FA41FFD1D58B6C000BEA989 /* XFMapViewController.m */,
 			);
 			path = XFMapViewController;
 			sourceTree = "<group>";
@@ -1329,7 +1329,7 @@
 				3F22D7401D5968AE00820C61 /* NewsPlayViewController.m in Sources */,
 				3FA420401D58B6C000BEA989 /* main.m in Sources */,
 				3F7EFCF01D5C600600651AB7 /* CompositeViewController.m in Sources */,
-				3FA420371D58B6C000BEA989 /* XFMapViewController.mm in Sources */,
+				3FA420371D58B6C000BEA989 /* XFMapViewController.m in Sources */,
 				3F7EFD021D5C686000651AB7 /* CompositeListCell.m in Sources */,
 				3F7EFCD51D5C25DA00651AB7 /* LiteraryListViewController.m in Sources */,
 				3F7EFCCC1D5C188B00651AB7 /* LiteraryModel.m in Sources */,
@@ -1470,7 +1470,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jaff-h.ShareFun";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1487,7 +1487,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jaff-h.ShareFun";
 				PRODUCT_NAME = "$(TARGET_NAME)";

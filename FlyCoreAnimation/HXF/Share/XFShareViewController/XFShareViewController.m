@@ -51,7 +51,7 @@
 
 -(NSMutableArray *)strArr{
     if (!_strArr) {
-        _strArr = [NSMutableArray arrayWithObjects:@"酒店",@"影院",@"小吃",@"蛋糕店",@"KTV",@"美食",@"美容",@"酒吧",@"手机店",@"公交站",@"医院",@"宾馆",@"网吧",@"卫生间",@"房子",@"停车场",@"银行",@"影城",@"网咖",@"地铁站",nil];
+        _strArr = [NSMutableArray arrayWithObjects:@"酒店",@"电影院",@"小吃",@"蛋糕店",@"KTV",@"美食",@"美容",@"酒吧",@"手机店",@"公交站",@"医院",@"宾馆",@"网吧",@"卫生间",@"房子",@"停车场",@"银行",@"网咖",@"地铁站",nil];
     }
     return _strArr;
 }
