@@ -13,6 +13,7 @@
 #import "MovieDetailOneCell.h"
 #import "MovieDetailTwoCell.h"
 #import "PhotoViewController.h"
+#import "MBProgressHUD.h"
 
 @interface DetailMovieViewController () <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -34,6 +35,8 @@
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSMutableArray *photoArray;
+@property (nonatomic, strong) UIButton *collectBtn;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @property (nonatomic, strong) MovieAnimation *animation;
 
@@ -223,9 +226,59 @@
     self.durationLabel.font = [UIFont systemFontOfSize:14];
     self.durationLabel.textAlignment = NSTextAlignmentLeft;
     [self.headView addSubview:self.durationLabel];
-
+    
+    // collectBtn
+    self.collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.collectBtn.frame = CGRectMake(SCWI - 10 - 32, 50, 32, 32);
+    [self.collectBtn addTarget:self action:@selector(collect:) forControlEvents:UIControlEventTouchUpInside];
+    [self.collectBtn setImage:[UIImage imageNamed:@"collection.png"] forState:UIControlStateNormal];
+    [self.collectBtn setImage:[UIImage imageNamed:@"haveCollection.png"] forState:UIControlStateSelected];
+    [self.topView addSubview:self.collectBtn];
+    
+   
+    
+    
+    
 }
 
+- (void)collect:(UIButton *)btn
+{
+   
+    // MBProgressHUD
+    if (!btn.selected) {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:self.progressHUD];
+        self.progressHUD.labelText = @"已收藏";
+        self.progressHUD.mode = MBProgressHUDModeText;
+        self.progressHUD.minShowTime = 1;
+        [self.progressHUD showAnimated:YES whileExecutingBlock:^{
+
+        } completionBlock:^{
+            [self.progressHUD removeFromSuperview];
+            self.progressHUD = nil;
+        }];
+    }
+    else
+    {
+        self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:self.progressHUD];
+        self.progressHUD.labelText = @"取消收藏";
+        self.progressHUD.mode = MBProgressHUDModeText;
+        self.progressHUD.minShowTime = 1;
+        [self.progressHUD showAnimated:YES whileExecutingBlock:^{
+            
+
+        } completionBlock:^{
+            [self.progressHUD removeFromSuperview];
+            self.progressHUD = nil;
+        }];
+
+    }
+    
+    
+    
+    btn.selected = !btn.selected;
+}
 
 
 - (void)presentMovie
@@ -311,6 +364,8 @@
     return nil;
     
 }
+
+
 
 - (NSMutableArray *)photoArray
 {

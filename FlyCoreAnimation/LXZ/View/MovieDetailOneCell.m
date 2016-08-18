@@ -8,6 +8,7 @@
 
 #import "MovieDetailOneCell.h"
 
+
 @implementation MovieDetailOneCell
 
 

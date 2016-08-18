@@ -99,10 +99,12 @@
 
 - (void)movieDidFinish
 {
-    [self removeObserver];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.timer invalidate];
-    self.timer = nil;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self removeObserver];
+        [self.timer invalidate];
+        self.timer = nil;
+    }];
+   
 }
 
 
@@ -112,12 +114,6 @@
     [self disapper];
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
-}
 
 - (void)chanageTime
 {
@@ -141,6 +137,7 @@
     {
         [self.activityView startAnimating];
     }
+    
     
 }
 
@@ -234,9 +231,13 @@
 
 - (void)backToDetail
 {
-    [self removeObserver];
+    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.avManager.player pause];
+        [self removeObserver];
+
+        [self.timer invalidate];
+        self.timer = nil;
     }];
     
     
@@ -294,8 +295,7 @@
 }
 
 - (void)removeObserver
-{
-    [self.avManager.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
+{   [self.avManager.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
     [self.avManager.playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
 }
 
