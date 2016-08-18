@@ -1,4 +1,25 @@
 PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
   - BaiduMapKit (3.0.0)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
@@ -12,6 +33,7 @@ PODS:
   - SDWebImage/Core (3.8.1)
 
 DEPENDENCIES:
+  - AFNetworking (~> 2.0)
   - BaiduMapKit (~> 3.0.0)
   - FMDB (~> 2.6.2)
   - MBProgressHUD (~> 0.9.2)
@@ -20,6 +42,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.8.1)
 
 SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BaiduMapKit: de2a726d5296d6b2dc0e974b683af73153608dcd
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
@@ -27,6 +50,6 @@ SPEC CHECKSUMS:
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
-PODFILE CHECKSUM: 999e5dfc1418fcad1bcf4fe9e92f4c079cd64f84
+PODFILE CHECKSUM: 69afaf2a8dcea79e412e349099195ca3f5fb6569
 
 COCOAPODS: 1.0.1

@@ -12,6 +12,47 @@
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import "ResultModel.h"
 #import "XFAnnotation.h"
+/**
+ *构造BMKMapPoint对象
+ *@param x 水平方向的坐标值
+ *@param y 垂直方向的坐标值
+ *@return 根据指定参数生成的BMKMapPoint对象
+ */
+//UIKIT_STATIC_INLINE BMKMapPoint BMKMapPointMake(double x, double y) {
+//    return (BMKMapPoint){x, y};
+//}
+/**
+ *构造BMKMapSize对象
+ *@param width 宽度
+ *@param height 高度
+ *@return 根据指定参数生成的BMKMapSize对象
+ */
+//UIKIT_STATIC_INLINE BMKMapSize BMKMapSizeMake(double width, double height) {
+//    return (BMKMapSize){width, height};
+//}
+
+
+@interface RouteAnnotation : BMKPointAnnotation
+{
+    int _type; ///<0:起点 1：终点 2：公交 3：地铁 4:驾乘 5:途经点
+    int _degree;
+}
+////地理坐标点，用直角地理坐标表示
+//typedef struct {
+//    double x;	///< 横坐标
+//    double y;	///< 纵坐标
+//} BMKMapPoint;
+
+@property (nonatomic) int type;
+@property (nonatomic) int degree;
+@end
+
+@implementation RouteAnnotation
+
+@synthesize type = _type;
+@synthesize degree = _degree;
+@end
+
 
 @interface XFMapViewController ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKPoiSearchDelegate,BMKRouteSearchDelegate,BMKRouteSearchDelegate>
 @property(nonatomic,strong)BMKMapView  *mapView;
@@ -23,7 +64,7 @@
 @property(nonatomic,strong)BMKRouteSearch  *routeSearch;
 @property(nonatomic,strong)BMKPointAnnotation  *pointAnnotation;
 @property(nonatomic,strong)BMKAnnotationView  *endPointAnnotation;
-
+@property(nonatomic,strong)NSMutableArray  *walkArr;
 
 @property(nonatomic,strong)NSString  *detailUid;
 @property(nonatomic,strong)NSMutableArray  *resultList;
@@ -52,17 +93,17 @@
     
   //  self.mapManager = [[BMKMapManager alloc]init];
     self.title = @"XF";
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pop)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(300, 20, 50, 50);
     [btn setImage:[UIImage imageNamed:@"ic_right - circle - o.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
  
-    self.seg = [[UISegmentedControl alloc]initWithItems:[NSArray arrayWithObjects:@"步行",@"公交",@"驾车", nil]];
+    self.seg = [[UISegmentedControl alloc]initWithItems:[NSArray arrayWithObjects:@"普通",@"卫星", nil]];
     [self.seg addTarget:self action:@selector(segchange) forControlEvents:UIControlEventValueChanged];
         self.seg.selectedSegmentIndex = 0;
-    self.seg.frame = CGRectMake(0, 0, 200, 30);
+    self.seg.frame = CGRectMake(0, 0, 100, 30);
     self.seg.layer.position = CGPointMake(SCWI/2, 40);
     
     
@@ -156,12 +197,10 @@
     _searcher.delegate = self;
     //发起检索
     BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
-//    if (!self.raidu) {
-        option.radius = 2000;
-//    }
-    
-    option.pageIndex = 1;
+        option.radius = 1000;
+    option.pageIndex = 2;
   option.pageCapacity = 10;
+    option.sortType = BMK_POI_SORT_BY_DISTANCE;
      option.location =self.locService.userLocation.location.coordinate;
     option.location = self.startPs;
     NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
@@ -205,6 +244,7 @@
     _detailSearcher.delegate = nil;
     _locService.delegate = nil;
     self.State = NO;
+    [self.mapView removeFromSuperview];
 }
 
 
@@ -219,12 +259,11 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
    
-    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+   // NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     //    _mapView.centerCoordinate = userLocation.location.coordinate;
     [_mapView updateLocationData:userLocation];
     self.startPs = userLocation.location.coordinate;
     //    static CLLocationCoordinate2D staticLocation = self.startPs;
-    
     if (CLLocationCoordinate2DIsValid(self.startPs) && self.State == YES) {
         self.State = NO;
 #pragma mark - POI
@@ -234,13 +273,25 @@
         //发起检索
         BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
         
-        option.pageIndex = 1;
+        option.pageIndex = 0;
         option.pageCapacity = 10;
-        option.radius = 5000;
+        
+        option.sortType = 0;
         // option.location =self.locService.userLocation.location.coordinate;
         option.location = self.startPs;
         NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
-        option.keyword = self.searchBarText;
+        NSLog(@"%@",self.searchBarText);
+        if ([self.searchBarText containsString:@"?"]) {
+            NSArray *arr = [self.searchBarText componentsSeparatedByString:@"?"];
+            option.keyword = arr.firstObject;
+            option.radius = (int)arr.lastObject;
+            NSLog(@"%@,%@",arr.firstObject,arr.lastObject);
+        }else{
+            option.keyword = self.searchBarText;
+            option.radius = 2000;
+
+        }
+       
         
         BOOL flag = [_searcher poiSearchNearBy:option];
         
@@ -326,7 +377,7 @@
     if(errorCode == BMK_SEARCH_NO_ERROR){
         //在此处理正常结果
         self.detailUid = poiDetailResult.uid;
-        NSLog(@"%@",poiDetailResult.uid);
+       
     }
 }
 -(void)setAnnotation:(CLLocationCoordinate2D)pt name:(NSString *)name adress:(NSString *)adress{
@@ -345,11 +396,6 @@
         newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
         self.pointAnnotation = annotation;
-        
-        //用于自定义弹出视图
-        //        XFAnnotation *b2 = [[XFAnnotation alloc]init];
-        //        BMKActionPaopaoView *a = [[BMKActionPaopaoView alloc]initWithCustomView:b2];
-        //        newAnnotationView.paopaoView = a;
         return newAnnotationView;
     }
     return nil;
@@ -363,96 +409,23 @@
     self.routeSearch.delegate = self;
 
     self.endPointAnnotation = view;
-    [self segchange];
+  //  [self segchange];
    
     
 }
 -(void)segchange{
-   /*
-    //发起检索
-    BMKPlanNode* start = [[BMKPlanNode alloc]init] ;
-    start.pt = self.startPs;
-    NSLog(@"%f,%f",start.pt.longitude,start.pt.latitude);
-    BMKPlanNode* end = [[BMKPlanNode alloc]init] ;
-    end.pt = self.pointAnnotation.coordinate;
-    NSLog(@"%f,%f",end.pt.longitude,end.pt.latitude);
-    
-    //BMKBaseRoutePlanOption *option = [[BMKBaseRoutePlanOption alloc]init];
-    */
-   
-    
-    
     switch (self.seg.selectedSegmentIndex) {
-        case 0:{
-           
-            BMKWalkingRoutePlanOption *option =  [[BMKWalkingRoutePlanOption alloc]init];
-            option.from = [[BMKPlanNode alloc]init];
-            option.from.pt = self.startPs;
-            option.to = [[BMKPlanNode alloc]init];
-            option.to.pt = CLLocationCoordinate2DMake(self.pointAnnotation.coordinate.latitude, self.pointAnnotation.coordinate.longitude);
-            [self.routeSearch walkingSearch:option];
-             
-//            [_mapView setMapType:BMKMapTypeStandard];
-        } break;
-        case 1:{
-           
-          BMKTransitRoutePlanOption  *option = [[BMKTransitRoutePlanOption alloc]init];
-            option.from = [[BMKPlanNode alloc]init];
-            option.from.pt = self.startPs ;
-            option.to = [[BMKPlanNode alloc]init];
-            option.to.pt = self.pointAnnotation.coordinate;
-            [self.routeSearch transitSearch:option];
-//            [_mapView setMapType:BMKMapTypeSatellite];
-        } break;
-        case 2:{
+        case 0:
+            [_mapView setMapType:BMKMapTypeStandard];
+            break;
+            case 1:
+            [_mapView setMapType:BMKMapTypeSatellite];
+            break;
             
-            BMKDrivingRoutePlanOption  *option = [[BMKDrivingRoutePlanOption alloc]init];
-            option.from = [[BMKPlanNode alloc]init];
-            option.from.pt = self.startPs ;
-            option.to = [[BMKPlanNode alloc]init];
-            option.to.pt = self.pointAnnotation.coordinate;
-            [self.routeSearch drivingSearch:option];
-            //            [_mapView setMapType:BMKMapTypeSatellite];
-        } break;
-
-    
         default:
             break;
     }
-    
-    
-    
 }
 
-- (void)onGetTransitRouteResult:(BMKRouteSearch*)searcher result:(BMKTransitRouteResult*)result errorCode:(BMKSearchErrorCode)error{
-    if (error == BMK_SEARCH_NO_ERROR) {
-        //在此处理正常结果
-        
-        for (BMKTransitRouteLine *line in result.routes) {
-            //            ///路线长度 单位： 米
-            //            @property (nonatomic) int distance;
-            //            ///路线耗时 单位： 秒
-            //            @property (nonatomic, strong) BMKTime* duration;
-            //            ///路线起点信息
-            //            @property (nonatomic, strong) BMKRouteNode* starting;
-            //            ///路线终点信息
-            //            @property (nonatomic, strong) BMKRouteNode* terminal;
-            NSString *routeDescription = [NSString stringWithFormat:@"路程长度: %d\n路线耗时: %d小时%d分%d秒", line.distance, line.duration.hours, line.duration.minutes, line.duration.seconds];
-            NSLog(@"%@", routeDescription);
-        }
-    }
-    else if (error == BMK_SEARCH_AMBIGUOUS_ROURE_ADDR){
-        //当路线起终点有歧义时通，获取建议检索起终点
-        //result.routeAddrResult
-    }
-    else {
-        NSLog(@"抱歉，未找到结果");
-    }
-}
--(void)onGetWalkingRouteResult:(BMKRouteSearch *)searcher result:(BMKWalkingRouteResult *)result errorCode:(BMKSearchErrorCode)error{
-    NSLog(@"walk");
-}
--(void)onGetDrivingRouteResult:(BMKRouteSearch *)searcher result:(BMKDrivingRouteResult *)result errorCode:(BMKSearchErrorCode)error{
-    NSLog(@"drive");
-}
+
 @end

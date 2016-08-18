@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,17 +52,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>362DC54D2C8333C0CB5E9D77479297D7</key>
+		<key>4878C70B21CA37D7CB8A476BF986741B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>520C28C435879CEA8E82C563662151E8</key>
+		<key>A17462710A19CF5280ED8E633D39EA6C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>823186126896AF2E115D9E50C4CE8BE6</key>
+		<key>C2DC0EDDE15F2A915BA8990A5B1988C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC3DDB16C853553F0CECF8C80BE86A9F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
