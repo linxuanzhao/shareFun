@@ -10,6 +10,7 @@
 #import "YZLAVManager.h"
 #import "XRCarouselView.h"
 #import "NewsDetailModel.h"
+#import "DBManager.h"
 
 @interface NewsPlayViewController ()<XRCarouselViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *curTime;
@@ -24,7 +25,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlay;
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
-@property (weak, nonatomic) IBOutlet UIImageView *centerImageView;
+@property (nonatomic, strong) DBManager *manager;
 
 
 @end
@@ -64,7 +65,7 @@
     [self changeTitleView];
     [self changeSliderImage];
     [self addBackground];
-    //[self imageScrollView];
+    self.manager = [DBManager shareInstance];
     
     
     self.avManager = [YZLAVManager shareInstance];
@@ -72,22 +73,38 @@
     NSMutableArray *arr =[NSMutableArray array];
     
     for (NewsDetailModel *model in self.urls) {
-        [arr addObject:model.playUrl32];
+        [arr addObject:model.playUrl64];
     }
     [self.avManager setPlayList:arr flag:self.number];
     [self.avManager.avPlay play];
 
-    
-
-
-    
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
-  
+    
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
+
 }
+
+-(void)rightBtnAction:(id)sender
+{
+    if (sender) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addRadio:self.collectModel];
+        
+    }
+    else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deleteRadio:self.collectModel];
+    }
+}
+
 - (IBAction)changeVolumeAction:(id)sender
 {
     self.avManager.avPlay.volume = self.volumeSlider.value;
@@ -99,14 +116,7 @@
 }
 
 
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    self.navigationController.navigationBar.hidden = NO;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
-//    
-//}
+
 
 -(void)changeTitleView
 {
@@ -177,15 +187,7 @@
     }
     [self.avManager next];
 }
-//下载
-- (IBAction)downLoadBtnAction:(id)sender {
-}
-//分享
-- (IBAction)shareBtnAction:(id)sender {
-}
-//收藏
-- (IBAction)collectBtnAction:(id)sender {
-}
+
 - (IBAction)chanageProgress:(id)sender {
     [self.avManager.avPlay pause];
     [self.avManager playProgress:self.slider.value];

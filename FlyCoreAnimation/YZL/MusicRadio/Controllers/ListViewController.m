@@ -12,6 +12,9 @@
 #import "DownLoad.h"
 #import "UIImageView+WebCache.h"
 #import "RadioPlayViewController.h"
+#import "CompositeListModel.h"
+#import "DBManager.h"
+
 
 
 @interface ListViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -22,6 +25,8 @@
 @property (nonatomic, strong) NSMutableArray *refreshArray;
 @property (nonatomic, strong) NSMutableSet *mSet;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) DBManager *manager;
+@property (nonatomic, strong) CompositeListModel *listModel;
 
 @end
 
@@ -123,7 +128,8 @@
     self.title = self.Name;
     [self requestData];
     [self createTableView];
-    self.view.backgroundColor = [UIColor clearColor];
+    self.manager = [DBManager shareInstance];
+//    self.view.backgroundColor = [UIColor clearColor];
     
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         _num += 1;
@@ -148,6 +154,7 @@
 {
     ListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
     ListModel *model = self.dataArray[indexPath.row];
+    cell.model  = (CompositeListModel *)model;
     //cell.imageBB.layer.cornerRadius = 30;
     //cell.imageBB.layer.masksToBounds = YES;
     [cell.imageBB sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
@@ -160,26 +167,22 @@
     cell.beijingImagevIew.layer.masksToBounds = YES;
     cell.beijingImagevIew.layer.borderColor = [[UIColor grayColor]CGColor];
     cell.beijingImagevIew.layer.borderWidth = 1;
-    
     cell.backgroundColor  = [UIColor clearColor];
-    
     float num = [model.duration floatValue]/60;
     NSString *str = [NSString stringWithFormat:@"%.2f",num];
-    
-//    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 375, 100)];
-//    view1.backgroundColor = [UIColor clearColor];
-//    cell.selectedBackgroundView = view1;
-    
     cell.timeLable.text = str;
     return cell;
 }
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     RadioPlayViewController *playVc = [[RadioPlayViewController alloc]init];
     ListModel *model = self.dataArray[indexPath.row];
     playVc.urls = self.dataArray;
     playVc.number = indexPath.row;
+    playVc.collectModel = cell.model;
     playVc.name = model.title;
     [self.navigationController pushViewController:playVc animated:YES];
     

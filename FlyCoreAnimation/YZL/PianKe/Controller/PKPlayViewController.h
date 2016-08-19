@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PKListModel.h"
+
 
 @interface PKPlayViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *pkUrls;
 @property (nonatomic, assign) NSInteger indexPath;
 @property (nonatomic, strong) NSString *titleA;
+@property (nonatomic, strong) PKListModel *collectModel;
 
 @end

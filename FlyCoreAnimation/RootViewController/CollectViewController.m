@@ -11,17 +11,31 @@
 #import "MovieTableViewCell.h"
 #import "Movie.h"
 #import "DetailMovieViewController.h"
+#import "CompositeListModel.h"
+#import "CollectRadioPlayController.h"
+#import "PKListCell.h"
+
 
 @interface CollectViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *radioArray;
+@property (nonatomic, strong) NSMutableArray *newArray;
 
 
 @end
 
 @implementation CollectViewController
+
+-(NSMutableArray *)newArray
+{
+    if (_newArray == nil) {
+        _newArray = [[NSMutableArray alloc]init];
+    }
+    return _newArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +44,8 @@
     
     self.dbManager = [DBManager shareInstance];
     self.dataArray = [self.dbManager selectFromTable];
+    self.newArray = [self.dbManager selectFromPKRadio];
+
     
 }
 
@@ -40,6 +56,7 @@
     self.tableView.delegate = self;
     [self.tableView registerClass:[MovieTableViewCell class] forCellReuseIdentifier:@"movieCollect"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"radioCollect"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"PKListCell" bundle:nil] forCellReuseIdentifier:@"pkListCell"];
     [self.view addSubview:self.tableView];
 }
 
@@ -55,9 +72,10 @@
     if (section == 0) {
         return self.dataArray.count;
     }
-    else{
-        return 5;
+    if (section == 1) {
+        return self.newArray.count;
     }
+    return 0;
     
 }
 
@@ -69,12 +87,21 @@
         cell.movie = movie;
          return cell;
     }
-   
-    else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"radioCollect"];
+    if (indexPath.section == 1) {
+        PKListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pkListCell"];
+        PKListModel *model = self.newArray[indexPath.row];
+        [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.coverimg]];
+        cell.imageViewA.layer.borderWidth = 2;
+        cell.imageViewA.layer.borderColor = [[UIColor blackColor]CGColor];
+        cell.titleLable.text = model.title;
         return cell;
     }
+    return nil;
+   
+
         
+        
+    
         
     
    
@@ -98,7 +125,7 @@
         return 120;
     }
     else{
-        return 50;
+        return 80;
     }
 }
 
@@ -126,6 +153,13 @@
         detailMovieVC.movie = cell.movie;
         
         [self.navigationController pushViewController:detailMovieVC animated:YES];
+    }
+    if (indexPath.section == 1) {
+        CollectRadioPlayController *playVc = [[CollectRadioPlayController alloc]init];
+        playVc.collectArray = self.newArray;
+        playVc.indexPath = indexPath.row;
+        [self.navigationController pushViewController:playVc animated:YES];
+        
     }
     
     

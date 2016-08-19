@@ -11,14 +11,14 @@
 #import "ListModel.h"
 #import "UIImageView+WebCache.h"
 #import "XRCarouselView.h"
-
+#import "DBManager.h"
 
 
 
 
 @interface RadioPlayViewController ()<XRCarouselViewDelegate>
 @property (nonatomic, strong) YZLAVManager *avManager;
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
+
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
 
@@ -26,7 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *allTime;
 
-@property (weak, nonatomic) IBOutlet UIButton *DownLoadBtn;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *scImageView;
 
@@ -41,8 +41,8 @@
 @property (nonatomic, assign) BOOL isPlay;
 
 @property (weak, nonatomic) IBOutlet UISlider *VolumeSlider;
+@property (nonatomic, strong) DBManager *manager;
 
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 
 
@@ -53,7 +53,7 @@
 
 @implementation RadioPlayViewController
 
-
+/*
 -(void)changeImage
 {
     [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
@@ -69,12 +69,8 @@
     baseAnimation.removedOnCompletion = NO;
     [_imageV.layer addAnimation:baseAnimation forKey:@"rotate"];
     
-    
-    
-    
-    
-
 }
+ */
 
 -(void)imageScrollView
 {
@@ -109,7 +105,7 @@
     [self chanageSliderImage];
     [self addBackground];
     //[self imageScrollView];
-    [self changeImage];
+    self.manager = [DBManager shareInstance];
     
 
 
@@ -124,21 +120,38 @@
       NSLog(@"%ld",self.urls.count);
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     
-    self.progressView.tintColor = [UIColor blackColor];
+//    self.progressView.tintColor = [UIColor blackColor];
     [self.avManager.avPlay play];
 
     
     [self.avManager.playItem addObserver:self forKeyPath:@"loadedTimeRanges"  options:NSKeyValueObservingOptionNew context:nil];
 
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
  
-     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
-    
+
 }
 
+-(void)rightBtnAction:(id)sender
+{
+    if (sender) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addRadio:self.collectModel];
+        
+    }
+    else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deleteRadio:self.collectModel];
+    }
+
+    
+}
+/*
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
@@ -150,15 +163,11 @@
             float result = startSenconds + durationSeconds;
             CMTime duration = self.avManager.playItem.duration;
             float totalDuration = CMTimeGetSeconds(duration);
-            [self.progressView setProgress:result / totalDuration animated:NO];
+//            [self.progressView setProgress:result / totalDuration animated:NO];
         }
-        
-       
     }
-    
-  
 }
-
+*/
 -(void)changeItem
 {
     self.navigationController.navigationBar.hidden = YES;
@@ -243,7 +252,8 @@
     if (self.number == self.urls.count) {
         self.number = 0;
     }
-    [self.avManager next];}
+    [self.avManager next];
+}
 
 
 
@@ -258,16 +268,6 @@
 - (IBAction)changeVolumeBtnAction:(id)sender
 {
     self.avManager.avPlay.volume = self.VolumeSlider.value;
-}
-//收藏
-- (IBAction)repeatOneBtnAction:(id)sender
-{
-    
-}
-//下载
-- (IBAction)downLoadBtnAction:(id)sender
-{
-
 }
 
 -(void)addBackground

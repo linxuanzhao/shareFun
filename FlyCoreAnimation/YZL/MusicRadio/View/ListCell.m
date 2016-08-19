@@ -14,6 +14,13 @@
     // Initialization code
 }
 
+-(void)setModel:(CompositeListModel *)model
+{
+    if (_model != model) {
+        _model = model;
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

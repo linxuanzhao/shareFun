@@ -8,6 +8,7 @@
 
 #import "LiteraryPlayViewController.h"
 #import "LiteraryListModel.h"
+#import "DBManager.h"
 
 
 @interface LiteraryPlayViewController ()
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlay;
 @property (weak, nonatomic) IBOutlet UIButton *startAndStop;
+@property (nonatomic, strong) DBManager *manager;
 
 @end
 
@@ -39,23 +41,42 @@
     [self chanageSliderImage];
     [self changeTitleView];
     [self addBackground];
+    self.manager = [DBManager shareInstance];
     LiteraryListModel *model = self.literaryUrls[self.indexPath];
     [self.centerIMagevIew sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
     self.avManager = [YZLAVManager shareInstance];
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (LiteraryListModel *model in self.literaryUrls) {
-        [array addObject:model.playUrl32];
+        [array addObject:model.playUrl64];
     }
     [self.avManager setPlayList:array flag:self.indexPath];
     [self.avManager.avPlay play];
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTimeLable) userInfo:nil repeats:YES];
-    
-    
-    
-    
-    
- 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectBtnAction1:)]; 
 }
+
+-(void)collectBtnAction1:(id)sender
+
+{
+    if (sender) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addRadio:self.collectModel];
+        
+    }
+    else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deleteRadio:self.collectModel];
+    }
+}
+
+
+
 -(void)changeTitleView
 {
     self.view1 = [[UIView alloc]initWithFrame:CGRectMake(20, 100, 180, 50)];
@@ -91,14 +112,6 @@
     self.ProgressSlider.value = self.avManager.curuentTime;
 }
 
-
-
-- (IBAction)downLoadBtnAction:(id)sender {
-}
-- (IBAction)shareBtnAction:(id)sender {
-}
-- (IBAction)collectBtnAction:(id)sender {
-}
 - (IBAction)backBtnAction:(id)sender
 {
     self.indexPath --;
@@ -112,13 +125,13 @@
 {
     if (!self.isPlay) {
         [_timer setFireDate:[NSDate distantFuture]];
-        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
+        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
         [self.avManager.avPlay pause];
         self.isPlay = YES;
     }else
     {
         [_timer setFireDate:[NSDate distantPast]];
-        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
+        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
         [self.avManager.avPlay play];
         self.isPlay = NO;
     }

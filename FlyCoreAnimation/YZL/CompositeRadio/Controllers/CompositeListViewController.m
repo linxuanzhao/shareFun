@@ -11,6 +11,8 @@
 #import "CompositeListModel.h"
 #import "UIImageView+WebCache.h"
 #import "CompositePlayViewController.h"
+#import "DBManager.h"
+#import "CompositeListModel.h"
 
 @interface CompositeListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -18,6 +20,9 @@
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, strong) NSMutableArray *newArray;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, assign) MBProgressHUDMode *hudModel;
+@property (nonatomic, strong) DBManager *manager;
+
 @end
 
 @implementation CompositeListViewController
@@ -65,7 +70,6 @@
     NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album?albumId=%@&device=iPhone&pageId=%ld&pageSize=20&statPosition=%@",self.albumID,self.num + 1 ,self.statPosition];
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        //NSLog(@"%@",dic);
         NSArray *array = dic[@"data"][@"list"];
             for (NSDictionary *dic3 in array) {
             CompositeListModel *model = [[CompositeListModel alloc]init];
@@ -104,6 +108,8 @@
     [super viewDidLoad];
     [self requestListData];
     [self createTableView];
+    self.manager = [DBManager shareInstance];
+  
    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
        self.num += 1;
        [self refreshRequest];
@@ -127,9 +133,11 @@
 {
     CompositeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"compositeListCell"];
     CompositeListModel *model = self.listArray[indexPath.row];
-    
+    cell.PPmodel = model;
+   
     [cell.imageviewA sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
     cell.imageviewA.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.dayLable.text = model.likes.stringValue;
     cell.imageviewA.layer.borderWidth = 2;
     cell.titleLable.text = model.title;
     cell.countLable.text = model.duration.stringValue;
@@ -139,10 +147,15 @@
     cell.imageViewBBB.layer.cornerRadius = 10;
     cell.imageViewBBB.layer.masksToBounds = YES;
     cell.imageViewBBB.layer.borderWidth = 1;
+    cell.imageViewBBB.userInteractionEnabled = YES;
     cell.imageViewBBB.layer.borderColor = [[UIColor grayColor]CGColor];
- 
+    cell.imageViewBBB.userInteractionEnabled = YES;
+    
+    
     return cell;
 }
+
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,10 +163,12 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CompositeListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     CompositePlayViewController *playVc = [[CompositePlayViewController alloc]init];
     playVc.compositeUrls = self.listArray;
     playVc.indexPath  = indexPath.row;
-    
+    playVc.collectModel = cell.PPmodel;
+     
     [self.navigationController pushViewController:playVc animated:YES];
     
 }

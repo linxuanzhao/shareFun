@@ -133,6 +133,7 @@
 {
     PKTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pkCell"];
     PKListModel *model = self.dataArray[indexPath.row];
+    cell.model = model;
     cell.titleLable.text = model.title;
     [cell.ImageViewBBB sd_setImageWithURL:[NSURL URLWithString:model.coverimg]];
     cell.ImageViewBBB.layer.borderColor = [[UIColor whiteColor]CGColor];
@@ -143,9 +144,12 @@
     cell.ImageViewAAA.layer.borderColor = [[UIColor grayColor]CGColor];
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
+    cell.ImageViewAAA.userInteractionEnabled = YES;
     return cell;
     
 }
+
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -154,8 +158,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    PKTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     PKPlayViewController *playVc = [[PKPlayViewController alloc]init];
     PKListModel *model = self.dataArray[indexPath.row];
+    playVc.collectModel = cell.model;
     playVc.titleA = model.title;
     playVc.indexPath = indexPath.row;
     playVc.pkUrls = self.dataArray;

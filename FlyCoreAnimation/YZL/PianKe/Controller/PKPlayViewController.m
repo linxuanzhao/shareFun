@@ -8,22 +8,20 @@
 
 #import "PKPlayViewController.h"
 #import "PKListModel.h"
+#import "DBManager.h"
 
 @interface PKPlayViewController ()
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
-@property (weak, nonatomic) IBOutlet UIImageView *imageViewAA;
 @property (weak, nonatomic) IBOutlet UILabel *curLable;
 @property (weak, nonatomic) IBOutlet UILabel *resLable;
 @property (weak, nonatomic) IBOutlet UISlider *progressSlider;
 @property (weak, nonatomic) IBOutlet UIButton *startAndStop;
-
-
 @property (nonatomic, strong) YZLAVManager *avManager;
 @property (nonatomic, strong) UIView *view1;
 @property (nonatomic, strong) UILabel *marLabel;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlay;
-
+@property (nonatomic, strong) DBManager *manager;
 @end
 
 @implementation PKPlayViewController
@@ -77,15 +75,9 @@
     [self chanageSliderImage];
     [self changeTitleView];
     [self addBackground];
-   // [self resTimeLable];
+    self.manager = [DBManager shareInstance];
     PKListModel *model = self.pkUrls[self.indexPath];
-    [self.imageViewAA sd_setImageWithURL:[NSURL URLWithString:model.coverimg]];
-    
     self.avManager = [YZLAVManager shareInstance];
-    
-
-
-    
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (PKListModel *model in self.pkUrls) {
         [array addObject:model.musicUrl];
@@ -95,22 +87,31 @@
 
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTimeLable) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
-
-
-
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
     
-    
+
 }
 
+-(void)rightBtnAction:(id)sender
+{
+    if (sender) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addPKRadio:self.collectModel];
+        
+    }
+    else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deletePKRadio:self.collectModel];
+    }
 
-//-(void)resTimeLable
-//{
-//    if ([self.resLable.text isEqualToString:@"00:03"]) {
-//        [self.avManager next];
-//        NSLog(@"123465798");
-//        sleep(2);
-//    }
-//}
+    
+}
 
 
 - (IBAction)backBtnAction:(id)sender {
@@ -118,7 +119,7 @@
     if (self.indexPath < 0) {
         self.indexPath = self.pkUrls.count - 1;
     }
-    [self.imageViewAA sd_setImageWithURL:[NSURL URLWithString:[self.pkUrls[self.indexPath] coverimg]]];
+ 
     [self.avManager above];
 }
 - (IBAction)startAndStopBtnAction:(id)sender
@@ -141,14 +142,10 @@
     if (self.indexPath == self.pkUrls.count) {
         self.indexPath = 0;
     }
-    [self.imageViewAA sd_setImageWithURL:[NSURL URLWithString:[self.pkUrls[self.indexPath] coverimg]]];
     [self.avManager next];
 
 }
-- (IBAction)shareBtnAction:(id)sender {
-}
-- (IBAction)collectBtnAction:(id)sender {
-}
+
 - (IBAction)chanageVolumeAction:(id)sender
 {
     self.avManager.avPlay.volume = self.volumeSlider.value;

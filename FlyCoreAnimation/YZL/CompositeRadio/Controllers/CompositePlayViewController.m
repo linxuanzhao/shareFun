@@ -8,6 +8,7 @@
 
 #import "CompositePlayViewController.h"
 #import "CompositeListModel.h"
+#import "DBManager.h"
 
 @interface CompositePlayViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *centerImageView;
@@ -21,6 +22,9 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) YZLAVManager *avManager;
 @property (nonatomic, assign) BOOL isPlay;
+@property (weak, nonatomic) IBOutlet UIButton *collecBtn;
+
+@property (nonatomic, strong)DBManager *manager;
 
 @end
 
@@ -28,9 +32,29 @@
 
 -(void)chanageSliderImage
 {
-    self.VolumeSlider.value = 0.4;
+    self.VolumeSlider.value = 1.0;
     [self.VolumeSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
     [self.progressSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
+}
+
+-(void)changeImage
+{
+
+    self.centerImageView.layer.cornerRadius = 100;
+    self.centerImageView.layer.masksToBounds = YES;
+    
+    CABasicAnimation *baseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    baseAnimation.toValue = @(M_PI * 200);
+    baseAnimation.duration = 5000;
+    baseAnimation.fillMode = kCAFillModeForwards;
+    baseAnimation.removedOnCompletion = NO;
+    [self.centerImageView.layer addAnimation:baseAnimation forKey:@"rotate"];
+    
+    
+    
+    
+    
+    
 }
 
 -(void)changeTitleView
@@ -75,17 +99,42 @@
     [self chanageSliderImage];
     [self changeTitleView];
     [self addBackground];
+    [self changeImage];
+    self.title = [self.compositeUrls[self.indexPath]title];
+
+    self.manager = [DBManager shareInstance];
     self.avManager = [YZLAVManager shareInstance];
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (CompositeListModel *model in self.compositeUrls) {
-        [array addObject:model.playUrl32];
+        [array addObject:model.playUrl64];
     }
     [self.avManager setPlayList:array flag:self.indexPath];
     [self.avManager.avPlay play];
 
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTimeLable) userInfo:nil repeats:YES];
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectBtnAction1:)];
 }
+
+-(void)collectBtnAction1:(id)sender
+
+{
+    if (sender) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addRadio:self.collectModel];
+
+    }
+    else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deleteRadio:self.collectModel];
+    }
+}
+
 - (IBAction)backBtnAction:(id)sender
 {
     self.indexPath --;
@@ -98,19 +147,15 @@
 - (IBAction)startAndStopBtnAction:(id)sender
 {
     if (!self.isPlay) {
-        //[_timer setFireDate:[NSDate distantFuture]];
-        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
+        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
         [self.avManager.avPlay play];
         self.isPlay = YES;
     }else
     {
-        //[_timer setFireDate:[NSDate distantPast]];
-        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-4"] forState:UIControlStateNormal];
+        [self.startAndStop setImage:[UIImage imageNamed:@"Unknown-5"] forState:UIControlStateNormal];
         [self.avManager.avPlay pause];
         self.isPlay = NO;
     }
-    //[self.avManager playWithBtn:nil];
-
 }
 - (IBAction)nextBtnAction:(id)sender
 {
@@ -122,12 +167,25 @@
     [self.avManager next];
 
 }
-- (IBAction)DownLoadBtnAction:(id)sender {
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray *array = [self.manager selectFromRadio];
+    if (array.count) {
+        for (CompositeListModel *model in array) {
+            if ([self.collectModel.title isEqualToString:model.title]) {
+                self.collecBtn.selected = YES;
+                
+            }
+        }
+    }
+    else{
+        self.collecBtn.selected = NO;
+    }
+    
 }
-- (IBAction)shareBtnAction:(id)sender {
-}
-- (IBAction)collectBtnAction:(id)sender {
-}
+
+
 - (IBAction)volumeSliderAction:(id)sender
 {
     self.avManager.avPlay.volume = self.VolumeSlider.value;

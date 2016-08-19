@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CompositeListModel.h"
 
 @interface NewsPlayViewController : UIViewController
 
@@ -14,4 +15,5 @@
 @property (nonatomic, assign) NSInteger number;
 @property (nonatomic, strong) NSString *name;
 
+@property (nonatomic, strong) CompositeListModel *collectModel;
 @end

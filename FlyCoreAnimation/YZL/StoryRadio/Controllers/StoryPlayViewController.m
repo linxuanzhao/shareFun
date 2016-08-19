@@ -10,11 +10,12 @@
 #import "YZLAVManager.h"
 #import "LisstModel.h"
 #import "UIImageView+WebCache.h"
+#import "DBManager.h"
 
 
 @interface StoryPlayViewController ()
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
-@property (weak, nonatomic) IBOutlet UIImageView *RotateImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *curTimeLable;
 @property (weak, nonatomic) IBOutlet UILabel *residualBtnAction;
 @property (nonatomic, strong) YZLAVManager *avManager;
@@ -24,7 +25,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlay;
 @property (weak, nonatomic) IBOutlet UIButton *startAndStopBtn;
-
+@property (nonatomic, strong) DBManager *manager;
 
 @end
 
@@ -33,7 +34,7 @@
 -(void)changeSliderImage
 {
     self.volumeSlider.minimumValue = 0.0;
-    self.volumeSlider.maximumValue = 1.0;
+    self.volumeSlider.value = 1;
     [self.volumeSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
     [self.progressSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
 }
@@ -45,10 +46,8 @@
     [self changeTitleView];
     //[self changeNavigationBar];
     [self addBackground];
-    
-    
+    self.manager = [DBManager shareInstance];
     LisstModel *model = self.storyUrls[self.indexPath];
-    [self.RotateImageView sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
     
     self.avManager = [YZLAVManager shareInstance];
     NSMutableArray *arr = [[NSMutableArray alloc]init];
@@ -59,26 +58,29 @@
     [self.avManager.avPlay play];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTimeLable) userInfo:nil repeats:YES];
-    
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
+
 }
-//-(void)changeNavigationBar
-//{
-//    self.navigationController.navigationBar.hidden = YES;
-//}
 
+-(void)rightBtnAction:(id)sender
+{
+    if (sender) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addRadio:self.collectModel];
+        
+    }
+    else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deleteRadio:self.collectModel];
+    }
 
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    self.navigationController.navigationBar.hidden = NO;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
-//    
-//}
+}
 
 -(void)changeTimeLable
 {
@@ -115,15 +117,7 @@
     [UIView commitAnimations];
     
 }
-//下载
-- (IBAction)DownLoadBtnAction:(id)sender {
-}
-//分享
-- (IBAction)shareBtnAction:(id)sender {
-}
-//收藏
-- (IBAction)collecBtnAction:(id)sender {
-}
+
 //上一首
 - (IBAction)BackBtnAction:(id)sender
 {

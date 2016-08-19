@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsPlayViewController">
             <connections>
-                <outlet property="centerImageView" destination="fPt-7o-g7y" id="9aN-VH-38U"/>
                 <outlet property="curTime" destination="fO3-fL-HNA" id="pJk-nK-I0g"/>
                 <outlet property="handleImageView" destination="QFg-to-6dL" id="CLY-d4-pjq"/>
                 <outlet property="leftLabel" destination="kCd-py-79O" id="V40-uZ-mLI"/>
@@ -39,17 +37,10 @@
                         <action selector="startAndStopBtnAction:" destination="-1" eventType="touchUpInside" id="dSf-LC-5uq"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucv-e2-07Y">
-                    <rect key="frame" x="312" y="608" width="32" height="32"/>
-                    <state key="normal" image="Unknown-2.png"/>
-                    <connections>
-                        <action selector="nextBtnAction:" destination="-1" eventType="touchUpInside" id="ksh-1t-CrY"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO3-fL-HNA">
                     <rect key="frame" x="29" y="548" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="38L-1W-8v5">
@@ -58,48 +49,31 @@
                         <action selector="chanageProgress:" destination="-1" eventType="valueChanged" id="e14-Kt-H4R"/>
                     </connections>
                 </slider>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ye3-zR-0HF">
-                    <rect key="frame" x="39" y="483" width="32" height="32"/>
-                    <state key="normal" image="Unknown-1.png"/>
-                    <connections>
-                        <action selector="downLoadBtnAction:" destination="-1" eventType="touchUpInside" id="T8j-mR-Nvg"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lF-K8-hmh">
-                    <rect key="frame" x="171" y="483" width="32" height="32"/>
-                    <state key="normal" image="Unknown-8.png"/>
-                    <connections>
-                        <action selector="shareBtnAction:" destination="-1" eventType="touchUpInside" id="mwA-QR-Nvb"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6u2-JL-cb6">
-                    <rect key="frame" x="303" y="483" width="32" height="32"/>
-                    <state key="normal" image="Unknown-7.png"/>
-                    <connections>
-                        <action selector="collectBtnAction:" destination="-1" eventType="touchUpInside" id="5Bx-pN-O9G"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCd-py-79O">
                     <rect key="frame" x="312" y="548" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zmz-Le-EAF">
-                    <rect key="frame" x="61" y="87" width="252" height="31"/>
+                    <rect key="frame" x="58" y="80" width="258" height="31"/>
                     <connections>
                         <action selector="changeVolumeAction:" destination="-1" eventType="valueChanged" id="wxg-c3-wTU"/>
                     </connections>
                 </slider>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zgu-0P-4S0">
-                    <rect key="frame" x="48" y="87" width="15" height="15"/>
+                    <rect key="frame" x="43" y="80" width="15" height="15"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume2.png" translatesAutoresizingMaskIntoConstraints="NO" id="qz0-Tf-bUf">
-                    <rect key="frame" x="319" y="87" width="15" height="15"/>
+                    <rect key="frame" x="319" y="80" width="15" height="15"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPt-7o-g7y">
-                    <rect key="frame" x="67" y="153" width="240" height="293"/>
-                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucv-e2-07Y">
+                    <rect key="frame" x="310" y="608" width="32" height="32"/>
+                    <state key="normal" image="Unknown-2.png"/>
+                    <connections>
+                        <action selector="nextBtnAction:" destination="-1" eventType="touchUpInside" id="ksh-1t-CrY"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -107,12 +81,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Unknown-1.png" width="32" height="32"/>
         <image name="Unknown-2.png" width="32" height="32"/>
         <image name="Unknown-4.png" width="33" height="32"/>
         <image name="Unknown-6.png" width="32" height="32"/>
-        <image name="Unknown-7.png" width="32" height="32"/>
-        <image name="Unknown-8.png" width="32" height="32"/>
         <image name="news-1.JPG" width="234" height="416"/>
         <image name="volume1.png" width="16" height="16"/>
         <image name="volume2.png" width="16" height="16"/>

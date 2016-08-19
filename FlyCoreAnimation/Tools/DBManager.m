@@ -10,6 +10,7 @@
 #import "FMDB.h"
 
 
+
 @interface DBManager ()
 
 @property (nonatomic, strong) FMDatabase *db;
@@ -47,6 +48,7 @@
 {
     if ([self.db open]) {
         [self.db executeUpdate:@"create table if not exists movie(name text not null, logo520692 text, releaseDate text, grade text)"];
+        [self.db executeUpdate:@"create table if not exists radio(title text not null, images text, playUrls text)"];
     }
     [self.db close];
     
@@ -60,6 +62,16 @@
     }
     [self.db close];
 }
+
+-(void)addRadio:(CompositeListModel *)model
+{
+    if ([self.db open]) {
+        [self.db executeUpdateWithFormat:@"insert into radio(title, images, playUrls) values (%@, %@, %@)",model.title,model.coverLarge,model.playUrl64];
+    }
+    [self.db close];
+}
+
+
 
 // 查询
 - (NSMutableArray *)selectFromTable
@@ -81,6 +93,33 @@
     [self.db close];
     return array;
 }
+//查询
+-(NSMutableArray *)selectFromRadio
+{
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    if ([self.db open]) {
+        FMResultSet *set = [self.db executeQuery:@"select *from radio"];
+        while ([set next]) {
+            CompositeListModel *model = [[CompositeListModel alloc]init];
+            model.title = [set stringForColumn:@"title"];
+            model.playUrl64 = [set stringForColumn:@"playUrls"];
+            model.coverLarge = [set stringForColumn:@"images"];
+            [array addObject:model];
+        }
+    }
+    [self.db close];
+    return  array;
+}
+
+//删除
+-(void)deleteRadio:(CompositeListModel *)model
+{
+    if ([self.db open]) {
+        [self.db executeUpdateWithFormat:@"delete from radio where title = %@", model.title];
+    }
+    [self.db close];
+    
+}
 
 // 删除
 - (void)deleteMovie:(Movie *)movie
@@ -91,6 +130,41 @@
     [self.db close];
 }
 
+
+//pk添加
+-(void)addPKRadio:(PKListModel *)model;
+{
+    if ([self.db open]) {
+        [self.db executeUpdateWithFormat:@"insert into radio(title, images, playUrls) values (%@, %@, %@)",model.title,model.coverimg,model.musicUrl];
+    }
+    [self.db close];
+}
+
+//pk删除
+-(void)deletePKRadio:(PKListModel *)model
+{
+    if ([self.db open]) {
+        [self.db executeUpdateWithFormat:@"delete from radio where title = %@", model.title];
+    }
+    [self.db close];
+    
+}
+-(NSMutableArray *)selectFromPKRadio
+{
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    if ([self.db open]) {
+        FMResultSet *set = [self.db executeQuery:@"select *from radio"];
+        while ([set next]) {
+            PKListModel *model = [[PKListModel alloc]init];
+            model.title = [set stringForColumn:@"title"];
+            model.musicUrl = [set stringForColumn:@"playUrls"];
+            model.coverimg = [set stringForColumn:@"images"];
+            [array addObject:model];
+        }
+    }
+    [self.db close];
+    return  array;
+}
 
 
 

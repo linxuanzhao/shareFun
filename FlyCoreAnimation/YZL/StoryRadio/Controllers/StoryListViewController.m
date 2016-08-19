@@ -12,6 +12,8 @@
 #import "ListTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "StoryPlayViewController.h"
+#import "DBManager.h"
+#import "CompositeListModel.h"
 
 @interface StoryListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,6 +21,8 @@
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, strong) NSMutableArray *newArray;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) CompositeListModel *listModel;
+@property (nonatomic, strong) DBManager *manager;
 
 @end
 
@@ -102,6 +106,7 @@
     [super viewDidLoad];
     [self requestData];
     [self createTableView];
+    self.manager = [DBManager shareInstance];
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.num += 1;
         [self refreshRequest];
@@ -125,6 +130,7 @@
 {
     ListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
     LisstModel *model = self.listArray[indexPath.row];
+    cell.model  = (CompositeListModel *)model;
     [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.coverSmall] placeholderImage:[UIImage imageNamed:@"2.png"]];
     cell.imageViewA.layer.borderColor = [[UIColor whiteColor]CGColor];
     cell.imageViewA.layer.borderWidth = 2;
@@ -139,8 +145,11 @@
     cell.bottomImageView.layer.borderWidth = 1;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.bottomImageView.userInteractionEnabled = YES;
+
     return cell;
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -149,12 +158,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ListTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     StoryPlayViewController *playVc = [[StoryPlayViewController alloc]init];
     LisstModel *model = self.listArray[indexPath.row];
     playVc.storyUrls = self.listArray;
     playVc.indexPath = indexPath.row;
     playVc.title = model.title;
-    
+    playVc.collectModel = cell.model;
     
     [self.navigationController pushViewController:playVc animated:YES];
     

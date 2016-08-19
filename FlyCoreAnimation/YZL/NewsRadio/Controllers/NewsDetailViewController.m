@@ -12,6 +12,8 @@
 #import "NewsDetailModel.h"
 #import "NewsDetailCell.h"
 #import "NewsPlayViewController.h"
+#import "CompositeListModel.h"
+#import "DBManager.h"
 
 @interface NewsDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,6 +21,8 @@
 @property (nonatomic, assign) NSInteger detaNum;
 @property (nonatomic, strong) NSMutableArray *arrayNew;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) DBManager *manager;
+@property (nonatomic, strong) CompositeListModel *listModel;
 @end
 
 @implementation NewsDetailViewController
@@ -66,6 +70,7 @@
     [super viewDidLoad];
     [self requestNewsDetailData];
     [self cretateTableView];
+    self.manager = [DBManager shareInstance];
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 
             self.detaNum += 1;
@@ -136,6 +141,7 @@
     
     NewsDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsDetaCell"];
     NewsDetailModel *model = self.detailArray[indexPath.row];
+    cell.model = (CompositeListModel *)model;
     [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.coverLarge] placeholderImage:[UIImage imageNamed:@"c1.jpg"]];
     cell.countLable.text = model.playtimes.stringValue;
     cell.dayLable.text = model.likes.stringValue;
@@ -149,14 +155,15 @@
     cell.imageV.layer.masksToBounds = YES;
     cell.imageV.layer.borderWidth = 1;
     cell.imageV.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.imageV.userInteractionEnabled = YES;
+
 //    cell.titleImageView.layer.cornerRadius = 10;
 //    cell.titleImageView.layer.masksToBounds = YES;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    
     return cell;
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -165,10 +172,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NewsDetailCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NewsPlayViewController *playVc = [[NewsPlayViewController alloc]init];
     NewsDetailModel *model = self.detailArray[indexPath.row];
     playVc.urls = self.detailArray;
     playVc.number = indexPath.row;
+    playVc.collectModel = cell.model;
     playVc.name = model.title;
     [self.navigationController pushViewController:playVc animated:YES];
 }

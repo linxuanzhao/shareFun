@@ -12,6 +12,8 @@
 #import "LiteraryListCell.h"
 #import "UIImageView+WebCache.h"
 #import "LiteraryPlayViewController.h"
+#import "CompositeListModel.h"
+#import "DBManager.h"
 
 @interface LiteraryListViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -20,6 +22,8 @@
 @property (nonatomic, strong) NSMutableArray *newArray;
 @property (nonatomic, assign) NSInteger num;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) DBManager *manager;
+@property (nonatomic, strong) CompositeListModel *listmodel;
 @end
 
 @implementation LiteraryListViewController
@@ -105,7 +109,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.manager = [DBManager shareInstance];
     [self requestListData];
     [self createTableView];
     
@@ -119,8 +123,9 @@
     _hud.labelColor = [UIColor blackColor];
     _hud.labelFont = [UIFont systemFontOfSize:14];
     _hud.labelText = @"~主淫,马上就加载好了哦~";
-  
 }
+
+
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -132,6 +137,7 @@
 {
     LiteraryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
     LiteraryListModel *model = self.listArray[indexPath.row];
+    cell.model = model;
     [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
     cell.timeLable.text = model.playtimes.stringValue;
     cell.titleLable.text = model.title;
@@ -145,9 +151,9 @@
     cell.listImageView.layer.borderWidth = 1;
     cell.listImageView.layer.cornerRadius = 10;
     cell.listImageView.layer.masksToBounds = YES;
-    
+    cell.listImageView.userInteractionEnabled = YES;
+
     return cell;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,10 +163,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    LiteraryListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     LiteraryPlayViewController *playVC = [[LiteraryPlayViewController alloc]init];
     LiteraryListModel *model = self.listArray[indexPath.row];
     playVC.literaryUrls = self.listArray;
     playVC.indexPath = indexPath.row;
+    playVC.collectModel = cell.model;
     playVC.title = model.title;
     
     [self.navigationController pushViewController:playVC animated:YES];

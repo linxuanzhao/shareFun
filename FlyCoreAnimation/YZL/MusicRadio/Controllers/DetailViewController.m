@@ -63,7 +63,7 @@
     
     
 
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"DetailCell" bundle:nil] forCellReuseIdentifier:@"detailCell"];
@@ -90,7 +90,6 @@
                 [model setValuesForKeysWithDictionary:dic2];
                 [self.array addObject:model];
             }
-            //[self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:self.array];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_tableView.mj_footer endRefreshing];
@@ -103,9 +102,7 @@
 {
   
     [DownLoad downLoadWithUrl:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=102&pageId=1&pageSize=20&statEvent=pageview%2Fcategory%40%E7%94%B5%E5%8F%B0&statModule=%E7%94%B5%E5%8F%B0&statPage=tab%40%E5%8F%91%E7%8E%B0_%E5%88%86%E7%B1%BB&status=0&version=5.4.21" postBody:nil resultBlock:^(NSData *data) {
-        if (data == nil) {
-            [self createAlertView];
-        }else{
+        if (data != nil) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSArray *array = dic[@"list"];
             for (NSDictionary *dict in array) {

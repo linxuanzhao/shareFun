@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CompositeListModel.h"
 
 @interface CompositePlayViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *compositeUrls;
 @property (nonatomic, assign) NSInteger indexPath;
-@property (nonatomic, strong) NSString *titleAA;
 
+@property (nonatomic, strong) NSString *titleA;
+@property (nonatomic, strong) CompositeListModel *collectModel;
 @end

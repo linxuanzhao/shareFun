@@ -20,4 +20,5 @@ typedef void(^cleanCacheBlock) ();
 +(void)modeSwitchingExampleWithView:(UIView *)view;
 
 +(void)doSomeWorkWithMixedProgressWithView:(UIView *)view;
+
 @end
