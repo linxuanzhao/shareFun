@@ -15,6 +15,7 @@
 #import "PhotoViewController.h"
 #import "MBProgressHUD.h"
 #import "DBManager.h"
+#import "MovieTableViewController.h"
 
 @interface DetailMovieViewController () <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -102,6 +103,7 @@
     else{
         self.collectBtn.selected = NO;
         
+        
     }
 
 }
@@ -161,6 +163,7 @@
             [self.logoArray addObject:urlImgStr];
             [self.logo1Array addObject:urlImgStr1];
         }
+        NSLog(@"%@", self.logoArray);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -311,13 +314,8 @@
 
 - (void)back
 {
-    
     [self.navigationController popViewControllerAnimated:YES];
-    [UIView animateWithDuration:0.0 delay:1 options:UIViewAnimationOptionLayoutSubviews animations:^{
-        self.navigationController.navigationBarHidden = NO;
-    } completion:nil];
-    
-
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -418,13 +416,19 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
-    if (operation == UINavigationControllerOperationPop) {
+    
+    if (operation == UINavigationControllerOperationPop && [toVC isEqual:self.vc]) {
+        
         return self.animation;
+        
+        
+    
     }
     else
     {
         return  nil;
     }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

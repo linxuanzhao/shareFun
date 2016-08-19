@@ -250,7 +250,6 @@
         MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"movie"];
         Movie *movie = self.hotArray[indexPath.row];
         cell.movie = movie;
-        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
                 return cell;
     }
     
@@ -261,7 +260,6 @@
         Movie *movie = self.listArray[indexPath.row];
         
         cell.movie = movie;
-        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
         return cell;
         
         
@@ -296,6 +294,7 @@
     detailMovieVC.name = cell.movie.name;
     detailMovieVC.releaseDate = cell.movie.releaseDate;
     detailMovieVC.movie = cell.movie;
+    detailMovieVC.vc = self;
     
     [self.navigationController pushViewController:detailMovieVC animated:YES];
 }

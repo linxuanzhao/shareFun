@@ -25,5 +25,7 @@
 @property (nonatomic, strong) NSString *releaseDate;
 
 @property (nonatomic, strong) Movie *movie;
+@property (nonatomic, strong) UIViewController *vc;
+
   
 @end

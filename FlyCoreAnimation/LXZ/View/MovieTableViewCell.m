@@ -42,7 +42,7 @@
         self.nameLabel.text = movie.name;
         self.playCountL.text = movie.screenings;
         self.scoreLabel.text = [NSString stringWithFormat:@"%@分", movie.grade];
-        
+        [self.imageV sd_setImageWithURL:[NSURL URLWithString:movie.logo520692]];
     }
 }
 

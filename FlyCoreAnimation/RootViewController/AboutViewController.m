@@ -55,11 +55,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    CollectViewController *collectVC = [[CollectViewController alloc] init];
-//    [self.navigationController pushViewController:collectVC animated:YES];
-    
+
     if (indexPath.row == 0) {
         [self clearCache];
+    }
+    else if (indexPath.row == 1)
+    {
+        CollectViewController *collectVC = [[CollectViewController alloc] init];
+        [self.navigationController pushViewController:collectVC animated:YES];
     }
     
 }
