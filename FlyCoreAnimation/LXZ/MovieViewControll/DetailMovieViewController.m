@@ -56,38 +56,7 @@
     [self getData];
     self.dbManager = [DBManager shareInstance];
 
-
-//    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
-//    screen.edges = UIRectEdgeLeft;
-//    [self.view addGestureRecognizer:screen];
 }
-
-//- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
-//{
-//    CGPoint pt = [screen translationInView:self.view];
-//    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
-//    
-//    [screen setTranslation:CGPointZero inView:self.view];
-//    
-//    if (screen.state == UIGestureRecognizerStateEnded) {
-//        if (self.view.frame.origin.x > SCWI / 2) {
-//            
-//            [UIView animateWithDuration:0.2 animations:^{
-//                self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
-//                
-//            } completion:^(BOOL finished) {
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }];
-//        }
-//        else
-//        {
-//            [UIView animateWithDuration:0.2 animations:^{
-//                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
-//            }];
-//        }
-//    }
-//}
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -96,16 +65,9 @@
         for (Movie *movie in array) {
             if ([self.movie.name isEqualToString:movie.name]) {
                 self.collectBtn.selected = YES;
-                
             }
         }
     }
-    else{
-        self.collectBtn.selected = NO;
-        
-        
-    }
-
 }
 
 
@@ -163,7 +125,6 @@
             [self.logoArray addObject:urlImgStr];
             [self.logo1Array addObject:urlImgStr1];
         }
-        NSLog(@"%@", self.logoArray);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -186,10 +147,10 @@
     [self.view addSubview:self.tableView];
     
     // headView
-    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCWI, 290)];
+    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCWI, SCHI * 0.435)];
     
     // imageView
-    self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 150, 100, 130)];
+    self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(SCWI * 0.04, SCHI * 0.225, SCWI * 0.24, SCHI * 0.172)];
     self.targetView = self.imageV;
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.logo520692]];
     
@@ -203,10 +164,10 @@
     self.tableView.tableHeaderView = self.headView;
     
     self.playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.playBtn.frame = CGRectMake(0, 0, 40, 40);
+    self.playBtn.frame = CGRectMake(0, 0, SCWI * 0.107, SCWI * 0.107);
     self.playBtn.backgroundColor = [UIColor colorWithRed:38 / 255.0 green:38 / 255.0 blue:38 / 255.0 alpha:0.6];
     self.playBtn.center = self.topView.center;
-    self.playBtn.layer.cornerRadius = 20;
+    self.playBtn.layer.cornerRadius = SCWI * 0.107 / 2;
     self.playBtn.layer.masksToBounds = YES;
     [self.playBtn setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
     [self.playBtn addTarget:self action:@selector(presentMovie) forControlEvents:UIControlEventTouchUpInside];
@@ -215,16 +176,16 @@
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [self.backButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    self.backButton.frame = CGRectMake(10, 50, 32, 32);
-    self.backButton.layer.cornerRadius = 16;
+    self.backButton.frame = CGRectMake(SCWI * 0.04, SCHI * 0.075, SCWI * 0.085, SCWI * 0.085);
+    self.backButton.layer.cornerRadius = SCWI * 0.085 / 2;
     self.backButton.layer.masksToBounds = YES;
-    self.backButton.backgroundColor = [UIColor colorWithRed:38 / 255.0 green:38 / 255.0 blue:38 / 255.0 alpha:0.6];
+    self.backButton.backgroundColor = [UIColor colorWithRed:38 / 255.0 green:38 / 255.0 blue:38 / 255.0 alpha:0.8];
     [self.topView addSubview:self.backButton];
     
     // name
     self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 150, 200, 20)];
     self.nameLabel.text = self.name;
-    self.nameLabel.font = [UIFont boldSystemFontOfSize:18];
+    self.nameLabel.font = [UIFont boldSystemFontOfSize:16];
     self.nameLabel.textColor = [UIColor colorWithRed:250 / 255.0 green:250 / 255.0 blue:250 / 255.0 alpha:1];
     self.nameLabel.textAlignment = NSTextAlignmentLeft;
     [self.topView addSubview:self.nameLabel];
@@ -315,7 +276,8 @@
 - (void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
-    self.navigationController.navigationBarHidden = NO;
+
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -377,10 +339,7 @@
        
         return cell;
     }
-    
-    
     return nil;
-    
 }
 
 
@@ -420,9 +379,6 @@
     if (operation == UINavigationControllerOperationPop && [toVC isEqual:self.vc]) {
         
         return self.animation;
-        
-        
-    
     }
     else
     {

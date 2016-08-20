@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *playCountL;
 @property (nonatomic, strong) UILabel *scoreLabel;
+@property (nonatomic, strong) UILabel *highlightLabel;
 
 @property (nonatomic, strong) Movie *movie;
 

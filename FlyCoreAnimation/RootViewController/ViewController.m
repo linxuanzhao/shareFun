@@ -19,7 +19,7 @@
 #define marginY2 40
 #define bgtype @"rippleEffect"
 #import "XFExplodeAnimationController.h"
-@interface ViewController ()<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BackViewControllerDelegate>
+@interface ViewController ()<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BackViewControllerDelegate, UIGestureRecognizerDelegate>
 
 
 @property(nonatomic,strong)UIView  *view0;
@@ -89,7 +89,14 @@
     [self initLabel];
     [self initWithLeftButton];
     [self initWithRightButton];
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+    
+
 }
+
+
+
+
 #pragma mark BUTTON
 -(void)initWithButton{
     self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -454,13 +461,12 @@
         alpView.alpha = 0;
         
         switch (self.tag) {
-                //青色 地图
+
                 
             case 100:{
                 VC =     [[MovieTableViewController alloc]init];
               
                 [self.navigationController pushViewController:VC animated:YES];
-//                [self presentViewController:VC animated:YES completion:nil];
             }
                 break;
             case 101:{ 
@@ -514,6 +520,18 @@
 -(void)modalViewControllerDidClickedDismissButton:(XFShareViewController *)viewController{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if (self.navigationController.childViewControllers.count == 1) {
+        // 表示用户在根控制器界面，就不需要触发滑动手势，
+        return NO;
+    }
+    return YES;
+}
+
+
+
 
 
 @end
