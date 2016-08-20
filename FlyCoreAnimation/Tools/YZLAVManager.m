@@ -9,7 +9,6 @@
 #import "YZLAVManager.h"
 #import <AVFoundation/AVFoundation.h>
 
-
 @interface YZLAVManager ()
 //判断现在是否正咋播放
 @property (nonatomic, assign) BOOL isplaying;
@@ -56,13 +55,15 @@
     self.playItem = [[AVPlayerItem alloc]initWithURL:url];
     self.avPlay = [[AVPlayer alloc]initWithPlayerItem:self.playItem];
     
-    NSTimer *t2 = [NSTimer scheduledTimerWithTimeInterval:0.11 target:self selector:@selector(autonext) userInfo:nil repeats:YES];
+    NSTimer *t2 = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                   target:self selector:@selector(autonext) userInfo:nil repeats:YES];
     [t2 fire];
     
 }
 -(void)autonext{
     if ([self curuentTime] == [self playDuration]) {
         [self next];
+        [self.avPlay play];
     }
 }
 //上一首
@@ -81,7 +82,7 @@
 {
 
     self.playIndex++;
-    if (self.playIndex == self.musicUrls.count - 1) {
+    if (self.playIndex == self.musicUrls.count) {
         self.playIndex = 0;
     }
     NSURL *url = [NSURL URLWithString:self.musicUrls[self.playIndex]];

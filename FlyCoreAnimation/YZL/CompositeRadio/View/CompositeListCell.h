@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CompositeListModel.h"
 
 @interface CompositeListCell : UITableViewCell
 
@@ -15,5 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
 @property (weak, nonatomic) IBOutlet UILabel *timeLable;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBBB;
+@property (weak, nonatomic) IBOutlet UILabel *dayLable;
+
+@property (nonatomic, strong) CompositeListModel *PPmodel;
 
 @end

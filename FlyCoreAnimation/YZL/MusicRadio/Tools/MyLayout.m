@@ -22,7 +22,7 @@
     //先设定大圆的半径 取长和宽最短的
     CGFloat radius = MIN(self.collectionView.frame.size.width, self.collectionView.frame.size.height)/2.5;
     //计算圆心位置
-    CGPoint center = CGPointMake(self.collectionView.frame.size.width/2, self.collectionView.frame.size.height/2-100);
+    CGPoint center = CGPointMake(self.collectionView.frame.size.width/2, self.collectionView.frame.size.height/2-30);
     //设置每个item的大小为50*50 则半径为25
     for (int i=0; i<_itemCount; i++) {
         UICollectionViewLayoutAttributes * attris = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
@@ -50,7 +50,7 @@
 }
 //设置内容区域的大小
 -(CGSize)collectionViewContentSize{
-    return CGSizeMake(400, 400);
+    return CGSizeMake(375, 400);
 }
 //返回设置数组
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{

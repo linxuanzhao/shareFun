@@ -10,7 +10,7 @@
 
 @interface LiteraryListModel : NSObject
 
-@property (nonatomic, strong) NSString *playUrl32;
+@property (nonatomic, strong) NSString *playUrl64;
 @property (nonatomic, strong) NSString *coverLarge;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSNumber *playtimes;

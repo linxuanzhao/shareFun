@@ -20,6 +20,7 @@
 #import "LiteraryViewController.h"
 #import "CompositeViewController.h"
 #import "PianKeViewController.h"
+#import "RadioViewController.h"
 
 
 @interface RadioViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,XRCarouselViewDelegate>
@@ -38,26 +39,47 @@
 {
     
     MyLayout *myLayout = [[MyLayout alloc]init];
-    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 244,WHDTH,HEIGHT - 180) collectionViewLayout:myLayout];
+   
+    _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 180,WHDTH,HEIGHT - 180) collectionViewLayout:myLayout];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
-    [self.view addSubview:_collectionView];
+    _collectionView.bounces = NO;
+    _collectionView.backgroundColor = [UIColor clearColor];
+    //[self.view addSubview:_collectionView];
     [_collectionView registerClass:[ImageCell class] forCellWithReuseIdentifier:@"imageCell"];
-    //_carouselView.backgroundColor = [UIColor lightGrayColor];
-    _collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+
+    UIImageView *iamgeView1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    iamgeView1.image = [UIImage imageNamed:@"collection-3.JPG"];
+    [self.view addSubview:iamgeView1];
+    iamgeView1.userInteractionEnabled = YES;
+    [iamgeView1 addSubview:_collectionView];
+    
+    
+   
+//    UIImage *oldImage = [UIImage imageNamed:@"coo"];
+//    
+//    UIGraphicsBeginImageContextWithOptions(self.collectionView.bounds.size, NO, 0.0);
+//    [oldImage drawAtPoint:CGPointZero];
+//    
+//    UIImage *newImage =UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:newImage];
+   
     
     
 }
 
 -(void)createData
 {
-    _nameArray = @[@"综合台",@"文艺台",@"音乐台",@"新闻台",@"故事台",@"PK"];
-    UIImage *image1 = [UIImage imageNamed:@"1.jpg"];
+    _nameArray = @[@"综合台",@"文艺台",@"音乐台",@"新闻台",@"故事台",@"片刻"];
+    UIImage *image1 = [UIImage imageNamed:@"1.png"];
     UIImage *image2 = [UIImage imageNamed:@"2.png"];
-    UIImage *image3 = [UIImage imageNamed:@"3.jpeg"];
-    UIImage *image4 = [UIImage imageNamed:@"4.jpg"];
-    UIImage *image5 = [UIImage imageNamed:@"5.jpg"];
-    UIImage *image6 = [UIImage imageNamed:@"6.jpg"];
+    UIImage *image3 = [UIImage imageNamed:@"3.png"];
+    UIImage *image4 = [UIImage imageNamed:@"4.png"];
+    UIImage *image5 = [UIImage imageNamed:@"5.png"];
+    UIImage *image6 = [UIImage imageNamed:@"6.png"];
     _imageArray = @[image1,image2,image3,image4,image5,image6];
 }
 
@@ -83,7 +105,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor clearColor];
     self.title = @"电台列表";
     //[self createCAEmitter];
     [self createCollectionView];
@@ -137,7 +159,32 @@ collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInte
 
 - (void)carouselView:(XRCarouselView *)carouselView clickImageAtIndex:(NSInteger)index
 {
-    NSLog(@"图片呢被点击了");
+    if (index == 0) {
+        CompositeViewController *comVc = [[CompositeViewController alloc]init];
+        [self.navigationController pushViewController:comVc animated:YES];
+    }
+    if (index == 1) {
+        LiteraryViewController *literaryVc = [[LiteraryViewController alloc]init];
+        [self.navigationController pushViewController:literaryVc animated:YES];
+    }
+    if (index == 2) {
+        DetailViewController *detailVc = [[DetailViewController alloc]init];
+        [self.navigationController pushViewController:detailVc animated:YES];
+    }
+    if (index == 3) {
+        PianKeViewController *pianKeVc = [[PianKeViewController alloc]init];
+        
+        [self.navigationController pushViewController:pianKeVc animated:YES];
+    }
+    if (index == 4) {
+        NewsViewController *newsVC = [[NewsViewController alloc]init];
+        [self.navigationController pushViewController:newsVC animated:YES];
+    }
+    if (index == 5) {
+        StoryViewController *storyVc = [[StoryViewController alloc]init];
+        
+        [self.navigationController pushViewController:storyVc animated:YES];
+    }
 }
 
 -(void)createCAEmitter

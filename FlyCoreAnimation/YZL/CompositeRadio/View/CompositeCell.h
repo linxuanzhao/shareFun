@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+
+
 @interface CompositeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewA;
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
@@ -15,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *countLable;
 @property (weak, nonatomic) IBOutlet UILabel *trcakLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBVBBB;
+
 
 @end

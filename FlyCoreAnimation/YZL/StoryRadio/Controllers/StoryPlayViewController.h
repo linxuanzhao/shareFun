@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CompositeListModel.h"
 
 @interface StoryPlayViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *storyUrls;
 @property (nonatomic, assign) NSInteger indexPath;
-@property (nonatomic, strong) NSString *title;
-
+@property (nonatomic, strong) NSString *titleA;
+@property (nonatomic, strong) CompositeListModel *collectModel;
 @end

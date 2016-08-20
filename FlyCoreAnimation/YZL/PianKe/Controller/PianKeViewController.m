@@ -9,9 +9,9 @@
 #import "PianKeViewController.h"
 #import "DownLoad.h"
 #import "PKModel.h"
-#import "PKTableViewCell.h"
 #import "PKListViewController.h"
 #import "NetWorkRequestManager.h"
+#import "PKListCell.h"
 
 @interface PianKeViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -51,7 +51,7 @@
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    [_tableView registerNib:[UINib nibWithNibName:@"PKTableViewCell" bundle:nil] forCellReuseIdentifier:@"pkCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"PKListCell" bundle:nil] forCellReuseIdentifier:@"pkListCell"];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor clearColor];
     [pkImageView addSubview:_tableView];
@@ -84,8 +84,8 @@
 -(void)requestData
 {
     [DownLoad downLoadWithUrl:@"http://api2.pianke.me/ting/radio" postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
         NSArray *array = dic[@"data"][@"alllist"];
         for (NSDictionary *dict in array) {
             PKModel *model = [[PKModel alloc]init];
@@ -95,6 +95,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
     }];
 }
 
@@ -131,15 +132,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PKTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pkCell"];
+    PKListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pkListCell"];
     PKModel *model = self.pkArray[indexPath.row];
-    [cell.ImageViewBBB sd_setImageWithURL:[NSURL URLWithString:model.coverimg]];
-    cell.ImageViewBBB.layer.borderColor = [[UIColor whiteColor]CGColor];
-    cell.ImageViewBBB.layer.borderWidth = 2;
-    cell.ImageViewAAA.layer.cornerRadius = 10;
-    cell.ImageViewAAA.layer.masksToBounds = YES;
-    cell.ImageViewAAA.layer.borderColor = [[UIColor grayColor]CGColor];
-    cell.ImageViewAAA.layer.borderWidth = 1;
+    [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.coverimg]];
+    cell.imageViewA.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.imageViewA.layer.borderWidth = 2;
+    cell.imageViewB.layer.cornerRadius = 10;
+    cell.imageViewB.layer.masksToBounds = YES;
+    cell.imageViewB.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.imageViewB.layer.borderWidth = 1;
     cell.titleLable.text = model.desc;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

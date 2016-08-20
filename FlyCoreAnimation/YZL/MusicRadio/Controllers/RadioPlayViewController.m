@@ -11,14 +11,14 @@
 #import "ListModel.h"
 #import "UIImageView+WebCache.h"
 #import "XRCarouselView.h"
+#import "DBManager.h"
 
 
 
 
-
-@interface RadioPlayViewController ()<XRCarouselViewDelegate>
+@interface RadioPlayViewController ()
 @property (nonatomic, strong) YZLAVManager *avManager;
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
+
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
 
@@ -26,7 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *allTime;
 
-@property (weak, nonatomic) IBOutlet UIButton *DownLoadBtn;
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *scImageView;
 
@@ -41,9 +41,9 @@
 @property (nonatomic, assign) BOOL isPlay;
 
 @property (weak, nonatomic) IBOutlet UISlider *VolumeSlider;
+@property (nonatomic, strong) DBManager *manager;
 
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
-
+@property (nonatomic, strong) UIButton *BarBtn;
 
 
 
@@ -53,7 +53,7 @@
 
 @implementation RadioPlayViewController
 
-
+/*
 -(void)changeImage
 {
     [self.slider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
@@ -69,12 +69,8 @@
     baseAnimation.removedOnCompletion = NO;
     [_imageV.layer addAnimation:baseAnimation forKey:@"rotate"];
     
-    
-    
-    
-    
-
 }
+ */
 
 -(void)imageScrollView
 {
@@ -108,11 +104,10 @@
     [self changeTitleView];
     [self chanageSliderImage];
     [self addBackground];
-    //[self imageScrollView];
-    [self changeImage];
+    [self changeTitle];
+   
+    self.manager = [DBManager shareInstance];
     
-
-
     self.avManager = [YZLAVManager shareInstance];
     
     NSMutableArray *arr =[NSMutableArray array];
@@ -121,58 +116,92 @@
         [arr addObject:model.playUrl64];
     }
     [self.avManager setPlayList:arr flag:self.number];
-      NSLog(@"%ld",self.urls.count);
+    
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     
-    self.progressView.tintColor = [UIColor blackColor];
+
     [self.avManager.avPlay play];
 
     
-    [self.avManager.playItem addObserver:self forKeyPath:@"loadedTimeRanges"  options:NSKeyValueObservingOptionNew context:nil];
-
+    _BarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _BarBtn.frame = CGRectMake(0, 0, 16, 16);
+    [_BarBtn setImage:[UIImage imageNamed:@"barButton-2.png"] forState:UIControlStateNormal];
+    //[_BarBtn setImage:[UIImage imageNamed:@"barButton-1.png"] forState:UIControlStateSelected];
+    [_BarBtn addTarget:self action:@selector(btnAction:) forControlEvents: UIControlEventTouchUpInside ];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:_BarBtn];
+    [self.navigationItem setRightBarButtonItem:barItem];
     
- 
-     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTitle) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
+
+-(void)changeTitle
+{
+    [self chanageNext];
+    self.number++;
+    if (self.number == self.urls.count) {
+        self.number = 0;
+    }
+    self.marLabel.text = [self.urls[self.number]title];
+    
     
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+-(void)chanageNext
 {
-    if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
-        if (self.avManager.playItem.loadedTimeRanges) {
-            NSArray *loadedTimeRanges = [self.avManager.avPlay.currentItem loadedTimeRanges];
-            CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];
-            float startSenconds = CMTimeGetSeconds(timeRange.start);
-            float durationSeconds = CMTimeGetSeconds(timeRange.duration);
-            float result = startSenconds + durationSeconds;
-            CMTime duration = self.avManager.playItem.duration;
-            float totalDuration = CMTimeGetSeconds(duration);
-            [self.progressView setProgress:result / totalDuration animated:NO];
+    if ([_allTime.text isEqualToString:@"00:03" ] || [_allTime.text isEqualToString:@"00:02"] || [_allTime.text isEqualToString:@"00:01"]) {
+        [self.avManager next];
+        [self.avManager.avPlay play];
+    }
+}
+
+-(void)btnAction:(UIButton *)btn
+{
+    self.BarBtn = btn;
+    if (!_BarBtn.selected) {
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"收藏成功";
+        [textHud hide:YES afterDelay:1];
+        [self.manager addRadio:self.collectModel];
+        UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+        btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+    }else{
+        MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        textHud.mode = MBProgressHUDModeText;
+        textHud.labelText = @"取消收藏";
+        [textHud hide:YES afterDelay:1];
+        [self.manager deleteRadio:self.collectModel];
+        UIImage *btnImage2  = [UIImage imageNamed:@"barButton-2.png"];
+        btnImage2 = [btnImage2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage2 forState:UIControlStateNormal];
+    }
+    _BarBtn.selected = !_BarBtn.selected;
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray *array = [self.manager selectFromRadio];
+    if (array.count) {
+        for (CompositeListModel *model in array) {
+            if ([self.collectModel.title isEqualToString:model.title]) {
+                self.BarBtn.selected = YES;
+                UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+                btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+                
+                
+            }
         }
-        
-       
+    }
+    else{
+        self.BarBtn.selected = NO;
     }
     
-  
 }
-
--(void)changeItem
-{
-    self.navigationController.navigationBar.hidden = YES;
-}
-
-
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    self.navigationController.navigationBar.hidden = NO;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
-//    
-//}
 
 -(void)changeTitleView
 {
@@ -243,7 +272,8 @@
     if (self.number == self.urls.count) {
         self.number = 0;
     }
-    [self.avManager next];}
+    [self.avManager next];
+}
 
 
 
@@ -258,16 +288,6 @@
 - (IBAction)changeVolumeBtnAction:(id)sender
 {
     self.avManager.avPlay.volume = self.VolumeSlider.value;
-}
-//收藏
-- (IBAction)repeatOneBtnAction:(id)sender
-{
-    
-}
-//下载
-- (IBAction)downLoadBtnAction:(id)sender
-{
-
 }
 
 -(void)addBackground
@@ -333,10 +353,6 @@
     [_timer invalidate];
 }
 
-- (void)carouselView:(XRCarouselView *)carouselView clickImageAtIndex:(NSInteger)index
-{
-    NSLog(@"图片被点击了");
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

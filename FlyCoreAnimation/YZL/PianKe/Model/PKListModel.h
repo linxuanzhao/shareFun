@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString *coverimg;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic,strong)NSString *musicUrl;
+@property (nonatomic, strong) NSString *musicUrl;
 
 
 @end
