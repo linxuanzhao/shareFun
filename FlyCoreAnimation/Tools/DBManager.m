@@ -47,6 +47,8 @@
 {
     if ([self.db open]) {
         [self.db executeUpdate:@"create table if not exists movie(movieId text primary key not null, name text, logo520692 text, releaseDate text, grade text, logo556640 text, mobilePreview text, actors text, category text, duration text, director text, area text, highlight text)"];
+        
+        [self.db executeUpdate:@"create table if not exists radio(title text not null, images text, playUrls text)"];
     }
     [self.db close];
     
