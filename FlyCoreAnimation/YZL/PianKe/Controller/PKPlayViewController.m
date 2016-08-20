@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isPlay;
 @property (nonatomic, strong) DBManager *manager;
+@property (nonatomic, strong) UIButton *BarBtn;
 @end
 
 @implementation PKPlayViewController
@@ -75,8 +76,9 @@
     [self chanageSliderImage];
     [self changeTitleView];
     [self addBackground];
+    [self changeTitle];
     self.manager = [DBManager shareInstance];
-    PKListModel *model = self.pkUrls[self.indexPath];
+    //PKListModel *model = self.pkUrls[self.indexPath];
     self.avManager = [YZLAVManager shareInstance];
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (PKListModel *model in self.pkUrls) {
@@ -87,32 +89,88 @@
 
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTimeLable) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
-    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
+    _BarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _BarBtn.frame = CGRectMake(0, 0, 16, 16);
+    [_BarBtn setImage:[UIImage imageNamed:@"barButton-2.png"] forState:UIControlStateNormal];
+    //[_BarBtn setImage:[UIImage imageNamed:@"barButton-1.png"] forState:UIControlStateSelected];
+    [_BarBtn addTarget:self action:@selector(btnAction:) forControlEvents: UIControlEventTouchUpInside ];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:_BarBtn];
+    [self.navigationItem setRightBarButtonItem:barItem];
     
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTitle) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
+    
+    
 }
 
--(void)rightBtnAction:(id)sender
+-(void)changeTitle
 {
-    if (sender) {
+    [self chanageNext];
+    self.indexPath++;
+    if (self.indexPath == self.pkUrls.count) {
+        self.indexPath = 0;
+    }
+    self.marLabel.text = [self.pkUrls[self.indexPath]title];
+    
+    
+}
+
+-(void)chanageNext
+{
+    if ([_resLable.text isEqualToString:@"00:03" ] || [_resLable.text isEqualToString:@"00:02"] || [_resLable.text isEqualToString:@"00:01"]) {
+        [self.avManager next];
+        [self.avManager.avPlay play];
+    }
+}
+
+-(void)btnAction:(UIButton *)btn
+{
+    self.BarBtn = btn;
+    if (!_BarBtn.selected) {
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"收藏成功";
         [textHud hide:YES afterDelay:1];
         [self.manager addPKRadio:self.collectModel];
-        
-    }
-    else{
+        UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+        btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+    }else{
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"取消收藏";
         [textHud hide:YES afterDelay:1];
         [self.manager deletePKRadio:self.collectModel];
+        UIImage *btnImage2  = [UIImage imageNamed:@"barButton-2.png"];
+        btnImage2 = [btnImage2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage2 forState:UIControlStateNormal];
     }
-
+    _BarBtn.selected = !_BarBtn.selected;
+    
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray *array = [self.manager selectFromRadio];
+    if (array.count) {
+        for (CompositeListModel *model in array) {
+            if ([self.collectModel.title isEqualToString:model.title]) {
+                self.BarBtn.selected = YES;
+                UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+                btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+                
+                
+            }
+        }
+    }
+    else{
+        self.BarBtn.selected = NO;
+    }
+    
+}
 
 - (IBAction)backBtnAction:(id)sender {
     self.indexPath --;

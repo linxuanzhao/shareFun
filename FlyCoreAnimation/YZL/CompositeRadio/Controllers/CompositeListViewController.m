@@ -90,6 +90,7 @@
 {
     NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album?albumId=%@&device=iPhone&pageSize=20&statPosition=%@",self.albumID,self.statPosition];
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *dic2 = dic[@"data"][@"tracks"];
         NSArray *array = dic2[@"list"];
@@ -101,6 +102,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
     }];
 }
 
@@ -165,10 +167,11 @@
 {
     CompositeListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     CompositePlayViewController *playVc = [[CompositePlayViewController alloc]init];
+    CompositeListModel *model = self.listArray[indexPath.row];
     playVc.compositeUrls = self.listArray;
     playVc.indexPath  = indexPath.row;
     playVc.collectModel = cell.PPmodel;
-     
+    playVc.title = model.title;
     [self.navigationController pushViewController:playVc animated:YES];
     
 }

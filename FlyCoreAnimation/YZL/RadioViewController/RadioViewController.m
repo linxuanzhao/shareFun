@@ -50,7 +50,7 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
 
     UIImageView *iamgeView1 = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    iamgeView1.image = [UIImage imageNamed:@"collection-2.JPG"];
+    iamgeView1.image = [UIImage imageNamed:@"collection-3.JPG"];
     [self.view addSubview:iamgeView1];
     iamgeView1.userInteractionEnabled = YES;
     [iamgeView1 addSubview:_collectionView];
@@ -73,7 +73,7 @@
 
 -(void)createData
 {
-    _nameArray = @[@"music",@"literature",@"news",@"story",@"composite",@"pianke"];
+    _nameArray = @[@"综合台",@"文艺台",@"音乐台",@"新闻台",@"故事台",@"片刻"];
     UIImage *image1 = [UIImage imageNamed:@"1.png"];
     UIImage *image2 = [UIImage imageNamed:@"2.png"];
     UIImage *image3 = [UIImage imageNamed:@"3.png"];

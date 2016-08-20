@@ -9,7 +9,6 @@
 #import "YZLAVManager.h"
 #import <AVFoundation/AVFoundation.h>
 
-
 @interface YZLAVManager ()
 //判断现在是否正咋播放
 @property (nonatomic, assign) BOOL isplaying;

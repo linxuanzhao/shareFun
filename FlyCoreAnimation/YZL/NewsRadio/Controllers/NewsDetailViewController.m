@@ -115,6 +115,7 @@
 
        NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album/track?albumId=%@&device=iPhone&isAsc=true&pageId=1&pageSize=20&statPosition=%@",self.albumId,self.statPosition];
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *array = dic[@"data"][@"list"];
         for (NSDictionary *dict in array) {
@@ -125,6 +126,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
         
     }];
 }

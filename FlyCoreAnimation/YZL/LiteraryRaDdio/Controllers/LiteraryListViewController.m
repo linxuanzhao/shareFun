@@ -92,6 +92,7 @@
 {
     NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album?albumId=%@&device=iPhone&pageSize=20&statPosition=%@",self.albumID,self.statPosition];
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *dict2 = dic[@"data"][@"tracks"];
         NSArray *array = dict2[@"list"];
@@ -103,6 +104,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
         
     }];
 }
@@ -137,7 +139,7 @@
 {
     LiteraryListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell"];
     LiteraryListModel *model = self.listArray[indexPath.row];
-    cell.model = model;
+    cell.model = (CompositeListModel *)model;
     [cell.imageViewA sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
     cell.timeLable.text = model.playtimes.stringValue;
     cell.titleLable.text = model.title;

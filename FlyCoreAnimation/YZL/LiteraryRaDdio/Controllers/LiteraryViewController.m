@@ -84,6 +84,7 @@
 -(void)requestLiteraryData
 {
     [DownLoad downLoadWithUrl:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=106&pageId=1&pageSize=20&statEvent=pageview%2Fcategory%40%E7%94%B5%E5%8F%B0&statModule=%E7%94%B5%E5%8F%B0&statPage=tab%40%E5%8F%91%E7%8E%B0_%E5%88%86%E7%B1%BB&status=0&version=5.4.21" postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *array = dict[@"list"];
         for (NSDictionary *dict1 in array) {
@@ -94,6 +95,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
 
     }];
     
@@ -105,6 +107,7 @@
     [super viewDidLoad];
     [self requestLiteraryData];
     [self createTableView];
+    self.title = @"文艺台";
     
     _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.num += 1;
@@ -174,6 +177,7 @@
     LiteraryModel *model = self.literaryArray[indexPath.row];
     listVC.albumID = model.desc;
     listVC.statPosition = [NSString stringWithFormat:@"%ld",indexPath.row+1];
+    listVC.title = model.title;
      [self.navigationController pushViewController:listVC animated:YES];
     
 }

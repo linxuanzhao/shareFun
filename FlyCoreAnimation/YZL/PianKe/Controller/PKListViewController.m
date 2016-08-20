@@ -103,7 +103,8 @@
     NSDictionary *dic = @{@"radioid":_redioid};
     
     [NetWorkRequestManager requestWithType:POST url:@"http://api2.pianke.me/ting/radio_detail" para:dic finish:^(NSData *data) {
-
+        if (data != nil) {
+         
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
       
         NSArray *array = dict[@"data"][@"list"];
@@ -115,6 +116,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
         
     } error:
      ^(NSError *error) {

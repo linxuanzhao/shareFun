@@ -84,6 +84,7 @@
 -(void)requestData
 {
     [DownLoad downLoadWithUrl:@"http://api2.pianke.me/ting/radio" postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray *array = dic[@"data"][@"alllist"];
         for (NSDictionary *dict in array) {
@@ -94,6 +95,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
     }];
 }
 

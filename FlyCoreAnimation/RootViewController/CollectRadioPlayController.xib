@@ -43,7 +43,7 @@
                     </connections>
                 </slider>
                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tvq-oQ-8VG">
-                    <rect key="frame" x="60" y="71" width="265" height="31"/>
+                    <rect key="frame" x="68" y="85" width="248" height="31"/>
                     <connections>
                         <action selector="chanageVolumenAction:" destination="-1" eventType="valueChanged" id="IF1-1Z-7bh"/>
                     </connections>
@@ -60,11 +60,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume1.png" translatesAutoresizingMaskIntoConstraints="NO" id="FwD-OA-K6h">
-                    <rect key="frame" x="46" y="71" width="15" height="15"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume2.png" translatesAutoresizingMaskIntoConstraints="NO" id="JEp-3W-v2q">
-                    <rect key="frame" x="323" y="71" width="15" height="15"/>
+                    <rect key="frame" x="322" y="85" width="15" height="15"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQC-dR-ZZg">
                     <rect key="frame" x="46" y="600" width="32" height="32"/>
@@ -73,6 +70,9 @@
                         <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="wyj-DG-ZDy"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="volume1.png" translatesAutoresizingMaskIntoConstraints="NO" id="FwD-OA-K6h">
+                    <rect key="frame" x="46" y="85" width="15" height="15"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

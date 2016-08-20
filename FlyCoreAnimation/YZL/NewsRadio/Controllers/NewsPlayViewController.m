@@ -26,6 +26,7 @@
 @property (nonatomic, assign) BOOL isPlay;
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
 @property (nonatomic, strong) DBManager *manager;
+@property (nonatomic, strong) UIButton *BarBtn;
 
 
 @end
@@ -65,6 +66,7 @@
     [self changeTitleView];
     [self changeSliderImage];
     [self addBackground];
+    [self changeTitle];
     self.manager = [DBManager shareInstance];
     
     
@@ -82,27 +84,86 @@
     [self.avManager.avPlay play];
     
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
-
+    _BarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _BarBtn.frame = CGRectMake(0, 0, 16, 16);
+    [_BarBtn setImage:[UIImage imageNamed:@"barButton-2.png"] forState:UIControlStateNormal];
+    //[_BarBtn setImage:[UIImage imageNamed:@"barButton-1.png"] forState:UIControlStateSelected];
+    [_BarBtn addTarget:self action:@selector(btnAction:) forControlEvents: UIControlEventTouchUpInside ];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:_BarBtn];
+    [self.navigationItem setRightBarButtonItem:barItem];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTitle) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
+    
 }
 
--(void)rightBtnAction:(id)sender
+-(void)changeTitle
 {
-    if (sender) {
+    [self chanageNext];
+    self.number++;
+    if (self.number == self.urls.count) {
+        self.number = 0;
+    }
+    self.marLabel.text = [self.urls[self.number]title];
+    
+    
+}
+
+-(void)chanageNext
+{
+    if ([_leftLabel.text isEqualToString:@"00:03" ] || [_leftLabel.text isEqualToString:@"00:02"] || [_leftLabel.text isEqualToString:@"00:01"]) {
+        [self.avManager next];
+        [self.avManager.avPlay play];
+    }
+}
+
+-(void)btnAction:(UIButton *)btn
+{
+    self.BarBtn = btn;
+    if (!_BarBtn.selected) {
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"收藏成功";
         [textHud hide:YES afterDelay:1];
         [self.manager addRadio:self.collectModel];
-        
-    }
-    else{
+        UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+        btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+    }else{
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"取消收藏";
         [textHud hide:YES afterDelay:1];
         [self.manager deleteRadio:self.collectModel];
+        UIImage *btnImage2  = [UIImage imageNamed:@"barButton-2.png"];
+        btnImage2 = [btnImage2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage2 forState:UIControlStateNormal];
     }
+    _BarBtn.selected = !_BarBtn.selected;
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray *array = [self.manager selectFromRadio];
+    if (array.count) {
+        for (CompositeListModel *model in array) {
+            if ([self.collectModel.title isEqualToString:model.title]) {
+                self.BarBtn.selected = YES;
+                UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+                btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+                
+                
+            }
+        }
+    }
+    else{
+        self.BarBtn.selected = NO;
+    }
+    
 }
 
 - (IBAction)changeVolumeAction:(id)sender

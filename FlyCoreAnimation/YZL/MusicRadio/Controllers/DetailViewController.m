@@ -137,16 +137,6 @@
     
 }
 
-
-
--(void)createAlertView
-{
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"数据没有回来哦" message:@"怎么办" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"sure", nil];
-    [alertView show];
-    
-}
-
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     _tableView.mj_footer.hidden = self.dataArray.count == 0;

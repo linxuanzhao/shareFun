@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompositePlayViewController">
             <connections>
                 <outlet property="VolumeSlider" destination="sNY-sT-ACr" id="ggE-RN-lFS"/>
-                <outlet property="centerImageView" destination="oBq-Sv-3I7" id="HwN-Hi-yAD"/>
                 <outlet property="curTimeLable" destination="ZGN-AO-Hkm" id="uBu-KN-oEN"/>
                 <outlet property="progressSlider" destination="Zvd-n9-o8E" id="Mzs-0u-qq3"/>
                 <outlet property="resTimeLable" destination="FGg-jh-hwV" id="ZBm-t2-Uoq"/>
@@ -68,9 +67,6 @@
                         <action selector="volumeSliderAction:" destination="-1" eventType="valueChanged" id="29p-lH-9In"/>
                     </connections>
                 </slider>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="center.png" translatesAutoresizingMaskIntoConstraints="NO" id="oBq-Sv-3I7">
-                    <rect key="frame" x="87" y="234" width="200" height="200"/>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGg-jh-hwV">
                     <rect key="frame" x="299" y="535" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -87,7 +83,6 @@
         <image name="Unknown-2.png" width="32" height="32"/>
         <image name="Unknown-4.png" width="33" height="32"/>
         <image name="Unknown-6.png" width="32" height="32"/>
-        <image name="center.png" width="234" height="207"/>
         <image name="composite-1.JPG" width="1200" height="1799"/>
         <image name="volume1.png" width="16" height="16"/>
         <image name="volume2.png" width="16" height="16"/>

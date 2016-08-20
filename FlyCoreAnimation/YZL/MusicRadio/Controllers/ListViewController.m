@@ -109,6 +109,7 @@
     NSString *str = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/v1/album?albumId=%@&device=iPhone&pageSize=20&statPosition=%@",self.albumId,self.statPosition];
     
     [DownLoad downLoadWithUrl:str postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary *dic1 = dic[@"data"][@"tracks"];
         NSArray *arr = dic1[@"list"];
@@ -120,6 +121,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        }
     }];
 }
 

@@ -64,6 +64,7 @@
     [self.newArray removeAllObjects];
     NSString *str1 = [NSString stringWithFormat:@"http://mobile.ximalaya.com/mobile/discovery/v2/category/keyword/albums?calcDimension=hot&categoryId=17&device=iPhone&keywordId=107&pageId=%ld&pageSize=20&version=5.4.21",self.num + 1];
     [DownLoad downLoadWithUrl:str1 postBody:nil resultBlock:^(NSData *data) {
+        if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
         NSArray *array = [dic valueForKey:@"list"];
@@ -78,6 +79,7 @@
             [_tableView.mj_footer endRefreshing];
             [self.tableView reloadData];
         });
+        }
     }];
 
     

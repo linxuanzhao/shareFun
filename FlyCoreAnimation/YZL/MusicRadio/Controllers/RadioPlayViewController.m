@@ -16,7 +16,7 @@
 
 
 
-@interface RadioPlayViewController ()<XRCarouselViewDelegate>
+@interface RadioPlayViewController ()
 @property (nonatomic, strong) YZLAVManager *avManager;
 
 @property (weak, nonatomic) IBOutlet UISlider *slider;
@@ -43,7 +43,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *VolumeSlider;
 @property (nonatomic, strong) DBManager *manager;
 
-
+@property (nonatomic, strong) UIButton *BarBtn;
 
 
 
@@ -104,11 +104,10 @@
     [self changeTitleView];
     [self chanageSliderImage];
     [self addBackground];
-    //[self imageScrollView];
+    [self changeTitle];
+   
     self.manager = [DBManager shareInstance];
     
-
-
     self.avManager = [YZLAVManager shareInstance];
     
     NSMutableArray *arr =[NSMutableArray array];
@@ -117,71 +116,92 @@
         [arr addObject:model.playUrl64];
     }
     [self.avManager setPlayList:arr flag:self.number];
-      NSLog(@"%ld",self.urls.count);
+    
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     
-//    self.progressView.tintColor = [UIColor blackColor];
+
     [self.avManager.avPlay play];
 
     
-    [self.avManager.playItem addObserver:self forKeyPath:@"loadedTimeRanges"  options:NSKeyValueObservingOptionNew context:nil];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnAction:)];
- 
-
+    _BarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _BarBtn.frame = CGRectMake(0, 0, 16, 16);
+    [_BarBtn setImage:[UIImage imageNamed:@"barButton-2.png"] forState:UIControlStateNormal];
+    //[_BarBtn setImage:[UIImage imageNamed:@"barButton-1.png"] forState:UIControlStateSelected];
+    [_BarBtn addTarget:self action:@selector(btnAction:) forControlEvents: UIControlEventTouchUpInside ];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:_BarBtn];
+    [self.navigationItem setRightBarButtonItem:barItem];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTitle) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
--(void)rightBtnAction:(id)sender
+-(void)changeTitle
 {
-    if (sender) {
+    [self chanageNext];
+    self.number++;
+    if (self.number == self.urls.count) {
+        self.number = 0;
+    }
+    self.marLabel.text = [self.urls[self.number]title];
+    
+    
+}
+
+-(void)chanageNext
+{
+    if ([_allTime.text isEqualToString:@"00:03" ] || [_allTime.text isEqualToString:@"00:02"] || [_allTime.text isEqualToString:@"00:01"]) {
+        [self.avManager next];
+        [self.avManager.avPlay play];
+    }
+}
+
+-(void)btnAction:(UIButton *)btn
+{
+    self.BarBtn = btn;
+    if (!_BarBtn.selected) {
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"收藏成功";
         [textHud hide:YES afterDelay:1];
         [self.manager addRadio:self.collectModel];
-        
-    }
-    else{
+        UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+        btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+    }else{
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"取消收藏";
         [textHud hide:YES afterDelay:1];
         [self.manager deleteRadio:self.collectModel];
+        UIImage *btnImage2  = [UIImage imageNamed:@"barButton-2.png"];
+        btnImage2 = [btnImage2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage2 forState:UIControlStateNormal];
     }
-
+    _BarBtn.selected = !_BarBtn.selected;
+    
     
 }
-/*
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+
+- (void)viewWillAppear:(BOOL)animated
 {
-    if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
-        if (self.avManager.playItem.loadedTimeRanges) {
-            NSArray *loadedTimeRanges = [self.avManager.avPlay.currentItem loadedTimeRanges];
-            CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];
-            float startSenconds = CMTimeGetSeconds(timeRange.start);
-            float durationSeconds = CMTimeGetSeconds(timeRange.duration);
-            float result = startSenconds + durationSeconds;
-            CMTime duration = self.avManager.playItem.duration;
-            float totalDuration = CMTimeGetSeconds(duration);
-//            [self.progressView setProgress:result / totalDuration animated:NO];
+    NSMutableArray *array = [self.manager selectFromRadio];
+    if (array.count) {
+        for (CompositeListModel *model in array) {
+            if ([self.collectModel.title isEqualToString:model.title]) {
+                self.BarBtn.selected = YES;
+                UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+                btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+                
+                
+            }
         }
     }
+    else{
+        self.BarBtn.selected = NO;
+    }
+    
 }
-*/
--(void)changeItem
-{
-    self.navigationController.navigationBar.hidden = YES;
-}
-
-
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    self.navigationController.navigationBar.hidden = NO;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.navigationController.navigationBar.hidden = YES;
-//    });
-//    
-//}
 
 -(void)changeTitleView
 {
@@ -333,10 +353,6 @@
     [_timer invalidate];
 }
 
-- (void)carouselView:(XRCarouselView *)carouselView clickImageAtIndex:(NSInteger)index
-{
-    NSLog(@"图片被点击了");
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

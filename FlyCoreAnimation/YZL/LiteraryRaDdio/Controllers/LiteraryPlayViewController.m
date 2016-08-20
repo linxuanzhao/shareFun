@@ -13,7 +13,6 @@
 
 @interface LiteraryPlayViewController ()
 @property (weak, nonatomic) IBOutlet UISlider *voluneSlider;
-@property (weak, nonatomic) IBOutlet UIImageView *centerIMagevIew;
 @property (weak, nonatomic) IBOutlet UILabel *curTimeLable;
 @property (weak, nonatomic) IBOutlet UILabel *resTimeLable;
 @property (weak, nonatomic) IBOutlet UISlider *ProgressSlider;
@@ -24,13 +23,14 @@
 @property (nonatomic, assign) BOOL isPlay;
 @property (weak, nonatomic) IBOutlet UIButton *startAndStop;
 @property (nonatomic, strong) DBManager *manager;
-
+@property (nonatomic, strong) UIButton *BarBtn;
 @end
 
 @implementation LiteraryPlayViewController
 
 -(void)chanageSliderImage
 {
+    self.ProgressSlider.value = 0.0;
     self.voluneSlider.value = 1.0;
     [self.voluneSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
     [self.ProgressSlider setThumbImage:[UIImage imageNamed:@"slider.png"] forState:UIControlStateNormal];
@@ -41,9 +41,12 @@
     [self chanageSliderImage];
     [self changeTitleView];
     [self addBackground];
+    [self changeTitle];
     self.manager = [DBManager shareInstance];
-    LiteraryListModel *model = self.literaryUrls[self.indexPath];
-    [self.centerIMagevIew sd_setImageWithURL:[NSURL URLWithString:model.coverLarge]];
+   // LiteraryListModel *model = self.literaryUrls[self.indexPath];
+    
+   
+
     self.avManager = [YZLAVManager shareInstance];
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for (LiteraryListModel *model in self.literaryUrls) {
@@ -52,27 +55,82 @@
     [self.avManager setPlayList:array flag:self.indexPath];
     [self.avManager.avPlay play];
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTimeLable) userInfo:nil repeats:YES];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(collectBtnAction1:)]; 
+    _BarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _BarBtn.frame = CGRectMake(0, 0, 16, 16);
+    [_BarBtn setImage:[UIImage imageNamed:@"barButton-2.png"] forState:UIControlStateNormal];
+    //[_BarBtn setImage:[UIImage imageNamed:@"barButton-1.png"] forState:UIControlStateSelected];
+    [_BarBtn addTarget:self action:@selector(btnAction:) forControlEvents: UIControlEventTouchUpInside ];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc]initWithCustomView:_BarBtn];
+    [self.navigationItem setRightBarButtonItem:barItem];
+//    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTitle) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
+    
 }
 
--(void)collectBtnAction1:(id)sender
-
+-(void)changeTitle
 {
-    if (sender) {
+    [self chanageNext];
+    self.indexPath++;
+    if (self.indexPath == self.literaryUrls.count) {
+        self.indexPath = 0;
+    }
+    self.marLabel.text = [self.literaryUrls[self.indexPath]title];
+    
+
+}
+
+-(void)chanageNext
+{
+    if ([_resTimeLable.text isEqualToString:@"00:03" ] || [_resTimeLable.text isEqualToString:@"00:02"] || [_resTimeLable.text isEqualToString:@"00:01"]) {
+        [self.avManager next];
+        [self.avManager.avPlay play];
+    }
+}
+-(void)btnAction:(UIButton *)btn
+{
+    self.BarBtn = btn;
+    if (!_BarBtn.selected) {
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"收藏成功";
         [textHud hide:YES afterDelay:1];
         [self.manager addRadio:self.collectModel];
-        
-    }
-    else{
+        UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+        btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+    }else{
         MBProgressHUD *textHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         textHud.mode = MBProgressHUDModeText;
         textHud.labelText = @"取消收藏";
         [textHud hide:YES afterDelay:1];
         [self.manager deleteRadio:self.collectModel];
+        UIImage *btnImage2  = [UIImage imageNamed:@"barButton-2.png"];
+        btnImage2 = [btnImage2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_BarBtn setImage:btnImage2 forState:UIControlStateNormal];
     }
+    _BarBtn.selected = !_BarBtn.selected;
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSMutableArray *array = [self.manager selectFromRadio];
+    if (array.count) {
+        for (CompositeListModel *model in array) {
+            if ([self.collectModel.title isEqualToString:model.title]) {
+                self.BarBtn.selected = YES;
+                UIImage *btnImage1  = [UIImage imageNamed:@"barButton-1.png"];
+                btnImage1 = [btnImage1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_BarBtn setImage:btnImage1 forState:UIControlStateNormal];
+            }
+        }
+    }
+    else{
+        self.BarBtn.selected = NO;
+    }
+    
 }
 
 
@@ -88,7 +146,7 @@
     [self.marLabel sizeToFit];
     self.view1.clipsToBounds = YES;
     [UIView beginAnimations:@"Marquee" context:NULL];
-    [UIView setAnimationDuration:10];
+    [UIView setAnimationDuration:6];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [UIView setAnimationRepeatAutoreverses:NO];
     [UIView setAnimationRepeatCount:10000];
@@ -118,7 +176,8 @@
     if (self.indexPath < 0) {
         self.indexPath = self.literaryUrls.count - 1;
     }
-    [self.centerIMagevIew sd_setImageWithURL:[NSURL URLWithString:[self.literaryUrls[self.indexPath] coverLarge]]];
+    self.marLabel.text = [self.literaryUrls[self.indexPath]title];
+ 
     [self.avManager above];
 }
 - (IBAction)startAndStopBtnAction:(id)sender
@@ -143,7 +202,8 @@
     if (self.indexPath == self.literaryUrls.count) {
         self.indexPath = 0;
     }
-    [self.centerIMagevIew sd_setImageWithURL:[NSURL URLWithString:[self.literaryUrls[self.indexPath] coverLarge]]];
+    self.marLabel.text = [self.literaryUrls[self.indexPath]title];
+ 
     [self.avManager next];
 }
 - (IBAction)volumeSliderAction:(id)sender
