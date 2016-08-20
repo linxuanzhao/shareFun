@@ -96,8 +96,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pop)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(300, 20, 50, 50);
-    [btn setImage:[UIImage imageNamed:@"ic_right - circle - o.png"] forState:UIControlStateNormal];
+    btn.frame = CGRectMake(20, 20, 50, 50);
+    [btn setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
  
     self.seg = [[UISegmentedControl alloc]initWithItems:[NSArray arrayWithObjects:@"普通",@"卫星", nil]];

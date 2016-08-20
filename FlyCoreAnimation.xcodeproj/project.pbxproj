@@ -37,6 +37,7 @@
 		3F22D7A31D596A1800820C61 /* 樱花瓣2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7831D596A1800820C61 /* 樱花瓣2.png */; settings = {ASSET_TAGS = (); }; };
 		3F2DB1CE1D67E8F0000416EB /* barButton-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2DB1CD1D67E8F0000416EB /* barButton-1.png */; settings = {ASSET_TAGS = (); }; };
 		3F2DB1D01D67E9CF000416EB /* barButton-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2DB1CF1D67E9CF000416EB /* barButton-2.png */; settings = {ASSET_TAGS = (); }; };
+		3F3B3E831D6844B000004EFB /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3B3E821D6844B000004EFB /* close.png */; settings = {ASSET_TAGS = (); }; };
 		3F60DC1D1D6593C20059BCFB /* XFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60DC1C1D6593C20059BCFB /* XFNetworking.m */; settings = {ASSET_TAGS = (); }; };
 		3F6C15CA1D48DFC90016A020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6C15C91D48DFC90016A020 /* Assets.xcassets */; };
 		3F6C15D81D48DFCA0016A020 /* FlyCoreAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15D71D48DFCA0016A020 /* FlyCoreAnimationTests.m */; };
@@ -249,6 +250,7 @@
 		3F22D7831D596A1800820C61 /* 樱花瓣2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "樱花瓣2.png"; sourceTree = "<group>"; };
 		3F2DB1CD1D67E8F0000416EB /* barButton-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barButton-1.png"; sourceTree = "<group>"; };
 		3F2DB1CF1D67E9CF000416EB /* barButton-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barButton-2.png"; sourceTree = "<group>"; };
+		3F3B3E821D6844B000004EFB /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		3F60DC1B1D6593C20059BCFB /* XFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFNetworking.h; sourceTree = "<group>"; };
 		3F60DC1C1D6593C20059BCFB /* XFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFNetworking.m; sourceTree = "<group>"; };
 		3F6C15BA1D48DFC90016A020 /* FlyCoreAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyCoreAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -531,6 +533,7 @@
 		3F22D7631D596A1800820C61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3F3B3E821D6844B000004EFB /* close.png */,
 				3F2DB1CF1D67E9CF000416EB /* barButton-2.png */,
 				3F2DB1CD1D67E8F0000416EB /* barButton-1.png */,
 				3F0D92241D673FEE0078971E /* collection-3.JPG */,
@@ -1366,6 +1369,7 @@
 				3FBA29C51D6699B800808646 /* NewsCell.xib in Resources */,
 				3F0D92251D673FEE0078971E /* collection-3.JPG in Resources */,
 				3FBA29AA1D6699B800808646 /* LiteraryCell.xib in Resources */,
+				3F3B3E831D6844B000004EFB /* close.png in Resources */,
 				3F9047F71D655A56004BAAEA /* collection.png in Resources */,
 				3FBA29B71D6699B800808646 /* psb.jpeg in Resources */,
 				3FBA29AC1D6699B800808646 /* LiteraryListCell.xib in Resources */,
