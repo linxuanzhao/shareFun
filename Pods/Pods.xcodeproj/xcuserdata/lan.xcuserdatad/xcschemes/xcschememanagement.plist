@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FlyCoreAnimation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,6 +47,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>07BE54FA94B47A04995B1401C477B323</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>23CF27B2BA6AC7125EFFEDA8C5AA819F</key>
 		<dict>
 			<key>primary</key>
@@ -57,22 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A17462710A19CF5280ED8E633D39EA6C</key>
+		<key>820003891A7D633961071703CD77F114</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C2DC0EDDE15F2A915BA8990A5B1988C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CC3DDB16C853553F0CECF8C80BE86A9F</key>
+		<key>A9A83F63385AA43314397B8DD375464B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F9C8036F1550048F30DF9BF82C1C83C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

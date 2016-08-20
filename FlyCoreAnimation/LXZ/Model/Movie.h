@@ -23,5 +23,6 @@
 @property (nonatomic, strong) NSString *area;
 @property (nonatomic, strong) NSString *releaseDate;
 @property (nonatomic, strong) NSString *screenings;
+@property (nonatomic, strong) NSString *highlight;
 
 @end

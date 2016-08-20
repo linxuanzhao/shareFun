@@ -80,14 +80,14 @@
                 
                 // 设置网络请求的缓存政策
                 manager.requestSerializer.cachePolicy =  NSURLRequestReturnCacheDataElseLoad;
-                NSLog(@"4G状态");
+//                NSLog(@"4G状态");
                 
                 break;
             case AFNetworkReachabilityStatusReachableViaWiFi:
                 
                 // 设置网络请求的缓存政策
                 manager.requestSerializer.cachePolicy =  NSURLRequestReloadIgnoringLocalCacheData;
-                NSLog(@"WiFi状态");
+//                NSLog(@"WiFi状态");
                 break;
                 
             default:

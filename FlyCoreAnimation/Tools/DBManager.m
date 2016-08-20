@@ -36,7 +36,6 @@
         NSString *path = [docPath stringByAppendingPathComponent:@"collect.sqlite"];
         self.db = [FMDatabase databaseWithPath:path];
         [self createTable];
-        NSLog(@"%@", path);
     }
 
     return self;
@@ -46,7 +45,7 @@
 - (void)createTable
 {
     if ([self.db open]) {
-        [self.db executeUpdate:@"create table if not exists movie(name text not null, logo520692 text, releaseDate text, grade text)"];
+        [self.db executeUpdate:@"create table if not exists movie(movieId text primary key not null, name text, logo520692 text, releaseDate text, grade text, logo556640 text, mobilePreview text, actors text, category text, duration text, director text, area text, highlight text)"];
     }
     [self.db close];
     
@@ -56,7 +55,7 @@
 - (void)addMovie:(Movie *)movie
 {
     if ([self.db open]) {
-        [self.db executeUpdateWithFormat:@"insert into movie(name, logo520692, releaseDate, grade) values (%@, %@, %@, %@)", movie.name, movie.logo520692, movie.releaseDate, movie.grade];
+        [self.db executeUpdate:@"insert into movie values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", movie.movieId, movie.name, movie.logo520692, movie.releaseDate, movie.grade, movie.logo556640, movie.mobilePreview, movie.actors, movie.category, movie.duration, movie.director, movie.area, movie.highlight];
     }
     [self.db close];
 }
@@ -69,14 +68,22 @@
         FMResultSet *set = [self.db executeQuery:@"select *from movie"];
         while ([set next]) {
             Movie *movie = [[Movie alloc] init];
-            movie.name = [set stringForColumn:@"name"];
-            movie.logo520692 = [set stringForColumn:@"logo520692"];
-            movie.releaseDate = [set stringForColumn:@"releaseDate"];
-            movie.grade = [set stringForColumn:@"grade"];
+            movie.movieId = [set stringForColumnIndex:0];
+            movie.name = [set stringForColumnIndex:1];
+            movie.logo520692 = [set stringForColumnIndex:2];
+            movie.releaseDate = [set stringForColumnIndex:3];
+            movie.grade = [set stringForColumnIndex:4];
+            movie.logo556640 = [set stringForColumnIndex:5];
+            movie.mobilePreview = [set stringForColumnIndex:6];
+            movie.actors = [set stringForColumnIndex:7];
+            movie.category = [set stringForColumnIndex:8];
+            movie.duration = [set stringForColumnIndex:9];
+            movie.director = [set stringForColumnIndex:10];
+            movie.area = [set stringForColumnIndex:11];
+            movie.highlight = [set stringForColumnIndex:12];
             [array addObject:movie];
         }
-        
-    
+
     }
     [self.db close];
     return array;

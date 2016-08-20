@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
+    
     [self createSegmentedControl];
     
     [self createPredictView];
@@ -41,10 +41,15 @@
     [self createMJRefresh];
     [self createPreMJRefresh];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -53,6 +58,12 @@
     [super viewDidAppear:animated];
     
     self.navigationController.delegate = self;
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.animation = nil;
 }
 
 - (NSMutableArray *)hotArray
@@ -250,19 +261,15 @@
         MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"movie"];
         Movie *movie = self.hotArray[indexPath.row];
         cell.movie = movie;
-                return cell;
+        return cell;
     }
     
     else if ([tableView isEqual:self.predictTableView])
     {
-       
         MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"list"];
         Movie *movie = self.listArray[indexPath.row];
-        
         cell.movie = movie;
         return cell;
-        
-        
     }
     return nil;
 
@@ -270,14 +277,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return SCHI / 667 * 120;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MovieTableViewCell *cell = (MovieTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     self.targetView = cell.imageV;
-    
     DetailMovieViewController *detailMovieVC = [[DetailMovieViewController alloc] init];
     NSString *str = [cell.movie.logo556640 substringToIndex:cell.movie.logo556640.length - 4];
     NSString *urlImgStr = [str stringByAppendingString:@"jpg"];
@@ -294,6 +300,7 @@
     detailMovieVC.name = cell.movie.name;
     detailMovieVC.releaseDate = cell.movie.releaseDate;
     detailMovieVC.movie = cell.movie;
+   
     detailMovieVC.vc = self;
     
     [self.navigationController pushViewController:detailMovieVC animated:YES];
@@ -311,6 +318,10 @@
 }
 
 
+- (void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 

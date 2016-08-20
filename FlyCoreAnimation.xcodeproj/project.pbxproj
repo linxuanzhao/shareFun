@@ -599,7 +599,6 @@
 			children = (
 				3F9047B21D6557A1004BAAEA /* LXZ */,
 				3FCAA20F1D649D000073C5D5 /* YZL */,
-				3FA420191D58B6C000BEA989 /* RootViewController */,
 				3FA41FF91D58B6C000BEA989 /* HXF */,
 				3FA420751D58B9B500BEA989 /* Tools */,
 				3FA420541D58B74200BEA989 /* Source */,
@@ -632,6 +631,7 @@
 		3F9047B21D6557A1004BAAEA /* LXZ */ = {
 			isa = PBXGroup;
 			children = (
+				3FA420191D58B6C000BEA989 /* RootViewController */,
 				3F9047B31D6557A1004BAAEA /* Model */,
 				3F9047B61D6557A1004BAAEA /* MovieAnimation */,
 				3F9047BB1D6557A1004BAAEA /* MovieViewControll */,
@@ -682,12 +682,12 @@
 			children = (
 				3F9047C71D6557A1004BAAEA /* MovieCell.h */,
 				3F9047C81D6557A1004BAAEA /* MovieCell.m */,
+				3F9047CD1D6557A1004BAAEA /* MovieTableViewCell.h */,
+				3F9047CE1D6557A1004BAAEA /* MovieTableViewCell.m */,
 				3F9047C91D6557A1004BAAEA /* MovieDetailOneCell.h */,
 				3F9047CA1D6557A1004BAAEA /* MovieDetailOneCell.m */,
 				3F9047CB1D6557A1004BAAEA /* MovieDetailTwoCell.h */,
 				3F9047CC1D6557A1004BAAEA /* MovieDetailTwoCell.m */,
-				3F9047CD1D6557A1004BAAEA /* MovieTableViewCell.h */,
-				3F9047CE1D6557A1004BAAEA /* MovieTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -815,7 +815,8 @@
 				3F9047FC1D6598F4004BAAEA /* CollectViewController.h */,
 				3F9047FD1D6598F4004BAAEA /* CollectViewController.m */,
 			);
-			path = RootViewController;
+			name = RootViewController;
+			path = ../RootViewController;
 			sourceTree = "<group>";
 		};
 		3FA420541D58B74200BEA989 /* Source */ = {
