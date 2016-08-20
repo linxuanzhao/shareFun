@@ -70,24 +70,34 @@
     if (indexPath.section == 0) {
         
         Movie *movie = self.dataArray[indexPath.row];
+        
     
         [self.dbManager deleteMovie:movie];
         
         [self.dataArray removeObject:movie];
         
-        if (self.dataArray.count == 0) {
-            UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
-            label.text = @"收藏空空如也";
-            label.textAlignment = NSTextAlignmentCenter;
-            label.backgroundColor = [UIColor whiteColor];
-            [self.view addSubview:label];
-            self.navigationItem.rightBarButtonItem = nil;
-        }
-
+        
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
-            }
+    }
+    else{
+        CompositeListModel *model = self.newArray[indexPath.row];
+        [self.dbManager deleteRadio:model];
+        [self.newArray removeObject:model];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        
+    }
+    
+    if (self.dataArray.count == 0 && self.newArray.count == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
+        label.text = @"收藏空空如也";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:label];
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+
    
     
     
@@ -103,7 +113,7 @@
     self.newArray = [self.dbManager selectFromPKRadio];
 
     
-    if (self.dataArray.count == 0) {
+    if (self.dataArray.count == 0 && self.newArray.count == 0) {
         UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
         label.text = @"收藏空空如也";
         label.textAlignment = NSTextAlignmentCenter;
