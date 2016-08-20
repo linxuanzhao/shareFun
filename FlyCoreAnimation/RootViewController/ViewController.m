@@ -19,7 +19,7 @@
 #define marginY2 40
 #define bgtype @"rippleEffect"
 #import "XFExplodeAnimationController.h"
-@interface ViewController ()<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BackViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface ViewController ()<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BackViewControllerDelegate>
 
 
 @property(nonatomic,strong)UIView  *view0;
@@ -159,7 +159,7 @@
 }
 -(void)right2Mid{
     
-    CATransform3D CA = CATransform3DMakeTranslation(10, 0, 1);
+    CATransform3D CA = CATransform3DMakeTranslation(10, 0, 10);
     CATransform3D CA2 = CATransform3DRotate(CA, 0, 0, 0, 0);
     CATransform3D CA3 = CATransform3DScale(CA2, 1.2, 1.2, 1.2);
     
@@ -182,7 +182,7 @@
 }
 -(void)left2far{
     
-    CATransform3D CA = CATransform3DMakeTranslation(10, -marginY2-marginY1, -1);
+    CATransform3D CA = CATransform3DMakeTranslation(10, -marginY2-marginY1, -10);
     CATransform3D CA2 = CATransform3DRotate(CA, 0, 0, 0, 0);
 //    CATransform3D CA3 = CATransform3DScale(CA2, 0.8, 0.8, 0);
 

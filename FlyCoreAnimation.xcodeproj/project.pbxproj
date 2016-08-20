@@ -81,7 +81,6 @@
 		3FA4207F1D58BA0A00BEA989 /* YZLAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4207E1D58BA0A00BEA989 /* YZLAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA420821D58BA7600BEA989 /* LXZAVManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA420811D58BA7600BEA989 /* LXZAVManager.m */; settings = {ASSET_TAGS = (); }; };
 		3FA4977F1D64A10D00A11503 /* literary.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3FA497781D64A10D00A11503 /* literary.JPG */; settings = {ASSET_TAGS = (); }; };
-		3FA497801D64A10D00A11503 /* cellImage-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA497791D64A10D00A11503 /* cellImage-1.png */; settings = {ASSET_TAGS = (); }; };
 		3FA497811D64A10D00A11503 /* music-1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4977A1D64A10D00A11503 /* music-1.JPG */; settings = {ASSET_TAGS = (); }; };
 		3FA497821D64A10D00A11503 /* news-1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4977B1D64A10D00A11503 /* news-1.JPG */; settings = {ASSET_TAGS = (); }; };
 		3FA497831D64A10D00A11503 /* composite-1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4977C1D64A10D00A11503 /* composite-1.JPG */; settings = {ASSET_TAGS = (); }; };
@@ -1283,6 +1282,7 @@
 				TargetAttributes = {
 					3F6C15B91D48DFC90016A020 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = PGVM9FG9AT;
 					};
 					3F6C15D21D48DFCA0016A020 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1343,7 +1343,6 @@
 				3FD7509B1D6842950077C6B6 /* CollectRadioPlayController.xib in Resources */,
 				3FB629621D66F51800435E1F /* collec-2.png in Resources */,
 				3FA420681D58B74300BEA989 /* ic_check - circle.png in Resources */,
-				3FA497801D64A10D00A11503 /* cellImage-1.png in Resources */,
 				3FBA29A51D6699B800808646 /* LiteraryPlayViewController.xib in Resources */,
 				3F22D78F1D596A1800820C61 /* ball.png in Resources */,
 				3FA4206C1D58B74300BEA989 /* left.png in Resources */,
