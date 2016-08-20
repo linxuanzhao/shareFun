@@ -24,6 +24,7 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - Masonry (1.0.1)
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.10)
   - SDCycleScrollView (1.65):
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - BaiduMapKit (~> 3.0.0)
   - FMDB (~> 2.6.2)
+  - Masonry (~> 1.0.1)
   - MBProgressHUD (~> 0.9.2)
   - MJRefresh (~> 3.1.10)
   - SDCycleScrollView (~> 1.65)
@@ -45,11 +47,12 @@ SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BaiduMapKit: de2a726d5296d6b2dc0e974b683af73153608dcd
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
-PODFILE CHECKSUM: 69afaf2a8dcea79e412e349099195ca3f5fb6569
+PODFILE CHECKSUM: 495996f893f902fdaa4a79e68806ecc728514ec4
 
 COCOAPODS: 1.0.1

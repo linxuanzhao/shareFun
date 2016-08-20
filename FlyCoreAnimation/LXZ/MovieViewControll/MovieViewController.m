@@ -41,40 +41,10 @@
     [self createCollectionView];
     [self getData];
 
-//    UIScreenEdgePanGestureRecognizer *screen = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(screenAction:)];
-//    screen.edges = UIRectEdgeLeft;
-//    [self.view addGestureRecognizer:screen];
     
     
 }
 
-//- (void)screenAction:(UIScreenEdgePanGestureRecognizer *)screen
-//{
-//    CGPoint pt = [screen translationInView:self.view];
-//    screen.view.center = CGPointMake(screen.view.center.x + pt.x, screen.view.center.y);
-//
-//    [screen setTranslation:CGPointZero inView:self.view];
-//    
-//    if (screen.state == UIGestureRecognizerStateEnded) {
-//        if (self.view.frame.origin.x > SCWI / 2) {
-//            
-//           [UIView animateWithDuration:0.2 animations:^{
-//               self.view.frame = CGRectMake(SCWI, 0, SCWI, SCHI);
-//               
-//           } completion:^(BOOL finished) {
-//               
-//           }];
-//           
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//        else
-//        {
-//            [UIView animateWithDuration:0.2 animations:^{
-//                self.view.frame = CGRectMake(0, 0, SCWI, SCHI);
-//            }];
-//        }
-//    }
-//}
 
 - (void)viewDidAppear:(BOOL)animated
 {

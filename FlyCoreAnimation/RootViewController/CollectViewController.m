@@ -41,13 +41,83 @@
     [super viewDidLoad];
     
     [self createTableView];
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editing)];
     self.dbManager = [DBManager shareInstance];
+    
+    
+    
+    
+}
+
+- (void)editing
+{
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+    if (self.tableView.editing) {
+        self.navigationItem.rightBarButtonItem.title = @"完成";
+    }
+    else{
+        self.navigationItem.rightBarButtonItem.title = @"编辑";
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        
+        Movie *movie = self.dataArray[indexPath.row];
+    
+        [self.dbManager deleteMovie:movie];
+        
+        [self.dataArray removeObject:movie];
+        
+        if (self.dataArray.count == 0) {
+            UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
+            label.text = @"收藏空空如也";
+            label.textAlignment = NSTextAlignmentCenter;
+            label.backgroundColor = [UIColor whiteColor];
+            [self.view addSubview:label];
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        
+            }
+   
+    
+    
+    
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    
     self.dataArray = [self.dbManager selectFromTable];
     self.newArray = [self.dbManager selectFromPKRadio];
 
     
+    if (self.dataArray.count == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
+        label.text = @"收藏空空如也";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:label];
+        self.navigationItem.rightBarButtonItem = nil;
+
+        
+    }
+    
+    [self.tableView reloadData];
 }
+
+
 
 - (void)createTableView
 {
@@ -85,6 +155,12 @@
         MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"movieCollect"];
         Movie *movie = self.dataArray[indexPath.row];
         cell.movie = movie;
+        [cell.playCountL removeFromSuperview];
+        UILabel *releaseDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 80, 300, 20)];
+        releaseDateLabel.font = [UIFont systemFontOfSize:12];
+        releaseDateLabel.textAlignment = NSTextAlignmentLeft;
+        releaseDateLabel.text = movie.releaseDate;
+        [cell.contentView addSubview:releaseDateLabel];
          return cell;
     }
     if (indexPath.section == 1) {
@@ -110,12 +186,15 @@
 -  (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
+        
         return @"电影";
+        
     }
     else
     {
         return @"电台";
     }
+
 }
 
 
@@ -133,7 +212,6 @@
 {
     if (indexPath.section == 0) {
         MovieTableViewCell *cell = (MovieTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-//        self.targetView = cell.imageV;
         
         DetailMovieViewController *detailMovieVC = [[DetailMovieViewController alloc] init];
         NSString *str = [cell.movie.logo556640 substringToIndex:cell.movie.logo556640.length - 4];
