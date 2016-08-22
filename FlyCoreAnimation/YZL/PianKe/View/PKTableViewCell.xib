@@ -13,19 +13,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjq-gV-M0f">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fjq-gV-M0f">
                         <rect key="frame" x="8" y="5" width="359" height="80"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGF-X1-2gY">
-                        <rect key="frame" x="21" y="15" width="201" height="60"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGF-X1-2gY">
+                        <rect key="frame" x="37" y="15" width="201" height="60"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qag-5w-FqK">
-                        <rect key="frame" x="262" y="15" width="60" height="60"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qag-5w-FqK">
+                        <rect key="frame" x="283" y="15" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="HuD-vz-MtX"/>
+                            <constraint firstAttribute="height" constant="60" id="zT7-kD-8j2"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="zGF-X1-2gY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="5d3-da-2Ur"/>
+                    <constraint firstAttribute="bottom" secondItem="fjq-gV-M0f" secondAttribute="bottom" constant="4" id="B3Y-zk-0LV"/>
+                    <constraint firstAttribute="trailing" secondItem="fjq-gV-M0f" secondAttribute="trailing" constant="8" id="LQt-hx-q5l"/>
+                    <constraint firstAttribute="bottom" secondItem="zGF-X1-2gY" secondAttribute="bottom" constant="14" id="ODQ-7M-vcs"/>
+                    <constraint firstItem="fjq-gV-M0f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Sdd-kA-AFM"/>
+                    <constraint firstItem="zGF-X1-2gY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="37" id="TXR-ts-BHI"/>
+                    <constraint firstItem="fjq-gV-M0f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="TyV-8u-5wA"/>
+                    <constraint firstAttribute="trailing" secondItem="Qag-5w-FqK" secondAttribute="trailing" constant="32" id="YdT-Jr-vqt"/>
+                    <constraint firstItem="Qag-5w-FqK" firstAttribute="centerY" secondItem="fjq-gV-M0f" secondAttribute="centerY" id="hb7-Mv-zgq"/>
+                    <constraint firstItem="Qag-5w-FqK" firstAttribute="leading" secondItem="zGF-X1-2gY" secondAttribute="trailing" constant="45" id="iFV-wr-6cU"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="ImageViewAAA" destination="fjq-gV-M0f" id="rDg-zt-zfa"/>

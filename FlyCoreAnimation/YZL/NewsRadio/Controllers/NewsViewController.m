@@ -7,7 +7,7 @@
 //
 
 #import "NewsViewController.h"
-#import "NewsCell.h"
+#import "DetailCell.h"
 #import "NewsModel.h"
 #import "UIImageView+WebCache.h"
 #import "NewsDetailViewController.h"
@@ -53,10 +53,10 @@
 //    [newsImageView addSubview:newsView];
     
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView .dataSource = self;
     _tableView.delegate = self;
-    [_tableView registerNib:[UINib nibWithNibName:@"NewsCell" bundle:nil] forCellReuseIdentifier:@"newsCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"DetailCell" bundle:nil] forCellReuseIdentifier:@"detailCell"];
     _tableView.backgroundColor = [UIColor clearColor];
     self.tableView.backgroundView = nil;
     self.tableView.bounces = YES;
@@ -140,25 +140,25 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsCell"];
+    DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"];
     NewsModel *model = self.newsArray[indexPath.row];
+    cell.backgroundColor = [UIColor clearColor];
+    
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"cellImage-1"]];
+    //    cell.imageV.layer.cornerRadius = 5;
+    //    cell.imageV.layer.masksToBounds = YES;
     cell.titleLable.text = model.title;
     cell.descLable.text = model.intro;
-    cell.countLable.text = model.playsCounts.stringValue;
-    cell.trackLable.text = model.tracks.stringValue;
-    [cell.handleImageView sd_setImageWithURL:[NSURL URLWithString:model.albumCoverUrl290] placeholderImage:[UIImage imageNamed:@"c1.jpg"]];
-    cell.ImageV.layer.borderColor = [[UIColor grayColor]CGColor];
-    cell.ImageV.layer.borderWidth = 1;
-    cell.ImageV.layer.cornerRadius = 10;
-    cell.ImageV.layer.masksToBounds = YES;
-    
-//    cell.handleImageView.layer.cornerRadius = 10;
-//    cell.handleImageView.layer.masksToBounds = YES;
-    cell.handleImageView.layer.borderColor = [[UIColor whiteColor]CGColor];
-    cell.handleImageView.layer.borderWidth = 2;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.numberLable.text = model.playsCounts.stringValue;
+    cell.EpisodesLable.text = model.tracks.stringValue;
+    cell.HandleImageView.layer.cornerRadius = 10;
+    cell.HandleImageView.layer.masksToBounds = YES;
+    cell.imageV.layer.borderColor = [[UIColor whiteColor]CGColor];
+    cell.imageV.layer.borderWidth = 2;
+    cell.HandleImageView.layer.borderColor = [[UIColor grayColor]CGColor];
+    cell.HandleImageView.layer.borderWidth = 1;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    return cell;
     
     return cell;
 
@@ -168,7 +168,7 @@
     
     [_hud hide:YES];
     
-    NewsCell *shotCell = (NewsCell *) cell;
+    DetailCell *shotCell = (DetailCell *) cell;
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     

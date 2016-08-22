@@ -55,7 +55,7 @@
 //    [newsImageView addSubview:newsView];
    
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, self.view.bounds.size.height
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height
                                                               ) style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
