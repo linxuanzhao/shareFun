@@ -14,18 +14,29 @@
 #import "DetailMovieViewController.h"
 #import "MovieAnimation.h"
 #import "UIViewController+Trainsition.h"
-
-@interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+#import "MovieAnimationko.h"
+#import "MovieTableViewController.h"
+@interface MovieViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate,UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @property (nonatomic, strong) MovieAnimation *animation;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic,strong)MovieAnimationko  *mak;
 
 @end
 
 @implementation MovieViewController
+-(MovieAnimationko *)mak{
+    
+    
+    if (!_mak) {
+        _mak = [MovieAnimationko new];
+    }
+    return _mak;
+
+}
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -134,16 +145,20 @@
     detailMovieVC.logo520692 = cell.movie.logo520692;
     detailMovieVC.name = cell.movie.name;
     detailMovieVC.releaseDate = cell.movie.releaseDate;
+    NSLog(@"%ld",indexPath.row);
     
     [self.navigationController pushViewController:detailMovieVC animated:YES];
 } 
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
+    
     if (operation == UINavigationControllerOperationPush) {
         return self.animation;
     }
-    else
+    else if(operation == UINavigationControllerOperationPop && [toVC isKindOfClass:[MovieTableViewController class]]){
+        return self.mak;
+    }
     {
         return nil;
     }

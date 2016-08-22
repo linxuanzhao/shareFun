@@ -9,6 +9,6 @@
 #import "XFReversibleAnimationController.h"
 
 
-@implementation CEReversibleAnimationController
+@implementation XFReversibleAnimationController
 
 @end
