@@ -96,7 +96,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pop)];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(20, 20, 50, 50);
+    btn.frame = CGRectMake(20, 20, 30, 30);
     [btn setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
  

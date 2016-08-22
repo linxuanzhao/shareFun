@@ -35,7 +35,7 @@
      [self listenNetWorkingPort];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
 //    UIImageView *imageV = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-//    imageV.image = [UIImage imageNamed:@"ggg.JPG"];
+//    imageV.image = [UIImage imageNamed:@"Home_refresh_bg.png"];
 //    [self.window addSubview:imageV];
     [self.window makeKeyAndVisible];
     ViewController *VC = [[ViewController alloc]init];
@@ -144,6 +144,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 
 @end

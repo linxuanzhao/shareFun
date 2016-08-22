@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XFReversibleAnimationController.h"
 
 @interface MovieTableViewController : UIViewController
 

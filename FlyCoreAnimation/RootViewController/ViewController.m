@@ -68,10 +68,12 @@
 
     self.canClick = YES;
     self.navigationController.navigationBarHidden = YES;
+           NSLog(@"%ld",self.tag);
     [self rightViewToMid:self.viewArr[0] withCATransform3d:self.CA1];
     [self midViewToLeft:self.viewArr[3] CATransfrom:self.CA0];
     [self leftViewToFar:self.viewArr[2] CATransform:self.CA3];
     [self farViewToRight:self.viewArr[1] CATransform3d:self.CA2];
+
 
 }
 - (void)viewDidLoad {
@@ -161,9 +163,9 @@
     
     CATransform3D CA = CATransform3DMakeTranslation(10, 0, 10);
     CATransform3D CA2 = CATransform3DRotate(CA, 0, 0, 0, 0);
-    CATransform3D CA3 = CATransform3DScale(CA2, 1.2, 1.2, 1.2);
-    
-    self.CA1 =CA3;
+  //  CATransform3D CA3 = CATransform3DScale(CA2, 1.2, 1.2, 1.2);
+
+    self.CA1 =CA2;
     
 }
 -(void)mid2Left{
@@ -184,9 +186,10 @@
     
     CATransform3D CA = CATransform3DMakeTranslation(10, -marginY2-marginY1, -10);
     CATransform3D CA2 = CATransform3DRotate(CA, 0, 0, 0, 0);
-//    CATransform3D CA3 = CATransform3DScale(CA2, 0.8, 0.8, 0);
+   
+    CATransform3D CA3 = CATransform3DScale(CA2, 0.8, 0.8, 1);
 
-    self.CA3 = CA2;
+    self.CA3 = CA3;
 }
 
 #pragma mark - View的滑动
@@ -248,7 +251,7 @@
 {
     UIImage *oldImage = [UIImage imageNamed:@"Home_refresh_bg.png"];
     
-    UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCWI, SCHI+10), NO, 0.0);
     [oldImage drawInRect:self.view.bounds];
     
     UIImage *newImage =UIGraphicsGetImageFromCurrentImageContext();
@@ -278,6 +281,7 @@
    // self.view0.layer.backgroundColor = [UIColor greenColor].CGColor;
     [self.view0 drawRect:self.view0.bounds image:@"movies"];
     self.view0.tag = 100;
+    [self.view addSubview:self.view0];
     
    
     [self.view.layer addSublayer:self.view0.layer];
@@ -300,9 +304,10 @@
    // self.view2.layer.backgroundColor = [UIColor cyanColor].CGColor;
     self.view2.tag = 102;
     [self.view2 drawRect:self.view2.frame image:@"XFMap3"];
+    [self.view addSubview:self.view2];
     self.viewArr = [NSMutableArray arrayWithObjects:self.view0,self.view1,self.view2,self.view3, nil];
     
-    [self.view addSubview:self.view2];
+    
 }
 
 
@@ -364,66 +369,67 @@
     }
 }
 #pragma mark - 初始状态
-//-(void)textTransform2{
-//    CABasicAnimation *animRota = [CABasicAnimation animation];
-//    
-//    animRota.keyPath =@"transform";
-//    CATransform3D tran = CATransform3DMakeTranslation(0, -(marginY1+marginY2), 0);
-//    animRota.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(tran, M_PI_4, 1, 0, 0)];
-//    animRota.removedOnCompletion = NO;
-//    animRota.fillMode =kCAFillModeForwards;
-//    animRota.duration = 0.8;
-//    
-//    [self.view2.layer addAnimation:animRota forKey:nil];
-//    
-//    
-//}
-//
-//
-//
-//-(void)textTransform0{
-//    CABasicAnimation *anim = [CABasicAnimation animation];
-//    anim.keyPath =@"transform";
-//    anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.5, 1.5, 1)];
-//    anim.removedOnCompletion = NO;
-//    anim.fillMode =kCAFillModeForwards;
-//    
-//    anim.duration = 0.8;
-//    [self.view0.layer addAnimation:anim forKey:nil];
-//}
-//-(void)textTransform3{
-//    CABasicAnimation *anim = [CABasicAnimation animation];
-//    anim.keyPath = @"transform";
-//    CATransform3D tra =  CATransform3DMakeTranslation(-marginX, -marginY2, 0);
-//    CATransform3D tra2 = CATransform3DRotate(tra, M_PI_2, 0, 1, 1);
-//    anim.toValue = [NSValue valueWithCATransform3D:tra2];
-//    
-//    anim.duration = 0.8;
-//    
-//    anim.removedOnCompletion = NO;
-//    anim.fillMode =kCAFillModeForwards;
-//    
-//    [self.view3.layer addAnimation:anim forKey:nil];
-//}
-//
-//-(void)textTransform1{
-//    CABasicAnimation *anim = [CABasicAnimation animation];
-//    anim.keyPath = @"transform";
-//    CATransform3D tra = CATransform3DMakeTranslation(marginX, -marginY2, 0);
-//    CATransform3D tra2 = CATransform3DRotate(tra, M_PI_2, 0, -1, -1);
-//    anim.toValue = [NSValue valueWithCATransform3D:tra2];
-//    anim.duration = 0.8;
-//    anim.removedOnCompletion = NO;
-//    anim.fillMode =kCAFillModeForwards;
-//    [self.view1.layer addAnimation:anim forKey:nil];
-//}
+-(void)textTransform2{
+    CABasicAnimation *animRota = [CABasicAnimation animation];
+    
+    animRota.keyPath =@"transform";
+    CATransform3D tran = CATransform3DMakeTranslation(0, -(marginY1+marginY2), 0);
+    animRota.toValue = [NSValue valueWithCATransform3D:CATransform3DRotate(tran, M_PI_4, 1, 0, 0)];
+    animRota.removedOnCompletion = NO;
+    animRota.fillMode =kCAFillModeForwards;
+    animRota.duration = 0.8;
+    
+    [self.view2.layer addAnimation:animRota forKey:nil];
+    
+    
+}
+
+
+
+-(void)textTransform0{
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    anim.keyPath =@"transform";
+    anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.5, 1.5, 1)];
+    anim.removedOnCompletion = NO;
+    anim.fillMode =kCAFillModeForwards;
+    
+    anim.duration = 0.8;
+    [self.view0.layer addAnimation:anim forKey:nil];
+}
+-(void)textTransform3{
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    anim.keyPath = @"transform";
+    CATransform3D tra =  CATransform3DMakeTranslation(-marginX, -marginY2, 0);
+    CATransform3D tra2 = CATransform3DRotate(tra, M_PI_2, 0, 1, 1);
+    anim.toValue = [NSValue valueWithCATransform3D:tra2];
+    
+    anim.duration = 0.8;
+    
+    anim.removedOnCompletion = NO;
+    anim.fillMode =kCAFillModeForwards;
+    
+    [self.view3.layer addAnimation:anim forKey:nil];
+}
+
+-(void)textTransform1{
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    anim.keyPath = @"transform";
+    CATransform3D tra = CATransform3DMakeTranslation(marginX, -marginY2, 0);
+    CATransform3D tra2 = CATransform3DRotate(tra, M_PI_2, 0, -1, -1);
+    anim.toValue = [NSValue valueWithCATransform3D:tra2];
+    anim.duration = 0.8;
+    anim.removedOnCompletion = NO;
+    anim.fillMode =kCAFillModeForwards;
+    [self.view1.layer addAnimation:anim forKey:nil];
+}
 
 #pragma mark - 跳转进控制器
 -(void)push{
     if (self.canClick) {
         self.canClick = NO;
     
-  //  self.finalArr = [NSMutableArray arrayWithArray:self.viewArr];
+   self.finalArr = [NSMutableArray arrayWithArray:self.viewArr];
+        
     /*
      CABasicAnimation *anim = [CABasicAnimation animation];
      anim.keyPath = @"transform";
@@ -440,6 +446,8 @@
     
 //    CALayer *biglayer =  [self.viewArr[0] layer];
     self.tag =   [self.viewArr[0] tag];
+        NSLog(@"%ld",self.tag);
+   //self.finalArr = self.viewArr;
     
     // [biglayer addAnimation:anim forKey:@"big"];
     //    NSLog(@"%ld %@",(long)self.tag,[self.viewArr[0] backgroundColor]);
@@ -521,7 +529,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
+//
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     if (self.navigationController.childViewControllers.count == 1) {
         // 表示用户在根控制器界面，就不需要触发滑动手势，
