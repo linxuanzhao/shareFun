@@ -60,6 +60,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+   
     NSMutableArray *array = [self.dbManager selectFromTable];
     if (array.count) {
         for (Movie *movie in array) {
@@ -292,6 +293,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.photoArray removeAllObjects];
     if (indexPath.section == 0) {
         MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
         cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
@@ -332,8 +334,21 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
             imageView.userInteractionEnabled = YES;
             [imageView addGestureRecognizer:tap];
+           
             [cell.scrollView addSubview:imageView];
-            [self.photoArray addObject:imageView];
+        
+            
+               [self.photoArray addObject:imageView];
+               
+            
+            
+            
+           
+            
+          
+           
+          
+            
 
         }
        
@@ -354,17 +369,23 @@
 
 - (void)tapAction:(UITapGestureRecognizer*)tap
 {
-
+    NSLog(@"%ld",self.photoArray.count);
     for (UIImageView *imageV in self.photoArray) {
-        if (imageV == tap.view ) {
+        
+        if (tap.view == imageV ) {
             self.index = [self.photoArray indexOfObject:imageV];
+            NSInteger a = self.photoArray.count;
+            if (self.index > a) {
+                self.index = self.photoArray.count%a;
+            }
+            NSLog(@"for%ld",self.index);
             
         }
     }
     PhotoViewController *photoVC = [[PhotoViewController alloc] init];
     photoVC.photoArray = self.logoArray;
     photoVC.index = self.index;
-    
+    NSLog(@"---------%ld",self.index);
     UINavigationController *photoNav = [[UINavigationController alloc] initWithRootViewController:photoVC];
     
     [self presentViewController:photoNav animated:YES completion:nil];
