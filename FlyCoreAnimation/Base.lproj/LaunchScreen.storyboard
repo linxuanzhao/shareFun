@@ -7,29 +7,27 @@
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchScreen" id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                        <viewControllerLayoutGuide type="top" id="4bB-5T-15g"/>
+                        <viewControllerLayoutGuide type="bottom" id="0v8-a9-CM9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <view key="view" contentMode="scaleToFill" id="2k2-ZA-ov6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShareFunBG.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="yYe-7z-5Nq">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShareFunBG" translatesAutoresizingMaskIntoConstraints="NO" id="MoX-3E-v38">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </imageView>
                         </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yYe-7z-5Nq" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="I3C-j1-mSp"/>
-                            <constraint firstItem="yYe-7z-5Nq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="a5N-kq-Uey"/>
-                            <constraint firstAttribute="trailing" secondItem="yYe-7z-5Nq" secondAttribute="trailing" id="eGG-CI-62B"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="yYe-7z-5Nq" secondAttribute="bottom" id="nnx-XJ-XFO"/>
+                            <constraint firstItem="MoX-3E-v38" firstAttribute="top" secondItem="4bB-5T-15g" secondAttribute="bottom" id="C9B-ek-vS9"/>
+                            <constraint firstItem="0v8-a9-CM9" firstAttribute="top" secondItem="MoX-3E-v38" secondAttribute="bottom" id="DfV-NG-mvb"/>
+                            <constraint firstAttribute="trailing" secondItem="MoX-3E-v38" secondAttribute="trailing" id="Jpe-JI-5aI"/>
+                            <constraint firstItem="MoX-3E-v38" firstAttribute="leading" secondItem="2k2-ZA-ov6" secondAttribute="leading" id="Smn-QN-giI"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -37,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ShareFunBG.jpg" width="640" height="1136"/>
+        <image name="ShareFunBG" width="375" height="666"/>
     </resources>
 </document>

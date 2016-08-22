@@ -33,6 +33,7 @@
 		3F22D7A11D596A1800820C61 /* Unknown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7811D596A1800820C61 /* Unknown.png */; settings = {ASSET_TAGS = (); }; };
 		3F22D7A21D596A1800820C61 /* Unknown3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7821D596A1800820C61 /* Unknown3.png */; settings = {ASSET_TAGS = (); }; };
 		3F22D7A31D596A1800820C61 /* 樱花瓣2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22D7831D596A1800820C61 /* 樱花瓣2.png */; settings = {ASSET_TAGS = (); }; };
+		3F29E5481D68503000D6A8FE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F04BDD41D62A81400F1007C /* AVFoundation.framework */; };
 		3F2DB1CE1D67E8F0000416EB /* barButton-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2DB1CD1D67E8F0000416EB /* barButton-1.png */; settings = {ASSET_TAGS = (); }; };
 		3F2DB1D01D67E9CF000416EB /* barButton-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2DB1CF1D67E9CF000416EB /* barButton-2.png */; settings = {ASSET_TAGS = (); }; };
 		3F381F171D6A913C00256BCC /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F381F151D6A913C00256BCC /* down.png */; settings = {ASSET_TAGS = (); }; };
@@ -41,7 +42,6 @@
 		3F381F1C1D6A96A100256BCC /* collectView.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F381F1A1D6A96A100256BCC /* collectView.png */; settings = {ASSET_TAGS = (); }; };
 		3F3B3E831D6844B000004EFB /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3B3E821D6844B000004EFB /* close.png */; settings = {ASSET_TAGS = (); }; };
 		3F60DC1D1D6593C20059BCFB /* XFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60DC1C1D6593C20059BCFB /* XFNetworking.m */; settings = {ASSET_TAGS = (); }; };
-		3F66AFA51D69B020008AFB81 /* ShareFunBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F66AFA41D69B020008AFB81 /* ShareFunBG.jpg */; settings = {ASSET_TAGS = (); }; };
 		3F6C15CA1D48DFC90016A020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6C15C91D48DFC90016A020 /* Assets.xcassets */; };
 		3F6C15D81D48DFCA0016A020 /* FlyCoreAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15D71D48DFCA0016A020 /* FlyCoreAnimationTests.m */; };
 		3F6C15E31D48DFCA0016A020 /* FlyCoreAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15E21D48DFCA0016A020 /* FlyCoreAnimationUITests.m */; };
@@ -134,8 +134,6 @@
 		3FBA29C11D6699B800808646 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA29601D6699B800808646 /* NewsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FBA29C21D6699B800808646 /* NewsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA29631D6699B800808646 /* NewsDetailModel.m */; settings = {ASSET_TAGS = (); }; };
 		3FBA29C31D6699B800808646 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA29651D6699B800808646 /* NewsModel.m */; settings = {ASSET_TAGS = (); }; };
-		3FBA29C41D6699B800808646 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA29681D6699B800808646 /* NewsCell.m */; settings = {ASSET_TAGS = (); }; };
-		3FBA29C51D6699B800808646 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBA29691D6699B800808646 /* NewsCell.xib */; settings = {ASSET_TAGS = (); }; };
 		3FBA29C61D6699B800808646 /* NewsDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA296B1D6699B800808646 /* NewsDetailCell.m */; settings = {ASSET_TAGS = (); }; };
 		3FBA29C71D6699B800808646 /* NewsDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBA296C1D6699B800808646 /* NewsDetailCell.xib */; settings = {ASSET_TAGS = (); }; };
 		3FBA29C81D6699B800808646 /* PianKeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA29701D6699B800808646 /* PianKeViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -260,10 +258,8 @@
 		3F3B3E821D6844B000004EFB /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		3F60DC1B1D6593C20059BCFB /* XFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFNetworking.h; sourceTree = "<group>"; };
 		3F60DC1C1D6593C20059BCFB /* XFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFNetworking.m; sourceTree = "<group>"; };
-		3F66AFA41D69B020008AFB81 /* ShareFunBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ShareFunBG.jpg; sourceTree = "<group>"; };
 		3F6C15BA1D48DFC90016A020 /* FlyCoreAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyCoreAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6C15C91D48DFC90016A020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3F6C15CC1D48DFC90016A020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F6C15D31D48DFCA0016A020 /* FlyCoreAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlyCoreAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6C15D71D48DFCA0016A020 /* FlyCoreAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyCoreAnimationTests.m; sourceTree = "<group>"; };
 		3F6C15D91D48DFCA0016A020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -409,9 +405,6 @@
 		3FBA29631D6699B800808646 /* NewsDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailModel.m; sourceTree = "<group>"; };
 		3FBA29641D6699B800808646 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
 		3FBA29651D6699B800808646 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
-		3FBA29671D6699B800808646 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
-		3FBA29681D6699B800808646 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
-		3FBA29691D6699B800808646 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		3FBA296A1D6699B800808646 /* NewsDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailCell.h; sourceTree = "<group>"; };
 		3FBA296B1D6699B800808646 /* NewsDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailCell.m; sourceTree = "<group>"; };
 		3FBA296C1D6699B800808646 /* NewsDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailCell.xib; sourceTree = "<group>"; };
@@ -496,6 +489,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F29E5481D68503000D6A8FE /* AVFoundation.framework in Frameworks */,
 				DEAC44B51C5F5432BB1DFD32 /* Pods_FlyCoreAnimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,6 +612,7 @@
 		3F6C15BC1D48DFC90016A020 /* FlyCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				3FF631571D6AC26C00CD6531 /* LaunchScreen.storyboard */,
 				3FD750891D6842950077C6B6 /* RootViewController */,
 				3FBA290A1D6699B800808646 /* YZL */,
 				3F9047B21D6557A1004BAAEA /* LXZ */,
@@ -626,7 +621,6 @@
 				3FA420541D58B74200BEA989 /* Source */,
 				3FA420131D58B6C000BEA989 /* Other */,
 				3F6C15C91D48DFC90016A020 /* Assets.xcassets */,
-				3F6C15CB1D48DFC90016A020 /* LaunchScreen.storyboard */,
 				3FA41FF71D58A60800BEA989 /* Info.plist */,
 			);
 			path = FlyCoreAnimation;
@@ -805,7 +799,6 @@
 				3FA420611D58B74200BEA989 /* play.png */,
 				3FA4205F1D58B74200BEA989 /* left.png */,
 				3FA420601D58B74200BEA989 /* pause.png */,
-				3F66AFA41D69B020008AFB81 /* ShareFunBG.jpg */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1047,9 +1040,6 @@
 		3FBA29661D6699B800808646 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3FBA29671D6699B800808646 /* NewsCell.h */,
-				3FBA29681D6699B800808646 /* NewsCell.m */,
-				3FBA29691D6699B800808646 /* NewsCell.xib */,
 				3FBA296A1D6699B800808646 /* NewsDetailCell.h */,
 				3FBA296B1D6699B800808646 /* NewsDetailCell.m */,
 				3FBA296C1D6699B800808646 /* NewsDetailCell.xib */,
@@ -1361,6 +1351,7 @@
 				3F22D7A01D596A1800820C61 /* Unknown-8.png in Resources */,
 				3FA420661D58B74300BEA989 /* Home_refresh_bg.png in Resources */,
 				3FA497831D64A10D00A11503 /* composite-1.JPG in Resources */,
+				3FF631591D6AC26C00CD6531 /* LaunchScreen.storyboard in Resources */,
 				3F22D7961D596A1800820C61 /* kkk.png in Resources */,
 				3FA497821D64A10D00A11503 /* news-1.JPG in Resources */,
 				3FD7509B1D6842950077C6B6 /* CollectRadioPlayController.xib in Resources */,
@@ -1385,13 +1376,11 @@
 				3FBA29E91D669BE000808646 /* collec-1.png in Resources */,
 				3F9047F81D655A56004BAAEA /* haveCollection.png in Resources */,
 				3FBA29E61D669B3B00808646 /* 4.png in Resources */,
-				3F66AFA51D69B020008AFB81 /* ShareFunBG.jpg in Resources */,
 				3F22D7991D596A1800820C61 /* time.png in Resources */,
 				3FA420621D58B74300BEA989 /* back.png in Resources */,
 				3F22D7911D596A1800820C61 /* c1.jpg in Resources */,
 				3FBA29DB1D6699B800808646 /* StoryTableViewCell.xib in Resources */,
 				3F22D7931D596A1800820C61 /* ggg.JPG in Resources */,
-				3FBA29C51D6699B800808646 /* NewsCell.xib in Resources */,
 				3F0D92251D673FEE0078971E /* collection-3.JPG in Resources */,
 				3FBA29AA1D6699B800808646 /* LiteraryCell.xib in Resources */,
 				3F3B3E831D6844B000004EFB /* close.png in Resources */,
@@ -1547,7 +1536,6 @@
 				3FBA29C31D6699B800808646 /* NewsModel.m in Sources */,
 				3FBA29BF1D6699B800808646 /* NewsPlayViewController.m in Sources */,
 				3F9047D91D6557A1004BAAEA /* MovieDetailTwoCell.m in Sources */,
-				3FBA29C41D6699B800808646 /* NewsCell.m in Sources */,
 				3FA4203C1D58B6C000BEA989 /* (null) in Sources */,
 				3FBA29BA1D6699B800808646 /* DetailCell.m in Sources */,
 				3FBA29D21D6699B800808646 /* StoryListViewController.m in Sources */,
@@ -1620,10 +1608,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3F6C15CB1D48DFC90016A020 /* LaunchScreen.storyboard */ = {
+		3FF631571D6AC26C00CD6531 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3F6C15CC1D48DFC90016A020 /* Base */,
+				3FF631581D6AC26C00CD6531 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

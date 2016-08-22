@@ -72,7 +72,7 @@
             
 
             [subV setTitle:self.strArr[i] forState:UIControlStateNormal];
-            subV.titleLabel.font = [UIFont systemFontOfSize:22];
+            subV.titleLabel.font = [UIFont systemFontOfSize:20];
            //[subV setTitleEdgeInsets:UIEdgeInsetsMake(20, 0, 20, 0)];
             
             subV.layer.masksToBounds=YES;

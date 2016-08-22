@@ -68,7 +68,7 @@
 
     self.canClick = YES;
     self.navigationController.navigationBarHidden = YES;
-           NSLog(@"%ld",self.tag);
+  //         NSLog(@"%ld",self.tag);
     [self rightViewToMid:self.viewArr[0] withCATransform3d:self.CA1];
     [self midViewToLeft:self.viewArr[3] CATransfrom:self.CA0];
     [self leftViewToFar:self.viewArr[2] CATransform:self.CA3];
@@ -143,11 +143,11 @@
 }
 #pragma mark - 标题
 -(void)initLabel{
-    self.strArr = [NSMutableArray arrayWithObjects:@"电影",@"电台",@"附近",@"分享", nil];
+    self.strArr = [NSMutableArray arrayWithObjects:@"电影",@"电台",@"附近",@"收藏", nil];
     
     self.str = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 150)];
-    self.str.font = [UIFont systemFontOfSize:25];
-    self.str.layer.position = CGPointMake(SCWI/2, SCHI/2+220);
+    self.str.font = [UIFont systemFontOfSize:22];
+    self.str.layer.position = CGPointMake(SCWI/2, SCHI/2+200);
     self.str.textAlignment = NSTextAlignmentCenter ;
     self.str.text = self.strArr.firstObject;
     [self.view addSubview:self.str];
@@ -270,15 +270,10 @@
     self.view3.layer.position = CGPointMake(SCWI/2, SCHI/2);
     self.view3.tag = 103;
     [self.view3 drawRect:self.view3.frame image:@"XFSave2"];
-  
-    //    self.view3.layer.backgroundColor = [UIColor redColor].CGColor;
-//    [self.view3 drawRect:self.view3.frame image:@"RadioXF"];
     [self.view addSubview:self.view3];
-    
     self.view0 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 150, 150)];
     self.view0.layer.position = CGPointMake(SCWI/2, SCHI/2);
-   // self.view0.layer.backgroundColor = [UIColor greenColor].CGColor;
-    [self.view0 drawRect:self.view0.bounds image:@"movies"];
+     [self.view0 drawRect:self.view0.bounds image:@"movies"];
     self.view0.tag = 100;
     [self.view addSubview:self.view0];
     
@@ -356,7 +351,7 @@
 
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    if (self.P.x - self.MP.x>10 && self.MP.x != 0) {
+    if (self.P.x - self.MP.x > 10 && self.MP.x != 0) {
         [self rowRight];
     }else{
         if (self.P.x < self.MP.x) {
@@ -428,35 +423,9 @@
         self.canClick = NO;
     
    self.finalArr = [NSMutableArray arrayWithArray:self.viewArr];
-        
-    /*
-     CABasicAnimation *anim = [CABasicAnimation animation];
-     anim.keyPath = @"transform";
-     anim.duration = 0.8;
-     CATransform3D CA = CATransform3DMakeRotation(-M_PI, 0, 0, 1);
-     anim.toValue = [NSValue valueWithCATransform3D:CATransform3DScale(CA, SCWI/75, SCHI/134, 0)];
-     // anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(SCWI/75, SCHI/134, 0)];
-     anim.removedOnCompletion = NO;
-     anim.fillMode =kCAFillModeForwards;
-     */
-    //      anim.subtype = kCATransitionFromRight;
-    
-    
-    
-//    CALayer *biglayer =  [self.viewArr[0] layer];
+  
     self.tag =   [self.viewArr[0] tag];
-        NSLog(@"%ld",self.tag);
-   //self.finalArr = self.viewArr;
-    
-    // [biglayer addAnimation:anim forKey:@"big"];
-    //    NSLog(@"%ld %@",(long)self.tag,[self.viewArr[0] backgroundColor]);
-    
-    //    for (int i = 1; i < self.viewArr.count; i++) {
-    //        UIView *Iv = self.viewArr[i];
-    //        Iv.hidden = YES;
-    //
-    //    }
-    CATransition *anim = [CATransition animation];
+       CATransition *anim = [CATransition animation];
     anim.type = bgtype;
     anim.duration = 0.8;
     
@@ -501,13 +470,7 @@
             default:
                 break;
         }
-        //转场
-        
-        
-        //    [self.navigationController pushViewController:VC animated:NO];
-        
-        
-    });
+     });
     
     }
     

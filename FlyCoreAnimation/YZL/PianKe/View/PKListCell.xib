@@ -13,26 +13,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zB-mz-hNu">
-                        <rect key="frame" x="25" y="15" width="50" height="50"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ifw-me-bMv">
+                        <rect key="frame" x="8" y="7" width="359" height="66"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27o-HI-UA5">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5zB-mz-hNu">
+                        <rect key="frame" x="25" y="15" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Roq-ND-ubh"/>
+                            <constraint firstAttribute="height" constant="50" id="gs1-QP-U5o"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27o-HI-UA5">
                         <rect key="frame" x="94" y="15" width="250" height="50"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ifw-me-bMv">
-                        <rect key="frame" x="8" y="5" width="359" height="66"/>
-                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="27o-HI-UA5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="2H2-aJ-mfs"/>
+                    <constraint firstItem="5zB-mz-hNu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="4Cd-m8-1Eh"/>
+                    <constraint firstAttribute="trailing" secondItem="27o-HI-UA5" secondAttribute="trailing" constant="31" id="4kK-7p-Yiy"/>
+                    <constraint firstItem="27o-HI-UA5" firstAttribute="leading" secondItem="5zB-mz-hNu" secondAttribute="trailing" constant="19" id="5xh-o8-yGb"/>
+                    <constraint firstAttribute="bottom" secondItem="27o-HI-UA5" secondAttribute="bottom" constant="14" id="GDX-9Q-uGV"/>
+                    <constraint firstItem="Ifw-me-bMv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Uvw-Ao-xNh"/>
+                    <constraint firstAttribute="bottom" secondItem="Ifw-me-bMv" secondAttribute="bottom" constant="6" id="cUD-YY-pwM"/>
+                    <constraint firstAttribute="trailing" secondItem="Ifw-me-bMv" secondAttribute="trailing" constant="8" id="iQr-js-gY1"/>
+                    <constraint firstItem="Ifw-me-bMv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="m1y-Be-HSI"/>
+                    <constraint firstItem="5zB-mz-hNu" firstAttribute="centerY" secondItem="Ifw-me-bMv" secondAttribute="centerY" id="zBJ-Ly-DI9"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageViewA" destination="5zB-mz-hNu" id="OCJ-Yz-h9g"/>
                 <outlet property="imageViewB" destination="Ifw-me-bMv" id="cRm-Cq-ap6"/>
                 <outlet property="titleLable" destination="27o-HI-UA5" id="0IQ-NT-X7h"/>
             </connections>
-            <point key="canvasLocation" x="406.5" y="392"/>
+            <point key="canvasLocation" x="381.5" y="328"/>
         </tableViewCell>
     </objects>
 </document>
