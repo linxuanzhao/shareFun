@@ -38,7 +38,6 @@
 		3F2DB1D01D67E9CF000416EB /* barButton-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2DB1CF1D67E9CF000416EB /* barButton-2.png */; settings = {ASSET_TAGS = (); }; };
 		3F3B3E831D6844B000004EFB /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3B3E821D6844B000004EFB /* close.png */; settings = {ASSET_TAGS = (); }; };
 		3F60DC1D1D6593C20059BCFB /* XFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60DC1C1D6593C20059BCFB /* XFNetworking.m */; settings = {ASSET_TAGS = (); }; };
-		3F66AFA51D69B020008AFB81 /* ShareFunBG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F66AFA41D69B020008AFB81 /* ShareFunBG.jpg */; settings = {ASSET_TAGS = (); }; };
 		3F6C15CA1D48DFC90016A020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6C15C91D48DFC90016A020 /* Assets.xcassets */; };
 		3F6C15D81D48DFCA0016A020 /* FlyCoreAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15D71D48DFCA0016A020 /* FlyCoreAnimationTests.m */; };
 		3F6C15E31D48DFCA0016A020 /* FlyCoreAnimationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6C15E21D48DFCA0016A020 /* FlyCoreAnimationUITests.m */; };
@@ -174,6 +173,7 @@
 		3FEE7DE71D5EFC8F00740438 /* XFExplodeAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7DE31D5EFC8F00740438 /* XFExplodeAnimationController.m */; settings = {ASSET_TAGS = (); }; };
 		3FEE7DE81D5EFC8F00740438 /* XFReversibleAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7DE61D5EFC8F00740438 /* XFReversibleAnimationController.m */; settings = {ASSET_TAGS = (); }; };
 		3FEE7E821D60421300740438 /* DBSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE7E811D60421300740438 /* DBSphereView.m */; settings = {ASSET_TAGS = (); }; };
+		3FF631591D6AC26C00CD6531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF631571D6AC26C00CD6531 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		DEAC44B51C5F5432BB1DFD32 /* Pods_FlyCoreAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */; };
 /* End PBXBuildFile section */
 
@@ -250,10 +250,8 @@
 		3F3B3E821D6844B000004EFB /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		3F60DC1B1D6593C20059BCFB /* XFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFNetworking.h; sourceTree = "<group>"; };
 		3F60DC1C1D6593C20059BCFB /* XFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFNetworking.m; sourceTree = "<group>"; };
-		3F66AFA41D69B020008AFB81 /* ShareFunBG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ShareFunBG.jpg; sourceTree = "<group>"; };
 		3F6C15BA1D48DFC90016A020 /* FlyCoreAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyCoreAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6C15C91D48DFC90016A020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3F6C15CC1D48DFC90016A020 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F6C15D31D48DFCA0016A020 /* FlyCoreAnimationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlyCoreAnimationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6C15D71D48DFCA0016A020 /* FlyCoreAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyCoreAnimationTests.m; sourceTree = "<group>"; };
 		3F6C15D91D48DFCA0016A020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -472,6 +470,7 @@
 		3FEE7E7F1D60421300740438 /* DBPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPoint.h; sourceTree = "<group>"; };
 		3FEE7E801D60421300740438 /* DBSphereView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSphereView.h; sourceTree = "<group>"; };
 		3FEE7E811D60421300740438 /* DBSphereView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSphereView.m; sourceTree = "<group>"; };
+		3FF631581D6AC26C00CD6531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DB5884A71858E768C3064DD /* Pods-FlyCoreAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.debug.xcconfig"; sourceTree = "<group>"; };
 		B03402906218EFAAA0C62362 /* Pods_FlyCoreAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlyCoreAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35953EDB7E950D2FF662D15 /* Pods-FlyCoreAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlyCoreAnimation.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlyCoreAnimation/Pods-FlyCoreAnimation.release.xcconfig"; sourceTree = "<group>"; };
@@ -605,6 +604,7 @@
 		3F6C15BC1D48DFC90016A020 /* FlyCoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				3FF631571D6AC26C00CD6531 /* LaunchScreen.storyboard */,
 				3FD750891D6842950077C6B6 /* RootViewController */,
 				3FBA290A1D6699B800808646 /* YZL */,
 				3F9047B21D6557A1004BAAEA /* LXZ */,
@@ -613,7 +613,6 @@
 				3FA420541D58B74200BEA989 /* Source */,
 				3FA420131D58B6C000BEA989 /* Other */,
 				3F6C15C91D48DFC90016A020 /* Assets.xcassets */,
-				3F6C15CB1D48DFC90016A020 /* LaunchScreen.storyboard */,
 				3FA41FF71D58A60800BEA989 /* Info.plist */,
 			);
 			path = FlyCoreAnimation;
@@ -787,7 +786,6 @@
 				3FA420611D58B74200BEA989 /* play.png */,
 				3FA4205F1D58B74200BEA989 /* left.png */,
 				3FA420601D58B74200BEA989 /* pause.png */,
-				3F66AFA41D69B020008AFB81 /* ShareFunBG.jpg */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1340,6 +1338,7 @@
 				3F22D7A01D596A1800820C61 /* Unknown-8.png in Resources */,
 				3FA420661D58B74300BEA989 /* Home_refresh_bg.png in Resources */,
 				3FA497831D64A10D00A11503 /* composite-1.JPG in Resources */,
+				3FF631591D6AC26C00CD6531 /* LaunchScreen.storyboard in Resources */,
 				3F22D7961D596A1800820C61 /* kkk.png in Resources */,
 				3FA497821D64A10D00A11503 /* news-1.JPG in Resources */,
 				3FD7509B1D6842950077C6B6 /* CollectRadioPlayController.xib in Resources */,
@@ -1363,7 +1362,6 @@
 				3FBA29E91D669BE000808646 /* collec-1.png in Resources */,
 				3F9047F81D655A56004BAAEA /* haveCollection.png in Resources */,
 				3FBA29E61D669B3B00808646 /* 4.png in Resources */,
-				3F66AFA51D69B020008AFB81 /* ShareFunBG.jpg in Resources */,
 				3F22D7991D596A1800820C61 /* time.png in Resources */,
 				3FA420621D58B74300BEA989 /* back.png in Resources */,
 				3F22D7911D596A1800820C61 /* c1.jpg in Resources */,
@@ -1592,10 +1590,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3F6C15CB1D48DFC90016A020 /* LaunchScreen.storyboard */ = {
+		3FF631571D6AC26C00CD6531 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3F6C15CC1D48DFC90016A020 /* Base */,
+				3FF631581D6AC26C00CD6531 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

@@ -190,34 +190,34 @@
     
     
 }
--(void)search{
-#pragma mark - POI
-    //初始化检索对象
-    _searcher =[[BMKPoiSearch alloc]init];
-    _searcher.delegate = self;
-    //发起检索
-    BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
-        option.radius = 1000;
-    option.pageIndex = 2;
-  option.pageCapacity = 10;
-    option.sortType = BMK_POI_SORT_BY_DISTANCE;
-     option.location =self.locService.userLocation.location.coordinate;
-    option.location = self.startPs;
-    NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
-    option.keyword = self.searchBarText;
-    
-    BOOL flag = [_searcher poiSearchNearBy:option];
-    
-    if(flag)
-    {
-        NSLog(@"%@周边检索发送成功",option.keyword);
-    }
-    else
-    {
-        NSLog(@"周边检索发送失败");
-    }
-    
-}
+//-(void)search{
+//#pragma mark - POI
+//    //初始化检索对象
+//    _searcher =[[BMKPoiSearch alloc]init];
+//    _searcher.delegate = self;
+//    //发起检索
+//    BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
+//        option.radius = 1000;
+//    option.pageIndex = 2;
+//  option.pageCapacity = 10;
+//    option.sortType = BMK_POI_SORT_BY_DISTANCE;
+//     option.location =self.locService.userLocation.location.coordinate;
+//    option.location = self.startPs;
+//    NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
+//    option.keyword = self.searchBarText;
+//    
+//    BOOL flag = [_searcher poiSearchNearBy:option];
+//    
+//    if(flag)
+//    {
+//        NSLog(@"%@周边检索发送成功",option.keyword);
+//    }
+//    else
+//    {
+//        NSLog(@"周边检索发送失败");
+//    }
+//    
+//}
 
 -(void)pop{
     
@@ -281,8 +281,8 @@
         option.location = self.startPs;
         NSLog(@"%f,%f",option.location.latitude,option.location.longitude);
         NSLog(@"%@",self.searchBarText);
-        if ([self.searchBarText containsString:@"?"]) {
-            NSArray *arr = [self.searchBarText componentsSeparatedByString:@"?"];
+        if ([self.searchBarText containsString:@"@"]) {
+            NSArray *arr = [self.searchBarText componentsSeparatedByString:@"@"];
             option.keyword = arr.firstObject;
             option.radius = (int)arr.lastObject;
             NSLog(@"%@,%@",arr.firstObject,arr.lastObject);
