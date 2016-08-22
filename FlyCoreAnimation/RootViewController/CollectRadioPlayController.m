@@ -9,6 +9,7 @@
 #import "CollectRadioPlayController.h"
 #import "YZLAVManager.h"
 #import "PKListModel.h"
+#import "DBManager.h"
 
 @interface CollectRadioPlayController ()
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
@@ -21,6 +22,9 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) UILabel *marLabel;
 @property (nonatomic, assign) BOOL isPlay;
+@property (nonatomic, strong) UIButton *BarBtn;
+@property (nonatomic, strong) DBManager *manager;
+@property (nonatomic, strong) CompositeListModel *collectModel;
 
 
 @end
@@ -57,10 +61,11 @@
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changeTime) userInfo:nil repeats:YES];
     [self.avManager.avPlay play];
-
-    
     
 }
+
+
+
 -(void)changeTime
 {
     float sec = self.avManager.playDuration - self.avManager.curuentTime;

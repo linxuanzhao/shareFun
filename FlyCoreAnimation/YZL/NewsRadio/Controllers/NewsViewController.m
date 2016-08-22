@@ -195,6 +195,7 @@
     NSString *str = [NSString stringWithFormat:@"%ld",indexPath.row + 1];
     detailVc.statPosition = str;
     detailVc.albumId = model.desc;
+    detailVc.title = model.title;
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 

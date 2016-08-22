@@ -105,7 +105,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    self.title = @"故事台";
     [self requestStoryData];
     [self createTableView];
     
@@ -159,6 +159,7 @@
     listVc.albumId = model.desc;
     NSString *str = [NSString stringWithFormat:@"%ld",indexPath.row+1];
     listVc.statPosition = str;
+    listVc.title = model.title;
     [self.navigationController pushViewController:listVc animated:YES];
 }
 
