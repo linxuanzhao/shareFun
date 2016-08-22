@@ -35,21 +35,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"热映电影";
-    
-    
-    self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
     [self createCollectionView];
     [self getData];
-
-    
-    
 }
-
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    self.animation = [[MovieAnimation alloc] initWithAnimateType:animationPush andDuration:1.5];
     self.navigationController.delegate = self;
 }
 

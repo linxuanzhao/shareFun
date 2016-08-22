@@ -125,6 +125,7 @@
             [self.logoArray addObject:urlImgStr];
             [self.logo1Array addObject:urlImgStr1];
         }
+
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -147,7 +148,7 @@
     [self.view addSubview:self.tableView];
     
     // headView
-    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCWI, SCHI * 0.435)];
+    self.headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCWI, SCHI * 0.404)];
     
     // imageView
     self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(SCWI * 0.04, SCHI * 0.225, SCWI * 0.24, SCHI * 0.172)];
@@ -183,28 +184,48 @@
     [self.topView addSubview:self.backButton];
     
     // name
-    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 150, 200, 20)];
+    self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.text = self.name;
     self.nameLabel.font = [UIFont boldSystemFontOfSize:16];
+    self.nameLabel.adjustsFontSizeToFitWidth = YES;
     self.nameLabel.textColor = [UIColor colorWithRed:250 / 255.0 green:250 / 255.0 blue:250 / 255.0 alpha:1];
     self.nameLabel.textAlignment = NSTextAlignmentLeft;
     [self.topView addSubview:self.nameLabel];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imageV.mas_right).offset(SCWI * 0.04);
+        make.top.equalTo(self.headView.mas_top).offset(SCHI * 0.225);
+        make.right.equalTo(self.headView.mas_right).offset(-SCWI * 0.04);
+        make.height.mas_equalTo(SCHI * 0.03);
+    }];
     
     // releaseDate
-    self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 165, 250, 40)];
+    self.dateLabel = [[UILabel alloc] init];
     self.dateLabel.text = [NSString stringWithFormat:@"%@上映 %@", self.releaseDate, self.area];
-    self.dateLabel.font = [UIFont systemFontOfSize:15];
+    self.dateLabel.font = [UIFont systemFontOfSize:14];
     self.dateLabel.numberOfLines = 2;
     self.dateLabel.textColor = [UIColor colorWithRed:250 / 255.0 green:250 / 255.0 blue:250 / 255.0 alpha:1];
     self.dateLabel.textAlignment = NSTextAlignmentLeft;
+//    self.dateLabel.backgroundColor = [UIColor redColor];
     [self.topView addSubview:self.dateLabel];
+    [self.dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imageV.mas_right).offset(SCWI * 0.04);
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(SCHI *0.007);
+        make.right.equalTo(self.headView.mas_right).offset(-SCWI * 0.04);
+        make.height.mas_equalTo(20);
+    }];
     
     // category
-    self.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 225, 200, 20)];
+    self.categoryLabel = [[UILabel alloc] init];
     self.categoryLabel.text = self.category;
     self.categoryLabel.font = [UIFont systemFontOfSize:14];
     self.categoryLabel.textAlignment = NSTextAlignmentLeft;
     [self.headView addSubview:self.categoryLabel];
+    [self.categoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imageV.mas_right).offset(SCWI * 0.04);
+        make.top.equalTo(self.topView.mas_bottom).offset(SCWI * 0.015);
+        make.right.equalTo(self.headView.mas_right).offset(-SCWI * 0.04);
+        make.height.mas_equalTo(20);
+    }];
     
     // duration
     self.durationLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 250, 200, 20)];
@@ -212,14 +233,25 @@
     self.durationLabel.font = [UIFont systemFontOfSize:14];
     self.durationLabel.textAlignment = NSTextAlignmentLeft;
     [self.headView addSubview:self.durationLabel];
+    [self.durationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.imageV.mas_right).offset(SCWI * 0.04);
+        make.top.equalTo(self.categoryLabel.mas_bottom).offset(SCWI * 0.015);
+        make.right.equalTo(self.headView.mas_right).offset(-SCWI * 0.04);
+        make.height.mas_equalTo(20);
+
+    }];
     
     // collectBtn
     self.collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.collectBtn.frame = CGRectMake(SCWI - 10 - 32, 50, 32, 32);
     [self.collectBtn addTarget:self action:@selector(collect:) forControlEvents:UIControlEventTouchUpInside];
     [self.collectBtn setImage:[UIImage imageNamed:@"collection.png"] forState:UIControlStateNormal];
     [self.collectBtn setImage:[UIImage imageNamed:@"haveCollection.png"] forState:UIControlStateSelected];
     [self.topView addSubview:self.collectBtn];
+    [self.collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.headView.mas_right).offset(-SCWI * 0.04);
+        make.top.equalTo(self.headView.mas_top).offset(SCHI * 0.075);
+        make.size.mas_equalTo(CGSizeMake(SCWI * 0.085, SCWI * 0.085));
+    }];
   
 }
 
@@ -309,13 +341,15 @@
         
         if (indexPath == self.selectedIndexPath) {
 
-            cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, self.height);
+            cell.descLabel.frame = CGRectMake(SCWI * 0.04, 0, SCWI - 30, self.height);
+            cell.imageV.frame = CGRectMake(cell.descLabel.center.x - 16, self.height, 16, 16);
+            cell.imageV.image = [UIImage imageNamed:@"up.png"];
             
         }
         else
         {
-            cell.descLabel.frame = CGRectMake(20, 0, SCWI - 40, 120);
-                      
+            cell.descLabel.frame = CGRectMake(SCWI * 0.04, 0, SCWI - 30, SCHI * 0.18);
+            cell.imageV.frame = CGRectMake(cell.descLabel.center.x - 16, SCHI * 0.18, 16, 16);
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -327,18 +361,20 @@
         MovieDetailTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photo"];
         cell.photoArray = self.logo1Array;
         for (int i = 0; i < self.logo1Array.count; i++) {
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 120, 0, 100, 100)];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:self.logo1Array[i]]];
+            UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(i * SCWI * 0.32, 0, SCWI * 0.267, SCHI * 0.15)];
+            [imageV sd_setImageWithURL:[NSURL URLWithString:self.logo1Array[i]]];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-            imageView.userInteractionEnabled = YES;
-            [imageView addGestureRecognizer:tap];
-            [cell.scrollView addSubview:imageView];
-            [self.photoArray addObject:imageView];
+            imageV.userInteractionEnabled = YES;
+            [imageV addGestureRecognizer:tap];
+            [cell.scrollView addSubview:imageV];
+            [self.photoArray addObject:imageV];
 
         }
        
         return cell;
     }
+    
+    
     return nil;
 }
 
@@ -356,7 +392,7 @@
 {
 
     for (UIImageView *imageV in self.photoArray) {
-        if (imageV == tap.view ) {
+        if (imageV == tap.view) {
             self.index = [self.photoArray indexOfObject:imageV];
             
         }
@@ -376,7 +412,7 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
     
-    if (operation == UINavigationControllerOperationPop && [toVC isEqual:self.vc]) {
+    if (operation == UINavigationControllerOperationPop && [toVC isKindOfClass:[MovieTableViewController class]]) {
         
         return self.animation;
     }
@@ -392,13 +428,13 @@
     if (indexPath.section == 0) {
         if (indexPath == self.selectedIndexPath) {
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            return self.height;
+            return self.height + 16;
             
         }
         else
         {
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            return 120;
+            return SCHI * 0.18 + 16;
         }
 
     }
@@ -431,6 +467,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 0;
+    }
     return 10;
 }
 

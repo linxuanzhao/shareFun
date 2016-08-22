@@ -12,6 +12,7 @@
 #import "MovieTableViewCell.h"
 #import "DetailMovieViewController.h"
 #import "UIViewController+Trainsition.h"
+#import "MovieViewController.h"
 
 @interface MovieTableViewController () <UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -21,7 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *hotArray;
 @property (nonatomic, strong) NSMutableArray*listArray;
 @property (nonatomic, strong) UITableView *predictTableView;
-
+@property (nonatomic, strong) MovieViewController *movieCollectVC;
 
 @end
 
@@ -44,7 +45,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
     
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -301,8 +302,6 @@
     detailMovieVC.releaseDate = cell.movie.releaseDate;
     detailMovieVC.movie = cell.movie;
    
-    detailMovieVC.vc = self;
-    
     [self.navigationController pushViewController:detailMovieVC animated:YES];
 }
 
@@ -321,6 +320,7 @@
 - (void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 
