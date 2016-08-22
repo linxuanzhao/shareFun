@@ -10,7 +10,7 @@
 
 @interface PhotoViewController : UIViewController
 
-@property (nonatomic, strong) NSArray *photoArray;
+@property (nonatomic, strong) NSMutableArray *photoArray;
 @property (nonatomic, assign) NSInteger index;
 
 @end

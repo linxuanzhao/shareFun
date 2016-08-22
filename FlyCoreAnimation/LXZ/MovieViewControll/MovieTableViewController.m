@@ -15,7 +15,7 @@
 #import "MovieAnimationko.h"
 #import "MovieViewController.h"
 
-@interface MovieTableViewController () <UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
+@interface MovieTableViewController () <UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) MovieAnimation *animation;
 @property (nonatomic, strong) UITableView *tableView;
@@ -23,7 +23,8 @@
 @property (nonatomic, strong) NSMutableArray *hotArray;
 @property (nonatomic, strong) NSMutableArray*listArray;
 @property (nonatomic, strong) UITableView *predictTableView;
-@property(nonatomic,strong)MovieAnimationko  *mak;
+@property (nonatomic, strong) MovieViewController *movieCollectVC;
+@property (nonatomic, strong) MovieAnimationko *mak;
 
 @end
 
@@ -42,30 +43,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self createSegmentedControl];
-    
     [self createPredictView];
     [self createTableView];
     [self getData];
     [self getPredictData];
-
     [self createSegmentedControl];
     [self createMJRefresh];
     [self createPreMJRefresh];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"切换" style:UIBarButtonItemStylePlain target:self action:@selector(changeVC)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"collectView.png"] style:UIBarButtonItemStylePlain target:self action:@selector(changeVC)];
     
-
+    
 }
--(void)changeVC{
-     MovieViewController *mc    =     [[MovieViewController alloc]init];
-    mc.transitioningDelegate = self;
-   // XFShare.delegate = self;
-    UINavigationController *navc = [[UINavigationController alloc]initWithRootViewController:mc];
+- (void)changeVC{
+    MovieViewController *mc = [[MovieViewController alloc] init];
+//    mc.transitioningDelegate = self;
     [self.navigationController pushViewController:mc animated:YES];
-
 }
 
 
@@ -163,7 +158,6 @@
 
 - (void)segmentAction:(UISegmentedControl *)sg
 {
-    
     switch (sg.selectedSegmentIndex) {
         case 0:
         {
@@ -323,15 +317,12 @@
     detailMovieVC.releaseDate = cell.movie.releaseDate;
     detailMovieVC.movie = cell.movie;
    
-    detailMovieVC.vc = self;
-    
     [self.navigationController pushViewController:detailMovieVC animated:YES];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
-{    //UIViewController  *a = [[UIViewController alloc]init];
-#warning animation ----------------
-   
+{
+
     if (operation == UINavigationControllerOperationPush && [toVC isKindOfClass:[MovieViewController class]]) {
         return self.mak;
     }
@@ -351,20 +342,10 @@
 - (void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 
-#pragma mark - 控制器跳转动画
-- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-{
-    
-    return self.mak;
-}
-// 3. Implement the methods to supply proper objects.
--(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    return self.mak;
-}
 
 
 

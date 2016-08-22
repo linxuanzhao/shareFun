@@ -7,7 +7,7 @@
 //
 
 #import "MovieDetailTwoCell.h"
-
+#import "PhotoViewController.h"
 
 @implementation MovieDetailTwoCell
 
@@ -15,32 +15,21 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 30)];
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCWI * 0.04, SCHI * 0.015, 200, SCHI * 0.03)];
         self.nameLabel.text = @"剧照";
         self.nameLabel.font = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:self.nameLabel];
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 30, SCWI - 20, 100)];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SCWI * 0.04, SCHI * 0.06, SCWI - 30, SCHI * 0.15)];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:self.scrollView];
-     
-        
     }
     return self;
 }
 
-- (NSArray *)photoArray
-{
-    if (!_photoArray) {
-        _photoArray = [NSArray array];
-    }
-    return _photoArray;
-}
-
-
 - (void)layoutSubviews
 {
-    self.scrollView.contentSize = CGSizeMake(120 * self.photoArray.count - 10 , 100);
+    self.scrollView.contentSize = CGSizeMake(SCWI * 0.32 * self.photoArray.count, 0);
 }
 
 

@@ -92,7 +92,6 @@
     [self initWithLeftButton];
     [self initWithRightButton];
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
-    
 
 }
 

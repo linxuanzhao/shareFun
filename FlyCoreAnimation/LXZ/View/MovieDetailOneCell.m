@@ -22,9 +22,11 @@
         self.descLabel.font = [UIFont systemFontOfSize:14];
         self.descLabel.numberOfLines = 0;
         self.descLabel.textAlignment = NSTextAlignmentLeft;
-    
         [self.contentView addSubview:self.descLabel];
-    
+        
+        self.imageV = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.imageV.image = [UIImage imageNamed:@"down.png"];
+        [self.contentView addSubview:self.imageV];
     }
     return self;
 }

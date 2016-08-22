@@ -13,6 +13,6 @@
 
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) NSArray *photoArray;
+@property (nonatomic, strong) NSMutableArray *photoArray;
 
 @end
