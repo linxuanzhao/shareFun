@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "DBManager.h"
 #import "MovieTableViewController.h"
+#import "MovieViewController.h"
 
 @interface DetailMovieViewController () <UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -55,6 +56,8 @@
     [self createDetailMovieView];
     [self getData];
     self.dbManager = [DBManager shareInstance];
+    
+    
 
 }
 
@@ -126,7 +129,6 @@
             [self.logo1Array addObject:urlImgStr1];
         }
 
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -309,7 +311,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -324,6 +325,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.photoArray removeAllObjects];
     if (indexPath.section == 0) {
         MovieDetailOneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"desc"];
         cell.descLabel.text = [NSString stringWithFormat:@"导演: %@\n主演: %@\n剧情: %@\n", self.director, self.actors, self.desc];
@@ -337,7 +339,6 @@
         [cell.descLabel sizeToFit];
         
         self.height = CGRectGetHeight(cell.descLabel.frame);
-        
         
         if (indexPath == self.selectedIndexPath) {
 
@@ -359,7 +360,10 @@
     
     else if (indexPath.section == 1){
         MovieDetailTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"photo"];
-        cell.photoArray = self.logo1Array;
+        
+            cell.photoArray = self.logo1Array;
+     
+       
         for (int i = 0; i < self.logo1Array.count; i++) {
             UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(i * SCWI * 0.32, 0, SCWI * 0.267, SCHI * 0.15)];
             [imageV sd_setImageWithURL:[NSURL URLWithString:self.logo1Array[i]]];
@@ -369,6 +373,7 @@
             [cell.scrollView addSubview:imageV];
             [self.photoArray addObject:imageV];
 
+
         }
        
         return cell;
@@ -377,8 +382,6 @@
     
     return nil;
 }
-
-
 
 - (NSMutableArray *)photoArray
 {
@@ -392,7 +395,7 @@
 {
 
     for (UIImageView *imageV in self.photoArray) {
-        if (imageV == tap.view) {
+        if (tap.view == imageV) {
             self.index = [self.photoArray indexOfObject:imageV];
             
         }
@@ -400,7 +403,6 @@
     PhotoViewController *photoVC = [[PhotoViewController alloc] init];
     photoVC.photoArray = self.logoArray;
     photoVC.index = self.index;
-    
     UINavigationController *photoNav = [[UINavigationController alloc] initWithRootViewController:photoVC];
     
     [self presentViewController:photoNav animated:YES completion:nil];
@@ -416,6 +418,9 @@
         
         return self.animation;
     }
+    else if (operation == UINavigationControllerOperationPop && [toVC isKindOfClass:[MovieViewController class]]){
+        return self.animation;
+    }
     else
     {
         return  nil;
@@ -428,12 +433,14 @@
     if (indexPath.section == 0) {
         if (indexPath == self.selectedIndexPath) {
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
             return self.height + 16;
             
         }
         else
         {
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
             return SCHI * 0.18 + 16;
         }
 
@@ -454,12 +461,14 @@
         {
             self.selectedIndexPath = indexPath;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         
         }
         
         else
         {
             self.selectedIndexPath = nil;
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+       
         }
     }
 

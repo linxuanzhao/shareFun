@@ -7,7 +7,7 @@
 //
 
 #import "MovieDetailTwoCell.h"
-
+#import "PhotoViewController.h"
 
 @implementation MovieDetailTwoCell
 
@@ -23,24 +23,13 @@
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(SCWI * 0.04, SCHI * 0.06, SCWI - 30, SCHI * 0.15)];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:self.scrollView];
-     
-        
     }
     return self;
 }
 
-- (NSArray *)photoArray
-{
-    if (!_photoArray) {
-        _photoArray = [NSArray array];
-    }
-    return _photoArray;
-}
-
-
 - (void)layoutSubviews
 {
-    self.scrollView.contentSize = CGSizeMake(SCWI * 0.32 * self.photoArray.count, SCHI * 0.15);
+    self.scrollView.contentSize = CGSizeMake(SCWI * 0.32 * self.photoArray.count, 0);
 }
 
 
