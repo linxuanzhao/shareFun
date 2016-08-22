@@ -63,10 +63,11 @@
     imageView1.userInteractionEnabled = YES;
     [self.view addSubview: imageView1];
 //    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:imageView1.frame];
-//    toolbar.barStyle = UIBarStyleDefault;
+//    toolbar.barStyle = UIBarStyleBlackOpaque;
 //    [imageView1 addSubview:toolbar];
+    imageView1.alpha = 0.8;
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 375, self.view.bounds.size.height) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     

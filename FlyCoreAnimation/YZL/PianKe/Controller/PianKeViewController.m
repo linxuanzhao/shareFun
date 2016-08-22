@@ -102,7 +102,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.title = @"片刻";
     [self requestData];
     [self createTableView];
     
@@ -159,6 +159,7 @@
     listVc.redioid = model.radioid;
     listVc.image = model.coverimg;
     listVc.str = model.title;
+    listVc.title = model.title;
     [self.navigationController pushViewController:listVc animated:YES];
     
 }
