@@ -7,12 +7,13 @@
 //
 
 #import "PhotoViewController.h"
-#import "SDCycleScrollView.h"
 
 @interface PhotoViewController ()
 
-@property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSTimer *hiddenTimer;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIImageView *imageV;
+@property (nonatomic, strong) UIButton *downLoadBtn;
 
 @end
 
@@ -20,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     self.navigationController.navigationBar.translucent = NO;
     
@@ -31,29 +33,55 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    UIImage *image = [UIImage imageNamed:@"back.png"];
-    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStyleDone target:self action:@selector(backPhoto)];
-//    NSMutableArray *arr = [NSMutableArray array];
-//    for (NSString *str in self.photoArray) {
-//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:str]]];
-//     //   NSNumber *hi = [[NSNumber alloc]initWithFloat:image.size.height];
-//        [arr addObject:[NSNumber numberWithFloat:image.size.height]];
-//    }
-    
-    self.cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, SCHI / 3 - 64, SCWI, SCHI / 3)imageURLStringsGroup:self.photoArray];
-    
-    self.cycleScrollView.backgroundColor=[UIColor blueColor];
-    self.cycleScrollView.backgroundColor = [UIColor clearColor];
-    self.cycleScrollView.autoScroll = NO;
-    self.cycleScrollView.infiniteLoop = NO;
-    self.cycleScrollView.firstIndex = self.index;
-    self.cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleNone;
-    [self.view addSubview:self.cycleScrollView];
+    UIImage *image1 = [UIImage imageNamed:@"back.png"];
+    image1 = [image1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image1 style:UIBarButtonItemStyleDone target:self action:@selector(backPhoto)];
     
     
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -64, SCWI, SCHI + 64)];
+    self.scrollView.contentOffset = CGPointMake(SCWI * self.index, 0);
+    self.scrollView.contentSize = CGSizeMake(SCWI * self.photoArray.count, 0);
+    self.scrollView.pagingEnabled = YES;
+    [self.view addSubview:self.scrollView];
+    for (int i = 0; i < self.photoArray.count; i++) {
+        self.imageV = [[UIImageView alloc] initWithFrame:CGRectMake(i * SCWI, 0, SCWI, SCHI)];
+        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
+        [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.photoArray[i]]];
+        [self.scrollView addSubview:self.imageV];
+    }
+    
+    
+    
+//    self.downLoadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.downLoadBtn.frame = CGRectMake(SCWI - 60, SCHI - 120, 32, 32);
+//    UIImage *image2 = [UIImage imageNamed:@"downLoad.png"];
+//    image2 = [image2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    [self.downLoadBtn addTarget:self action:@selector(downLoad) forControlEvents:UIControlEventTouchUpInside];
+//    [self.downLoadBtn setImage:image2 forState:UIControlStateNormal];
+//    [self.view addSubview:self.downLoadBtn];
+
+
 }
+
+
+
+//- (void)downLoad
+//{
+//
+//     UIImageWriteToSavedPhotosAlbum(self.imageV.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+//}
+//
+//- (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+//{
+//    NSString *message = @"呵呵";
+//    if (!error) {
+//        message = @"成功保存到相册";
+//    }else
+//    {
+//        message = [error description];
+//    }
+//    NSLog(@"message is %@",message);
+//}
 
 
 
@@ -100,13 +128,10 @@
 }
 
 
-
-
-
 - (void)backPhoto
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {

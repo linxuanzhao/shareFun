@@ -20,7 +20,7 @@
         self.nameL = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 20, self.bounds.size.width, 20)];
         self.nameL.font = [UIFont boldSystemFontOfSize:15];
         self.nameL.textAlignment = NSTextAlignmentCenter;
-        
+        self.nameL.lineBreakMode = NSLineBreakByTruncatingMiddle;
         [self.contentView addSubview:self.nameL];
     }
     return self;

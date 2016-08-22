@@ -137,13 +137,7 @@
     {
         [self.activityView startAnimating];
     }
-    
-    
 }
-
-
-
-
 
 - (void)createPlayControlView
 {
@@ -326,6 +320,7 @@
     }
     return YES;
 }
+
 
 #pragma mark 屏幕旋转代码
 - (BOOL)shouldAutorotate{

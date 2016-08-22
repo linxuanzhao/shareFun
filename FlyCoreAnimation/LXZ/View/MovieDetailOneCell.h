@@ -11,6 +11,7 @@
 @interface MovieDetailOneCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *descLabel;
+@property (nonatomic, strong) UIImageView *imageV;
 
 
 @end
