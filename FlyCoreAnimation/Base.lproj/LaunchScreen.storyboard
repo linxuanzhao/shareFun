@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShareFunBG" translatesAutoresizingMaskIntoConstraints="NO" id="MoX-3E-v38">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShareFun.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="MoX-3E-v38">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </imageView>
                         </subviews>
@@ -31,10 +31,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-184.5" y="384.5"/>
+            <point key="canvasLocation" x="-147" y="381"/>
         </scene>
     </scenes>
     <resources>
-        <image name="ShareFunBG" width="375" height="666"/>
+        <image name="ShareFun.jpg" width="640" height="1136"/>
     </resources>
 </document>

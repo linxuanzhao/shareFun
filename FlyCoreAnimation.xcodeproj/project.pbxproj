@@ -166,6 +166,7 @@
 		3FBA29F11D66AF3300808646 /* RadioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA29F01D66AF3300808646 /* RadioModel.m */; settings = {ASSET_TAGS = (); }; };
 		3FBC69591D6304820032F54B /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FBC69581D6304820032F54B /* movie.png */; settings = {ASSET_TAGS = (); }; };
 		3FCA043A1D632CEF00BD6154 /* Raido3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA04391D632CEF00BD6154 /* Raido3.png */; settings = {ASSET_TAGS = (); }; };
+		3FD3DD1E1D6B1CD2008334DB /* ShareFun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3DD1D1D6B1CD2008334DB /* ShareFun.jpg */; settings = {ASSET_TAGS = (); }; };
 		3FD750981D6842950077C6B6 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7508B1D6842950077C6B6 /* AboutViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3FD750991D6842950077C6B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7508D1D6842950077C6B6 /* AppDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		3FD7509A1D6842950077C6B6 /* CollectRadioPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD7508F1D6842950077C6B6 /* CollectRadioPlayController.m */; settings = {ASSET_TAGS = (); }; };
@@ -454,6 +455,7 @@
 		3FBA29F01D66AF3300808646 /* RadioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioModel.m; sourceTree = "<group>"; };
 		3FBC69581D6304820032F54B /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movie.png; sourceTree = "<group>"; };
 		3FCA04391D632CEF00BD6154 /* Raido3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Raido3.png; sourceTree = "<group>"; };
+		3FD3DD1D1D6B1CD2008334DB /* ShareFun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ShareFun.jpg; sourceTree = "<group>"; };
 		3FD7508A1D6842950077C6B6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		3FD7508B1D6842950077C6B6 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		3FD7508C1D6842950077C6B6 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 				3F381F1A1D6A96A100256BCC /* collectView.png */,
 				3F381F151D6A913C00256BCC /* down.png */,
 				3F381F161D6A913C00256BCC /* up.png */,
+				3FD3DD1D1D6B1CD2008334DB /* ShareFun.jpg */,
 				3F9047F51D655A56004BAAEA /* collection.png */,
 				3F9047F61D655A56004BAAEA /* haveCollection.png */,
 				3F22D7631D596A1800820C61 /* Images */,
@@ -1295,7 +1298,7 @@
 				TargetAttributes = {
 					3F6C15B91D48DFC90016A020 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = PGVM9FG9AT;
+						DevelopmentTeam = 9GL7T79KV7;
 					};
 					3F6C15D21D48DFCA0016A020 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1351,7 +1354,6 @@
 				3F22D7A01D596A1800820C61 /* Unknown-8.png in Resources */,
 				3FA420661D58B74300BEA989 /* Home_refresh_bg.png in Resources */,
 				3FA497831D64A10D00A11503 /* composite-1.JPG in Resources */,
-				3FF631591D6AC26C00CD6531 /* LaunchScreen.storyboard in Resources */,
 				3F22D7961D596A1800820C61 /* kkk.png in Resources */,
 				3FA497821D64A10D00A11503 /* news-1.JPG in Resources */,
 				3FD7509B1D6842950077C6B6 /* CollectRadioPlayController.xib in Resources */,
@@ -1375,6 +1377,7 @@
 				3FA420691D58B74300BEA989 /* ic_left - circle.png in Resources */,
 				3FBA29E91D669BE000808646 /* collec-1.png in Resources */,
 				3F9047F81D655A56004BAAEA /* haveCollection.png in Resources */,
+				3FD3DD1E1D6B1CD2008334DB /* ShareFun.jpg in Resources */,
 				3FBA29E61D669B3B00808646 /* 4.png in Resources */,
 				3F22D7991D596A1800820C61 /* time.png in Resources */,
 				3FA420621D58B74300BEA989 /* back.png in Resources */,
@@ -1611,7 +1614,6 @@
 		3FF631571D6AC26C00CD6531 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3FF631581D6AC26C00CD6531 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1708,11 +1710,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jaff-h.ShareFun";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lanou3g.ShareFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1725,11 +1728,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = FlyCoreAnimation/Other/PrefixHeader.pch;
 				INFOPLIST_FILE = FlyCoreAnimation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jaff-h.ShareFun";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lanou3g.ShareFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
