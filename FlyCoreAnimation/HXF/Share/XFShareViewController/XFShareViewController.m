@@ -193,10 +193,12 @@
 
 - (void)imageBg
 {
-    UIImage *oldImage = [UIImage imageNamed:@"XFBG.jpg"];
+   
+   UIImage *oldImage =  [UIImage imageNamed:@"XSBGi6p.jpg"];
+   
     
-    UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, 0.0);
-    [oldImage drawInRect:self.view.bounds];
+    UIGraphicsBeginImageContextWithOptions([UIScreen mainScreen].bounds.size, NO, 0.0);
+    [oldImage drawInRect:[UIScreen mainScreen].bounds];
     
     UIImage *newImage =UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

@@ -27,7 +27,7 @@
 }
 
 
-- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext;
+- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
 {
     if (self.animationType == animationPush) {
         [self pushAnimateWithAnimateTransition:transitionContext];

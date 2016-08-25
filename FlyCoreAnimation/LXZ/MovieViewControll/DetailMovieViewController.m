@@ -394,15 +394,11 @@
 
 - (void)tapAction:(UITapGestureRecognizer*)tap
 {
-    NSLog(@"%ld",self.photoArray.count);
+
     for (UIImageView *imageV in self.photoArray) {
         if (tap.view == imageV) {
             self.index = [self.photoArray indexOfObject:imageV];
-            NSInteger a = self.photoArray.count;
-            if (self.index > a) {
-                self.index = self.photoArray.count%a;
-            }
-            NSLog(@"for%ld",self.index);
+            
             
         }
     }

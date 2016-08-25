@@ -33,7 +33,7 @@
  //   [self.window makeKeyAndVisible];
  //-------------------------------------------//
      [self listenNetWorkingPort];
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 //    UIImageView *imageV = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
 //    imageV.image = [UIImage imageNamed:@"Home_refresh_bg.png"];
 //    [self.window addSubview:imageV];

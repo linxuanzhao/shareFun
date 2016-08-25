@@ -87,10 +87,11 @@
     self.state = 0;
      [self initFarButton];
     [self initWithButton];
-   
+    
     [self initLabel];
     [self initWithLeftButton];
     [self initWithRightButton];
+  //  self.navigationController.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
 
 }
@@ -453,10 +454,10 @@
                 break;
             case 102:{
                 XFShareViewController *XFShare =     [[XFShareViewController alloc]init];
-                XFShare.transitioningDelegate =self;
-                XFShare.delegate = self;
-                     [self presentViewController:XFShare
-                                   animated:YES completion:nil];
+               XFShare.delegate = self;
+                XFShare.transitioningDelegate = self;
+             //       [self.navigationController pushViewController:XFShare animated:YES];
+                [self presentViewController:XFShare animated:YES completion:nil];
             }
                 break;
             case 103:{
@@ -476,6 +477,7 @@
     
 }
 #pragma mark - 控制器跳转动画
+
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
     
@@ -500,6 +502,14 @@
     return YES;
 }
 
+//-(id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+//    if (operation == UINavigationControllerOperationPush && [toVC isKindOfClass:[XFShareViewController class]]) {
+//        return self.XFExplode;
+//    }if ([toVC isKindOfClass:[ViewController class]]) {
+//        return self.XFExplode;
+//    }
+//    return nil;
+//}
 
 
 
